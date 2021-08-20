@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "./Header.scss";
@@ -11,6 +12,7 @@ import NotificationIcon from "../../assets/images/icons/Notification.svg";
 // import NotificationIconActive from "../../assets/images/icons/Notification-active.png";
 import UserIcon from "../../assets/images/icons/User.svg";
 import UserIconActive from "../../assets/images/icons/User-active.png";
+import MenuIcon from "../../assets/images/icons/menu.svg";
 
 class Header extends Component {
   static propTypes = {
@@ -53,9 +55,11 @@ class Header extends Component {
     return (
       <nav className="Navbar">
         <div className="Navbar__container container">
-          <h1 className="Navbar__title">MACEBOOK</h1>
+          <Link to="/" className="Navbar__title">
+            MACEBOOK
+          </Link>
           <button className="Navbar__toggler" onClick={this.handleToggleClick}>
-            Drop
+            <img className="Navbar__toggler-icon" src={MenuIcon} />
           </button>
           <div
             className={
@@ -68,28 +72,28 @@ class Header extends Component {
               <Search />
             </div>
             <ul className="Navbar__nav">
-              <div className="Navbar__item">
+              <Link className="Navbar__item" to="/">
                 <img className="Navbar__item-icon" src={this.getIcon("home")} />
                 <p className="Navbar__item-text">Home</p>
-              </div>
-              <div className="Navbar__item">
+              </Link>
+              <Link className="Navbar__item" to="/jobs">
                 <img className="Navbar__item-icon" src={this.getIcon("jobs")} />
                 <p className="Navbar__item-text">Jobs</p>
-              </div>
-              <div className="Navbar__item">
+              </Link>
+              <Link className="Navbar__item" to="/notify">
                 <img
                   className="Navbar__item-icon"
                   src={this.getIcon("notify")}
                 />
                 <p className="Navbar__item-text">Notification</p>
-              </div>
-              <div className="Navbar__item">
+              </Link>
+              <Link className="Navbar__item" to="/profile">
                 <img
                   className="Navbar__item-icon"
                   src={this.getIcon("profile")}
                 />
                 <p className="Navbar__item-text">Profile</p>
-              </div>
+              </Link>
             </ul>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NoMatch from "./pages/NoMatch/NoMatch";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Route exact path={["/", "/index"]} component={Home} />
+          <Route exact path={["/", "/index", "/home"]} component={Home} />
+          <Route exact path="/profile" component={Profile} />
           <Route path="*" component={NoMatch} />
         </Switch>
       </Router>
