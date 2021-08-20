@@ -1,0 +1,99 @@
+@import "../../assets/sass/main.scss";
+
+.Navbar {
+  background-color: $color-black;
+  color: $color-white;
+  padding: $padding-sm 0;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+  }
+
+  &__toggler {
+    display: none;
+  }
+
+  &__collapse {
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-right: 2.875rem;
+    }
+  }
+
+  &__item-icon {
+    display: inline-block;
+  }
+
+  &__item-text {
+    display: none;
+  }
+
+  &__search {
+    margin-right: 2.875rem;
+  }
+
+  @media (max-width: 934px) {
+    &__container {
+      flex-wrap: wrap;
+    }
+
+    &__collapse {
+      display: block;
+      width: 100%;
+    }
+
+    &__hide {
+      display: none;
+    }
+
+    &__toggler {
+      display: block;
+    }
+
+    &__nav {
+      flex-direction: column;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      margin-right: 0;
+    }
+
+    &__item-icon {
+      display: inline-block;
+      &:not(:last-child) {
+        margin: $margin-sm;
+        margin-left: 0;
+      }
+    }
+
+    &__item-text {
+      display: block;
+    }
+
+    &__search {
+      margin-right: 0;
+    }
+  }
+}

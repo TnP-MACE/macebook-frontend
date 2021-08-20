@@ -1,0 +1,25 @@
+@import "../../assets/sass/main.scss";
+
+.Search {
+  margin: 0 auto;
+  position: relative;
+  background-color: $color-white;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__icon {
+    padding: 0.5rem 0 0.5rem 0.8rem;
+    height: 1rem;
+  }
+
+  &__input {
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    font-size: $font-size-regular;
+    flex-grow: 1;
+  }
+}
