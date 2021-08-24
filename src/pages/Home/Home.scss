@@ -1,4 +1,18 @@
 @import "../../assets/sass/main.scss";
 
 .Home {
+    .container {
+
+        .card-cols{
+            display: flex;
+            justify-content: space-around;
+            margin-left: $margin-xl;
+            .card-col1{
+                width: 55%;
+            }
+            .card-col2{
+                width: 33.5%;
+            }
+        }
+    }
 }
