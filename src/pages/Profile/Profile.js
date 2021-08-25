@@ -8,6 +8,12 @@ class Profile extends Component {
     return (
       <div className="Profile">
         <Header active="profile" />
+        <div className="container">
+          <div className="profile-bgimgContainer">
+            <img src="" alt="Background Image Not Loaded"></img>
+          </div>
+          
+        </div>
       </div>
     );
   }
