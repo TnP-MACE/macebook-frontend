@@ -23,12 +23,17 @@ class Profile extends Component {
               <h2>User Name</h2>
               <div className="profile-userDetails">
                 <span>Position</span>
-                <span>Location</span>
-                <span>Connections</span>
+                <span>Location . Batch of '14 . CSE</span>
+                <span className="userConnections">Connections</span>
               </div>
             </div>
             <div className="profile-header-section-3">
-              <span>Buttons</span>
+              <div className="profile-header-btnContainer">
+                <div className="profile-header-userButtons">
+                  <button className="profile-header-btn1">Settings</button>
+                  <button className="profile-header-btn2">Edit Profile</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
