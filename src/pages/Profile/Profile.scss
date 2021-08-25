@@ -105,6 +105,10 @@
 .profile-leftpanel{
     flex: 1;
     padding: $padding-sm;
+    .card-container{
+        padding: 10px;
+        margin: 20px 0px;
+    }
 }
 .profile-rightpanel{
     flex: 3;
