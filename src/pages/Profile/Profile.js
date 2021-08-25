@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Profile.scss";
 import Header from "../../components/Header/Header";
-import UserIconActive from "../../assets/images/icons/User-active.png";
+import Card from "../../components/Card/Card";
 
 class Profile extends Component {
   render() {
@@ -36,6 +36,25 @@ class Profile extends Component {
               </div>
             </div>
           </div>
+          <div className="profile-body">
+            <div className="profile-leftpanel">
+              <Card>
+                <h3>About</h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+              </Card>
+              <Card>
+                <h3>Skills</h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+              </Card>
+              <Card>
+                <h3>PEOPLE YOU MAY KNOW</h3>
+              </Card>
+            </div>
+            <div className="profile-rightpanel">
+              Right Panel
+            </div>
+          </div>
+
         </div>
       </div>
     );

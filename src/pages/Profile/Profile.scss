@@ -96,3 +96,20 @@
         }
     }
 }
+
+
+.profile-body{
+    display: flex;
+    padding: $padding-sm;
+}
+.profile-leftpanel{
+    flex: 1;
+    padding: $padding-sm;
+}
+.profile-rightpanel{
+    flex: 3;
+    padding: $padding-sm;
+}
+.profile-leftpanel Cards{
+    margin: 10px 0px;
+}
