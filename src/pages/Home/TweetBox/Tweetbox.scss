@@ -1,5 +1,24 @@
 @import "../../../assets/sass/main.scss";
 
+@media (min-width: 560px){
+    .Tweetbox{
+        .input-text-field{
+            .input-video{
+                margin-top: -9.8%;
+            }
+        }
+    }
+}
+@media (max-width: 560px){
+    .Tweetbox{
+        .input-text-field{
+            .input-video{
+                margin-top: -13.6%;
+            }
+        }
+    }
+}
+
 .Tweetbox{
     display: flex;
     align-items: center;
@@ -18,9 +37,10 @@
         width: 500px;
         height: 25px;
         border-radius: 22px;
-        border: 1px solid $color-grey;
+        border: 1px solid $color-gray;
         .text-field{
             border: none;
+            outline: none;
         }
         .text-field::placeholder{
             font-family: 'Public Sans', sans-serif;
@@ -28,9 +48,9 @@
         .input-video{
             display: flex;
             justify-content: flex-end;
-            margin-top: -7.8%; // main
             img{
                 margin: $margin-sm;
+                cursor: pointer;
             }
         }
     }
@@ -38,7 +58,7 @@
 .modal{
     z-index: 9999;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 42%;
   min-width: 35rem;
   min-height: 20rem;
@@ -62,7 +82,7 @@
           font-weight: bold;
       }
       select{
-          border: solid 1px $color-grey;
+          border: solid 1px $color-gray;
           border-radius: 10px;
       }
       select#anyone option[value="Anyone"]   { background-image:url(../../../assets/images/icons/Anyone.svg);   }
@@ -77,11 +97,13 @@
       width: 23rem;
       border: none;
       margin: $margin-sm;
+      outline: none;
   }
   .modal-bottom{
       display: flex;
       justify-content: space-between;
       button{
+          cursor: pointer;
           background-color: $color-white;
           border: none; 
           height: 0.2rem;

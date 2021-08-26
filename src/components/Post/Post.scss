@@ -1,4 +1,28 @@
 @import "../../assets/sass/main.scss";
+
+@media (min-width: 768px){
+    .post-container{
+        .post-content{
+            img{
+                margin-left: $margin-regular;
+            }
+        }
+    }
+    .post-attributes{
+        p{
+            margin-left: -15%;
+        }
+    }
+}
+@media (max-width: 768px){
+    .post-container{
+        .post-content{
+            img{
+                margin-left: $margin-sm;
+            }
+        }
+    }
+}
 .post-container{
     .poster{
         display: flex;
@@ -42,19 +66,20 @@
     .post-content{
         p{
             margin-left: $margin-regular;
+            margin-right: $margin-regular;
         }
         .hashtags{
             font-weight: bold;
             color: $color-orange;
         }
         img{
-            margin: $margin-regular;
+            margin-right: $margin-regular;
             padding: $padding-sm;
             width: 85%;
         }
     }
     .post-attributes{
-        width: 32%;
+        width: 60%;
         display: flex;
         justify-content: space-around;
         p{
@@ -66,9 +91,6 @@
             letter-spacing: 0em;
             text-align: left;
             color: $color-grey;
-            margin-left: $margin-regular;
-            margin-bottom: $margin-sm;
-            margin-top: -16%;
         }
     }
     .post-activity{
@@ -93,10 +115,11 @@
         input{
             padding: $padding-sm;
             margin-top: $margin-regular;
-            border: 1px solid $color-grey;
+            border: 1px solid $color-gray;
             border-radius: 24px;
             height: 1rem;
             width: 80rem;
+            outline: none;
         }
        
     }
