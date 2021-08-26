@@ -57,6 +57,25 @@ class Profile extends Component {
               </div>
               <div className="card-container">
                 <Card>
+                  <div className="profile-applicationContainer">
+                    <div className="profile-appCount">
+                      <div className="profile-appContent">
+                        <h2>3</h2>
+                        <p>New Applications</p>
+                      </div>
+                      <div className="profile-appContent">
+                        <h2>42</h2>
+                        <p>Total Applications</p>
+                      </div>
+                    </div>
+                    <div className="profile-dashboardbtnContainer">
+                      <button>Go to Dashboard</button>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+              <div className="card-container">
+                <Card>
                   <h3>PEOPLE YOU MAY KNOW</h3>
                 </Card>
               </div>

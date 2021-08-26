@@ -59,7 +59,7 @@
     span{
         font-weight: 300;
         &.userConnections{
-            color: red;
+            color: $color-orange;
             font-weight: 600;
             font-style: normal;
         }
@@ -109,13 +109,18 @@
         padding: 10px;
         margin: 20px 0px;
         h3{
+            padding-top: 10px;
             text-transform: uppercase;
+        }
+        p{
+            padding-bottom: 10px;
         }
         .profile-skillsContainer{
             display: flex;
             justify-content: left;
             align-items: center;
             flex-wrap: wrap;
+            padding-bottom: 10px;
             .profile-skills{
                 color: $color-white;
                 background-color: $color-black;
@@ -127,9 +132,42 @@
                 text-transform: uppercase;
             }
         }
+        .profile-applicationContainer{
+            padding: 10px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .profile-appCount{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .profile-appContent{
+                    text-align: center;
+                    h2{
+                        color: $color-orange;
+                    }
+                    p{
+                        font-size: $font-size-sm;
+                    }
+                }
+            }
+            .profile-dashboardbtnContainer{
+                button{
+                    padding: 10px 20px;
+                    font-weight: 700;
+                    font-size: $font-size-regular;
+                    color: $color-black;
+                    background-color: $color-white;
+                    border: 2px solid $color-black;
+                    border-radius: 20px;
+                }
+            }
+        }
     }
 }
 .profile-rightpanel{
     flex: 3;
     padding: $padding-sm;
 }
+
