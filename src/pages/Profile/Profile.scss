@@ -108,12 +108,28 @@
     .card-container{
         padding: 10px;
         margin: 20px 0px;
+        h3{
+            text-transform: uppercase;
+        }
+        .profile-skillsContainer{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            flex-wrap: wrap;
+            .profile-skills{
+                color: $color-white;
+                background-color: $color-black;
+                border: 1px solid $color-black;
+                border-radius: 10px;
+                margin: 5px 10px;
+                padding: 2px 8px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+        }
     }
 }
 .profile-rightpanel{
     flex: 3;
     padding: $padding-sm;
-}
-.profile-leftpanel Cards{
-    margin: 10px 0px;
 }

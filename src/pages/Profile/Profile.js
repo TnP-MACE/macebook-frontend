@@ -47,7 +47,12 @@ class Profile extends Component {
               <div className="card-container">
                 <Card>
                   <h3>Skills</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+                  <div className="profile-skillsContainer">
+                    <span className="profile-skills">HTML</span>
+                    <span className="profile-skills">CSS</span>
+                    <span className="profile-skills">REACT</span>
+                    <span className="profile-skills">Node.js</span>                    
+                  </div>
                 </Card>
               </div>
               <div className="card-container">
