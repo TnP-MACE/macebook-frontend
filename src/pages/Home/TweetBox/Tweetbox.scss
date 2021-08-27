@@ -48,9 +48,15 @@
         .input-video{
             display: flex;
             justify-content: flex-end;
-            img{
-                margin: $margin-sm;
+            button{
+                margin-top: 0.7rem;
+                background-color: rgba(0, 0, 0, 0);
+                border: none;
                 cursor: pointer;
+                img{
+                    margin: $margin-sm;
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -75,7 +81,7 @@
       img{
           padding: $padding-sm;
       }
-      a{
+      .profile-link{
           margin-top: $margin-sm;
           text-decoration: none;
           color: $color-black;
@@ -112,9 +118,16 @@
       }
       .media-input{
           margin: $margin-sm;
-          img{
-              margin-left: $margin-regular;
-          }
+            button{
+                background-color: none;
+                border: none;
+                cursor: pointer;
+                margin-top: 1rem;
+                img{
+                    margin-left: $margin-regular;
+                  }
+            }
+          
       }
   }
   

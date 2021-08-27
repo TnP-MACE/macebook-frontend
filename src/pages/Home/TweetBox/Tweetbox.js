@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Tweetbox.scss'
+import { Link } from 'react-router-dom'
 import profilepic from '../../../assets/images/icons/UserProfile.png'
 import Camera from '../../../assets/images/icons/Camera.svg'
 import Video from '../../../assets/images/icons/Video.svg'
@@ -31,7 +32,9 @@ class Tweetbox extends Component {
                         <div className="poster">
                             <img src={profilepic} alt="profilepicture"></img>
                             <div className="post-view">
-                                <a href="./">David J</a>
+                                <Link to="./" className="profile-link">
+                                    David J
+                                </Link>
                                 <select id="post-viewers" name="post-viewers">
                                     <option value="Anyone">Anyone </option>
                                     <option value="Connections">Connections</option>
@@ -44,9 +47,15 @@ class Tweetbox extends Component {
                         </Card>
                         <div className="modal-bottom">
                             <div class="media-input">
-                                <img src={Camera} alt="Camera"></img>
-                                <img src={Video} alt="Video"></img>
-                                <img src={Doc} alt="Document"></img>
+                                <button>
+                                    <img src={Camera} alt="Camera"></img>
+                                </button>
+                                <button>
+                                    <img src={Video} alt="Video"></img>
+                                </button>
+                                <button>
+                                    <img src={Doc} alt="Document"></img>
+                                </button>
                             </div>
                             <Card>
                                 <button type="button">Post</button>
@@ -54,8 +63,12 @@ class Tweetbox extends Component {
                         </div>
                     </Modal>
                     <div className="input-video">
-                        <img src={Camera} alt="Camera"></img>
-                        <img src={Video} alt="Video"></img>
+                        <button type="button" className="camera-btn">
+                            <img src={Camera} alt="Camera"></img>
+                        </button>
+                        <button type="button" className="video-btn">
+                            <img src={Video} alt="Video"></img>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -98,8 +98,13 @@
         display: flex;
         justify-content: space-around;
         margin-left: $margin-sm;
-        img{
-            margin-top: $margin-sm;
+        button{
+            background-color: rgba(255,255,255,0);
+            border: none;
+            cursor: pointer;
+            img{
+                margin-top: $margin-sm;
+            }
         }
     }
     .post-comment{
@@ -125,7 +130,7 @@
     }
     .load-comments{
         margin-left: $margin-sm;
-        a{
+        .comments-loader{
             color: $color-orange;
             font-family: Poppins;
             font-size: 10px;

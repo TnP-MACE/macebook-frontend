@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './Post.scss'
 import like from '../../assets/images/icons/like.svg'
 import msg from '../../assets/images/icons/message.svg'
@@ -10,18 +11,18 @@ class Post extends Component {
             <div className="post-container">
                 <div className="poster">
                     <div className="posterimg">
-                        <a href="./">
+                        <Link to="./">
                             {' '}
                             <img
                                 src={this.props.posterprofile}
                                 alt="posterimage"
                                 className="profile-pic"></img>
-                        </a>
+                        </Link>
                     </div>
                     <div className="name_desig">
-                        <a href="./">
+                        <Link href="./">
                             <p className="Name">{this.props.poster}</p>
-                        </a>
+                        </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
                 </div>
@@ -36,13 +37,19 @@ class Post extends Component {
                 </div>
                 <div className="post-activity">
                     <div>
-                        <img src={like} alt="Like"></img>
+                        <button>
+                            <img src={like} alt="Like"></img>
+                        </button>
                     </div>
                     <div>
-                        <img src={msg} alt="Message"></img>
+                        <button>
+                            <img src={msg} alt="Message"></img>
+                        </button>
                     </div>
                     <div>
-                        <img src={share} alt="Share"></img>
+                        <button>
+                            <img src={share} alt="Share"></img>
+                        </button>
                     </div>
                 </div>
                 <div className="post-comment">
@@ -53,7 +60,9 @@ class Post extends Component {
                         className="comment-input-field"></input>
                 </div>
                 <div className="load-comments">
-                    <a href="./">View all comments</a>
+                    <Link to="./" className="comments-loader">
+                        View all comments
+                    </Link>
                 </div>
             </div>
         )
