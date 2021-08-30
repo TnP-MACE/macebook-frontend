@@ -94,6 +94,14 @@ class Profile extends Component {
                 <Experience/>
                 <Experience/>
               </div>
+              <div className="profile-accom">
+                <h2>Accomplishments</h2>
+                <div className="acc-row">
+                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                </div>
+              </div>
             </div>
           </div>
 
