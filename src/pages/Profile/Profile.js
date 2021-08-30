@@ -4,6 +4,8 @@ import "./Profile.scss";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import Experience from "../../components/Experience/Experience";
+import cover from "../../assets/images/icons/cover.jpg";
+import profileimg from "../../assets/images/icons/profile.webp";
 
 class Profile extends Component {
   render() {
@@ -12,12 +14,12 @@ class Profile extends Component {
         <Header active="profile" />
         <div className="container">
           <div className="profile-bgimgContainer">
-            <img src='https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg' alt="Background Image Not Loaded"></img>
+            <img src={cover} alt="Background Image Not Loaded"></img>
           </div>
           <div className="profile-header">
             <div className="profile-header-section-1">
               <div className="profile-imgContainer">
-                <img src='https://randomuser.me/api/portraits/med/men/4.jpg' alt="User Img"></img>
+                <img src={profileimg} alt="User Img"></img>
               </div>
             </div>
             <div className="profile-header-desc">
@@ -90,9 +92,27 @@ class Profile extends Component {
               </div>
               <div className="profile-experience">
                 <h2>Experience</h2>
-                <Experience/>
-                <Experience/>
-                <Experience/>
+                <Experience 
+                  name="Apple Inc" 
+                  duration="Oct 2019- Current"
+                  type="Fulltime"
+                  position="Senior Software Engineer"
+                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+                />
+                <Experience 
+                  name="Apple Inc" 
+                  duration="Oct 2019- Current"
+                  type="Fulltime"
+                  position="Senior Software Engineer"
+                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+                />
+                <Experience 
+                  name="Apple Inc" 
+                  duration="Oct 2019- Current"
+                  type="Fulltime"
+                  position="Senior Software Engineer"
+                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+                />
               </div>
               <div className="profile-accom">
                 <h2>Accomplishments</h2>
@@ -101,6 +121,10 @@ class Profile extends Component {
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
                 </div>
+              </div>
+              <div className="profile-contact">
+                <h2>Contact Info</h2>
+
               </div>
             </div>
           </div>
