@@ -1,1 +1,231 @@
 @import "../../assets/sass/main.scss";
+
+.container{
+    .profile-bgimgContainer{
+        width: 100%;
+        height: 250px;
+        margin-top: $margin-regular;
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+        //border: 2px solid #000;
+    }
+
+    .profile-header{
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+    }
+
+    .profile-header-section-1{
+        flex: 2;
+        width: 100%;
+        height: 100%;
+    }
+    .profile-header-desc{
+        flex: 6;
+        display: flex;
+        .profile-header-section-2{
+            flex: 5;
+            align-items: center;
+            padding: $padding-sm;
+        }
+        .profile-header-section-3{
+            flex: 3;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+
+    .profile-imgContainer{
+        width: 13.25em;
+        height: 13.25em;
+        position: relative;
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            position: absolute;
+            top: -35%;
+            left: 20%;
+        }
+    }
+
+    .profile-userDetails{
+        display: flex;
+        flex-direction: column;
+        span{
+            font-weight: 300;
+            &.userConnections{
+                color: $color-orange;
+                font-weight: 600;
+                font-style: normal;
+            }
+        }
+    }
+
+    .profile-header-btnContainer{
+        position: relative;
+        .profile-header-userButtons{
+            padding: 35px 0;
+            button{
+                padding: 10px;
+                margin: 0px 10px;
+                font-weight: 600;
+                border-radius: 20px;
+                cursor: pointer;
+                width: 8.125em;          
+                &.profile-header-btn1{
+                    color: #000000;
+                    background: #ffffff;
+                    border: 2px solid #000000;
+                    position: absolute;
+                    top: 50%;
+                    right: 40%;
+                }
+                &.profile-header-btn2{
+                    color: #ffffff;
+                    background: #000000;
+                    border: 2px solid #000000;
+                    position: absolute;
+                    top: 50%;
+                    right: 0%;
+                }
+            }
+        }
+    }
+
+
+    .profile-body{
+        display: flex;
+        padding: $padding-sm;
+    }
+    .profile-leftpanel{
+        flex: 1;
+        padding: $padding-sm;
+        .card-container{
+            padding: 10px;
+            margin: 20px 0px;
+            h3{
+                padding-top: 10px;
+                text-transform: uppercase;
+            }
+            p{
+                padding-bottom: 10px;
+            }
+            .profile-skillsContainer{
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                flex-wrap: wrap;
+                padding-bottom: 10px;
+                .profile-skills{
+                    color: $color-white;
+                    background-color: $color-black;
+                    border: 1px solid $color-black;
+                    border-radius: 10px;
+                    margin: 5px 10px;
+                    padding: 2px 8px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+            }
+            .profile-applicationContainer{
+                padding: 10px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .profile-appCount{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .profile-appContent{
+                        text-align: center;
+                        h2{
+                            color: $color-orange;
+                        }
+                        p{
+                            font-size: $font-size-sm;
+                        }
+                    }
+                }
+                .profile-dashboardbtnContainer{
+                    button{
+                        padding: 10px 20px;
+                        font-weight: 600;
+                        font-size: $font-size-regular;
+                        color: $color-black;
+                        background-color: $color-white;
+                        border: 2px solid $color-black;
+                        border-radius: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .profile-rightpanel{
+        flex: 3;
+        padding: $padding-sm;
+        .profile-posts-section{
+            width: 100%;
+        }
+        .acc-row{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            span{
+                width: 90%;
+                padding: $padding-regular;
+                background-color:  #C8C8C8;
+                border-radius: 10px;
+                margin: $margin-sm;
+            }
+        }
+    }
+
+
+    @media (max-width: 768px){
+        .profile-bgimgContainer{
+            width:100%;
+            height: 9.375em;
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 15px;
+            }
+            //border: 2px solid #000;
+        }
+        .profile-header{
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .profile-header-section-1{
+            flex: 6;
+        }
+        .profile-header-desc{
+            flex-direction: column;
+        }
+        .profile-imgContainer{
+            width: 7.5em;
+            height: 7.5em;
+        }
+        .profile-header-userButtons{
+            button{
+                width: 6.25em;
+                &.profile-header-btn1{
+                    right: 50%;
+                }
+                &.profile-header-btn2{
+                    top: 75%;
+                }
+            }
+        }
+    }
+
+}

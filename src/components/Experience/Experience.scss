@@ -1,0 +1,33 @@
+@import "../../assets/sass/main.scss";
+
+.exp-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: $margin-regular;
+    .exp-col-1{
+        display: flex;
+        flex: 1;
+        justify-content: space-evenly;
+        img{
+            width: 4em;
+            height: 4em;
+            box-shadow: 2px 2px 5px 2px  	#C8C8C8;
+            border-radius: 10px;
+        }
+        .exp-comp-det{
+            p{
+                font-weight: 200;
+            }
+            span{
+                &.gray-bg{
+                    padding: 0.2em 0.4em;
+                    background-color:  	#C8C8C8;
+                }
+            }
+        }
+    }
+    .exp-col-2{
+        flex: 2;
+    }
+}
