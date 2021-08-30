@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./Profile.scss";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
+import Experience from "../../components/Experience/Experience";
 
 class Profile extends Component {
   render() {
@@ -19,19 +20,21 @@ class Profile extends Component {
                 <img src='https://randomuser.me/api/portraits/med/men/4.jpg' alt="User Img"></img>
               </div>
             </div>
-            <div className="profile-header-section-2">
-              <h2>User Name</h2>
-              <div className="profile-userDetails">
-                <span>Position</span>
-                <span>Location . Batch of '14 . CSE</span>
-                <span className="userConnections">Connections</span>
+            <div className="profile-header-desc">
+              <div className="profile-header-section-2">
+                <h2>User Name</h2>
+                <div className="profile-userDetails">
+                  <span>Position</span>
+                  <span>Location . Batch of '14 . CSE</span>
+                  <span className="userConnections">Connections</span>
+                </div>
               </div>
-            </div>
-            <div className="profile-header-section-3">
-              <div className="profile-header-btnContainer">
-                <div className="profile-header-userButtons">
-                  <button className="profile-header-btn1">Settings</button>
-                  <button className="profile-header-btn2">Edit Profile</button>
+              <div className="profile-header-section-3">
+                <div className="profile-header-btnContainer">
+                  <div className="profile-header-userButtons">
+                    <button className="profile-header-btn1">Settings</button>
+                    <button className="profile-header-btn2">Edit Profile</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -81,7 +84,16 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile-rightpanel">
-              Right Panel
+              <div className="profile-posts-section">
+                <h2>My Posts</h2>
+                <p>Posts</p>
+              </div>
+              <div className="profile-experience">
+                <h2>Experience</h2>
+                <Experience/>
+                <Experience/>
+                <Experience/>
+              </div>
             </div>
           </div>
 
