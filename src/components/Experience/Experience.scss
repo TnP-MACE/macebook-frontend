@@ -12,7 +12,7 @@
         img{
             width: 4em;
             height: 4em;
-            box-shadow: 2px 2px 5px 2px  	#C8C8C8;
+            box-shadow: 2px 2px 5px 2px  	#E2E2E2;
             border-radius: 10px;
         }
         .exp-comp-det{
@@ -22,12 +22,36 @@
             span{
                 &.gray-bg{
                     padding: 0.2em 0.4em;
-                    background-color:  	#C8C8C8;
+                    background-color:  	#E2E2E2;
                 }
             }
         }
     }
     .exp-col-2{
         flex: 2;
+    }
+
+}
+@media (max-width: 768px){
+    .exp-row{
+        flex-direction: column;
+        //flex-direction: row;
+        .exp-col-1{
+            flex: 1;
+            margin: $margin-sm;
+            //flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            img{
+                margin: $margin-sm;
+            }
+            .exp-comp-det{
+                text-align: center;
+                line-height: 1.8;
+            }
+        }
+        .exp-col-2{
+            flex: 1;
+        }
     }
 }

@@ -71,6 +71,8 @@
         position: relative;
         .profile-header-userButtons{
             padding: 35px 0;
+            display: flex;
+            justify-content: flex-end;
             button{
                 padding: 10px;
                 margin: 0px 10px;
@@ -82,17 +84,17 @@
                     color: #000000;
                     background: #ffffff;
                     border: 2px solid #000000;
-                    position: absolute;
-                    top: 50%;
-                    right: 40%;
+                    //position: absolute;
+                    //top: 50%;
+                    //right: 40%;
                 }
                 &.profile-header-btn2{
                     color: #ffffff;
                     background: #000000;
                     border: 2px solid #000000;
-                    position: absolute;
-                    top: 50%;
-                    right: 0%;
+                    //position: absolute;
+                    //top: 50%;
+                    //right: 0%;
                 }
             }
         }
@@ -101,7 +103,7 @@
 
     .profile-body{
         display: flex;
-        padding: $padding-sm;
+        //padding: $padding-sm;
     }
     .profile-leftpanel{
         flex: 1;
@@ -182,7 +184,7 @@
             span{
                 width: 90%;
                 padding: $padding-regular;
-                background-color:  #C8C8C8;
+                background-color:  #E2E2E2;
                 border-radius: 10px;
                 margin: $margin-sm;
             }
@@ -210,21 +212,28 @@
         }
         .profile-header-desc{
             flex-direction: column;
+            //justify-content: center;
+            .profile-header-section-1{
+                padding: $padding-sm;
+            }
         }
         .profile-imgContainer{
             width: 7.5em;
             height: 7.5em;
+            img{
+                left: 10%;
+            }
         }
         .profile-header-userButtons{
+            display: flex;
+            padding: 0;
             button{
+                position: relative;
                 width: 6.25em;
-                &.profile-header-btn1{
-                    right: 50%;
-                }
-                &.profile-header-btn2{
-                    top: 75%;
-                }
             }
+        }
+        .profile-body{
+            flex-direction: column;
         }
     }
 
