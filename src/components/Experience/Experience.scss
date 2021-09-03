@@ -10,25 +10,47 @@
         flex: 1;
         justify-content: space-evenly;
         img{
-            width: 4em;
-            height: 4em;
+            width: 44px;
+            height: 44px;
             box-shadow: 2px 2px 5px 2px  	#E2E2E2;
             border-radius: 10px;
         }
         .exp-comp-det{
+            h4{
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 16.5px;
+            }
             p{
-                font-weight: 200;
+                font-weight: 400;
+                font-size: 8px;
+                line-height: 12px;
+                color: #626262;
             }
             span{
                 &.gray-bg{
                     padding: 0.2em 0.4em;
                     background-color:  	#E2E2E2;
+                    font-size: 6px;
+                    line-height: 9px;
+                    font-weight: 500;
+                    color: #626262;
                 }
             }
         }
     }
     .exp-col-2{
         flex: 2;
+        h3{
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: 600;
+        }
+        p{
+            font-size: 9px;
+            line-height: 13.5px;
+            font-weight: 400;
+        }
     }
 
 }

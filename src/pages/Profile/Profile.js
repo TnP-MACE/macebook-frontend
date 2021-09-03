@@ -4,8 +4,11 @@ import "./Profile.scss";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import Experience from "../../components/Experience/Experience";
+import Post from "../../components/Post/Post";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
+import postImg from '../../assets/images/icons/postImg.png'
+import profilepic from '../../assets/images/icons/UserProfile.png'
 
 class Profile extends Component {
   render() {
@@ -26,8 +29,8 @@ class Profile extends Component {
               <div className="profile-header-section-2">
                 <h2>User Name</h2>
                 <div className="profile-userDetails">
-                  <span>Position</span>
-                  <span>Location . Batch of '14 . CSE</span>
+                  <span className="position">Position</span>
+                  <span className="batch">Location . Batch of '14 . CSE</span>
                   <span className="userConnections">Connections</span>
                 </div>
               </div>
@@ -88,7 +91,20 @@ class Profile extends Component {
             <div className="profile-rightpanel">
               <div className="profile-posts-section">
                 <h2>My Posts</h2>
-                <p>Posts</p>
+                <div className="profile-postContainer">
+                    <Card>
+                      <Post
+                        poster="Ruben Lubin"
+                        posterprofile={profilepic}
+                        designation="poster designation"
+                        content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
+                        hashtags="#Hashtags   #lorem_epsum"
+                        image={postImg}
+                        likes="3k"
+                        comments="1k"
+                        profilepic={profilepic}/>
+                    </Card>
+                </div>
               </div>
               <div className="profile-experience">
                 <h2>Experience</h2>

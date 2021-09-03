@@ -31,6 +31,11 @@
             flex: 5;
             align-items: center;
             padding: $padding-sm;
+            h2{
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 42px;
+            }
         }
         .profile-header-section-3{
             flex: 3;
@@ -59,10 +64,25 @@
         flex-direction: column;
         span{
             font-weight: 300;
+            &.position{
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+            }
+            &.batch{
+                font-weight: 600;
+                font-style: normal;
+                font-size: 13px;
+                line-height: 19.5px;
+                color: #626262;
+
+            }
             &.userConnections{
                 color: $color-orange;
                 font-weight: 600;
                 font-style: normal;
+                font-size: 15px;
+                line-height: 22.5px;
             }
         }
     }
@@ -74,24 +94,27 @@
             display: flex;
             justify-content: flex-end;
             button{
-                padding: 10px;
+                //padding: 10px;
                 margin: 0px 10px;
-                font-weight: 600;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
                 border-radius: 20px;
                 cursor: pointer;
-                width: 8.125em;          
+                width: 130px;
+                height: 40px;          
                 &.profile-header-btn1{
-                    color: #000000;
-                    background: #ffffff;
-                    border: 2px solid #000000;
+                    color: $color-black;
+                    background: $color-white;
+                    border: 2px solid $color-black;
                     //position: absolute;
                     //top: 50%;
                     //right: 40%;
                 }
                 &.profile-header-btn2{
-                    color: #ffffff;
-                    background: #000000;
-                    border: 2px solid #000000;
+                    color: $color-white;
+                    background: $color-black;
+                    border: 2px solid $color-black;
                     //position: absolute;
                     //top: 50%;
                     //right: 0%;
@@ -114,9 +137,15 @@
             h3{
                 padding-top: 10px;
                 text-transform: uppercase;
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 22.5px;
             }
             p{
                 padding-bottom: 10px;
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 19.5px;
             }
             .profile-skillsContainer{
                 display: flex;
@@ -128,10 +157,12 @@
                     color: $color-white;
                     background-color: $color-black;
                     border: 1px solid $color-black;
-                    border-radius: 10px;
+                    border-radius: 8px;
                     margin: 5px 10px;
                     padding: 2px 8px;
-                    font-weight: 600;
+                    font-weight: 700;
+                    font-size: 12px;
+                    line-height: 18px;
                     text-transform: uppercase;
                 }
             }
@@ -149,21 +180,29 @@
                         text-align: center;
                         h2{
                             color: $color-orange;
+                            font-weight: 600;
+                            font-size: 24px;
+                            line-height: 36px;
                         }
                         p{
-                            font-size: $font-size-sm;
+                            font-size: 10px;
+                            font-weight: 500;
+                            line-height: 15px;
                         }
                     }
                 }
                 .profile-dashboardbtnContainer{
                     button{
                         padding: 10px 20px;
-                        font-weight: 600;
-                        font-size: $font-size-regular;
+                        font-weight: 500;
+                        font-size: 13px;
+                        line-height: 19.5px;
+                        font-style: normal;
                         color: $color-black;
                         background-color: $color-white;
-                        border: 2px solid $color-black;
-                        border-radius: 20px;
+                        border: 1px solid $color-black;
+                        box-sizing: border-box;
+                        border-radius: 50px;
                     }
                 }
             }
@@ -174,6 +213,10 @@
         padding: $padding-sm;
         .profile-posts-section{
             width: 100%;
+            .profile-postContainer{
+                width: 100%;
+                display: flex;
+            }
         }
         .acc-row{
             display: flex;
@@ -187,6 +230,9 @@
                 background-color:  #E2E2E2;
                 border-radius: 10px;
                 margin: $margin-sm;
+                font-size: 13px;
+                line-height: 19px;
+                font-weight: 500;
             }
         }
     }
