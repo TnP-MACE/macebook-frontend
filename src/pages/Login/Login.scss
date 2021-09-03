@@ -1,0 +1,135 @@
+@import "../../assets/sass/main.scss";
+
+.Login{
+
+
+  &__container-white {
+    position:absolute;
+    max-width: 33.625rem;
+    height: 38.1875rem;
+    //left: -195px;
+    box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2),
+    1px -1px 2px rgba(191, 191, 191, 0.2),
+    -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+    //border-top:67px solid#000000 ;
+    background:$color-white;
+    //border-radius: 0px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    //justify-content: space-around;
+    &__username{
+     padding-top: 12.06rem;
+    }
+    &__password{
+      padding-top: 3.75rem;
+    }
+    &__create{
+      margin-top: 8.37rem;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 15px;
+    }
+    &__forgot{
+      padding-top: 1rem;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    &__sign {
+      position: center;
+      width: 69px;
+      height: 30px;
+      margin-top: 41px;
+
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      /* identical to box height */
+
+
+      color:$color-black;
+    }
+    &__error-message {
+      color: #cc0033;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 15px;
+      margin: 5px 0 0;
+    }
+
+    &__google{
+      position: absolute;
+      padding-top: 11rem;
+      background: $color-white;
+      border: 0.5px solid #8D8D8D;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      //line-height: 21px;
+      /* identical to box height */
+      text-align: center;
+
+      color:$color-black;
+
+    }
+
+    form input {
+
+      border: none;
+      outline: none;
+      border-bottom: 1px solid $color-black;
+      max-width:100%;
+
+    }
+
+    form button {
+      position: absolute;
+      width: 186px;
+      height: 40px;
+      margin-top: 80px;
+      background: $color-black;
+      border: 1px solid $color-black;
+      box-sizing: border-box;
+      border-radius: 50px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      /* identical to box height */
+
+
+      color: $color-white;
+
+    }
+
+    
+
+  }
+  &__heading{
+    padding-top: 1rem;
+    height: 67px;
+    max-width:538px;
+    background: $color-black;
+    color:$color-white;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 40px
+  }
+
+}
+
+

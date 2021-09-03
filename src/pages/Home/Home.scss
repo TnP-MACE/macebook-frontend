@@ -1,4 +1,41 @@
 @import "../../assets/sass/main.scss";
 
 .Home {
+    .container {
+        @media (min-width: 1080px) {
+            .card-cols{
+                margin-top: $margin-regular;
+                display: flex;
+                justify-content: space-around;
+                margin-left: $margin-xl;
+            }
+            .card-col2{
+                margin-left: 4rem;
+                margin-right: 4rem;
+            }
+        }
+        
+        @media (min-width: 768px){
+            .card-cols{
+                .card-col1{
+                    width: 36rem;
+                }
+                .card-col2{
+                        width: 36rem;
+                }
+            }
+        }
+        @media (max-width: 560px){
+            .card-cols{
+                .card-col1{
+                    margin-left: -1rem;
+                    width: 116%;
+                }
+                .card-col2{
+                    margin-left: -1rem;
+                    width: 116%;
+                }
+            }
+        }
+    }
 }

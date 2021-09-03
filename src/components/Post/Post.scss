@@ -1,0 +1,146 @@
+@import "../../assets/sass/main.scss";
+
+@media (min-width: 768px){
+    .post-container{
+        .post-content{
+            img{
+                margin-left: $margin-regular;
+            }
+        }
+    }
+    .post-attributes{
+        p{
+            margin-left: -15%;
+        }
+    }
+}
+@media (max-width: 768px){
+    .post-container{
+        .post-content{
+            img{
+                margin-left: $margin-sm;
+            }
+        }
+    }
+}
+.post-container{
+    .poster{
+        display: flex;
+        .posterimg{
+            margin-left: $margin-sm;
+            padding-top: $padding-sm;
+            .profile-pic{
+                margin: $margin-sm;
+                border-radius: 50%;
+                width: 3.8rem;
+                height: 3.8rem;
+            }
+        }
+        .name_desig{
+            margin-top: $margin-sm;
+            a{   text-decoration: none;
+                 color: $color-black;
+                .Name{
+                    font-family: Poppins;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-top: $margin-regular;
+                }
+            }
+            .Desig{
+                font-family: Poppins;
+                font-size: 13px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 20px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: $color-grey;
+            }
+        }
+    }
+    .post-content{
+        p{
+            margin-left: $margin-regular;
+            margin-right: $margin-regular;
+        }
+        .hashtags{
+            font-weight: bold;
+            color: $color-orange;
+        }
+        img{
+            margin-right: $margin-regular;
+            padding: $padding-sm;
+            width: 85%;
+        }
+    }
+    .post-attributes{
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+        p{
+            font-family: Poppins;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 25px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: $color-grey;
+        }
+    }
+    .post-activity{
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+        margin-left: $margin-sm;
+        button{
+            background-color: rgba(255,255,255,0);
+            border: none;
+            cursor: pointer;
+            img{
+                margin-top: $margin-sm;
+            }
+        }
+    }
+    .post-comment{
+        width: 90%;
+        display: flex;
+        
+        img{
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            padding: $padding-regular;
+        }
+        input{
+            padding: $padding-sm;
+            margin-top: $margin-regular;
+            border: 1px solid $color-gray;
+            border-radius: 24px;
+            height: 1rem;
+            width: 80rem;
+            outline: none;
+        }
+       
+    }
+    .load-comments{
+        margin-left: $margin-sm;
+        .comments-loader{
+            color: $color-orange;
+            font-family: Poppins;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 15px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin-left: $margin-sm;
+            text-decoration: none;
+        }
+    }
+}
