@@ -69,6 +69,8 @@
     }
 
     &__google{
+      display:flex;
+
       position: absolute;
       margin-top: 7.43rem;
       background:$color-white;
@@ -86,11 +88,17 @@
 
 
       color: $color-black;
-
+     p{
+       margin-top: 10px;
+       margin-right:5px;
+     }
+    }
+    form{
+      position:center;
     }
 
     form input {
-
+      font-size:16px;
       border: none;
       outline: none;
       border-bottom: 1px solid $color-black;
@@ -103,7 +111,7 @@
       position: absolute;
       width: 186px;
       height: 40px;
-      margin-top: 3.5rem;
+      margin-top: 2rem;
       background: $color-black;
       border: 1px solid $color-black;
       box-sizing: border-box;
@@ -122,7 +130,9 @@
     &__create{
      margin-top: 6.68rem;
     }
-
+    select{
+      font-size:16px ;
+    }
 
 
   }
