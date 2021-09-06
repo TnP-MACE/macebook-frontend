@@ -7,8 +7,14 @@ import Experience from "../../components/Experience/Experience";
 import Post from "../../components/Post/Post";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
-import postImg from '../../assets/images/icons/postImg.png'
-import profilepic from '../../assets/images/icons/UserProfile.png'
+import postImg from '../../assets/images/icons/postImg.png';
+import profilepic from '../../assets/images/icons/UserProfile.png';
+import mail from "../../assets/images/icons/mail.svg";
+import phone from "../../assets/images/icons/phone.svg";
+import web from "../../assets/images/icons/web.svg";
+import linkedin from "../../assets/images/icons/linkedin.svg";
+import fb from "../../assets/images/icons/fb.svg";
+import github from "../../assets/images/icons/github.svg";
 
 class Profile extends Component {
   render() {
@@ -92,18 +98,7 @@ class Profile extends Component {
               <div className="profile-posts-section">
                 <h2>My Posts</h2>
                 <div className="profile-postContainer">
-                    <Card>
-                      <Post
-                        poster="Ruben Lubin"
-                        posterprofile={profilepic}
-                        designation="poster designation"
-                        content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
-                        hashtags="#Hashtags   #lorem_epsum"
-                        image={postImg}
-                        likes="3k"
-                        comments="1k"
-                        profilepic={profilepic}/>
-                    </Card>
+                    Posts
                 </div>
               </div>
               <div className="profile-experience">
@@ -140,11 +135,35 @@ class Profile extends Component {
               </div>
               <div className="profile-contact">
                 <h2>Contact Info</h2>
-
+                <div className="contact-section">
+                  <div className="contact-content">
+                    <img src={mail} alt="mail"></img>
+                    <p>johndoe@email.com</p>
+                  </div>
+                  <div className="contact-content">
+                    <img src={phone} alt="mail"></img>
+                    <p>+91 123456789</p>
+                  </div>
+                  <div className="contact-content">
+                    <img src={web} alt="mail"></img>
+                    <p>johndoe.com</p>
+                  </div>
+                  <div className="contact-content">
+                    <img src={linkedin} alt="mail"></img>
+                    <p>linkedin.com/in/johndoe</p>
+                  </div>
+                  <div className="contact-content">
+                    <img src={fb} alt="mail"></img>
+                    <p>John Doe</p>
+                  </div>
+                  <div className="contact-content">
+                    <img src={github} alt="mail"></img>
+                    <p>github.com/johndoe</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     );

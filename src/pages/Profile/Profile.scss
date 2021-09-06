@@ -235,6 +235,30 @@
                 font-weight: 500;
             }
         }
+        .profile-contact{
+            .contact-section{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                .contact-content{
+                    display: flex;
+                    justify-content: space-between;
+                    p{
+                        flex: 2;
+                        padding-left: 10px;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    //flex: 1;
+                    width: 33.33%;
+                    //padding: 0px 10px;
+                    margin-top: 23px;
+                    margin-bottom: 39px;
+                }
+            }
+        }
     }
 
 
@@ -280,6 +304,14 @@
         }
         .profile-body{
             flex-direction: column;
+            .contact-section{
+                flex-direction: column;
+                width: 100%;
+                .contact-content{
+                    width: 3.6em;
+                    margin: 10px 0px;
+                }
+            }
         }
     }
 
