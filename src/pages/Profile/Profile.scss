@@ -212,10 +212,15 @@
         flex: 3;
         padding: $padding-sm;
         .profile-posts-section{
+            height: 100%;
             width: 100%;
             .profile-postContainer{
                 width: 100%;
                 display: flex;
+                .profile-post{
+                    width: 450px;
+                    height: 150px;
+                }
             }
         }
         .acc-row{
@@ -275,23 +280,24 @@
         }
         .profile-header{
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
         .profile-header-section-1{
-            flex: 6;
+            flex: 1;
         }
         .profile-header-desc{
             flex-direction: column;
             //justify-content: center;
             .profile-header-section-1{
-                padding: $padding-sm;
+                padding: 0;
             }
         }
         .profile-imgContainer{
-            width: 7.5em;
-            height: 7.5em;
+            width: 10em;
+            height: 10em;
             img{
-                left: 10%;
+                left: 60%;
             }
         }
         .profile-header-userButtons{

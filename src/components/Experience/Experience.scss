@@ -8,7 +8,6 @@
     .exp-col-1{
         display: flex;
         flex: 1;
-        justify-content: space-evenly;
         img{
             width: 44px;
             height: 44px;
@@ -16,6 +15,7 @@
             border-radius: 10px;
         }
         .exp-comp-det{
+            margin: 0px 20px;
             h4{
                 font-weight: 500;
                 font-size: 11px;

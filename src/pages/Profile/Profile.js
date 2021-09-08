@@ -4,6 +4,7 @@ import "./Profile.scss";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import Experience from "../../components/Experience/Experience";
+import Suggestions from "../../components/Suggestions/Suggestions";
 import Post from "../../components/Post/Post";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
@@ -90,7 +91,7 @@ class Profile extends Component {
               </div>
               <div className="card-container">
                 <Card>
-                  <h3>PEOPLE YOU MAY KNOW</h3>
+                  <Suggestions></Suggestions>
                 </Card>
               </div>
             </div>
@@ -98,7 +99,23 @@ class Profile extends Component {
               <div className="profile-posts-section">
                 <h2>My Posts</h2>
                 <div className="profile-postContainer">
-                    Posts
+                    <div className="profile-post">
+                      <Card>
+                        <Post 
+                          poster="Ruben Lubin"
+                          posterprofile={profilepic}
+                          designation="poster designation"
+                          content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
+                          hashtags="#Hashtags   #lorem_epsum"
+                          image={postImg}
+                          likes="3k"
+                          comments="1k"
+                          profilepic={profilepic}></Post>
+                      </Card>
+                    </div>
+                    <div className="profile-post">
+                      Post
+                    </div>
                 </div>
               </div>
               <div className="profile-experience">
