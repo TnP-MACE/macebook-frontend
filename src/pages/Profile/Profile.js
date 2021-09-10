@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import Experience from "../../components/Experience/Experience";
 import Suggestions from "../../components/Suggestions/Suggestions";
-import Post from "../../components/Post/Post";
+import ProfilePost from "../../components/ProfilePost/ProfilePost";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
 import postImg from '../../assets/images/icons/postImg.png';
@@ -17,6 +17,7 @@ import linkedin from "../../assets/images/icons/linkedin.svg";
 import fb from "../../assets/images/icons/fb.svg";
 import github from "../../assets/images/icons/github.svg";
 import edit from '../../assets/images/icons/edit.svg';
+import arrow from "../../assets/images/icons/arrow.png";
 
 class Profile extends Component {
   render() {
@@ -108,7 +109,7 @@ class Profile extends Component {
                 <div className="profile-postContainer">
                     <div className="profile-post">
                       <Card>
-                        <Post 
+                        <ProfilePost 
                           poster="Ruben Lubin"
                           posterprofile={profilepic}
                           designation="poster designation"
@@ -117,8 +118,25 @@ class Profile extends Component {
                           image={postImg}
                           likes="3k"
                           comments="1k"
-                          profilepic={profilepic}></Post>
+                          profilepic={profilepic}></ProfilePost>
                       </Card>
+                    </div>
+                    <div className="profile-post">
+                      <Card>
+                        <ProfilePost 
+                          poster="Ruben Lubin"
+                          posterprofile={profilepic}
+                          designation="poster designation"
+                          content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
+                          hashtags="#Hashtags   #lorem_epsum"
+                          image={postImg}
+                          likes="3k"
+                          comments="1k"
+                          profilepic={profilepic}></ProfilePost>
+                      </Card>
+                    </div>
+                    <div className="arrow">
+                      <img src={arrow} alt="View Posts"></img>
                     </div>
                 </div>
               </div>

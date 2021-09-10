@@ -1,0 +1,150 @@
+@import "../../assets/sass/main.scss";
+
+@media (min-width: 768px){
+    .post-container{
+        width: 350px;
+        height: 500px;
+        .post-content{
+            img{
+                margin-left: $margin-regular;
+            }
+        }
+    }
+    .post-attributes{
+        p{
+            margin-left: -15%;
+        }
+    }
+}
+@media (max-width: 768px){
+    .post-container{
+        .post-content{
+            img{
+                margin-left: $margin-sm;
+            }
+        }
+    }
+}
+.post-container{
+    .poster{
+        display: flex;
+        .posterimg{
+            margin-left: $margin-sm;
+            padding-top: $padding-sm;
+            .profile-pic{
+                margin: $margin-sm;
+                border-radius: 50%;
+                width: 2.8rem;
+                height: 2.8rem;
+            }
+        }
+        .name_desig{
+            margin-top: $margin-sm;
+            a{   text-decoration: none;
+                 color: $color-black;
+                .Name{
+                    font-family: Poppins;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 15px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin-top: $margin-sm;
+                }
+            }
+            .Desig{
+                font-family: Poppins;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 9px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: $color-grey;
+            }
+        }
+    }
+    .post-content{
+        font-size: 11px;
+        font-weight: 600;
+        p{
+            margin-left: $margin-sm;
+            margin-right: $margin-sm;
+        }
+        .hashtags{
+            font-weight: bold;
+            color: $color-orange;
+        }
+        img{
+            margin-right: $margin-sm;
+            padding: 10px;
+            width: 75%;
+        }
+    }
+    .post-attributes{
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+        p{
+            font-family: Poppins;
+            font-size: 9px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 15px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: $color-grey;
+        }
+    }
+    .post-activity{
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+        margin-left: $margin-sm;
+        button{
+            background-color: rgba(255,255,255,0);
+            border: none;
+            cursor: pointer;
+            img{
+                margin-top: $margin-sm;
+            }
+        }
+    }
+    .post-comment{
+        width: 90%;
+        display: flex;
+        
+        img{
+            width: 2.0rem;
+            height: 2.0rem;
+            border-radius: 50%;
+            padding: $padding-sm;
+        }
+        input{
+            padding: $padding-sm;
+            margin-top: $margin-sm;
+            border: 1px solid $color-gray;
+            border-radius: 24px;
+            height: 0.6rem;
+            width: 80rem;
+            outline: none;
+        }
+       
+    }
+    .load-comments{
+        margin-left: $margin-sm;
+        .comments-loader{
+            color: $color-orange;
+            font-family: Poppins;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 15px;
+            letter-spacing: 0em;
+            text-align: left;
+            margin-left: $margin-sm;
+            text-decoration: none;
+        }
+    }
+}

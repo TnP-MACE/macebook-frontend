@@ -106,7 +106,7 @@
                 &.profile-header-btn1{
                     color: $color-black;
                     background: $color-white;
-                    border: 1px solid $color-black;
+                    border: 1.5px solid $color-black;
                     //position: absolute;
                     //top: 50%;
                     //right: 40%;
@@ -114,7 +114,7 @@
                 &.profile-header-btn2{
                     color: $color-white;
                     background: $color-black;
-                    border: 1px solid $color-black;
+                    border: 1.5px solid $color-black;
                     //position: absolute;
                     //top: 50%;
                     //right: 0%;
@@ -145,22 +145,22 @@
             h3{
                 padding-top: 10px;
                 text-transform: uppercase;
-                font-size: 15px;
+                font-size: 18px;
                 font-weight: 600;
                 line-height: 22.5px;
             }
             p{
-                padding-bottom: 10px;
+                padding: 15px 0px;
                 font-weight: 500;
-                font-size: 13px;
-                line-height: 19.5px;
+                font-size: 15px;
+                line-height: 20px;
             }
             .profile-skillsContainer{
                 display: flex;
                 justify-content: left;
                 align-items: center;
                 flex-wrap: wrap;
-                padding-bottom: 10px;
+                padding: 15px 0px;
                 .profile-skills{
                     color: $color-white;
                     background-color: $color-black;
@@ -169,7 +169,7 @@
                     margin: 5px 10px;
                     padding: 2px 8px;
                     font-weight: 700;
-                    font-size: 12px;
+                    font-size: 14px;
                     line-height: 18px;
                     text-transform: uppercase;
                 }
@@ -186,6 +186,7 @@
                     align-items: center;
                     .profile-appContent{
                         text-align: center;
+                        margin: 0px 10px;
                         h2{
                             color: $color-orange;
                             font-weight: 600;
@@ -193,7 +194,7 @@
                             line-height: 36px;
                         }
                         p{
-                            font-size: 10px;
+                            font-size: 13px;
                             font-weight: 500;
                             line-height: 15px;
                         }
@@ -202,15 +203,16 @@
                 .profile-dashboardbtnContainer{
                     button{
                         padding: 10px 20px;
-                        font-weight: 500;
-                        font-size: 13px;
+                        font-weight: 600;
+                        font-size: 15px;
                         line-height: 19.5px;
                         font-style: normal;
                         color: $color-black;
                         background-color: $color-white;
-                        border: 1px solid $color-black;
+                        border: 1.5px solid $color-black;
                         box-sizing: border-box;
                         border-radius: 50px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -225,9 +227,17 @@
             .profile-postContainer{
                 width: 100%;
                 display: flex;
+                align-items: center;
                 .profile-post{
-                    width: 450px;
+                    width: 400px;
                     //height: 550px;
+                }
+                .arrow{
+                    img{
+                        width: 45px;
+                        height: 45px;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -327,12 +337,22 @@
         }
         .profile-body{
             flex-direction: column;
+            align-items: center;
             .contact-section{
                 flex-direction: column;
                 width: 100%;
                 .contact-content{
                     width: 3.6em;
                     margin: 10px 0px;
+                }
+            }
+            .profile-postContainer{
+                flex-direction: column;
+                align-items: center;
+                .arrow{
+                    img{
+                        margin: 10px 0px;
+                    }
                 }
             }
         }
