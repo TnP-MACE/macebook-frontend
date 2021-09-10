@@ -16,6 +16,7 @@ import web from "../../assets/images/icons/web.svg";
 import linkedin from "../../assets/images/icons/linkedin.svg";
 import fb from "../../assets/images/icons/fb.svg";
 import github from "../../assets/images/icons/github.svg";
+import edit from '../../assets/images/icons/edit.svg';
 
 class Profile extends Component {
   render() {
@@ -34,7 +35,7 @@ class Profile extends Component {
             </div>
             <div className="profile-header-desc">
               <div className="profile-header-section-2">
-                <h2>User Name</h2>
+                <h2>USER NAME</h2>
                 <div className="profile-userDetails">
                   <span className="position">Position</span>
                   <span className="batch">Location . Batch of '14 . CSE</span>
@@ -55,13 +56,19 @@ class Profile extends Component {
             <div className="profile-leftpanel">
               <div className="card-container">
                 <Card>
-                  <h3>About</h3>
+                  <div className="card-header">
+                    <h3>About</h3>
+                    <img src={edit} alt="Edit"></img>
+                  </div>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
                 </Card>
               </div>
               <div className="card-container">
                 <Card>
-                  <h3>Skills</h3>
+                  <div className="card-header">
+                    <h3>Skills</h3>
+                    <img src={edit} alt="Edit"></img>
+                  </div>
                   <div className="profile-skillsContainer">
                     <span className="profile-skills">HTML</span>
                     <span className="profile-skills">CSS</span>
@@ -113,13 +120,13 @@ class Profile extends Component {
                           profilepic={profilepic}></Post>
                       </Card>
                     </div>
-                    <div className="profile-post">
-                      Post
-                    </div>
                 </div>
               </div>
               <div className="profile-experience">
-                <h2>Experience</h2>
+                <div className="section-headers">
+                  <h2>Experience</h2>
+                  <span><img src={edit} alt="Edit"></img></span>
+                </div>
                 <Experience 
                   name="Apple Inc" 
                   duration="Oct 2019- Current"
@@ -143,7 +150,10 @@ class Profile extends Component {
                 />
               </div>
               <div className="profile-accom">
-                <h2>Accomplishments</h2>
+                <div className="section-headers">
+                  <h2>Accomplishments</h2>
+                  <span><img src={edit} alt="Edit"></img></span>
+                </div>
                 <div className="acc-row">
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
@@ -151,7 +161,10 @@ class Profile extends Component {
                 </div>
               </div>
               <div className="profile-contact">
-                <h2>Contact Info</h2>
+                <div className="section-headers">
+                  <h2>Contact Info</h2>
+                  <span><img src={edit} alt="Edit"></img></span>
+                </div>
                 <div className="contact-section">
                   <div className="contact-content">
                     <img src={mail} alt="mail"></img>
