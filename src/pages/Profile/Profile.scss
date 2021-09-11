@@ -319,12 +319,17 @@
             .profile-header-section-1{
                 padding: 0;
             }
+            .profile-header-section-2{
+                h2{
+                    font-size: 24px;
+                }
+            }
         }
         .profile-imgContainer{
             width: 10em;
             height: 10em;
             img{
-                left: 60%;
+                left: 40%;
             }
         }
         .profile-header-userButtons{
@@ -346,6 +351,10 @@
                     margin: 10px 0px;
                 }
             }
+            .profile-rightpanel{
+                width: 100%;
+                margin-left: 20%;
+            }
             .profile-postContainer{
                 flex-direction: column;
                 align-items: center;
@@ -353,6 +362,9 @@
                     img{
                         margin: 10px 0px;
                     }
+                }
+                .profile-post{
+                    width: 300px;
                 }
             }
         }
