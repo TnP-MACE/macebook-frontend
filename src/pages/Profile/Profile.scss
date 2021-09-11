@@ -15,7 +15,7 @@
 
     .profile-header{
         display: flex;
-        margin: auto;
+        //margin: auto;
         flex-wrap: wrap;
     }
 
@@ -31,6 +31,11 @@
             flex: 5;
             align-items: center;
             padding: $padding-sm;
+            h2{
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 42px;
+            }
         }
         .profile-header-section-3{
             flex: 3;
@@ -59,10 +64,25 @@
         flex-direction: column;
         span{
             font-weight: 300;
+            &.position{
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+            }
+            &.batch{
+                font-weight: 600;
+                font-style: normal;
+                font-size: 13px;
+                line-height: 19.5px;
+                color: #626262;
+
+            }
             &.userConnections{
                 color: $color-orange;
                 font-weight: 600;
                 font-style: normal;
+                font-size: 15px;
+                line-height: 22.5px;
             }
         }
     }
@@ -71,28 +91,33 @@
         position: relative;
         .profile-header-userButtons{
             padding: 35px 0;
+            display: flex;
+            justify-content: flex-end;
             button{
-                padding: 10px;
+                //padding: 10px;
                 margin: 0px 10px;
-                font-weight: 600;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
                 border-radius: 20px;
                 cursor: pointer;
-                width: 8.125em;          
+                width: 130px;
+                height: 40px;          
                 &.profile-header-btn1{
-                    color: #000000;
-                    background: #ffffff;
-                    border: 2px solid #000000;
-                    position: absolute;
-                    top: 50%;
-                    right: 40%;
+                    color: $color-black;
+                    background: $color-white;
+                    border: 1.5px solid $color-black;
+                    //position: absolute;
+                    //top: 50%;
+                    //right: 40%;
                 }
                 &.profile-header-btn2{
-                    color: #ffffff;
-                    background: #000000;
-                    border: 2px solid #000000;
-                    position: absolute;
-                    top: 50%;
-                    right: 0%;
+                    color: $color-white;
+                    background: $color-black;
+                    border: 1.5px solid $color-black;
+                    //position: absolute;
+                    //top: 50%;
+                    //right: 0%;
                 }
             }
         }
@@ -101,35 +126,51 @@
 
     .profile-body{
         display: flex;
-        padding: $padding-sm;
+        //padding: $padding-sm;
     }
     .profile-leftpanel{
         flex: 1;
-        padding: $padding-sm;
+        padding: 0px $padding-sm;
         .card-container{
             padding: 10px;
             margin: 20px 0px;
+            .card-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                img{
+                    cursor: pointer;
+                }
+            }
             h3{
                 padding-top: 10px;
                 text-transform: uppercase;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 22.5px;
             }
             p{
-                padding-bottom: 10px;
+                padding: 15px 0px;
+                font-weight: 500;
+                font-size: 15px;
+                line-height: 20px;
             }
             .profile-skillsContainer{
                 display: flex;
                 justify-content: left;
                 align-items: center;
                 flex-wrap: wrap;
-                padding-bottom: 10px;
+                padding: 15px 0px;
                 .profile-skills{
                     color: $color-white;
                     background-color: $color-black;
                     border: 1px solid $color-black;
-                    border-radius: 10px;
+                    border-radius: 8px;
                     margin: 5px 10px;
                     padding: 2px 8px;
-                    font-weight: 600;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 18px;
                     text-transform: uppercase;
                 }
             }
@@ -145,11 +186,17 @@
                     align-items: center;
                     .profile-appContent{
                         text-align: center;
+                        margin: 0px 10px;
                         h2{
                             color: $color-orange;
+                            font-weight: 600;
+                            font-size: 24px;
+                            line-height: 36px;
                         }
                         p{
-                            font-size: $font-size-sm;
+                            font-size: 13px;
+                            font-weight: 500;
+                            line-height: 15px;
                         }
                     }
                 }
@@ -157,11 +204,15 @@
                     button{
                         padding: 10px 20px;
                         font-weight: 600;
-                        font-size: $font-size-regular;
+                        font-size: 15px;
+                        line-height: 19.5px;
+                        font-style: normal;
                         color: $color-black;
                         background-color: $color-white;
-                        border: 2px solid $color-black;
-                        border-radius: 20px;
+                        border: 1.5px solid $color-black;
+                        box-sizing: border-box;
+                        border-radius: 50px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -171,7 +222,33 @@
         flex: 3;
         padding: $padding-sm;
         .profile-posts-section{
+            //height: 100%;
             width: 100%;
+            .profile-postContainer{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                .profile-post{
+                    width: 400px;
+                    //height: 550px;
+                }
+                .arrow{
+                    img{
+                        width: 45px;
+                        height: 45px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .section-headers{
+            display: flex;
+            align-items: center;
+            img{
+                margin: 10px;
+                padding-top: 5px;
+                cursor: pointer;
+            }
         }
         .acc-row{
             display: flex;
@@ -182,9 +259,36 @@
             span{
                 width: 90%;
                 padding: $padding-regular;
-                background-color:  #C8C8C8;
+                background-color:  #E2E2E2;
                 border-radius: 10px;
                 margin: $margin-sm;
+                font-size: 13px;
+                line-height: 19px;
+                font-weight: 500;
+            }
+        }
+        .profile-contact{
+            .contact-section{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                .contact-content{
+                    display: flex;
+                    justify-content: space-between;
+                    p{
+                        flex: 2;
+                        padding-left: 10px;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+                    //flex: 1;
+                    width: 33.33%;
+                    //padding: 0px 10px;
+                    margin-top: 23px;
+                    margin-bottom: 39px;
+                }
             }
         }
     }
@@ -203,26 +307,64 @@
         }
         .profile-header{
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
         .profile-header-section-1{
-            flex: 6;
+            flex: 1;
         }
         .profile-header-desc{
             flex-direction: column;
+            //justify-content: center;
+            .profile-header-section-1{
+                padding: 0;
+            }
+            .profile-header-section-2{
+                h2{
+                    font-size: 24px;
+                }
+            }
         }
         .profile-imgContainer{
-            width: 7.5em;
-            height: 7.5em;
+            width: 10em;
+            height: 10em;
+            img{
+                left: 40%;
+            }
         }
         .profile-header-userButtons{
+            display: flex;
+            padding: 0;
             button{
+                position: relative;
                 width: 6.25em;
-                &.profile-header-btn1{
-                    right: 50%;
+            }
+        }
+        .profile-body{
+            flex-direction: column;
+            align-items: center;
+            .contact-section{
+                flex-direction: column;
+                width: 100%;
+                .contact-content{
+                    width: 3.6em;
+                    margin: 10px 0px;
                 }
-                &.profile-header-btn2{
-                    top: 75%;
+            }
+            .profile-rightpanel{
+                width: 100%;
+                margin-left: 20%;
+            }
+            .profile-postContainer{
+                flex-direction: column;
+                align-items: center;
+                .arrow{
+                    img{
+                        margin: 10px 0px;
+                    }
+                }
+                .profile-post{
+                    width: 300px;
                 }
             }
         }
