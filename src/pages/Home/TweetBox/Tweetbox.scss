@@ -6,6 +6,9 @@
             .input-video{
                 margin-top: -9.8%;
             }
+            .modal{
+                min-width: 35rem;
+            }
         }
     }
 }
@@ -14,6 +17,10 @@
         .input-text-field{
             .input-video{
                 margin-top: -13.6%;
+            }
+            .modal{
+                margin-left: 2rem;
+                min-width: 80%;
             }
         }
     }
@@ -66,7 +73,6 @@
   position: absolute;
   top: 50%;
   left: 42%;
-  min-width: 35rem;
   min-height: 20rem;
   padding: 15px;
   border-radius: 10px;
@@ -98,9 +104,12 @@
       }
       
   }
-  input{
-      height: 12rem;
-      width: 23rem;
+  textarea {
+      padding: 0px;
+      overflow: hidden;
+      min-height: 12rem;
+      height: 100%;
+      width: 100%;
       border: none;
       margin: $margin-sm;
       outline: none;

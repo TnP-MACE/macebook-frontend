@@ -20,12 +20,9 @@ class Tweetbox extends Component {
                     <img src={profilepic} alt="profilepicture"></img>
                 </div>
                 <div className="input-text-field">
-                    <input
-                        type="text"
-                        className="text-field"
-                        onClick={() => this.openModal()}
-                        placeholder="Add a post"
-                    />
+                    <div onClick={() => this.openModal()}>
+                        <input className="text-field" placeholder="Add a post" />
+                    </div>
                     <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
                         <h3>Create a post</h3>
                         <hr></hr>
@@ -43,7 +40,7 @@ class Tweetbox extends Component {
                             </div>
                         </div>
                         <Card>
-                            <input type="text"></input>
+                            <textarea className="post-text"></textarea>
                         </Card>
                         <div className="modal-bottom">
                             <div class="media-input">
@@ -63,10 +60,16 @@ class Tweetbox extends Component {
                         </div>
                     </Modal>
                     <div className="input-video">
-                        <button type="button" className="camera-btn">
+                        <button
+                            type="button"
+                            onClick={() => this.openModal()}
+                            className="camera-btn">
                             <img src={Camera} alt="Camera"></img>
                         </button>
-                        <button type="button" className="video-btn">
+                        <button
+                            type="button"
+                            onClick={() => this.openModal()}
+                            className="video-btn">
                             <img src={Video} alt="Video"></img>
                         </button>
                     </div>

@@ -42,7 +42,7 @@ const Login = () => (
 
                     <div className="Login__container-white container">
                         <div className="Login__container-white__sign ">Sign in</div>
-                        <div className="Signup__container-white__google "><img  src={Google}/> Sign in with Google</div>
+                        <div className="Login__container-white__google "><img  src={Google}/><p>Sign in with Google</p></div>
                         <form onSubmit={handleSubmit}>
 
 
