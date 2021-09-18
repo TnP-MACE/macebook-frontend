@@ -1,0 +1,53 @@
+@import "../../assets/sass/main.scss";
+.Completeprofile{
+
+  &__main{
+    display: flex;
+    margin-top: 9.312rem;
+    border-color: black;
+    flex-direction: row;
+
+    &__cover{
+
+      width: 46.125rem;
+      height: 10rem;
+      background-color: #8D8D8D;
+      border-radius: 10px;
+      input{
+        margin-top: 98px;
+        margin-left:272px;
+      }
+      &__dp{
+        background-color: darkgrey;
+        border-radius: 50%;
+        height: 119px;
+        width:115px;
+
+        z-index:9;
+        margin-bottom:10px;
+      }
+    }
+    &__profile{
+      margin-left: 198px;
+      margin-top: 16px;
+    }
+    &__full{
+      margin-left: 497px;
+
+    }
+    &__phno{
+      margin-left: 497px;
+    }
+    &__username{
+      margin-top: 111px;
+    }
+    &__bio{
+      resize: none;
+      display: block;
+      width: 733px;
+      height:93px;
+      margin-top: 136px;
+    }
+  }
+
+}
