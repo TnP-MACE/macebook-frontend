@@ -345,15 +345,20 @@
             align-items: center;
             .contact-section{
                 flex-direction: column;
+                justify-content: center;
                 width: 100%;
                 .contact-content{
                     width: 3.6em;
                     margin: 10px 0px;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
             .profile-rightpanel{
                 width: 100%;
-                margin-left: 20%;
+                margin-left: 0%;
             }
             .profile-postContainer{
                 flex-direction: column;
