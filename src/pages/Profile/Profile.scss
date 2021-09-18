@@ -284,7 +284,7 @@
                         font-weight: 600;
                     }
                     //flex: 1;
-                    width: 33.33%;
+                    width: 250px;
                     //padding: 0px 10px;
                     margin-top: 23px;
                     margin-bottom: 39px;
@@ -345,14 +345,24 @@
             align-items: center;
             .contact-section{
                 flex-direction: column;
-                justify-content: center;
-                width: 100%;
+                justify-content: left;
+                align-items: flex-start;
+                width: 80%;
+                //border: 2px solid #000;
+                margin-right: 20%;
                 .contact-content{
-                    width: 3.6em;
-                    margin: 10px 0px;
+                    width: 300%;
+                    margin: 0px;
+                    padding-right: 20%;
+                    margin-right: 40%;
+                    //border: 1px solid #000;
                     img{
                         width: 20px;
                         height: 20px;
+                    }
+                    p{
+                        font-size: 8px;
+                        //border: 2px solid #000;
                     }
                 }
             }
