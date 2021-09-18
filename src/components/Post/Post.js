@@ -36,7 +36,7 @@ class Post extends Component {
     }
     render() {
         return (
-            <div className="post-container">
+            <div className="home-post-container">
                 <div className="poster">
                     <div className="posterimg">
                         <Link to="./">
@@ -54,7 +54,7 @@ class Post extends Component {
                         <p className="Desig">{this.props.designation}</p>
                     </div>
                 </div>
-                <div className="post-content">
+                <div className="home-post-content">
                     <p>{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
                     <img src={this.props.image} alt={this.props.content}></img>
