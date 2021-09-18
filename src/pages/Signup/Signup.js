@@ -48,9 +48,9 @@ const Signup =()=>(
 
                     <div className="Signup__container-white container">
                         <div className="Signup__container-white__sign ">Create Account</div>
-                        <div className="Signup__container-white__google "><img  src={Google}/> Create a account with Google</div>
+                        <div className="Signup__container-white__google "><img  src={Google}/> <p>Create a account with Google</p></div>
                         <form onSubmit={handleSubmit}>
-                            <div><select name="user"
+                            <div ><select name="user"
 
                                          value={values.user}
                                          onChange={handleChange}

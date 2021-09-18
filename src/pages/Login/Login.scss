@@ -65,9 +65,10 @@
     }
 
     &__google{
-      position: absolute;
-      padding-top: 11rem;
-      background: $color-white;
+      display:flex;
+      position:absolute;
+      margin-top: 6.43rem;
+      background:$color-white;
       border: 0.5px solid #8D8D8D;
       box-sizing: border-box;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -80,12 +81,16 @@
       /* identical to box height */
       text-align: center;
 
-      color:$color-black;
 
+      color: $color-black;
+      p {
+        margin-top: 10px;
+        margin-right:5px;
+      }
     }
 
     form input {
-
+      font-size:16px;
       border: none;
       outline: none;
       border-bottom: 1px solid $color-black;
