@@ -24,8 +24,9 @@
             }
         }
         .profile-pic{
-            width: 2.0rem;
-            height: 2.0rem;
+            width: 1.8rem;
+            height: 1.8rem;
+            //margin: 10px;
         }
         .Name{
             font-size:12px;
@@ -33,9 +34,17 @@
         .Desig{
             font-size: 10px;
         }
+        .home-post-content{
+            font-size: 9px;
+            font-weight: 500;
+            img{
+                width: 60%;
+                margin-left: $margin-sm;
+            }
+        }
     }
 }
-.post-container{
+.home-post-container{
     .poster{
         display: flex;
         .posterimg{
@@ -75,7 +84,7 @@
             }
         }
     }
-    .post-content{
+    .home-post-content{
         font-size: 11px;
         font-weight: 600;
         p{
@@ -116,6 +125,9 @@
             background-color: rgba(255,255,255,0);
             border: none;
             cursor: pointer;
+            svg{
+                margin-top: $margin-sm;
+            }
             img{
                 margin-top: $margin-sm;
             }
