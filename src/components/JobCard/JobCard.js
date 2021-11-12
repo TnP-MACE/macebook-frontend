@@ -41,12 +41,15 @@ class JobCard extends Component{
                         <div class="section-3">
                             <h4 class="lh-25">Job Type: <span class="job-spec">{this.props.type}</span> <span class="job-spec">{this.props.experience} Experience</span></h4>
                             <h4 class="lh-25">Salary/Stipend: <span class="job-spec">${this.props.salary} + Benefits</span></h4>
-                            <h4 class="lh-25">Skills: {this.props.skills.map((skill) => <span class="job-spec">{skill}</span>)}</h4>
+                            <h4 class="lh-25">Skills: <span class="skills"> {this.props.skills.map((skill) => <span class="job-spec">{skill}</span>)}</span></h4>
                         </div>
                     </div>
                     <div class="jobCard-desc" style={{display: this.state.ShowHidedesc ? "block" : "none" }}>
                         <h4>Description</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. </p>
+                        <p>{this.props.desc}</p>
+                    </div>
+                    <div class="posted-details">
+                        <p>Posted on {this.props.date} by <span class="user">{this.props.user}</span></p>
                     </div>
                 </Card>
             </div>
