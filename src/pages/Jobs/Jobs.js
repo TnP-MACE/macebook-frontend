@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-import './Jobs.scss'
-import Header from '../../components/Header/Header'
-import JobCard from '../../components/JobCard/JobCard'
-import Card from '../../components/Card/Card'
-import clogo from '../../assets/images/icons/company-logo.png'
+import "./Jobs.scss";
+import Header from "../../components/Header/Header";
+import JobCard from "../../components/JobCard/JobCard";
+import Card from "../../components/Card/Card";
+import clogo from "../../assets/images/icons/company-logo.png";
+import SearchIcon from "../../assets/images/icons/Search.svg";
 
 class Jobs extends Component {
     state = {
@@ -51,9 +52,9 @@ class Jobs extends Component {
         ]
     }
 
-    render() {
-        return (
-            <div class="Jobs">
+    render(){
+        return(
+            <div className="Jobs">
                 <Header active="jobs" />
                 <div class="jobs-container">
                     <div class="left-section">
@@ -72,10 +73,18 @@ class Jobs extends Component {
                                 user={job.user}
                             />
                         ))}
+                        <div className="left-section-bottom">
+                            <p>Show More</p>
+                        </div>
                     </div>
                     <div class="right-section">
                         <Card>
-                            <p>Hello</p>
+                            <div className="right-card">
+                                <div className="Search">
+                                    <img className="Search__icon" src={SearchIcon} />
+                                    <input type="text" className="Search__input" placeholder="Search" />
+                                </div>
+                            </div>
                         </Card>
                     </div>
                 </div>
