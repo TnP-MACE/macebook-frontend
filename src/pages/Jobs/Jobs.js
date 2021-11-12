@@ -17,7 +17,10 @@ class Jobs extends Component {
                 type: 'Full Time',
                 experience: '1-2',
                 salary: 90000,
-                skills: ['C++', 'Perl', 'Java', 'PHP']
+                skills: ['C++', 'Perl', 'Java', 'PHP'],
+                date: '14/11/2021',
+                user: 'John Doe',
+                desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. '
             },
             {
                 clogo: { clogo },
@@ -27,7 +30,10 @@ class Jobs extends Component {
                 type: 'Full Time',
                 experience: '1-2',
                 salary: 90000,
-                skills: ['C++', 'Perl', 'Java', 'PHP']
+                skills: ['C++', 'Perl', 'Java', 'PHP'],
+                date: '14/11/2021',
+                user: 'John Doe',
+                desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. '
             },
             {
                 clogo: { clogo },
@@ -37,7 +43,10 @@ class Jobs extends Component {
                 type: 'Full Time',
                 experience: '1-2',
                 salary: 90000,
-                skills: ['C++', 'Perl', 'Java', 'PHP']
+                skills: ['C++', 'Perl', 'Java', 'PHP'],
+                date: '14/11/2021',
+                user: 'John Doe',
+                desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. '
             }
         ]
     }
@@ -58,6 +67,9 @@ class Jobs extends Component {
                                 experience={job.experience}
                                 salary={job.salary}
                                 skills={job.skills}
+                                desc={job.desc}
+                                date={job.date}
+                                user={job.user}
                             />
                         ))}
                     </div>

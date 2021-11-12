@@ -50,10 +50,13 @@ class JobCard extends Component {
                                 <span class="job-spec">${this.props.salary} + Benefits</span>
                             </h4>
                             <h4 class="lh-25">
-                                Skills:
-                                {this.props.skills.map((skill) => (
-                                    <span class="job-spec">{skill}</span>
-                                ))}
+                                Skills:{' '}
+                                <span class="skills">
+                                    {' '}
+                                    {this.props.skills.map((skill) => (
+                                        <span class="job-spec">{skill}</span>
+                                    ))}
+                                </span>
                             </h4>
                         </div>
                     </div>
@@ -61,14 +64,12 @@ class JobCard extends Component {
                         class="jobCard-desc"
                         style={{ display: this.state.ShowHidedesc ? 'block' : 'none' }}>
                         <h4>Description</h4>
+                        <p>{this.props.desc}</p>
+                    </div>
+                    <div class="posted-details">
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has been the industry's standard dummy At vero eos
-                            et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                            praesentium voluptatum deleniti atque corrupti quos dolores et quas
-                            molestias excepturi sint occaecati cupiditate non provident, similique
-                            sunt in culpa qui officia deserunt mollitia animi, id est laborum et
-                            dolorum fuga.{' '}
+                            Posted on {this.props.date} by{' '}
+                            <span class="user">{this.props.user}</span>
                         </p>
                     </div>
                 </Card>
