@@ -8,10 +8,10 @@
     margin-top: 3rem;
     margin-left: 14%;
         }
-        // .job-spec{
-        //     width: 58%;
-        //     margin-left: 12.4%;
-        // }
+        .job-spec{
+            width: 58%;
+            margin-left: 12.4%;
+        }
         .resume{
             width: 263px;
             height: 36px;
@@ -31,6 +31,7 @@
             .resume-upload{
                 margin-left: 341px;
                 margin-top: 53px;
+                label{ cursor: pointer;}
                 p{  color: gray;
                     margin-left: -4rem;
                 }
@@ -93,7 +94,7 @@
             padding-top: 0.4rem;
             padding-bottom: 0.4rem;
             margin-bottom: 5rem;
-            margin-left: 57rem;
+            margin-left: 64%;
         }
     }
 }
@@ -104,13 +105,13 @@
     font-size: 24px;
             height: 38px;
     width: 141px;
-    margin-top: 143px;
+    margin-top: 8%;
     margin-left: 6%;
         }
         .resume{
             width: 263px;
             height: 36px;
-            margin-top: 208px;
+            margin-top: 8%;
             margin-left: 6%;
             font-weight: bold;
     font-size: 24px;
@@ -118,14 +119,15 @@
         .upload{
             margin-top: 10px;
             margin-left: 6%;
-            width: 421px;
+            width: 80%;
             height: 293px;
             border: 1px dashed #000000;
             box-sizing: border-box;
             border-radius: 7px;
             .resume-upload{
-                margin-left: 141px;
+                margin-left: 30%;
                 margin-top: 53px;
+                label{ cursor: pointer;}
                 p{  color: gray;
                     margin-left: -4rem;
                 }
@@ -155,7 +157,7 @@
             .msg-field{
                 margin-top: 5.2rem;
                 margin-left: 5%;
-                max-width: 421px;
+                max-width: 80%;
                 padding: 10px;
                 overflow: hidden;
                 width: 100%;
@@ -189,7 +191,8 @@
             padding-top: 0.4rem;
             padding-bottom: 0.4rem;
             margin-bottom: 5rem;
-            margin-left: 24.2rem;
+            margin-left: 65%;
         }
     }
 }
+
