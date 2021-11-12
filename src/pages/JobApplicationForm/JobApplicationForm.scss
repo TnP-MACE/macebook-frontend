@@ -1,0 +1,198 @@
+@media (min-width: 1008px) {
+    .job-application-form-cont{
+        .joblist{
+            font-weight: bold;
+    font-size: 24px;
+            height: 38px;
+    width: 141px;
+    margin-top: 3rem;
+    margin-left: 14%;
+        }
+        .job-spec{
+            width: 58%;
+            margin-left: 12.4%;
+        }
+        .resume{
+            width: 263px;
+            height: 36px;
+            margin-top: 68px;
+            margin-left: 14%;
+            font-weight: bold;
+    font-size: 24px;
+        }
+        .upload{
+            margin-top: 10px;
+            margin-left: 14%;
+            width: 821px;
+            height: 293px;
+            border: 1px dashed #000000;
+            box-sizing: border-box;
+            border-radius: 7px;
+            .resume-upload{
+                margin-left: 341px;
+                margin-top: 53px;
+                label{ cursor: pointer;}
+                p{  color: gray;
+                    margin-left: -4rem;
+                }
+                input {
+                    visibility:hidden;
+                    width:0;
+                    height:0;
+                  }
+            }
+            
+        }
+        .message{
+            margin-bottom: 2rem;
+            padding: 1rem;
+            .msg{
+                position: absolute;
+    width: 118px;
+    height: 36px;
+    margin-left: 14%;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+            }
+            .msg-field{
+                margin-top: 5.2rem;
+                margin-left: 14%;
+                max-width: 821px;
+                padding: 10px;
+                overflow: hidden;
+                width: 100%;
+                outline: none;
+    border: 1px dashed #000000;
+    box-sizing: border-box;
+    border-radius: 7px;
+    height: 100%;
+    min-height: 127px;
+            }
+            textarea::placeholder {
+                position: absolute;
+                color: gray;
+                font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 27px;
+            margin-left: 1rem;
+              }
+             
+        }
+        .btn-apply{
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            font-family: Poppins;
+            border-radius: 18px;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            margin-bottom: 5rem;
+            margin-left: 64%;
+        }
+    }
+}
+@media (max-width: 1008px) {
+    .job-application-form-cont{
+        .joblist{
+            font-weight: bold;
+    font-size: 24px;
+            height: 38px;
+    width: 141px;
+    margin-top: 8%;
+    margin-left: 6%;
+        }
+        .resume{
+            width: 263px;
+            height: 36px;
+            margin-top: 8%;
+            margin-left: 6%;
+            font-weight: bold;
+    font-size: 24px;
+        }
+        .upload{
+            margin-top: 10px;
+            margin-left: 6%;
+            width: 80%;
+            height: 293px;
+            border: 1px dashed #000000;
+            box-sizing: border-box;
+            border-radius: 7px;
+            .resume-upload{
+                margin-left: 30%;
+                margin-top: 53px;
+                label{ cursor: pointer;}
+                p{  color: gray;
+                    margin-left: -4rem;
+                }
+                input {
+                    visibility:hidden;
+                    width:0;
+                    height:0;
+                  }
+            }
+            
+        }
+        .message{
+            margin-bottom: 2rem;
+            padding: 0rem;
+            .msg{
+                position: absolute;
+    width: 118px;
+    height: 36px;
+    margin-left: 5%;
+    margin-top: 1rem;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+            }
+            .msg-field{
+                margin-top: 5.2rem;
+                margin-left: 5%;
+                max-width: 80%;
+                padding: 10px;
+                overflow: hidden;
+                width: 100%;
+                outline: none;
+    border: 1px dashed #000000;
+    box-sizing: border-box;
+    border-radius: 7px;
+    height: 100%;
+    min-height: 127px;
+            }
+            textarea::placeholder {
+                position: absolute;
+                color: gray;
+                font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 27px;
+            margin-left: 1rem;
+              }
+             
+        }
+        .btn-apply{
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            font-family: Poppins;
+            border-radius: 18px;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            margin-bottom: 5rem;
+            margin-left: 65%;
+        }
+    }
+}
+
