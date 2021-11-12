@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 import JobCard from "../../components/JobCard/JobCard";
 import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";
-
+import SearchIcon from "../../assets/images/icons/Search.svg";
 
 
 class Jobs extends Component{
@@ -56,17 +56,25 @@ class Jobs extends Component{
 
     render(){
         return(
-            <div class="Jobs">
+            <div className="Jobs">
                 <Header active="jobs" />
-                <div class="jobs-container">
-                    <div class="left-section">
+                <div className="jobs-container">
+                    <div className="left-section">
                         {this.state.jobs.map((job) =>
                             <JobCard clogo={job.clogo} position={job.position} company={job.company} location={job.location} type={job.type} experience={job.experience} salary={job.salary} skills={job.skills} desc={job.desc} date={job.date} user={job.user} />
                         )}
+                        <div className="left-section-bottom">
+                            <p>Show More</p>
+                        </div>
                     </div>
                     <div class="right-section">
                         <Card>
-                            <p>Hello</p>
+                            <div className="right-card">
+                                <div className="Search">
+                                    <img className="Search__icon" src={SearchIcon} />
+                                    <input type="text" className="Search__input" placeholder="Search" />
+                                </div>
+                            </div>
                         </Card>
                     </div>
                 </div>

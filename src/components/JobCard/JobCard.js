@@ -23,33 +23,33 @@ class JobCard extends Component{
 
     render(){
         return(
-            <div class="jobCard-container">
+            <div className="jobCard-container">
                 <Card>
-                    <div class="jobCard-content">
-                        <div class="section-1">
+                    <div className="jobCard-content">
+                        <div className="section-1">
                             <img src={clogo} alt="Company Logo"></img>
                         </div>
-                        <div class="section-2">
+                        <div className="section-2">
                             <h2>{this.props.position}</h2>
                             <h4>{this.props.company}</h4>
-                            <span class="location">{this.props.location}</span>
-                            <div class="btns-container">
-                                <button id="btn1" class="btn1">Apply Now</button>
-                                <button id="btn2" class="btn2" onClick={this.handleClick}>{this.state.btnContent}</button>
+                            <span className="location">{this.props.location}</span>
+                            <div className="btns-container">
+                                <button id="btn1" className="btn1">Apply Now</button>
+                                <button id="btn2" className="btn2" onClick={this.handleClick}>{this.state.btnContent}</button>
                             </div>
                         </div>
-                        <div class="section-3">
-                            <h4 class="lh-25">Job Type: <span class="job-spec">{this.props.type}</span> <span class="job-spec">{this.props.experience} Experience</span></h4>
-                            <h4 class="lh-25">Salary/Stipend: <span class="job-spec">${this.props.salary} + Benefits</span></h4>
-                            <h4 class="lh-25">Skills: <span class="skills"> {this.props.skills.map((skill) => <span class="job-spec">{skill}</span>)}</span></h4>
+                        <div className="section-3">
+                            <h4 className="lh-25">Job Type: <span className="job-spec">{this.props.type}</span> <span className="job-spec">{this.props.experience} Experience</span></h4>
+                            <h4 className="lh-25">Salary/Stipend: <span className="job-spec">${this.props.salary} + Benefits</span></h4>
+                            <h4 className="lh-25">Skills: <span className="skills"> {this.props.skills.map((skill) => <span className="job-spec">{skill}</span>)}</span></h4>
                         </div>
                     </div>
-                    <div class="jobCard-desc" style={{display: this.state.ShowHidedesc ? "block" : "none" }}>
+                    <div className="jobCard-desc" style={{display: this.state.ShowHidedesc ? "block" : "none" }}>
                         <h4>Description</h4>
                         <p>{this.props.desc}</p>
                     </div>
-                    <div class="posted-details">
-                        <p>Posted on {this.props.date} by <span class="user">{this.props.user}</span></p>
+                    <div className="posted-details">
+                        <p>Posted on {this.props.date} by <span className="user">{this.props.user}</span></p>
                     </div>
                 </Card>
             </div>

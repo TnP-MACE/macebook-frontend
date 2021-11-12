@@ -7,11 +7,48 @@
     justify-content: center;
     .left-section{
         flex: 5;
+        .left-section-bottom{
+            width: 100%;
+            p{
+                text-align: right;
+                color: $color-orange;
+                cursor: pointer;
+                text-transform: uppercase;
+                font-size: 12px;
+            }
+        }
     }
     .right-section{
         flex: 2;
     }
 }
+
+.Search {
+    margin: 0 auto;
+    position: relative;
+    background-color: $color-white;
+    border-radius: 10px;
+    border: 2px solid #000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  
+    &__icon {
+      padding: 0.5rem 0 0.5rem 0.8rem;
+      height: 1rem;
+    }
+  
+    &__input {
+      padding: 0.5rem;
+      border: none;
+      outline: none;
+      font-size: $font-size-regular;
+      flex-grow: 1;
+    }
+  }
+  
+
 
 @media (max-width: 768px){
     .jobs-container{
