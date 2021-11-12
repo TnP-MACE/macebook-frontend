@@ -18,6 +18,7 @@ import fb from "../../assets/images/icons/fb.svg";
 import github from "../../assets/images/icons/github.svg";
 import edit from '../../assets/images/icons/edit.svg';
 import arrow from "../../assets/images/icons/arrow.png";
+import clogo from "../../assets/images/icons/company-logo.png";
 
 class Profile extends Component {
   render() {
@@ -146,6 +147,7 @@ class Profile extends Component {
                   <span><img src={edit} alt="Edit"></img></span>
                 </div>
                 <Experience 
+                  logo={clogo}
                   name="Apple Inc" 
                   duration="Oct 2019- Current"
                   type="Fulltime"
@@ -153,6 +155,7 @@ class Profile extends Component {
                   desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
                 />
                 <Experience 
+                  logo={clogo}
                   name="Apple Inc" 
                   duration="Oct 2019- Current"
                   type="Fulltime"
@@ -160,6 +163,7 @@ class Profile extends Component {
                   desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
                 />
                 <Experience 
+                  logo={clogo}
                   name="Apple Inc" 
                   duration="Oct 2019- Current"
                   type="Fulltime"

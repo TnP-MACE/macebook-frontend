@@ -7,6 +7,8 @@ import NoMatch from './pages/NoMatch/NoMatch'
 import Profile from './pages/Profile/Profile'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import Signup from './pages/Signup/Signup'
+import Completeprofile from './pages/complete-profile/Completeprofile'
+import Jobs from './pages/Jobs/Jobs'
 import JobApplicationForm from './pages/JobApplicationForm/JobApplicationForm'
 function App() {
     return (
@@ -19,9 +21,11 @@ function App() {
                     <Route exact path="/login" component={Login} />
                     <Route exact path={['/', '/index', '/home']} component={Home} />
                     <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/jobs" component={Jobs} />
                     <Route exact path="/jobApplicationForm" component={JobApplicationForm} />
                     <Route exact path="/forgotpassword" component={ForgotPassword} />
                     <Route exact path="/signup" component={Signup} />
+                    <Route exact path="/completeprofile" component={Completeprofile} />
                     <Route path="*" component={NoMatch} />
                 </Switch>
             </Router>

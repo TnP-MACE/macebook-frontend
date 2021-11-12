@@ -5,13 +5,17 @@
     font-size: 24px;
             height: 38px;
     width: 141px;
-    margin-top: 143px;
+    margin-top: 3rem;
     margin-left: 14%;
         }
+        // .job-spec{
+        //     width: 58%;
+        //     margin-left: 12.4%;
+        // }
         .resume{
             width: 263px;
             height: 36px;
-            margin-top: 208px;
+            margin-top: 68px;
             margin-left: 14%;
             font-weight: bold;
     font-size: 24px;
@@ -46,8 +50,6 @@
     width: 118px;
     height: 36px;
     margin-left: 14%;
-    top: 825px;
-    
     font-family: Poppins;
     font-style: normal;
     font-weight: bold;
@@ -137,14 +139,13 @@
         }
         .message{
             margin-bottom: 2rem;
-            padding: 1rem;
+            padding: 0rem;
             .msg{
                 position: absolute;
     width: 118px;
     height: 36px;
     margin-left: 5%;
-    top: 825px;
-    
+    margin-top: 1rem;
     font-family: Poppins;
     font-style: normal;
     font-weight: bold;
