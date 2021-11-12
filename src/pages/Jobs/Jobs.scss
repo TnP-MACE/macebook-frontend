@@ -1,0 +1,14 @@
+@import "../../assets/sass/main.scss";
+
+.jobs-container{
+    width: 80%;
+    margin: 30px 10%;
+    display: flex;
+    justify-content: center;
+    .left-section{
+        flex: 5;
+    }
+    .right-section{
+        flex: 2;
+    }
+}

@@ -8,7 +8,7 @@ class Experience extends Component{
         return(
             <div className="exp-row">
                   <div className="exp-col-1">
-                      <img src={logo} alt="Image"></img>
+                      <img src={this.props.logo} alt="Image"></img>
                       <div className="exp-comp-det">
                         <h4>{this.props.name}</h4>
                         <p>{this.props.duration}</p>
