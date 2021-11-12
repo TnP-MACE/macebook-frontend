@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react'
 import './Tweetbox.scss'
 import { Link } from 'react-router-dom'
@@ -44,15 +46,9 @@ class Tweetbox extends Component {
                         </Card>
                         <div className="modal-bottom">
                             <div class="media-input">
-                                <button>
-                                    <img src={Camera} alt="Camera"></img>
-                                </button>
-                                <button>
-                                    <img src={Video} alt="Video"></img>
-                                </button>
-                                <button>
-                                    <img src={Doc} alt="Document"></img>
-                                </button>
+                                <input type="image" src={Camera}></input>
+                                <input type="image" src={Video}></input>
+                                <input type="image" src={Doc}></input>
                             </div>
                             <Card>
                                 <button type="button">Post</button>
@@ -60,18 +56,16 @@ class Tweetbox extends Component {
                         </div>
                     </Modal>
                     <div className="input-video">
-                        <button
-                            type="button"
+                        <input
+                            type="image"
+                            src={Camera}
                             onClick={() => this.openModal()}
-                            className="camera-btn">
-                            <img src={Camera} alt="Camera"></img>
-                        </button>
-                        <button
-                            type="button"
+                            className="video-btn"></input>
+                        <input
+                            type="image"
+                            src={Video}
                             onClick={() => this.openModal()}
-                            className="video-btn">
-                            <img src={Video} alt="Video"></img>
-                        </button>
+                            className="video-btn"></input>
                     </div>
                 </div>
             </div>
