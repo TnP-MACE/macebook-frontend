@@ -1,5 +1,5 @@
 import React, { Component } from "react";
- 
+
 import "./JobCard.scss";
 import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";

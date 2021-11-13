@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import "./CompleteProfile.scss";
+import "./Completeprofile.scss";
 import fileImage from "../../assets/images/icons/file.svg";
 
 class CompleteProfile extends React.Component {

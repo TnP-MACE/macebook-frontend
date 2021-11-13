@@ -38,6 +38,7 @@
                 font-size: 28px;
                 font-weight: 700;
                 line-height: 42px;
+                text-transform: uppercase;
             }
         }
         .profile-header-section-3{
@@ -72,6 +73,7 @@
                 font-weight: 600;
                 font-size: 16px;
                 line-height: 24px;
+                text-transform: uppercase;
             }
             &.batch{
                 font-weight: 600;
@@ -123,6 +125,54 @@
                     //top: 50%;
                     //right: 0%;
                 }
+            }
+        }
+    }
+
+    @media (max-width: 768px){
+        .profile-bgimgContainer{
+            width:100%;
+            height: 9.375em;
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 15px;
+            }
+            //border: 2px solid #000;
+        }
+        .profile-header{
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-header-section-1{
+            flex: 1;
+        }
+        .profile-header-desc{
+            flex-direction: column;
+            //justify-content: center;
+            .profile-header-section-1{
+                padding: 0;
+            }
+            .profile-header-section-2{
+                h2{
+                    font-size: 24px;
+                }
+            }
+        }
+        .profile-imgContainer{
+            width: 10em;
+            height: 10em;
+            img{
+                left: 40%;
+            }
+        }
+        .profile-header-userButtons{
+            display: flex;
+            padding: 0;
+            button{
+                position: relative;
+                width: 6.25em;
             }
         }
     }
