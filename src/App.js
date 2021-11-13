@@ -10,6 +10,7 @@ import Signup from './pages/Signup/Signup'
 import Completeprofile from './pages/complete-profile/Completeprofile'
 import Jobs from './pages/Jobs/Jobs'
 import JobApplicationForm from './pages/JobApplicationForm/JobApplicationForm'
+import Posts from './pages/Posts/Posts'
 function App() {
     return (
         <div>
@@ -22,6 +23,7 @@ function App() {
                     <Route exact path={['/', '/index', '/home']} component={Home} />
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/jobs" component={Jobs} />
+                    <Route exact path="/posts" component={Posts} />
                     <Route exact path="/jobApplicationForm" component={JobApplicationForm} />
                     <Route exact path="/forgotpassword" component={ForgotPassword} />
                     <Route exact path="/signup" component={Signup} />

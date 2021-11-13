@@ -31,7 +31,8 @@ class Profile extends Component {
     batch: 14,
     dept: 'CSE',
     conn: 2000,
-    self: true
+    self: true,
+    skills: ['HTML','CSS','REACTJS','NodeJS']
   }
   render() {
     return (
@@ -83,7 +84,9 @@ class Profile extends Component {
                 <Card>
                   <div className="card-header">
                     <h3>About</h3>
-                    <img src={edit} alt="Edit"></img>
+                    <div style={{display: this.state.self ? "block": "none"}}>
+                      <img src={edit} alt="Edit"></img>
+                    </div>
                   </div>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
                 </Card>
@@ -92,17 +95,16 @@ class Profile extends Component {
                 <Card>
                   <div className="card-header">
                     <h3>Skills</h3>
-                    <img src={edit} alt="Edit"></img>
+                    <div style={{display: this.state.self ? "block": "none"}}>
+                      <img src={edit} alt="Edit"></img>
+                    </div>
                   </div>
                   <div className="profile-skillsContainer">
-                    <span className="profile-skills">HTML</span>
-                    <span className="profile-skills">CSS</span>
-                    <span className="profile-skills">REACT</span>
-                    <span className="profile-skills">Node.js</span>                    
+                    {this.state.skills.map((skill) => <span className="profile-skills">{skill}</span> )}                  
                   </div>
                 </Card>
               </div>
-              <div className="card-container">
+              <div className="card-container"  style={{display: this.state.self ? "block": "none"}}>
                 <Card>
                   <div className="profile-applicationContainer">
                     <div className="profile-appCount">
@@ -167,7 +169,7 @@ class Profile extends Component {
               <div className="profile-experience">
                 <div className="section-headers">
                   <h2>Experience</h2>
-                  <span><img src={edit} alt="Edit"></img></span>
+                  <span style={{display: this.state.self ? "block": "none"}}><img src={edit} alt="Edit"></img></span>
                 </div>
                 <Experience 
                   logo={clogo}
@@ -197,7 +199,7 @@ class Profile extends Component {
               <div className="profile-accom">
                 <div className="section-headers">
                   <h2>Accomplishments</h2>
-                  <span><img src={edit} alt="Edit"></img></span>
+                  <span style={{display: this.state.self ? "block": "none"}}><img src={edit} alt="Edit"></img></span>
                 </div>
                 <div className="acc-row">
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
@@ -208,7 +210,7 @@ class Profile extends Component {
               <div className="profile-contact">
                 <div className="section-headers">
                   <h2>Contact Info</h2>
-                  <span><img src={edit} alt="Edit"></img></span>
+                  <span style={{display: this.state.self ? "block": "none"}}><img src={edit} alt="Edit"></img></span>
                 </div>
                 <div className="contact-section">
                   <div className="contact-content">
