@@ -19,7 +19,10 @@ class JobApplicationForm extends Component {
                     type: 'Full Time',
                     experience: '1-2',
                     salary: 90000,
-                    skills: ['C++', 'Perl', 'Java', 'PHP']
+                    skills: ['C++', 'Perl', 'Java', 'PHP'],
+                    desc: 'Lorem Ipsum',
+                    date: '2017-01-03',
+                    user: 'John Doe'
                 }
             ]
         }
@@ -39,6 +42,9 @@ class JobApplicationForm extends Component {
                         experience={this.state.jobs[0].experience}
                         salary={this.state.jobs[0].salary}
                         skills={this.state.jobs[0].skills}
+                        desc={this.state.jobs[0].desc}
+                        date={this.state.jobs[0].date}
+                        user={this.state.jobs[0].user}
                     />
                 </div>
                 <h3 className="resume">Upload your Resume:</h3>

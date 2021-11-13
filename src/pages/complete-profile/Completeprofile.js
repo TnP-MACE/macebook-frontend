@@ -1,7 +1,7 @@
-import React from "react";
-import Header from "../../components/Header/Header";
-import "./CompleteProfile.scss";
-import fileImage from "../../assets/images/icons/file.svg";
+import React from 'react'
+import Header from '../../components/Header/Header'
+import './CompleteProfile.scss'
+import fileImage from '../../assets/images/icons/file.svg'
 
 class CompleteProfile extends React.Component {
     render() {
@@ -162,8 +162,8 @@ class CompleteProfile extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default CompleteProfile;
+export default CompleteProfile

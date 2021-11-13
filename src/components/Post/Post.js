@@ -36,7 +36,7 @@ class Post extends Component {
     }
     render() {
         return (
-            <div className="home-post-container">
+            <div className="home-posts-container">
                 <div className="poster">
                     <div className="posterimg">
                         <Link to="./">
@@ -54,16 +54,16 @@ class Post extends Component {
                         <p className="Desig">{this.props.designation}</p>
                     </div>
                 </div>
-                <div className="home-post-content">
+                <div className="home-posts-content">
                     <p>{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
                     <img src={this.props.image} alt={this.props.content}></img>
                 </div>
-                <div className="post-attributes">
+                <div className="home-posts-attributes">
                     <p>{this.state.likes_count} Likes</p>
                     <p>{this.props.comments} Comments</p>
                 </div>
-                <div className="post-activity">
+                <div className="home-posts-activity">
                     <div>
                         <button onClick={this.likePost}>
                             <svg
@@ -92,7 +92,7 @@ class Post extends Component {
                         </button>
                     </div>
                 </div>
-                <div className="post-comment">
+                <div className="home-posts-comment">
                     <img src={this.props.profilepic} alt="Profilepic"></img>
                     <input
                         type="text"

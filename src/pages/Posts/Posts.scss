@@ -1,0 +1,17 @@
+@import "../../assets/sass/main.scss";
+
+.posts-container{
+    .posts-display{
+        display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // flex-wrap: wrap;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+    }
+    .post-content {
+        // max-width: 200px;
+        min-width: 0;
+        max-width: 50%;
+    }
+}

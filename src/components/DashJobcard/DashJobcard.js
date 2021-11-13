@@ -1,25 +1,24 @@
 import React, { Component } from "react";
 
-import "./JobCard.scss";
+import "./DashJobcard.scss";
 import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";
+import edit from "../../assets/images/icons/edit.svg";
+import del from "../../assets/images/icons/delete.svg";
+import { Link } from "react-router-dom";
  
  
-class JobCard extends Component{
-    state={
-        ShowHidedesc: false,
-        btnContent: "View More"
-    }
+class DashJobCard extends Component{
    
-    handleClick = () =>{
-        this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
-        if(this.state.ShowHidedesc){
-            this.setState({btnContent: 'View More'});
-        }
-        else{
-            this.setState({btnContent: 'View Less'});
-        }
-    }
+    // handleClick = () =>{
+    //     this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
+    //     if(this.state.ShowHidedesc){
+    //         this.setState({btnContent: 'View More'});
+    //     }
+    //     else{
+    //         this.setState({btnContent: 'View Less'});
+    //     }
+    // }
  
     render(){
         return(
@@ -34,12 +33,24 @@ class JobCard extends Component{
                             <h4>{this.props.company}</h4>
                             <span className="location">{this.props.location}</span>
                             <div className="btns-container">
-                                <button id="btn1" className="btn1">
-                                    Apply Now
-                                </button>
-                                <button id="btn2" className="btn2" onClick={this.handleClick}>
-                                    {this.state.btnContent}
-                                </button>
+                                <Link to="#">
+                                    <img src={edit} alt="Edit"></img>
+                                </Link>
+                                <Link to="#">
+                                    <img src={del} alt="Edit"></img>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="section-4">
+                            <div className="profile-appCount">
+                                <div className="profile-appContent">
+                                    <h2>{this.props.new}</h2>
+                                    <p>New Applications</p>
+                                </div>
+                                <div className="profile-appContent">
+                                    <h2>{this.props.tot}</h2>
+                                    <p>Total Applications</p>
+                                </div>
                             </div>
                         </div>
                         <div className="section-3">
@@ -57,14 +68,10 @@ class JobCard extends Component{
                                     {this.props.skills.map((skill) => <span className="job-spec">{skill}</span>)}
                                 </span>
                             </h4>
+                            <div className="posted-details">
+                                <p>Posted on {this.props.date}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="jobCard-desc" style={{display: this.state.ShowHidedesc ? "block" : "none" }}>
-                        <h4>Description</h4>
-                        <p>{this.props.desc}</p>
-                    </div>
-                    <div className="posted-details">
-                        <p>Posted on {this.props.date} by <span className="user">{this.props.user}</span></p>
                     </div>
                 </Card>
             </div>
@@ -72,4 +79,4 @@ class JobCard extends Component{
     }
 }
  
-export default JobCard
+export default DashJobCard

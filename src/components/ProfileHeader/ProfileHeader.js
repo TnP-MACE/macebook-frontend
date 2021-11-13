@@ -27,7 +27,7 @@ class ProfileHeader extends Component{
                     </div>
                     <div className="profile-header-desc">
                     <div className="profile-header-section-2">
-                        <h2>{this.props.user}</h2>
+                        <h2 className="username">{this.props.user}</h2>
                         <div className="profile-userDetails">
                         <span className="position">{this.props.position}</span>
                         <span className="batch">{this.props.location} . Batch of '{this.props.batch} . {this.props.dept}</span>
