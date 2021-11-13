@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 
 const Signup = () => {
     const history = useHistory();
+
     return (
         <Formik
             initialValues={{ username: "", password: "", confirmpassword: "", email: "", user: "" }}
@@ -87,14 +88,14 @@ const Signup = () => {
                     handleSubmit,
                 } = props;
                 return (
-                    <div className="container">
+                    <div className="container Signup">
                         <div className="Signup__heading">MACEBOOK</div>
 
                         <div className="Signup__container-white container">
                             <div className="Signup__container-white__sign ">Create Account</div>
-                            <div className="Signup__container-white__google ">
+                            {/* <div className="Signup__container-white__google ">
                                 <img src={Google} /> <p>Create a account with Google</p>
-                            </div>
+                            </div> */}
                             <form onSubmit={handleSubmit}>
                                 <div>
                                     <select
@@ -104,7 +105,7 @@ const Signup = () => {
                                         onBlur={handleBlur}
                                         className={errors.user && touched.user && "error"}
                                     >
-                                        <option value="">Select Your user type</option>
+                                        <option value="">Select your user type</option>
                                         <option value="Student">Student</option>
                                         <option value="Alumini">Aluminui</option>
                                     </select>
@@ -137,7 +138,7 @@ const Signup = () => {
                                     <input
                                         name="username"
                                         type="text"
-                                        placeholder="username"
+                                        placeholder="Username"
                                         value={values.username}
                                         onChange={handleChange}
                                         onBlur={handleBlur}

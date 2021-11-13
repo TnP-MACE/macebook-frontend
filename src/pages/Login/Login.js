@@ -11,7 +11,27 @@ const Login = () => (
     <Formik
         initialValues={{ username: "", password: "" }}
         onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+            const asyncFunc = async () => {
+                try{
+                    const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: values.username,
+                            password: values.password
+                        })
+                    })
+
+                    const loginData = await loginResponse.json()
+                    console.log(loginData)
+                } catch(e){
+                    console.log(e)
+                }
+            }
+            
+            asyncFunc();
         }}
 
 

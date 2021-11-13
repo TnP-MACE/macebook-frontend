@@ -92,7 +92,7 @@ const Completeprofile = () => {
                 if(skillData) {
                     skills = JSON.parse(skillData)
                 }
-
+                
             }}
 
 

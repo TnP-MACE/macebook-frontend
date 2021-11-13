@@ -1,10 +1,13 @@
 @import "../../assets/sass/main.scss";
 
 .Signup{
-
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  flex-direction: column;
 
   &__container-white {
-    position:absolute;
+    // position:absolute;
     max-width: 33.625rem;
     height: 38.1875rem;
     //left: -195px;
@@ -25,7 +28,11 @@
       border-color: $color-white;
       border-bottom: 1px solid $color-black;
       //max-width:100%;
-      margin-top:7.875rem;
+      margin-top:1.875rem;
+      border: 1px solid $color-black;
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
     }
     &__email{
       padding-top: 1rem;
@@ -44,12 +51,9 @@
 
 
     &__sign {
-      position: center;
-
+      // position: center;
 
       padding-top: 1.93rem;
-
-
       font-family: Poppins;
       font-style: normal;
       font-weight: 600;
@@ -99,9 +103,11 @@
 
     form input {
       font-size:16px;
-      border: none;
+      // border: none;
       outline: none;
-      border-bottom: 1px solid $color-black;
+      border: 1px solid $color-black;
+      border-radius: 4px;
+      padding: 10px;
       max-width:100%;
       height: 24px;
 
@@ -146,7 +152,11 @@
     font-style: normal;
     font-weight: bold;
     font-size: 27px;
-    line-height: 40px
+    line-height: 40px;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
   }
 
 }
