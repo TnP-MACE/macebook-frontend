@@ -1,53 +1,164 @@
 @import "../../assets/sass/main.scss";
-.Completeprofile{
 
-  &__main{
-    display: flex;
-    margin-top: 9.312rem;
-    border-color: black;
-    flex-direction: row;
+.Completion {
+    &__title {
+        margin: 2.8rem 0 2rem 0;
+    }
+    &__row {
+        display: flex;
+        width: 100%;
 
-    &__cover{
+        .Completion__form-group {
+            &:not(:last-child) {
+                margin-right: 1.5rem;
+            }
+        }
+    }
 
-      width: 46.125rem;
-      height: 10rem;
-      background-color: #8D8D8D;
-      border-radius: 10px;
-      input{
-        margin-top: 98px;
-        margin-left:272px;
-      }
-      &__dp{
-        background-color: darkgrey;
+    &__inner-container {
+        margin-bottom: 3rem;
+        max-width: 54rem;
+        margin: 0 auto;
+    }
+
+    &__content-box {
+        background: $color-white;
+        border: 1px solid #c4c4c4;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 1rem 1.5rem;
+    }
+    &__form-group {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-bottom: 1rem;
+    }
+    &__form-input {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    &__width-one-third {
+        max-width: calc(100% / 3);
+    }
+    &__hidden {
+        visibility: hidden;
+    }
+
+    &__cover-container {
+        position: relative;
+    }
+
+    &__cover {
+        background-color: #c4c4c4;
+        width: 100%;
+        height: 10rem;
+        border-radius: 10px;
+    }
+    &__cover-image-btn-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__cover-file-ico {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__cover-btn {
+        border-radius: 10px;
+        outline: none;
+        border: 1px solid #d5d5d5;
+        box-sizing: border-box;
+        padding: 0.4rem 0.8rem;
+        background-color: $color-white;
+    }
+
+    &__profile-picture-container {
+        position: relative;
+        top: -3.5rem;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    &__profile-picture {
+        height: 8rem;
         border-radius: 50%;
-        height: 119px;
-        width:115px;
+    }
 
-        z-index:9;
-        margin-bottom:10px;
-      }
+    &__profile-picture-btn {
+        background: $color-black;
+        border: 1px solid $color-black;
+        box-sizing: border-box;
+        border-radius: 50px;
+        padding: 0.5rem 0.8rem;
+        color: $color-white;
+        position: relative;
+        top: -1.2rem;
     }
-    &__profile{
-      margin-left: 198px;
-      margin-top: 16px;
-    }
-    &__full{
-      margin-left: 497px;
 
+    &__bio {
+        width: 100%;
+        resize: none;
+        box-sizing: border-box;
     }
-    &__phno{
-      margin-left: 497px;
-    }
-    &__username{
-      margin-top: 111px;
-    }
-    &__bio{
-      resize: none;
-      display: block;
-      width: 733px;
-      height:93px;
-      margin-top: 136px;
-    }
-  }
 
+    &__subtitle {
+        margin: 1.5rem 0 0.8rem 0;
+    }
+
+    input,
+    textarea,
+    &__skills-box {
+        border-radius: 4px;
+        outline: none;
+        border: 1px solid #c4c4c4;
+        padding: 0.6rem;
+        font-size: 16px;
+    }
+
+    &__fields-container {
+        margin-top: -3rem;
+    }
+
+    &__skills-container {
+        flex-grow: 2;
+        margin-right: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    &__skills-box {
+        height: 100%;
+    }
+
+    &__links-container {
+        flex-grow: 1;
+    }
+
+    &__form-group-skills {
+        margin-right: 0 !important;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__submit-btn {
+        background: #ff3d00;
+        border: 1px solid #ff3d00;
+        box-sizing: border-box;
+        border-radius: 50px;
+        padding: 0.5rem 2rem;
+        font-weight: bold;
+        color: $color-white;
+        margin: 3.5rem auto;
+        display: block;
+        cursor: pointer;
+    }
 }
