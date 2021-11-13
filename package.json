@@ -14,6 +14,9 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "react-select": "^5.2.1",
+    "render": "^0.1.4",
+    "select": "^1.1.2",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
