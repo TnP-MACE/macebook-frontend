@@ -1,33 +1,40 @@
 @import "../../assets/sass/main.scss";
 
 @media (min-width: 768px){
-    .home-post-container{
-        .home-post-content{
+    .home-posts-container{
+        .home-posts-content{
+            margin-left: -3rem;
             img{
-                margin-left: $margin-sm;
+                margin-left: 4rem;
+                width: 80%;
+                height: 80%;
             }
+            p{font-size: 15px;
+            width: 110%;}
         }
     }
-    .post-attributes{
+    .home-posts-attributes{
         p{
-            margin-left: -15%;
+            margin-left: -12%;
         }
     }
 }
 @media (max-width: 768px){
-    .home-post-container{
-        .home-post-content{
+    .home-posts-container{
+        .home-posts-content{
+            margin-left: -3rem;
             p{
-                font-size: 14px;
+                font-size: 12px;
+                
             }
             img{
-                margin-left: 12px;
-                width: 85%;
+                margin-left: 3.6rem;
+                width: 80%;
             }
         }
     }
 }
-.home-post-container{
+.home-posts-container{
     .poster{
         display: flex;
         .posterimg{
@@ -67,10 +74,13 @@
             }
         }
     }
-    .home-post-content{
+    .home-posts-content{
+        width: 110%;
         p{
-            margin-left: $margin-regular;
+            margin-left: 5rem;
+            width: 80%;
             margin-right: $margin-regular;
+            font-weight: normal;
         }
         .hashtags{
             font-weight: bold;
@@ -82,7 +92,7 @@
             
         }
     }
-    .post-attributes{
+    .home-posts-attributes{
         width: 60%;
         display: flex;
         justify-content: space-around;
@@ -97,7 +107,7 @@
             color: $color-grey;
         }
     }
-    .post-activity{
+    .home-posts-activity{
         width: 30%;
         display: flex;
         justify-content: space-around;
@@ -111,7 +121,7 @@
             }
         }
     }
-    .post-comment{
+    .home-posts-comment{
         width: 90%;
         display: flex;
         
