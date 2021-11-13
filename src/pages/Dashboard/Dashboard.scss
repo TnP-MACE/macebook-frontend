@@ -9,12 +9,10 @@
             text-transform: uppercase;
         }
     }
-    .jobs-posted{
-        h3{
-            font-size: 27px;
-            line-height: 40px;
-            margin: 10px 0px;
-        }
+    h3{
+        font-size: 27px;
+        line-height: 40px;
+        margin: 10px 0px;
     }
     .add-btnContainer{
         width: 100%;
@@ -33,6 +31,77 @@
             margin-right: 15px;
         }
     }
+    .applications{
+        .tb-titles{
+            width: 100%;
+            display: flex;
+            text-align: left;
+            .name{
+                flex: 2;
+            }
+            .pos{
+                flex: 3;
+            }
+            .msg{
+                flex: 2;
+            }
+            .remarks{
+                flex: 2;
+            }
+            .tb-title{
+                font-weight: 600;
+            }
+        }
+        .tb-dataContainer{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            .tb-datas{
+                display: flex;
+                width: 100%;
+                .name{
+                    flex: 2;
+                }
+                .pos{
+                    flex: 3;
+                    display: flex;
+                    justify-content: space-between;
+                    .tb-links{
+                        margin-right: 10px;
+                        font-style: italic;
+                        a{
+                            color: $color-orange;
+                            margin: 0px 5px;
+                        }
+                    }
+                }
+                .msg{
+                    flex: 2;
+                }
+                .remarks{
+                    flex: 2;
+                    display: flex;
+                    justify-content: space-between;
+                    img{
+                        margin-left: 10px;
+                        width: 16px;
+                        height: 16px;
+                        cursor: pointer;
+                    }
+                    .rem-icons{
+                        img{
+                            width: 20px;
+                            height: 20px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .tb-data{
+                    text-align: left;
+                }
+            }
+        }
+    }
 
     @media(max-width: 768px){
         .title{
@@ -40,16 +109,23 @@
                 font-size: 26px;
             }
         }
-        .jobs-posted{
-            h3{
-                font-size: 22px;
-            }
+        h3{
+            font-size: 22px;
         }
         .add-btnContainer{
             text-align: center;
             .add-btn{
                 margin-left: 15px;
             }
+        }
+        .applications{
+            margin-top: 20px;
+        }
+        .tb-datas{
+            flex-direction: column;
+        }
+        .tb-title{
+            display: none;
         }
     }
 }
