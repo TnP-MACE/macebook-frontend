@@ -34,7 +34,61 @@ class Profile extends Component {
     dept: 'CSE',
     conn: 2000,
     self: true,
-    skills: ['HTML','CSS','REACTJS','NodeJS']
+    skills: ['HTML','CSS','REACTJS','NodeJS'],
+    posts:[
+      {
+        poster:"Ruben Lubin",
+        posterprofile: {profilepic},
+        designation:"poster designation",
+        content:"Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+        hashtags:"#Hashtags   #lorem_epsum",
+        image:{postImg},
+        likes:"3k",
+        comments:"1k",
+        profilepic:{profilepic}
+      },
+      {
+        poster:"Ruben Lubin",
+        posterprofile: {profilepic},
+        designation:"poster designation",
+        content:"Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+        hashtags:"#Hashtags   #lorem_epsum",
+        image:{postImg},
+        likes:"3k",
+        comments:"1k",
+        profilepic:{profilepic}
+      }
+    ],
+    exp: [
+      {
+        logo:{clogo},
+        name:"Apple Inc",
+        duration:"Oct 2019- Current",
+        type:"Fulltime",
+        position:"Senior Software Engineer",
+        desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+      },
+      {
+        logo:{clogo},
+        name:"Apple Inc",
+        duration:"Oct 2019- Current",
+        type:"Fulltime",
+        position:"Senior Software Engineer",
+        desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+      },
+      {
+        logo:{clogo},
+        name:"Apple Inc",
+        duration:"Oct 2019- Current",
+        type:"Fulltime",
+        position:"Senior Software Engineer",
+        desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+      }
+    ],
+    acc: ["Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+          "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+          "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"     
+    ]
   }
 
   render() {
@@ -136,7 +190,23 @@ class Profile extends Component {
               <div className="profile-posts-section">
                 <h2>My Posts</h2>
                 <div className="profile-postContainer">
-                    <div className="profile-post">
+                    {this.state.posts.map((post) =>
+                      <div className="profile-post">
+                        <Card>
+                          <ProfilePost 
+                            poster={post.poster}
+                            posterprofile={profilepic}
+                            designation={post.designation}
+                            content={post.content}
+                            hashtags={post.hashtags}
+                            image={postImg}
+                            likes={post.likes}
+                            comments={post.comments}
+                            profilepic={profilepic}></ProfilePost>
+                        </Card>
+                      </div>
+                    )}
+                    {/* <div className="profile-post">
                       <Card>
                         <ProfilePost 
                           poster="Ruben Lubin"
@@ -163,7 +233,7 @@ class Profile extends Component {
                           comments="1k"
                           profilepic={profilepic}></ProfilePost>
                       </Card>
-                    </div>
+                    </div> */}
                     <Link to="/posts">
                     <div className="arrow">
                       <img src={arrow} alt="View Posts"></img>
@@ -176,7 +246,17 @@ class Profile extends Component {
                   <h2>Experience</h2>
                   <span style={{display: this.state.self ? "block": "none"}}><img src={edit} alt="Edit"></img></span>
                 </div>
-                <Experience 
+                {this.state.exp.map((exp) =>
+                  <Experience 
+                    logo={clogo}
+                    name={exp.name}
+                    duration={exp.duration}
+                    type={exp.type}
+                    position={exp.position}
+                    desc={exp.desc}
+                  />
+                )}
+                {/* <Experience 
                   logo={clogo}
                   name="Apple Inc" 
                   duration="Oct 2019- Current"
@@ -199,7 +279,7 @@ class Profile extends Component {
                   type="Fulltime"
                   position="Senior Software Engineer"
                   desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
-                />
+                /> */}
               </div>
               <div className="profile-accom">
                 <div className="section-headers">
@@ -207,9 +287,12 @@ class Profile extends Component {
                   <span style={{display: this.state.self ? "block": "none"}}><img src={edit} alt="Edit"></img></span>
                 </div>
                 <div className="acc-row">
+                  {this.state.acc.map((acc) =>
+                    <span className="acc-data">{acc}</span>
+                  )}
+                  {/* <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
                   <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> */}
                 </div>
               </div>
               <div className="profile-contact">
