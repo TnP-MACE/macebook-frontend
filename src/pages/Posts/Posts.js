@@ -46,7 +46,6 @@ class Posts extends Component{
                     <div className="posts-display">
                         <div className="post-content">
                             <Card>
-                                <div className="card-content">
                                     <Post
                                         poster="Ruben Lubin"
                                         posterprofile={profilepic}
@@ -58,12 +57,10 @@ class Posts extends Component{
                                         comments="1k"
                                         profilepic={profilepic}>
                                     </Post>
-                                </div>
                             </Card>
                          </div>
                          <div className="post-content">
                             <Card>
-                                <div className="card-content">
                                     <Post
                                         poster="Ruben Lubin"
                                         posterprofile={profilepic}
@@ -75,12 +72,10 @@ class Posts extends Component{
                                         comments="1k"
                                         profilepic={profilepic}>
                                     </Post>
-                                </div>
                             </Card>
                          </div>
                          <div className="post-content">
                             <Card>
-                                <div className="card-content">
                                     <Post
                                         poster="Ruben Lubin"
                                         posterprofile={profilepic}
@@ -92,7 +87,6 @@ class Posts extends Component{
                                         comments="1k"
                                         profilepic={profilepic}>
                                     </Post>
-                                </div>
                             </Card>
                          </div>
                     </div>

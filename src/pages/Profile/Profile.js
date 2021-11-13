@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 import "./Profile.scss";
 import Header from "../../components/Header/Header";
@@ -22,6 +23,7 @@ import arrow from "../../assets/images/icons/arrow.png";
 import clogo from "../../assets/images/icons/company-logo.png";
 
 class Profile extends Component {
+
   state={
     username: 'John Doe',
     cover: {cover},
@@ -34,6 +36,7 @@ class Profile extends Component {
     self: true,
     skills: ['HTML','CSS','REACTJS','NodeJS']
   }
+
   render() {
     return (
       <div className="Profile">
@@ -161,9 +164,11 @@ class Profile extends Component {
                           profilepic={profilepic}></ProfilePost>
                       </Card>
                     </div>
+                    <Link to="/posts">
                     <div className="arrow">
                       <img src={arrow} alt="View Posts"></img>
                     </div>
+                    </Link>
                 </div>
               </div>
               <div className="profile-experience">
