@@ -3,10 +3,11 @@
 
 /* base styles */
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: "Poppins", Helvetica;
+    font-family: "Poppins", Helvetica;
+    overflow: scroll;
 }
