@@ -1,162 +1,150 @@
 @import "../../assets/sass/main.scss";
 
-.Signup{
-  display: flex;
-  justify-content: center;
-  padding-top: 2rem;
-  flex-direction: column;
-
-  &__container-white {
-    // position:absolute;
-    max-width: 33.625rem;
-    height: 38.1875rem;
-    //left: -195px;
-    box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2),
-    1px -1px 2px rgba(191, 191, 191, 0.2),
-    -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
-    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-    inset -1px -1px 2px rgba(191, 191, 191, 0.5);
-    //border-top:67px solid#000000 ;
-    background:$color-white;
-    //border-radius: 0px 90px;
+.Signup {
     display: flex;
+    justify-content: center;
+    padding-top: 2rem;
     flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    //justify-content: space-around;
-    form select{
-      border-color: $color-white;
-      border-bottom: 1px solid $color-black;
-      //max-width:100%;
-      margin-top:1.875rem;
-      border: 1px solid $color-black;
-      padding: 10px;
-      width: 100%;
-      border-radius: 4px;
+
+    &__container-white {
+        // position:absolute;
+        max-width: 33.625rem;
+        height: 38.1875rem;
+        //left: -195px;
+        box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+            -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+            inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+        //border-top:67px solid#000000 ;
+        background: $color-white;
+        //border-radius: 0px 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        //justify-content: space-around;
+        form select {
+            border-color: $color-white;
+            border-bottom: 1px solid $color-black;
+            //max-width:100%;
+            margin-top: 1.875rem;
+            border: 1px solid $color-black;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+        }
+        &__email {
+            padding-top: 1rem;
+        }
+        &__username {
+            padding-top: 1rem;
+        }
+        &__password {
+            //position:absolute;
+            padding-top: 1rem;
+        }
+        &__confirmpass {
+            padding-top: 1rem;
+        }
+
+        &__sign {
+            // position: center;
+
+            padding-top: 1.93rem;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            /* identical to box height */
+
+            color: $color-black;
+        }
+        &__error-message {
+            color: $color-red;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 15px;
+            margin: 5px 0 0;
+        }
+
+        &__google {
+            display: flex;
+
+            position: absolute;
+            margin-top: 7.43rem;
+            background: $color-white;
+            border: 0.5px solid #8d8d8d;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 50px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            //line-height: 21px;
+            /* identical to box height */
+            text-align: center;
+
+            color: $color-black;
+            p {
+                margin-top: 10px;
+                margin-right: 5px;
+            }
+        }
+        form {
+            position: center;
+        }
+
+        form input {
+            font-size: 16px;
+            // border: none;
+            outline: none;
+            border: 1px solid $color-black;
+            border-radius: 4px;
+            padding: 10px;
+            max-width: 100%;
+            height: 24px;
+        }
+
+        form button {
+            position: absolute;
+            width: 186px;
+            height: 40px;
+            margin-top: 2rem;
+            background: $color-black;
+            border: 1px solid $color-black;
+            box-sizing: border-box;
+            border-radius: 50px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+            color: $color-white;
+        }
+        &__create {
+            margin-top: 6.68rem;
+        }
+        select {
+            font-size: 16px;
+        }
     }
-    &__email{
-      padding-top: 1rem;
+    &__heading {
+        padding-top: 1rem;
+        height: 67px;
+        max-width: 538px;
+        background: $color-black;
+        color: $color-white;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 27px;
+        line-height: 40px;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
     }
-    &__username{
-      padding-top: 1rem;
-
-    }
-    &__password{
-      //position:absolute;
-      padding-top:1rem;
-    }
-    &__confirmpass{
-      padding-top:1rem;
-    }
-
-
-    &__sign {
-      // position: center;
-
-      padding-top: 1.93rem;
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 30px;
-      /* identical to box height */
-
-
-      color: $color-black;
-    }
-    &__error-message {
-      color: $color-red;
-      display: inline-block;
-      font-size: 12px;
-      line-height: 15px;
-      margin: 5px 0 0;
-    }
-
-    &__google{
-      display:flex;
-
-      position: absolute;
-      margin-top: 7.43rem;
-      background:$color-white;
-      border: 0.5px solid #8D8D8D;
-      box-sizing: border-box;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 50px;
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      //line-height: 21px;
-      /* identical to box height */
-      text-align: center;
-
-
-      color: $color-black;
-     p{
-       margin-top: 10px;
-       margin-right:5px;
-     }
-    }
-    form{
-      position:center;
-    }
-
-    form input {
-      font-size:16px;
-      // border: none;
-      outline: none;
-      border: 1px solid $color-black;
-      border-radius: 4px;
-      padding: 10px;
-      max-width:100%;
-      height: 24px;
-
-    }
-
-    form button {
-      position: absolute;
-      width: 186px;
-      height: 40px;
-      margin-top: 2rem;
-      background: $color-black;
-      border: 1px solid $color-black;
-      box-sizing: border-box;
-      border-radius: 50px;
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 21px;
-      /* identical to box height */
-
-
-      color: $color-white;
-
-    }
-    &__create{
-     margin-top: 6.68rem;
-    }
-    select{
-      font-size:16px ;
-    }
-
-
-  }
-  &__heading{
-    padding-top: 1rem;
-    height: 67px;
-    max-width:538px;
-    background: $color-black;
-    color:$color-white;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 27px;
-    line-height: 40px;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-  }
-
 }

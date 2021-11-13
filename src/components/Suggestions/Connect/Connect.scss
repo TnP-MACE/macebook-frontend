@@ -1,34 +1,34 @@
 @import "../../../assets/sass/main.scss";
 
-.connect{
+.connect {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
-    
-    .connect-profile{
+
+    .connect-profile {
         display: flex;
         justify-content: space-around;
-        
-        img{
+
+        img {
             margin-top: $margin-sm;
             width: 3.6rem;
             height: 3.6rem;
             padding: 0px;
-            box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2),
-    1px -1px 2px rgba(191, 191, 191, 0.2),
-    -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
-    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-    inset -1px -1px 2px rgba(191, 191, 191, 0.5);
-  border-radius: 10px;
+            box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+                -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+                inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+            border-radius: 10px;
         }
-        .connect-name{
+        .connect-name {
             width: 8rem;
             margin-top: $margin-sm;
             margin-left: $margin-sm;
         }
     }
-    
-    p{
+
+    p {
         font-family: Poppins;
         font-size: 10px;
         font-style: normal;
@@ -37,15 +37,17 @@
         letter-spacing: 0em;
         text-align: left;
     }
-    button{
-        margin-top: $margin-regular;
+    button {
+        // margin-top: $margin-regular;
         margin-left: $margin-regular;
         background-color: $color-black;
         color: $color-white;
         border: none;
         border-radius: 12px;
-        padding: $padding-sm;
-        height: 2rem;
+        padding: 0.5rem 0.8rem;
+        // height: 2rem;
         cursor: pointer;
+        display: flex;
+        align-items: center;
     }
 }

@@ -1,112 +1,114 @@
 @import "../../assets/sass/main.scss";
 
 .Navbar {
-  background-color: $color-black;
-  color: $color-white;
-  padding: $padding-sm 0;
-
-  &__container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__title {
-    font-size: $font-size-lg;
-    font-weight: 700;
-    text-decoration: none;
+    background-color: $color-black;
     color: $color-white;
-  }
+    padding: $padding-sm 0;
 
-  &__toggler {
-    display: none;
-  }
-
-  &__collapse {
-    display: flex;
-    align-items: center;
-  }
-
-  &__nav {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &:not(:last-child) {
-      margin-right: 2.875rem;
-    }
-  }
-
-  &__item-icon {
-    display: inline-block;
-  }
-  //width
-
-  &__item-text {
-    display: none;
-  }
-
-  &__search {
-    margin-right: 8rem;
-  }
-
-  @media (max-width: 934px) {
     &__container {
-      flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
-    &__collapse {
-      display: block;
-      width: 100%;
-    }
-
-    &__hide {
-      display: none;
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: 700;
+        text-decoration: none;
+        color: $color-white;
     }
 
     &__toggler {
-      display: block;
-      background-color: transparent;
-      border: none;
-      outline: none;
+        display: none;
     }
 
-    &__toggler-icon {
-      height: 1.2rem;
+    &__collapse {
+        display: flex;
+        align-items: center;
     }
 
     &__nav {
-      flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        // position: relative;
     }
 
     &__item {
-      display: flex;
-      flex-direction: row;
-      margin-right: 0;
-      text-decoration: none;
-      color: $color-white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 2.875rem;
+        }
     }
 
     &__item-icon {
-      display: inline-block;
-      &:not(:last-child) {
-        margin: $margin-sm;
-        margin-left: 0;
-      }
+        display: inline-block;
     }
+    //width
 
     &__item-text {
-      display: block;
+        display: none;
     }
 
     &__search {
-      margin: $margin-sm 0;
+        margin-right: 8rem;
     }
-  }
+
+    @media (max-width: 934px) {
+        &__container {
+            flex-wrap: wrap;
+        }
+
+        &__collapse {
+            display: block;
+            width: 100%;
+        }
+
+        &__hide {
+            display: none;
+        }
+
+        &__toggler {
+            display: block;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        &__toggler-icon {
+            height: 1.2rem;
+        }
+
+        &__nav {
+            flex-direction: column;
+        }
+
+        &__item {
+            display: flex;
+            flex-direction: row;
+            margin-right: 0;
+            text-decoration: none;
+            color: $color-white;
+        }
+
+        &__item-icon {
+            display: inline-block;
+            &:not(:last-child) {
+                margin: $margin-sm;
+                margin-left: 0;
+            }
+        }
+
+        &__item-text {
+            display: block;
+        }
+
+        &__search {
+            margin: $margin-sm 0;
+        }
+    }
 }
