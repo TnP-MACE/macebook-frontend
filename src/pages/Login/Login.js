@@ -15,6 +15,7 @@ const Login = () => (
                 try{
                     const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
                         method: 'POST',
+                        credentials: 'include',
                         headers: {
                             "Content-Type": "application/json"
                         },
@@ -26,6 +27,12 @@ const Login = () => (
 
                     const loginData = await loginResponse.json()
                     console.log(loginData)
+
+                    const userData = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
+                        method: 'GET',
+                        credentials: "include"
+                    });
+                    console.log(userData)
                 } catch(e){
                     console.log(e)
                 }

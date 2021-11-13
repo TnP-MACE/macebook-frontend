@@ -21,7 +21,10 @@
                     width: 36rem;
                 }
                 .card-col2{
-                        width: 36rem;
+                    width: 36rem;
+                    position: sticky;
+                    top: 10px;
+                    height: fit-content;
                 }
             }
         }

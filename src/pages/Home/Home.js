@@ -9,46 +9,119 @@ import Header from '../../components/Header/Header'
 import postImg from '../../assets/images/icons/postImg.png'
 import profilepic from '../../assets/images/icons/UserProfile.png'
 
+
 class Home extends Component {
-    render() {
-        return (
-            <div className="Home">
-                <Helmet>
-                    <title>Macebook | Home</title>
-                </Helmet>
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [
+        {
+          poster: "Ruben Lubin",
+          posterprofile: profilepic,
+          designation: "poster designation",
+          content:
+            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
+          hashtags: "#Hashtags   #lorem_epsum",
+          image: postImg,
+          likes: "3k",
+          comments: "1k",
+          profilepic: profilepic,
+        },
+        {
+          poster: "Ruben Lubin",
+          posterprofile: profilepic,
+          designation: "poster designation",
+          content:
+            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
+          hashtags: "#Hashtags   #lorem_epsum",
+          image: postImg,
+          likes: "3k",
+          comments: "1k",
+          profilepic: profilepic,
+        },
+        {
+          poster: "Ruben Lubin",
+          posterprofile: profilepic,
+          designation: "poster designation",
+          content:
+            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
+          hashtags: "#Hashtags   #lorem_epsum",
+          image: postImg,
+          likes: "3k",
+          comments: "1k",
+          profilepic: profilepic,
+        },
+        {
+          poster: "Ruben Lubin",
+          posterprofile: profilepic,
+          designation: "poster designation",
+          content:
+            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
+          hashtags: "#Hashtags   #lorem_epsum",
+          image: postImg,
+          likes: "3k",
+          comments: "1k",
+          profilepic: profilepic,
+        },
+      ],
+    };
+  }
 
-                <Header active={'home'} />
+  render() {
+    return (
+      <div className="Home">
+        <Helmet>
+          <title>Macebook | Home</title>
+        </Helmet>
 
-                <div className="container">
-                    <div className="card-cols">
-                        <div className="card-col1">
-                            <div className="tweetbox-container">
-                                <Tweetbox></Tweetbox>
-                            </div>
-                            <Card>
-                                <Post
-                                    poster="Ruben Lubin"
-                                    posterprofile={profilepic}
-                                    designation="poster designation"
-                                    content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip.
+        <Header active={"home"} />
+
+        <div className="container">
+          <div className="card-cols">
+            <div className="card-col1">
+              <div className="tweetbox-container">
+                <Tweetbox></Tweetbox>
+              </div>
+              {this.state.posts.map(e=>{
+                  return <Card>
+                    <Post
+                      poster={e.poster}
+                      posterprofile={e.profilepic}
+                      designation={e.designation}
+                      content={e.content}
+                      hashtags={e.hashtags}
+                      image={e.image}
+                      likes={e.likes}
+                      comments={e.comments}
+                      profilepic={e.profilepic}
+                    ></Post>
+                  </Card>
+              })}
+              {/* <Card>
+                <Post
+                  poster="Ruben Lubin"
+                  posterprofile={profilepic}
+                  designation="poster designation"
+                  content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip.
                       Hashtags   lorem_epsum"
-                                    hashtags="#Hashtags   #lorem_epsum"
-                                    image={postImg}
-                                    likes="3k"
-                                    comments="1k"
-                                    profilepic={profilepic}></Post>
-                            </Card>
-                        </div>
-                        <div className="card-col2">
-                            <Card>
-                                <Suggestions></Suggestions>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
+                  hashtags="#Hashtags   #lorem_epsum"
+                  image={postImg}
+                  likes="3k"
+                  comments="1k"
+                  profilepic={profilepic}
+                ></Post>
+              </Card> */}
             </div>
-        )
-    }
+            <div className="card-col2">
+              <Card>
+                <Suggestions></Suggestions>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Home
