@@ -77,9 +77,9 @@ class Header extends Component {
                                 : "Navbar__collapse Navbar__hide"
                         }
                     >
-                        <div className="Navbar__search">
+                        {/* <div className="Navbar__search">
                             <Search />
-                        </div>
+                        </div> */}
                         <ul className="Navbar__nav">
                             <Link className="Navbar__item" to="/">
                                 <img className="Navbar__item-icon" src={this.getIcon("home")} />

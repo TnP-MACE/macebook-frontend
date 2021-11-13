@@ -1,24 +1,24 @@
 @import "../../../assets/sass/main.scss";
 
-@media (min-width: 560px){
-    .Tweetbox{
-        .input-text-field{
-            .input-video{
+@media (min-width: 560px) {
+    .Tweetbox {
+        .input-text-field {
+            .input-video {
                 margin-top: -9.8%;
             }
-            .modal{
+            .modal {
                 min-width: 35rem;
             }
         }
     }
 }
-@media (max-width: 560px){
-    .Tweetbox{
-        .input-text-field{
-            .input-video{
+@media (max-width: 560px) {
+    .Tweetbox {
+        .input-text-field {
+            .input-video {
                 margin-top: -13.6%;
             }
-            .modal{
+            .modal {
                 margin-left: 2rem;
                 min-width: 80%;
             }
@@ -26,43 +26,45 @@
     }
 }
 
-.Tweetbox{
+.Tweetbox {
     display: flex;
     align-items: center;
     margin: $margin-sm;
-    .profile-pic{
-        img{
+    .profile-pic {
+        img {
             margin-top: $margin-sm;
             height: 55px;
             width: 55px;
             border-radius: 50%;
         }
     }
-    .input-text-field{
+    .input-text-field {
         margin: $margin-sm;
         padding: $padding-sm;
         width: 500px;
         height: 25px;
         border-radius: 22px;
         border: 1px solid $color-gray;
-        .text-field{
+        .text-field {
             border: none;
             outline: none;
+            width: 100%;
+            height: 100%;
         }
-        .text-field::placeholder{
-            font-family: 'Public Sans', sans-serif;
+        .text-field::placeholder {
+            font-family: "Public Sans", sans-serif;
         }
-        .input-video{
+        .input-video {
             display: flex;
             justify-content: flex-end;
-            input{
-                margin-top: 1rem;
+            input {
+                margin-top: 0.8rem;
                 margin-left: 0.2rem;
                 padding: 0.3rem;
                 background-color: rgba(0, 0, 0, 0);
                 border: none;
                 cursor: pointer;
-                img{
+                img {
                     margin: $margin-sm;
                     cursor: pointer;
                 }
@@ -70,78 +72,77 @@
         }
     }
 }
-.modal{
+.modal {
     z-index: 9999;
-  position: absolute;
-  top: 50%;
-  left: 42%;
-  min-height: 20rem;
-  padding: 15px;
-  border-radius: 10px;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  h3{
-      font-weight: normal;
-      margin: $margin-sm;
-  }
-  .poster{
-      display: flex;
-      img{
-          padding: $padding-sm;
-      }
-      .profile-link{
-          margin-top: $margin-sm;
-          text-decoration: none;
-          color: $color-black;
-          font-weight: bold;
-      }
-      select{
-          border: solid 1px $color-gray;
-          border-radius: 10px;
-      }
-      select#anyone option[value="Anyone"]   { background-image:url(../../../assets/images/icons/Anyone.svg);   }
-      .post-view{
-          display: flex;
-          flex-direction: column;
-      }
-      
-  }
-  textarea {
-      padding: 0px;
-      overflow: hidden;
-      min-height: 12rem;
-      height: 100%;
-      width: 100%;
-      border: none;
-      margin: $margin-sm;
-      outline: none;
-  }
-  .modal-bottom{
-      display: flex;
-      justify-content: space-between;
-      button{
-          cursor: pointer;
-          background-color: $color-white;
-          border: none; 
-          height: 0.1rem;
-          width: 3rem;
-          padding: 0px;
-      }
-      .media-input{
-          margin: $margin-sm;
-            input{
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    min-height: 20rem;
+    padding: 15px;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    h3 {
+        font-weight: normal;
+        margin: $margin-sm;
+    }
+    .poster {
+        display: flex;
+        img {
+            padding: $padding-sm;
+        }
+        .profile-link {
+            margin-top: $margin-sm;
+            text-decoration: none;
+            color: $color-black;
+            font-weight: bold;
+        }
+        select {
+            border: solid 1px $color-gray;
+            border-radius: 10px;
+        }
+        select#anyone option[value="Anyone"] {
+            background-image: url(../../../assets/images/icons/Anyone.svg);
+        }
+        .post-view {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    textarea {
+        padding: 0px;
+        overflow: hidden;
+        min-height: 12rem;
+        height: 100%;
+        width: 100%;
+        border: none;
+        margin: $margin-sm;
+        outline: none;
+    }
+    .modal-bottom {
+        display: flex;
+        justify-content: space-between;
+        button {
+            cursor: pointer;
+            background-color: $color-white;
+            border: none;
+            height: 0.1rem;
+            width: 3rem;
+            padding: 0px;
+        }
+        .media-input {
+            margin: $margin-sm;
+            input {
                 background-color: none;
                 border: none;
                 cursor: pointer;
                 margin-top: 1rem;
                 padding: 1rem;
             }
-          
-      }
-  }
-  
+        }
+    }
 }
-.bg{
+.bg {
     z-index: 9998;
     position: absolute;
     width: 100%;
