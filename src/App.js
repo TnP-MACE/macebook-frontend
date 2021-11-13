@@ -11,6 +11,7 @@ import Completeprofile from './pages/complete-profile/Completeprofile'
 import Jobs from './pages/Jobs/Jobs'
 import JobApplicationForm from './pages/JobApplicationForm/JobApplicationForm'
 import Posts from './pages/Posts/Posts'
+import Dashboard from "./pages/Dashboard/Dashboard";
 function App() {
     return (
         <div>
@@ -28,6 +29,7 @@ function App() {
                     <Route exact path="/forgotpassword" component={ForgotPassword} />
                     <Route exact path="/signup" component={Signup} />
                     <Route exact path="/complete-profile" component={Completeprofile} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                     <Route path="*" component={NoMatch} />
                 </Switch>
             </Router>
