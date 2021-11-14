@@ -13,19 +13,16 @@ const Login = () => (
         onSubmit={(values, { setSubmitting }) => {
             const asyncFunc = async () => {
                 try {
-                    const loginResponse = await fetch(
-                        "https://mace-connect.herokuapp.com/api/v1/auth/login",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                email: values.username,
-                                password: values.password,
-                            }),
-                        }
-                    );
+                    const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: values.username,
+                            password: values.password,
+                        }),
+                    });
 
                     const loginData = await loginResponse.json();
                     if (loginData.statusCode != 200 || loginData.statusCode != 201) {
@@ -45,15 +42,7 @@ const Login = () => (
         })}
     >
         {(props) => {
-            const {
-                values,
-                touched,
-                errors,
-                isSubmitting,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-            } = props;
+            const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
             return (
                 <div className="container Login">
                     <div className="Login__heading">MACEBOOK</div>
@@ -77,9 +66,7 @@ const Login = () => (
                                 />
                             </div>
                             {errors.username && touched.username && (
-                                <div className="Login__container-white__error-message">
-                                    {errors.username}
-                                </div>
+                                <div className="Login__container-white__error-message">{errors.username}</div>
                             )}
 
                             <div className="Login__container-white__password">
@@ -94,15 +81,10 @@ const Login = () => (
                                 />
                             </div>
                             {errors.password && touched.password && (
-                                <div className="Login__container-white__error-message">
-                                    {errors.password}
-                                </div>
+                                <div className="Login__container-white__error-message">{errors.password}</div>
                             )}
                             <div>
-                                <Link
-                                    className="Login__container-white__forgot"
-                                    to="/forgotpassword"
-                                >
+                                <Link className="Login__container-white__forgot" to="/forgotpassword">
                                     Forgot Password
                                 </Link>
                             </div>

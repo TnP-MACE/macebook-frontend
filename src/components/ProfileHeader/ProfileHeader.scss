@@ -1,11 +1,11 @@
 @import "../../assets/sass/main.scss";
 
-.profile-headerContainer{
-    .profile-bgimgContainer{
+.profile-headerContainer {
+    .profile-bgimgContainer {
         width: 100%;
         height: 250px;
         margin-top: $margin-regular;
-        img{
+        img {
             width: 100%;
             height: 100%;
             border-radius: 15px;
@@ -13,35 +13,35 @@
         //border: 2px solid #000;
     }
 
-    .profile-header{
+    .profile-header {
         display: flex;
         //margin: auto;
         flex-wrap: wrap;
         //border: 2px solid #000;
     }
 
-    .profile-header-section-1{
+    .profile-header-section-1 {
         flex: 2;
         width: 100%;
         height: 100%;
         //border: 2px solid #000;
     }
-    .profile-header-desc{
+    .profile-header-desc {
         flex: 6;
         display: flex;
-        .profile-header-section-2{
+        .profile-header-section-2 {
             flex: 5;
             align-items: center;
             padding: $padding-sm;
             //border: 2px solid #000;
-            h2{
+            h2 {
                 font-size: 28px;
                 font-weight: 700;
                 line-height: 42px;
                 text-transform: uppercase;
             }
         }
-        .profile-header-section-3{
+        .profile-header-section-3 {
             flex: 3;
             justify-content: center;
             align-items: center;
@@ -49,12 +49,11 @@
         }
     }
 
-
-    .profile-imgContainer{
+    .profile-imgContainer {
         width: 13.25em;
         height: 13.25em;
         position: relative;
-        img{
+        img {
             width: 100%;
             height: 100%;
             border-radius: 10px;
@@ -64,26 +63,25 @@
         }
     }
 
-    .profile-userDetails{
+    .profile-userDetails {
         display: flex;
         flex-direction: column;
-        span{
+        span {
             font-weight: 300;
-            &.position{
+            &.position {
                 font-weight: 600;
                 font-size: 16px;
                 line-height: 24px;
                 text-transform: uppercase;
             }
-            &.batch{
+            &.batch {
                 font-weight: 600;
                 font-style: normal;
                 font-size: 13px;
                 line-height: 19.5px;
                 color: #626262;
-
             }
-            &.userConnections{
+            &.userConnections {
                 color: $color-orange;
                 font-weight: 600;
                 font-style: normal;
@@ -93,13 +91,13 @@
         }
     }
 
-    .profile-header-btnContainer{
+    .profile-header-btnContainer {
         position: relative;
-        .profile-header-userButtons{
+        .profile-header-userButtons {
             padding: 35px 0;
             display: flex;
             justify-content: flex-end;
-            button{
+            button {
                 //padding: 10px;
                 margin: 0px 10px;
                 font-weight: 500;
@@ -108,8 +106,8 @@
                 border-radius: 20px;
                 cursor: pointer;
                 width: 130px;
-                height: 40px;          
-                &.profile-header-btn1{
+                height: 40px;
+                &.profile-header-btn1 {
                     color: $color-black;
                     background: $color-white;
                     border: 1.5px solid $color-black;
@@ -117,7 +115,7 @@
                     //top: 50%;
                     //right: 40%;
                 }
-                &.profile-header-btn2{
+                &.profile-header-btn2 {
                     color: $color-white;
                     background: $color-black;
                     border: 1.5px solid $color-black;
@@ -129,48 +127,48 @@
         }
     }
 
-    @media (max-width: 768px){
-        .profile-bgimgContainer{
-            width:100%;
+    @media (max-width: 768px) {
+        .profile-bgimgContainer {
+            width: 100%;
             height: 9.375em;
-            img{
+            img {
                 width: 100%;
                 height: 100%;
                 border-radius: 15px;
             }
             //border: 2px solid #000;
         }
-        .profile-header{
+        .profile-header {
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
         }
-        .profile-header-section-1{
+        .profile-header-section-1 {
             flex: 1;
         }
-        .profile-header-desc{
+        .profile-header-desc {
             flex-direction: column;
             //justify-content: center;
-            .profile-header-section-1{
+            .profile-header-section-1 {
                 padding: 0;
             }
-            .profile-header-section-2{
-                h2{
+            .profile-header-section-2 {
+                h2 {
                     font-size: 24px;
                 }
             }
         }
-        .profile-imgContainer{
+        .profile-imgContainer {
             width: 10em;
             height: 10em;
-            img{
+            img {
                 left: 40%;
             }
         }
-        .profile-header-userButtons{
+        .profile-header-userButtons {
             display: flex;
             padding: 0;
-            button{
+            button {
                 position: relative;
                 width: 6.25em;
             }

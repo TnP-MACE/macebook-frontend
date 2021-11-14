@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
-import Card from '../../components/Card/Card'
-import './Settings.scss'
+import React, { Component } from "react";
+import Header from "../../components/Header/Header";
+import Card from "../../components/Card/Card";
+import "./Settings.scss";
 class Settings extends Component {
     render() {
         return (
             <div className="Settings-cont">
-                <Header active={'profile'} />
+                <Header active={"profile"} />
                 <div className="card-columns">
                     <div className="card-col1">
                         <Card>
@@ -49,7 +49,7 @@ class Settings extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
-export default Settings
+export default Settings;

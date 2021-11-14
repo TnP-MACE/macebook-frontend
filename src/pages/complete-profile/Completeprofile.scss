@@ -1,6 +1,14 @@
 @import "../../assets/sass/main.scss";
 
 .Completion {
+    &__container {
+        border: 1px solid #c4c4c4;
+        padding: 2rem;
+        max-width: 857px;
+        margin: 2rem auto !important;
+        border-radius: 10px;
+    }
+
     &__title {
         margin: 2.8rem 0 2rem 0;
     }
@@ -55,9 +63,9 @@
         width: 100%;
         height: 10rem;
         border-radius: 10px;
-        img{
-            width:100%;
-            height:100%;
+        img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center;
         }
@@ -70,6 +78,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            img {
+                height: 35px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+            span {
+                background-color: $color-white;
+                padding: 5px 8px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        }
     }
 
     &__cover-file-ico {

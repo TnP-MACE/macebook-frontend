@@ -19,11 +19,10 @@ class JobCard extends Component{
    
     handleClick = () =>{
         this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
-        if(this.state.ShowHidedesc){
-            this.setState({btnContent: 'View More'});
-        }
-        else{
-            this.setState({btnContent: 'View Less'});
+        if (this.state.ShowHidedesc) {
+            this.setState({ btnContent: "View More" });
+        } else {
+            this.setState({ btnContent: "View Less" });
         }
     }
     
@@ -54,27 +53,30 @@ class JobCard extends Component{
                         </div>
                         <div className="section-3">
                             <h4 className="lh-25">
-                                Job Type: {' '}
-                                <span className="job-spec">{this.props.type}</span> <span className="job-spec">{this.props.experience} Experience</span>
+                                Job Type: <span className="job-spec">{this.props.type}</span>{" "}
+                                <span className="job-spec">{this.props.experience} Experience</span>
                             </h4>
                             <h4 className="lh-25">
-                                Salary/Stipend: {' '} 
-                                <span className="job-spec">${this.props.salary} + Benefits</span>
+                                Salary/Stipend: <span className="job-spec">${this.props.salary} + Benefits</span>
                             </h4>
                             <h4 className="lh-25">
-                                Skills: {' '} 
-                                <span className="skills"> 
-                                    {this.props.skills.map((skill) => <span className="job-spec">{skill}</span>)}
+                                Skills:{" "}
+                                <span className="skills">
+                                    {this.props.skills.map((skill) => (
+                                        <span className="job-spec">{skill}</span>
+                                    ))}
                                 </span>
                             </h4>
                         </div>
                     </div>
-                    <div className="jobCard-desc" style={{display: this.state.ShowHidedesc ? "block" : "none" }}>
+                    <div className="jobCard-desc" style={{ display: this.state.ShowHidedesc ? "block" : "none" }}>
                         <h4>Description</h4>
                         <p>{this.props.desc}</p>
                     </div>
                     <div className="posted-details">
-                        <p>Posted on {this.props.date} by <span className="user">{this.props.user}</span></p>
+                        <p>
+                            Posted on {this.props.date} by <span className="user">{this.props.user}</span>
+                        </p>
                     </div>
                 </Card>
             </div>

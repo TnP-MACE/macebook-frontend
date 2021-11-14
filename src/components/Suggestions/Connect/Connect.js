@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import './Connect.scss'
+import React, { Component } from "react";
+import "./Connect.scss";
 
 class Connect extends Component {
     render() {
-        const Connectprofile = this.props.image
+        const Connectprofile = this.props.image;
         return (
             <div className="connect">
                 <div className="connect-profile">
@@ -13,7 +13,8 @@ class Connect extends Component {
                             src={Connectprofile}
                             alt="connection"
                             width="100%"
-                            height="100%"></img>
+                            height="100%"
+                        ></img>
                     </a>
                     <div className="connect-name">
                         <h4>{this.props.name}</h4>
@@ -22,7 +23,7 @@ class Connect extends Component {
                 </div>
                 <button>Connect</button>
             </div>
-        )
+        );
     }
 }
-export default Connect
+export default Connect;

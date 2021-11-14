@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 import "./Jobs.scss";
 import Header from "../../components/Header/Header";
@@ -58,8 +58,8 @@ class Jobs extends Component {
         };
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="Jobs">
                 <Header active="jobs" />
                 <div class="jobs-container">
@@ -97,8 +97,8 @@ class Jobs extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default Jobs
+export default Jobs;

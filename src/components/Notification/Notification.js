@@ -11,8 +11,7 @@ class Notification extends React.Component {
                     <img src={User} /> John Doe liked your post. <span>3min</span>
                 </p>
                 <p>
-                    <img src={User} /> John Doe commented on your post. "Good Job!"{" "}
-                    <span>5min</span>
+                    <img src={User} /> John Doe commented on your post. "Good Job!" <span>5min</span>
                 </p>
                 <p>
                     <img src={User} /> John Doe connected with you. <span>1hr</span>
@@ -22,8 +21,7 @@ class Notification extends React.Component {
                     <img src={User} /> John Doe liked your post. <span>3min</span>
                 </p>
                 <p>
-                    <img src={User} /> John Doe commented on your post. "Good Job!"{" "}
-                    <span>5min</span>
+                    <img src={User} /> John Doe commented on your post. "Good Job!" <span>5min</span>
                 </p>
             </div>
         );

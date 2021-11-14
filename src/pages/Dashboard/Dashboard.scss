@@ -1,25 +1,25 @@
 @import "../../assets/sass/main.scss";
 
-.dashboard-container{
-    .title{
+.dashboard-container {
+    .title {
         margin-top: 20px;
-        h2{
+        h2 {
             font-size: 32px;
             line-height: 48px;
             text-transform: uppercase;
         }
     }
-    h3{
+    h3 {
         font-size: 27px;
         line-height: 40px;
         margin: 10px 0px;
     }
-    .add-btnContainer{
+    .add-btnContainer {
         width: 100%;
         margin: 5px 0px;
         margin-top: 10px;
         text-align: right;
-        .add-btn{
+        .add-btn {
             text-align: right;
             background-color: #000;
             color: #fff;
@@ -31,100 +31,100 @@
             margin-right: 15px;
         }
     }
-    .applications{
-        .tb-titles{
+    .applications {
+        .tb-titles {
             width: 100%;
             display: flex;
             text-align: left;
-            .name{
+            .name {
                 flex: 2;
             }
-            .pos{
+            .pos {
                 flex: 3;
             }
-            .msg{
+            .msg {
                 flex: 2;
             }
-            .remarks{
+            .remarks {
                 flex: 2;
             }
-            .tb-title{
+            .tb-title {
                 font-weight: 600;
             }
         }
-        .tb-dataContainer{
+        .tb-dataContainer {
             display: flex;
             width: 100%;
             flex-direction: column;
-            .tb-datas{
+            .tb-datas {
                 display: flex;
                 width: 100%;
-                .name{
+                .name {
                     flex: 2;
                 }
-                .pos{
+                .pos {
                     flex: 3;
                     display: flex;
                     justify-content: space-between;
-                    .tb-links{
+                    .tb-links {
                         margin-right: 10px;
                         font-style: italic;
-                        a{
+                        a {
                             color: $color-orange;
                             margin: 0px 5px;
                         }
                     }
                 }
-                .msg{
+                .msg {
                     flex: 2;
                 }
-                .remarks{
+                .remarks {
                     flex: 2;
                     display: flex;
                     justify-content: space-between;
-                    img{
+                    img {
                         margin-left: 10px;
                         width: 16px;
                         height: 16px;
                         cursor: pointer;
                     }
-                    .rem-icons{
-                        img{
+                    .rem-icons {
+                        img {
                             width: 20px;
                             height: 20px;
                             cursor: pointer;
                         }
                     }
                 }
-                .tb-data{
+                .tb-data {
                     text-align: left;
                 }
             }
         }
     }
 
-    @media(max-width: 768px){
-        .title{
-            h2{
+    @media (max-width: 768px) {
+        .title {
+            h2 {
                 font-size: 26px;
             }
         }
-        h3{
+        h3 {
             font-size: 22px;
         }
-        .add-btnContainer{
+        .add-btnContainer {
             text-align: center;
-            .add-btn{
+            .add-btn {
                 margin-left: 15px;
             }
         }
-        .applications{
+        .applications {
             margin-top: 20px;
         }
-        .tb-datas{
+        .tb-datas {
             flex-direction: column;
         }
-        .tb-title{
+        .tb-title {
             display: none;
         }
     }
