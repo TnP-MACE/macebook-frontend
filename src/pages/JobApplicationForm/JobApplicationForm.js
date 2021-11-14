@@ -4,7 +4,8 @@ import JobCard from '../../components/JobCard/JobCard'
 import clogo from '../../assets/images/icons/company-logo.png'
 import './JobApplicationForm.scss'
 import fileresume from '../../assets/images/icons/ant-design_file-add-outlined.svg'
-//import { Link } from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
+import queryString from 'query-string';
 
 class JobApplicationForm extends Component {
     constructor(props) {
@@ -27,6 +28,12 @@ class JobApplicationForm extends Component {
             ]
         }
     }
+    
+    componentDidMount(){
+        const res=queryString.parse(this.props.location.search);
+        console.log(res)
+    }
+
     render() {
         return (
             <div className="job-application-form-cont">

@@ -3,13 +3,19 @@ import React, { Component } from "react";
 import "./JobCard.scss";
 import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";
- 
+import JobApplicationForm from "../../pages/JobApplicationForm/JobApplicationForm";
+import { Redirect } from "react-router";
+import {withRouter} from "react-router-dom";
  
 class JobCard extends Component{
-    state={
-        ShowHidedesc: false,
-        btnContent: "View More"
+    constructor(props){
+        super(props);
+        this.state = {
+          ShowHidedesc: false,
+          btnContent: "View More",
+        };
     }
+    
    
     handleClick = () =>{
         this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
@@ -20,7 +26,11 @@ class JobCard extends Component{
             this.setState({btnContent: 'View Less'});
         }
     }
- 
+    
+    handleApply=()=>{
+        const id =this.props.id;
+        this.props.history.push(`/jobApplicationForm/?id=${id}`)
+    }
     render(){
         return(
             <div className="jobCard-container">
@@ -34,7 +44,7 @@ class JobCard extends Component{
                             <h4>{this.props.company}</h4>
                             <span className="location">{this.props.location}</span>
                             <div className="btns-container">
-                                <button id="btn1" className="btn1">
+                                <button id="btn1" className="btn1" onClick={this.handleApply}>
                                     Apply Now
                                 </button>
                                 <button id="btn2" className="btn2" onClick={this.handleClick}>
@@ -72,4 +82,4 @@ class JobCard extends Component{
     }
 }
  
-export default JobCard
+export default JobCard;
