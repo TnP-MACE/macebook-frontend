@@ -1,31 +1,31 @@
-import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
-import JobCard from '../../components/JobCard/JobCard'
-import clogo from '../../assets/images/icons/company-logo.png'
-import './JobApplicationForm.scss'
-import fileresume from '../../assets/images/icons/ant-design_file-add-outlined.svg'
+import React, { Component } from "react";
+import Header from "../../components/Header/Header";
+import JobCard from "../../components/JobCard/JobCard";
+import clogo from "../../assets/images/icons/company-logo.png";
+import "./JobApplicationForm.scss";
+import fileresume from "../../assets/images/icons/ant-design_file-add-outlined.svg";
 //import { Link } from 'react-router-dom'
 
 class JobApplicationForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             jobs: [
                 {
                     clogo: { clogo },
-                    position: 'Junior Software Engineer',
-                    company: 'Apple Inc.',
-                    location: 'San Fransisco, California',
-                    type: 'Full Time',
-                    experience: '1-2',
+                    position: "Junior Software Engineer",
+                    company: "Apple Inc.",
+                    location: "San Fransisco, California",
+                    type: "Full Time",
+                    experience: "1-2",
                     salary: 90000,
-                    skills: ['C++', 'Perl', 'Java', 'PHP'],
-                    desc: 'Lorem Ipsum',
-                    date: '2017-01-03',
-                    user: 'John Doe'
-                }
-            ]
-        }
+                    skills: ["C++", "Perl", "Java", "PHP"],
+                    desc: "Lorem Ipsum",
+                    date: "2017-01-03",
+                    user: "John Doe",
+                },
+            ],
+        };
     }
     render() {
         return (
@@ -66,11 +66,12 @@ class JobApplicationForm extends Component {
                         type="text"
                         placeholder="Max. 100 words only"
                         maxlength="100"
-                        className="msg-field"></textarea>
+                        className="msg-field"
+                    ></textarea>
                 </div>
                 <button className="btn-apply">APPLY</button>
             </div>
-        )
+        );
     }
 }
-export default JobApplicationForm
+export default JobApplicationForm;

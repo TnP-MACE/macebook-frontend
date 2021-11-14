@@ -1,80 +1,80 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import './Posts.scss'
-import Header from '../../components/Header/Header'
-import ProfileHeader from '../../components/ProfileHeader/ProfileHeader'
-import Card from '../../components/Card/Card'
-import Post from '../../components/Post/Post'
-import cover from '../../assets/images/icons/cover.jpg'
-import profileimg from '../../assets/images/icons/profile.webp'
-import postImg from '../../assets/images/icons/postImg.png'
-import profilepic from '../../assets/images/icons/UserProfile.png'
+import "./Posts.scss";
+import Header from "../../components/Header/Header";
+import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import Card from "../../components/Card/Card";
+import Post from "../../components/Post/Post";
+import cover from "../../assets/images/icons/cover.jpg";
+import profileimg from "../../assets/images/icons/profile.webp";
+import postImg from "../../assets/images/icons/postImg.png";
+import profilepic from "../../assets/images/icons/UserProfile.png";
 
 class Posts extends Component {
     state = {
         profile: {
-            username: 'John Doe',
+            username: "John Doe",
             cover: { cover },
             profileimg: { profileimg },
-            position: 'Senior SWE at Apple Inc.',
-            location: 'San Fransisco, CA',
+            position: "Senior SWE at Apple Inc.",
+            location: "San Fransisco, CA",
             batch: 14,
-            dept: 'CSE',
+            dept: "CSE",
             conn: 2000,
             self: true,
-            skills: ['HTML', 'CSS', 'REACTJS', 'NodeJS']
+            skills: ["HTML", "CSS", "REACTJS", "NodeJS"],
         },
         posts: [
             {
-                poster: 'Ruben Lubin',
+                poster: "Ruben Lubin",
                 posterprofile: profilepic,
-                designation: 'poster designation',
+                designation: "poster designation",
                 content:
-                    'Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum',
-                hashtags: '#Hashtags   #lorem_epsum',
+                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                hashtags: "#Hashtags   #lorem_epsum",
                 image: postImg,
-                likes: '3k',
-                comments: '1k',
-                profilepic: profilepic
+                likes: "3k",
+                comments: "1k",
+                profilepic: profilepic,
             },
             {
-                poster: 'Ruben Lubin',
+                poster: "Ruben Lubin",
                 posterprofile: profilepic,
-                designation: 'poster designation',
+                designation: "poster designation",
                 content:
-                    'Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum',
-                hashtags: '#Hashtags   #lorem_epsum',
+                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                hashtags: "#Hashtags   #lorem_epsum",
                 image: postImg,
-                likes: '3k',
-                comments: '1k',
-                profilepic: profilepic
+                likes: "3k",
+                comments: "1k",
+                profilepic: profilepic,
             },
             {
-                poster: 'Ruben Lubin',
+                poster: "Ruben Lubin",
                 posterprofile: profilepic,
-                designation: 'poster designation',
+                designation: "poster designation",
                 content:
-                    'Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum',
-                hashtags: '#Hashtags   #lorem_epsum',
+                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                hashtags: "#Hashtags   #lorem_epsum",
                 image: postImg,
-                likes: '3k',
-                comments: '1k',
-                profilepic: profilepic
+                likes: "3k",
+                comments: "1k",
+                profilepic: profilepic,
             },
             {
-                poster: 'Ruben Lubin',
+                poster: "Ruben Lubin",
                 posterprofile: profilepic,
-                designation: 'poster designation',
+                designation: "poster designation",
                 content:
-                    'Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum',
-                hashtags: '#Hashtags   #lorem_epsum',
+                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                hashtags: "#Hashtags   #lorem_epsum",
                 image: postImg,
-                likes: '3k',
-                comments: '1k',
-                profilepic: profilepic
-            }
-        ]
-    }
+                likes: "3k",
+                comments: "1k",
+                profilepic: profilepic,
+            },
+        ],
+    };
 
     render() {
         return (
@@ -108,17 +108,18 @@ class Posts extends Component {
                                                 image={post.image}
                                                 likes={post.likes}
                                                 comments={post.comments}
-                                                profilepic={post.profilepic}></Post>
+                                                profilepic={post.profilepic}
+                                            ></Post>
                                         </Card>
                                     </div>
-                                )
+                                );
                             })}
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default Posts
+export default Posts;

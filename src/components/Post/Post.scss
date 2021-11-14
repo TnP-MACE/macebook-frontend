@@ -1,57 +1,59 @@
 @import "../../assets/sass/main.scss";
 
-@media (min-width: 768px){
-    .home-posts-container{
-        .home-posts-content{
+@media (min-width: 768px) {
+    .home-posts-container {
+        .home-posts-content {
             margin-left: -3rem;
-            img{
+            img {
                 margin-left: 4rem;
                 width: 80%;
                 height: 80%;
             }
-            p{font-size: 15px;
-            width: 110%;}
+            p {
+                font-size: 15px;
+                width: 110%;
+            }
         }
     }
-    .home-posts-attributes{
-        p{
+    .home-posts-attributes {
+        p {
             margin-left: -12%;
         }
     }
 }
-@media (max-width: 768px){
-    .home-posts-container{
-        .home-posts-content{
+@media (max-width: 768px) {
+    .home-posts-container {
+        .home-posts-content {
             margin-left: -3rem;
-            p{
+            p {
                 font-size: 12px;
-                
             }
-            img{
+            img {
                 margin-left: 3.6rem;
                 width: 80%;
             }
         }
     }
 }
-.home-posts-container{
-    .poster{
+.home-posts-container {
+    .poster {
         display: flex;
-        .posterimg{
+        .posterimg {
             margin-left: $margin-sm;
             padding-top: $padding-sm;
-            .profile-pic{
+            .profile-pic {
                 margin: $margin-sm;
                 border-radius: 50%;
                 width: 3.8rem;
                 height: 3.8rem;
             }
         }
-        .name_desig{
+        .name_desig {
             margin-top: $margin-sm;
-            a{   text-decoration: none;
-                 color: $color-black;
-                .Name{
+            a {
+                text-decoration: none;
+                color: $color-black;
+                .Name {
                     font-family: Poppins;
                     font-size: 16px;
                     font-style: normal;
@@ -62,7 +64,7 @@
                     margin-top: $margin-regular;
                 }
             }
-            .Desig{
+            .Desig {
                 font-family: Poppins;
                 font-size: 13px;
                 font-style: normal;
@@ -74,29 +76,28 @@
             }
         }
     }
-    .home-posts-content{
+    .home-posts-content {
         width: 110%;
-        p{
+        p {
             margin-left: 5rem;
             width: 80%;
             margin-right: $margin-regular;
             font-weight: normal;
         }
-        .hashtags{
+        .hashtags {
             font-weight: bold;
             color: $color-orange;
         }
-        img{
+        img {
             margin-right: $margin-regular;
             padding: $padding-sm;
-            
         }
     }
-    .home-posts-attributes{
+    .home-posts-attributes {
         width: 60%;
         display: flex;
         justify-content: space-around;
-        p{
+        p {
             font-family: Poppins;
             font-size: 11px;
             font-style: normal;
@@ -107,31 +108,31 @@
             color: $color-grey;
         }
     }
-    .home-posts-activity{
+    .home-posts-activity {
         width: 30%;
         display: flex;
         justify-content: space-around;
         margin-left: $margin-sm;
-        button{
-            background-color: rgba(255,255,255,0);
+        button {
+            background-color: rgba(255, 255, 255, 0);
             border: none;
             cursor: pointer;
-            svg{
+            svg {
                 margin-top: 0.1rem;
             }
         }
     }
-    .home-posts-comment{
+    .home-posts-comment {
         width: 90%;
         display: flex;
-        
-        img{
+
+        img {
             width: 2.5rem;
             height: 2.5rem;
             border-radius: 50%;
             padding: $padding-regular;
         }
-        input{
+        input {
             padding: $padding-sm;
             margin-top: $margin-regular;
             border: 1px solid $color-gray;
@@ -140,11 +141,10 @@
             width: 80rem;
             outline: none;
         }
-       
     }
-    .load-comments{
+    .load-comments {
         margin-left: $margin-sm;
-        .comments-loader{
+        .comments-loader {
             color: $color-orange;
             font-family: Poppins;
             font-size: 10px;

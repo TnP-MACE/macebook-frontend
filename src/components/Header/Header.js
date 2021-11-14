@@ -70,13 +70,7 @@ class Header extends Component {
                     <button className="Navbar__toggler" onClick={this.handleToggleClick}>
                         <img className="Navbar__toggler-icon" src={MenuIcon} />
                     </button>
-                    <div
-                        className={
-                            this.state.dropdownActive
-                                ? "Navbar__collapse"
-                                : "Navbar__collapse Navbar__hide"
-                        }
-                    >
+                    <div className={this.state.dropdownActive ? "Navbar__collapse" : "Navbar__collapse Navbar__hide"}>
                         {/* <div className="Navbar__search">
                             <Search />
                         </div> */}

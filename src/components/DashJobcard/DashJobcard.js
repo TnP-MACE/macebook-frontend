@@ -6,10 +6,8 @@ import clogo from "../../assets/images/icons/company-logo.png";
 import edit from "../../assets/images/icons/edit.svg";
 import del from "../../assets/images/icons/delete.svg";
 import { Link } from "react-router-dom";
- 
- 
-class DashJobCard extends Component{
-   
+
+class DashJobCard extends Component {
     // handleClick = () =>{
     //     this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
     //     if(this.state.ShowHidedesc){
@@ -19,9 +17,9 @@ class DashJobCard extends Component{
     //         this.setState({btnContent: 'View Less'});
     //     }
     // }
- 
-    render(){
-        return(
+
+    render() {
+        return (
             <div className="jobCard-container">
                 <Card>
                     <div className="jobCard-content">
@@ -55,17 +53,18 @@ class DashJobCard extends Component{
                         </div>
                         <div className="section-3">
                             <h4 className="lh-25">
-                                Job Type: {' '}
-                                <span className="job-spec">{this.props.type}</span> <span className="job-spec">{this.props.experience} Experience</span>
+                                Job Type: <span className="job-spec">{this.props.type}</span>{" "}
+                                <span className="job-spec">{this.props.experience} Experience</span>
                             </h4>
                             <h4 className="lh-25">
-                                Salary/Stipend: {' '} 
-                                <span className="job-spec">${this.props.salary} + Benefits</span>
+                                Salary/Stipend: <span className="job-spec">${this.props.salary} + Benefits</span>
                             </h4>
                             <h4 className="lh-25">
-                                Skills: {' '} 
-                                <span className="skills"> 
-                                    {this.props.skills.map((skill) => <span className="job-spec">{skill}</span>)}
+                                Skills:{" "}
+                                <span className="skills">
+                                    {this.props.skills.map((skill) => (
+                                        <span className="job-spec">{skill}</span>
+                                    ))}
                                 </span>
                             </h4>
                             <div className="posted-details">
@@ -78,5 +77,5 @@ class DashJobCard extends Component{
         );
     }
 }
- 
-export default DashJobCard
+
+export default DashJobCard;

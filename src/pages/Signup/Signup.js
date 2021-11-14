@@ -37,19 +37,16 @@ const Signup = () => {
                             return alert("Couldn't create account!");
                         }
 
-                        const loginResponse = await fetch(
-                            "https://mace-connect.herokuapp.com/api/v1/auth/login",
-                            {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    email: values.email,
-                                    password: values.password,
-                                }),
-                            }
-                        );
+                        const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                email: values.email,
+                                password: values.password,
+                            }),
+                        });
                         const loginData = await loginResponse.json();
                         if (loginData.success === false) {
                             return alert("Authorization couln't be completed");
@@ -65,28 +62,14 @@ const Signup = () => {
             validationSchema={Yup.object().shape({
                 user: Yup.string().required("Required"),
                 username: Yup.string().required("Required"),
-                email: Yup.string()
-                    .email("Must be a valid email")
-                    .max(255)
-                    .required("Email is required"),
+                email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
 
                 password: Yup.string().required("No password provided."),
-                confirmpassword: Yup.string().oneOf(
-                    [Yup.ref("password"), null],
-                    "Passwords must match"
-                ),
+                confirmpassword: Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match"),
             })}
         >
             {(props) => {
-                const {
-                    values,
-                    touched,
-                    errors,
-                    isSubmitting,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                } = props;
+                const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
                 return (
                     <div className="container Signup">
                         <div className="Signup__heading">MACEBOOK</div>
@@ -112,9 +95,7 @@ const Signup = () => {
                                 </div>
 
                                 {errors.user && touched.user && (
-                                    <div className="Signup__container-white__error-message">
-                                        {errors.user}
-                                    </div>
+                                    <div className="Signup__container-white__error-message">{errors.user}</div>
                                 )}
 
                                 <div className="Signup__container-white__email">
@@ -129,9 +110,7 @@ const Signup = () => {
                                     />
                                 </div>
                                 {errors.email && touched.email && (
-                                    <div className="Signup__container-white__error-message">
-                                        {errors.email}
-                                    </div>
+                                    <div className="Signup__container-white__error-message">{errors.email}</div>
                                 )}
 
                                 <div className="Signup__container-white__username">
@@ -146,9 +125,7 @@ const Signup = () => {
                                     />
                                 </div>
                                 {errors.username && touched.username && (
-                                    <div className="Signup__container-white__error-message">
-                                        {errors.username}
-                                    </div>
+                                    <div className="Signup__container-white__error-message">{errors.username}</div>
                                 )}
 
                                 <div className="Signup__container-white__password">
@@ -163,9 +140,7 @@ const Signup = () => {
                                     />
                                 </div>
                                 {errors.password && touched.password && (
-                                    <div className="Signup__container-white__error-message">
-                                        {errors.password}
-                                    </div>
+                                    <div className="Signup__container-white__error-message">{errors.password}</div>
                                 )}
                                 <div className="Signup__container-white__confirmpass">
                                     <input
@@ -175,11 +150,7 @@ const Signup = () => {
                                         value={values.confirmpassword}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        className={
-                                            errors.confirmpassword &&
-                                            touched.confirmpassword &&
-                                            "error"
-                                        }
+                                        className={errors.confirmpassword && touched.confirmpassword && "error"}
                                     />
                                 </div>
                                 {errors.confirmpassword && touched.confirmpassword && (

@@ -53,11 +53,9 @@
                     width: 73px;
                     height: 41px;
                     margin-top: 0.2rem;
-                    box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2),
-                        1px -1px 2px rgba(191, 191, 191, 0.2),
+                    box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
                         -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
-                        inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-                        inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+                        inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
                     border-radius: 10px;
                     background-color: white;
                     border: none;

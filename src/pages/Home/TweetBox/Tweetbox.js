@@ -26,18 +26,8 @@ class Tweetbox extends Component {
                         <input className="text-field" placeholder="Add a post" />
                     </div>
                     <div className="input-video">
-                        <input
-                            type="image"
-                            src={Camera}
-                            onClick={() => this.openModal()}
-                            className="video-btn"
-                        ></input>
-                        <input
-                            type="image"
-                            src={Video}
-                            onClick={() => this.openModal()}
-                            className="video-btn"
-                        ></input>
+                        <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn"></input>
+                        <input type="image" src={Video} onClick={() => this.openModal()} className="video-btn"></input>
                     </div>
                     <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
                         <h3>Create a post</h3>

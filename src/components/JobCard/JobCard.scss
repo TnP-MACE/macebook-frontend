@@ -1,46 +1,46 @@
 @import "../../assets/sass/main.scss";
 
-.jobCard-content{
+.jobCard-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    h2{
+    h2 {
         font-size: 18px;
         font-style: normal;
         font-weight: 600;
     }
-    h4{
+    h4 {
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
-        &.lh-25{
+        &.lh-25 {
             line-height: 25px;
         }
     }
-    .section-1{
-        img{
+    .section-1 {
+        img {
             width: 90px;
             height: 90px;
-            box-shadow: 2px 2px 5px 2px  	#E2E2E2;
+            box-shadow: 2px 2px 5px 2px #e2e2e2;
             border-radius: 10px;
         }
     }
-    .section-2{
+    .section-2 {
         flex: 4;
         padding-left: 20px;
-        .location{
+        .location {
             font-size: 12px;
             font-weight: 400;
             color: #626262;
         }
-        .btns-container{
+        .btns-container {
             margin: 5px 0px;
             font-size: 14px;
             font-weight: 600;
-            button{
+            button {
                 width: 130px;
             }
-            .btn1{
+            .btn1 {
                 color: #fff;
                 padding: 5px 20px;
                 background-color: #000;
@@ -50,7 +50,7 @@
                 font-size: 14px;
                 font-weight: 500;
             }
-            .btn2{
+            .btn2 {
                 color: #000;
                 padding: 5px 20px;
                 margin-left: 10px;
@@ -63,16 +63,16 @@
             }
         }
     }
-    .section-3{
+    .section-3 {
         flex: 3;
-        span{
+        span {
             font-weight: 400;
             font-size: 11px;
             line-height: 12px;
-            &.job-spec{
+            &.job-spec {
                 padding: 0.2em 2em;
                 margin: 0em 0.25em;
-                background-color:  	#E2E2E2;
+                background-color: #e2e2e2;
                 font-size: 9px;
                 border-radius: 5px;
                 line-height: 9px;
@@ -82,60 +82,59 @@
         }
     }
 }
-.jobCard-desc{
+.jobCard-desc {
     margin-top: 10px;
     margin-left: 5px;
-    h4{
+    h4 {
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
     }
-    p{
+    p {
         font-size: 11px;
         font-weight: 500;
     }
 }
-.posted-details{
+.posted-details {
     width: 100%;
     margin: 5px 0px;
-    p{
+    p {
         text-align: right;
         font-size: 10px;
         font-style: italic;
     }
-    span{
-        &.user{
+    span {
+        &.user {
             color: $color-orange;
         }
     }
 }
 
-
-@media (max-width: 768px){
-    .jobCard-content{
+@media (max-width: 768px) {
+    .jobCard-content {
         flex-direction: column;
-        .btns-container{
+        .btns-container {
             align-items: center;
             justify-content: center;
-            .btn1{
+            .btn1 {
                 margin-left: 0px;
             }
-            .btn2{
+            .btn2 {
                 margin-right: 10px;
                 margin-top: 5px;
             }
         }
-        .section-2{
+        .section-2 {
             margin-bottom: 10px;
         }
-        .section-3{
+        .section-3 {
             width: 100%;
             flex-wrap: wrap;
-            span{
-                &.skills{
+            span {
+                &.skills {
                     display: flex;
                     flex-wrap: wrap;
-                    .job-spec{
+                    .job-spec {
                         margin: 4px 2px;
                     }
                 }
