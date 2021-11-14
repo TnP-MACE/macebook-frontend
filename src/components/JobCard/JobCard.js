@@ -28,7 +28,7 @@ class JobCard extends Component{
     
     handleApply=()=>{
         const id =this.props.id;
-        this.props.history.push(`/jobApplicationForm/?id=${id}`)
+        this.props.history.push(`/job-application-form/?id=${id}`)
     }
     render(){
         return(
