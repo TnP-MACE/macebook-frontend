@@ -26,6 +26,7 @@ const Signup = () => {
                                     "Content-Type": "application/json",
                                 },
                                 body: JSON.stringify({
+                                    type: values.user,
                                     username: values.username,
                                     email: values.email,
                                     password: values.password,
@@ -33,26 +34,11 @@ const Signup = () => {
                             }
                         );
                         const registerData = await registerResponse.json();
+                        console.log(registerData)
                         if (registerData.success === false) {
                             return alert("Couldn't create account!");
                         }
-
-                        const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                email: values.email,
-                                password: values.password,
-                            }),
-                        });
-                        const loginData = await loginResponse.json();
-                        if (loginData.success === false) {
-                            return alert("Authorization couln't be completed");
-                        }
-                        console.log(loginData);
-                        history.push("/complete-profile");
+                        history.push("/login");
                     } catch (e) {
                         console.log(e);
                     }
