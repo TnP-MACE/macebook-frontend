@@ -172,7 +172,7 @@ const Completeprofile = () => {
                         <Header active={"home"} />
                         <div className="Completion">
                             <form onSubmit={handleSubmit}>
-                                <div className="container">
+                                <div className="container Completion__container">
                                     <div className="Completion__cover-container">
                                         <div className="Completion__cover">
                                             <img id="cover-img" className="Completion__cover-file-ico" />
@@ -180,18 +180,20 @@ const Completeprofile = () => {
                                         <div className="Completion__cover-image-btn-container">
                                             <label htmlFor="cover-input" id="cover-input-label">
                                                 <img src={DocImage} />
+                                                <span>Upload Cover Photo</span>
                                             </label>
                                             <input
                                                 className="Completion__cover-btn"
                                                 type="file"
                                                 name="cover"
+                                                accept="image/*"
                                                 value={values.cover}
                                                 onChange={(e) => {
                                                     handleChange(e);
                                                     Cover(e);
                                                 }}
                                                 onBlur={handleBlur}
-                                                style={{ visibility: "hidden" }}
+                                                style={{ display: "none" }}
                                                 id="cover-input"
                                             />
                                         </div>
@@ -212,6 +214,7 @@ const Completeprofile = () => {
                                         <input
                                             type="file"
                                             name="profile"
+                                            accept="image/*"
                                             value={values.profile}
                                             onChange={(e) => {
                                                 handleChange(e);
@@ -232,6 +235,7 @@ const Completeprofile = () => {
                                     <div className="coverchange">
                                         <input
                                             type="file"
+                                            accept="image/*"
                                             values={values.cover}
                                             onChange={(e) => {
                                                 handleChange(e);

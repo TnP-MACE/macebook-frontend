@@ -21,7 +21,7 @@ const ForgotPassword = () => (
         {(props) => {
             const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
             return (
-                <div className="container">
+                <div className="container ForgotPassword">
                     <div className="ForgotPassword__heading">MACEBOOK</div>
 
                     <div className="ForgotPassword__container-white container">
