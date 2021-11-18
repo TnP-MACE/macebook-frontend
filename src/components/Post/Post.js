@@ -12,6 +12,9 @@ class Post extends Component {
         this.state = {
             liked: false,
             likes_count: 0,
+            commentValue: "",
+            commentLine: [{ commentId: "", commentText: "" }],
+            posts: [],
         };
         this.likePost = this.likePost.bind(this);
     }
@@ -27,6 +30,12 @@ class Post extends Component {
         });
         this.setState((prevState) => {
             //likes_count:  (prevState.likes_count==1) ? 0 : 1;
+            // if (prevState.liked) {
+            //     this.setState({ likes_count: prevState.likes_count + 1 });
+            //     console.log(this.likes_count);
+            // } else {
+            //     this.setState({ likes_count: prevState.likes_count - 1 });
+            // }
             if (prevState.likes_count === 1) {
                 this.setState({ likes_count: 0 });
             } else {
@@ -34,6 +43,22 @@ class Post extends Component {
             }
         });
     }
+    handleCommentValue(e) {
+        this.setState({ commentValue: e.target.value });
+    }
+    setCommentLine = () => {
+        this.setState({
+            commentLine: [...this.state.commentLine, { text: this.state.commentValue }],
+            commentValue: "",
+        });
+    };
+    submitCommentValue = (e) => {
+        e.preventDefault();
+        this.setCommentLine();
+    };
+    enterCommentLine = (e) => {
+        this.setCommentLine();
+    };
     render() {
         return (
             <div className="home-posts-container">
@@ -92,7 +117,16 @@ class Post extends Component {
                 </div>
                 <div className="home-posts-comment">
                     <img src={this.props.profilepic} alt="Profilepic"></img>
-                    <input type="text" placeholder="Add a comment" className="comment-input-field"></input>
+                    <input
+                        type="text"
+                        placeholder="Add a comment"
+                        className="comment-input-field"
+                        onChange={(e) => this.handleCommentValue(e)}
+                        value={this.commentValue}
+                    ></input>
+                    <button className="comment-post-btn" onClick={(e) => this.submitCommentValue()}>
+                        Post
+                    </button>
                 </div>
                 <div className="load-comments">
                     <Link to="./" className="comments-loader">

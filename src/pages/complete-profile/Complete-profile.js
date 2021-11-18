@@ -101,7 +101,7 @@ const Completeprofile = () => {
             onSubmit={(values, { setSubmitting }) => {
                 //console.log(values);
                 const skillData = sessionStorage.getItem("skills");
-                let skills = ["css","javascript"];
+                let skills = ["css", "javascript"];
                 if (skillData) {
                     skills = JSON.parse(skillData);
                 }
@@ -109,8 +109,8 @@ const Completeprofile = () => {
                 //console.log(skills);
                 const skData = sk.map((s) => s.value);
                 const data = { ...values, skills: skData };
-                console.log(data)
-                 const accomplishment =[]
+                console.log(data);
+                const accomplishment = [];
                 const finaldata = {
                     fullname: data.fullname,
                     admission: {
@@ -130,23 +130,24 @@ const Completeprofile = () => {
                     ref_email: data.remail,
                     ref_phonenumber: data.rphno,
                     skills: data.skills,
-                    accomplishments: accomplishment
+                    accomplishments: accomplishment,
                 };
                 console.log(finaldata);
-                const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGluYXZAamF2YS5jb20iLCJpYXQiOjE2MzcyNDczNzMsImV4cCI6MTYzNzMzMzc3M30.EdzplDAyconnyhFk_4w9Kxdv-vpveuZqDNhaQwyzCsw";
+                const token =
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGluYXZAamF2YS5jb20iLCJpYXQiOjE2MzcyNDczNzMsImV4cCI6MTYzNzMzMzc3M30.EdzplDAyconnyhFk_4w9Kxdv-vpveuZqDNhaQwyzCsw";
                 const asyncFunc = async () => {
                     try {
+                        const token =
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
                             {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    "Authorization":`Bearer ${token}`
+                                    Authorization: `Bearer ${token}`,
                                 },
-                                body: JSON.stringify(
-                                    finaldata
-                                ),
+                                body: JSON.stringify(finaldata),
                             }
                         );
                         const completeprofiledata = await Completeprofileresponse.json();
