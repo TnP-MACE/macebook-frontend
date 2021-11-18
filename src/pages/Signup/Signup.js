@@ -50,7 +50,9 @@ const Signup = () => {
                 username: Yup.string().required("Required"),
                 email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
 
-                password: Yup.string().required("No password provided."),
+                password: Yup.string()
+                          .required("No password provided.")
+                          .min(8, 'Must be more than 8 digits'),
                 confirmpassword: Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match"),
             })}
         >

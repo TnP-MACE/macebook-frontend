@@ -101,15 +101,16 @@ const Completeprofile = () => {
             onSubmit={(values, { setSubmitting }) => {
                 //console.log(values);
                 const skillData = sessionStorage.getItem("skills");
-                let skills = [];
+                let skills = ["css","javascript"];
                 if (skillData) {
                     skills = JSON.parse(skillData);
                 }
                 const sk = skills[skills.length - 1];
+                //console.log(skills);
                 const skData = sk.map((s) => s.value);
                 const data = { ...values, skills: skData };
-                //console.log(data)
-
+                console.log(data)
+                 const accomplishment =[]
                 const finaldata = {
                     fullname: data.fullname,
                     admission: {
@@ -129,9 +130,10 @@ const Completeprofile = () => {
                     ref_email: data.remail,
                     ref_phonenumber: data.rphno,
                     skills: data.skills,
+                    accomplishments: accomplishment
                 };
                 console.log(finaldata);
-
+                const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGluYXZAamF2YS5jb20iLCJpYXQiOjE2MzcyNDczNzMsImV4cCI6MTYzNzMzMzc3M30.EdzplDAyconnyhFk_4w9Kxdv-vpveuZqDNhaQwyzCsw";
                 const asyncFunc = async () => {
                     try {
                         const Completeprofileresponse = await fetch(
@@ -140,15 +142,16 @@ const Completeprofile = () => {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    "Authorization":`Bearer ${window.localStorage.getItem('token')}`
+                                    "Authorization":`Bearer ${token}`
                                 },
-                                body: JSON.stringify({
-                                    finaldata,
-                                }),
+                                body: JSON.stringify(
+                                    finaldata
+                                ),
                             }
                         );
                         const completeprofiledata = await Completeprofileresponse.json();
                         console.log(completeprofiledata);
+                        console.log(token);
                     } catch (e) {
                         console.log(e);
                     }
