@@ -134,13 +134,15 @@ const Completeprofile = () => {
 
                 const asyncFunc = async () => {
                     try {
+                        const token =
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
                             {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    "Authorization":`Bearer ${window.localStorage.getItem('token')}`
+                                    Authorization: `Bearer ${token}`,
                                 },
                                 body: JSON.stringify({
                                     finaldata,

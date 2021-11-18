@@ -13,57 +13,53 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: [
-                {
-                    poster: "Ruben Lubin",
-                    posterprofile: profilepic,
-                    designation: "poster designation",
-                    content:
-                        "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
-                    hashtags: "#Hashtags   #lorem_epsum",
-                    image: postImg,
-                    likes: "3k",
-                    comments: "1k",
-                    profilepic: profilepic,
-                },
-                {
-                    poster: "Ruben Lubin",
-                    posterprofile: profilepic,
-                    designation: "poster designation",
-                    content:
-                        "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
-                    hashtags: "#Hashtags   #lorem_epsum",
-                    image: postImg,
-                    likes: "3k",
-                    comments: "1k",
-                    profilepic: profilepic,
-                },
-                {
-                    poster: "Ruben Lubin",
-                    posterprofile: profilepic,
-                    designation: "poster designation",
-                    content:
-                        "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
-                    hashtags: "#Hashtags   #lorem_epsum",
-                    image: postImg,
-                    likes: "3k",
-                    comments: "1k",
-                    profilepic: profilepic,
-                },
-                {
-                    poster: "Ruben Lubin",
-                    posterprofile: profilepic,
-                    designation: "poster designation",
-                    content:
-                        "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum ",
-                    hashtags: "#Hashtags   #lorem_epsum",
-                    image: postImg,
-                    likes: "3k",
-                    comments: "1k",
-                    profilepic: profilepic,
-                },
-            ],
+            postImg: postImg,
+            designation: "SDE I at Amazon",
+            profilepic: profilepic,
+            posts: [],
+            profile: [],
         };
+    }
+    // fetchUpcoming() {
+    //     fetch("https://mace-connect.herokuapp.com/api/v1/posts")
+    //         .then((response) => response.json())
+    //         .then((data) =>
+    //             this.setState({
+    //                 posts: data.results,
+    //             })
+    //         );
+    // };
+
+    fetchUpcoming = async () => {
+        try {
+            const token =
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
+            let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            let response2 = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            let responseJson = await response.json();
+            let resJson = await response2.json();
+            return this.setState({
+                posts: responseJson,
+                profile: resJson,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    //ABcd@12345678910
+    componentDidMount() {
+        this.fetchUpcoming();
     }
 
     render() {
@@ -81,19 +77,20 @@ class Home extends Component {
                             <div className="tweetbox-container">
                                 <Tweetbox></Tweetbox>
                             </div>
+
                             {this.state.posts.map((e) => {
                                 return (
                                     <Card>
                                         <Post
-                                            poster={e.poster}
-                                            posterprofile={e.profilepic}
-                                            designation={e.designation}
-                                            content={e.content}
+                                            poster={this.state.profile.username}
+                                            posterprofile={this.state.profilepic}
+                                            designation={this.state.designation}
+                                            content={e.text}
                                             hashtags={e.hashtags}
-                                            image={e.image}
+                                            image={this.state.postImg}
                                             likes={e.likes}
                                             comments={e.comments}
-                                            profilepic={e.profilepic}
+                                            profilepic={this.state.profilepic}
                                         ></Post>
                                     </Card>
                                 );

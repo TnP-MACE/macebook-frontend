@@ -141,6 +141,11 @@
             width: 80rem;
             outline: none;
         }
+        .comment-post-btn {
+            margin-left: -15%;
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+        }
     }
     .load-comments {
         margin-left: $margin-sm;
