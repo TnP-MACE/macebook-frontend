@@ -32,8 +32,7 @@ class Home extends Component {
 
     fetchUpcoming = async () => {
         try {
-            const token =
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
+            const token = window.localStorage.getItem("token");
             let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
                 method: "GET",
                 headers: {

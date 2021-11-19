@@ -12,8 +12,11 @@ import profilepic from "../../assets/images/icons/profile.jpg";
 import Select from "react-select";
 import { useState } from "react";
 import DocImage from "../../assets/images/icons/Doc.svg";
+import { useHistory } from "react-router";
 
 const Completeprofile = () => {
+    const history = useHistory();
+
     const Profile = () => {
         const element = document.getElementById("profile-input");
         const file = element.files[0];
@@ -99,7 +102,6 @@ const Completeprofile = () => {
                 rphno: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
-                //console.log(values);
                 const skillData = sessionStorage.getItem("skills");
                 let skills = ["css", "javascript"];
                 if (skillData) {
@@ -132,13 +134,9 @@ const Completeprofile = () => {
                     skills: data.skills,
                     accomplishments: accomplishment,
                 };
-                console.log(finaldata);
-                const token =
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGluYXZAamF2YS5jb20iLCJpYXQiOjE2MzcyNDczNzMsImV4cCI6MTYzNzMzMzc3M30.EdzplDAyconnyhFk_4w9Kxdv-vpveuZqDNhaQwyzCsw";
                 const asyncFunc = async () => {
                     try {
-                        const token =
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
+                        const token = window.localStorage.getItem("token");
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
                             {
@@ -151,8 +149,9 @@ const Completeprofile = () => {
                             }
                         );
                         const completeprofiledata = await Completeprofileresponse.json();
-                        console.log(completeprofiledata);
-                        console.log(token);
+                        if (completeprofiledata.success) {
+                            history.push("/");
+                        }
                     } catch (e) {
                         console.log(e);
                     }

@@ -28,9 +28,9 @@ const Login = () => {
                             }),
                         });
 
-                        // if(loginResponse.status != 200 && loginResponse.status != 201){
-                        //     return alert("Couldn't login!")
-                        // }
+                        if (loginResponse.status != 201) {
+                            return alert("Couldn't login!");
+                        }
 
                         const loginData = await loginResponse.json();
                         // if( loginData.statusCode != 200){
@@ -41,6 +41,7 @@ const Login = () => {
 
                         const token = loginData.access_token;
                         window.localStorage.setItem("token", token);
+                        window.localStorage.setItem("isAuthenticated", "true");
                         history.push("/complete-profile");
                     } catch (e) {
                         // alert("Couldn't sign you in! Try again");
