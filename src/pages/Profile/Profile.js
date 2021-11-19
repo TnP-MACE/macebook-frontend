@@ -23,75 +23,102 @@ import arrow from "../../assets/images/icons/arrow.png";
 import clogo from "../../assets/images/icons/company-logo.png";
 
 class Profile extends Component {
-    state = {
-        username: "John Doe",
-        cover: { cover },
-        profileimg: { profileimg },
-        position: "Senior SWE at Apple Inc.",
-        location: "San Fransisco, CA",
-        batch: 14,
-        dept: "CSE",
-        conn: 2000,
-        self: true,
-        skills: ["HTML", "CSS", "REACTJS", "NodeJS"],
-        posts: [
-            {
-                poster: "Ruben Lubin",
-                posterprofile: { profilepic },
-                designation: "poster designation",
-                content:
-                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
-                hashtags: "#Hashtags   #lorem_epsum",
-                image: { postImg },
-                likes: "3k",
-                comments: "1k",
-                profilepic: { profilepic },
-            },
-            {
-                poster: "Ruben Lubin",
-                posterprofile: { profilepic },
-                designation: "poster designation",
-                content:
-                    "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
-                hashtags: "#Hashtags   #lorem_epsum",
-                image: { postImg },
-                likes: "3k",
-                comments: "1k",
-                profilepic: { profilepic },
-            },
-        ],
-        exp: [
-            {
-                logo: { clogo },
-                name: "Apple Inc",
-                duration: "Oct 2019- Current",
-                type: "Fulltime",
-                position: "Senior Software Engineer",
-                desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
-            },
-            {
-                logo: { clogo },
-                name: "Apple Inc",
-                duration: "Oct 2019- Current",
-                type: "Fulltime",
-                position: "Senior Software Engineer",
-                desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
-            },
-            {
-                logo: { clogo },
-                name: "Apple Inc",
-                duration: "Oct 2019- Current",
-                type: "Fulltime",
-                position: "Senior Software Engineer",
-                desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
-            },
-        ],
-        acc: [
-            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
-            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
-            "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
-        ],
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "John Doe",
+            cover: { cover },
+            profileimg: { profileimg },
+            position: "Senior SWE at Apple Inc.",
+            location: "San Fransisco, CA",
+            batch: 14,
+            dept: "CSE",
+            conn: 2000,
+            self: true,
+            skills: ["HTML", "CSS", "REACTJS", "NodeJS"],
+            email: "dohndoe@email.com",
+            posts: [],
+            exp: [
+                {
+                    logo: { clogo },
+                    name: "Apple Inc",
+                    duration: "Oct 2019- Current",
+                    type: "Fulltime",
+                    position: "Senior Software Engineer",
+                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+                },
+                {
+                    logo: { clogo },
+                    name: "Apple Inc",
+                    duration: "Oct 2019- Current",
+                    type: "Fulltime",
+                    position: "Senior Software Engineer",
+                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+                },
+                {
+                    logo: { clogo },
+                    name: "Apple Inc",
+                    duration: "Oct 2019- Current",
+                    type: "Fulltime",
+                    position: "Senior Software Engineer",
+                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+                },
+            ],
+            acc: [
+                "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+                "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
+            ],
+        };
+    }
+
+    componentDidMount() {
+        const asyncFunc = async () => {
+            try {
+                const token =
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
+                let userResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const userData = await userResponse.json();
+                console.log(userData);
+                this.setState((prev) => {
+                    return {
+                        ...prev,
+                        username: userData.username,
+                        email: userData.email,
+                    };
+                });
+
+                let postsResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const postsData = await postsResponse.json();
+                console.log(postsData);
+                this.setState((prev) => {
+                    return {
+                        ...prev,
+                        posts: postsData.slice(1, 3),
+                    };
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        asyncFunc();
+    }
+
+    componentDidUpdate() {
+        console.log(this.state);
+    }
 
     render() {
         return (
@@ -197,56 +224,32 @@ class Profile extends Component {
                             <div className="profile-posts-section">
                                 <h2>My Posts</h2>
                                 <div className="profile-postContainer">
-                                    {this.state.posts.map((post) => (
-                                        <div className="profile-post">
-                                            <Card>
-                                                <ProfilePost
-                                                    poster={post.poster}
-                                                    posterprofile={profilepic}
-                                                    designation={post.designation}
-                                                    content={post.content}
-                                                    hashtags={post.hashtags}
-                                                    image={postImg}
-                                                    likes={post.likes}
-                                                    comments={post.comments}
-                                                    profilepic={profilepic}
-                                                ></ProfilePost>
-                                            </Card>
-                                        </div>
-                                    ))}
-                                    {/* <div className="profile-post">
-                      <Card>
-                        <ProfilePost 
-                          poster="Ruben Lubin"
-                          posterprofile={profilepic}
-                          designation="poster designation"
-                          content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
-                          hashtags="#Hashtags   #lorem_epsum"
-                          image={postImg}
-                          likes="3k"
-                          comments="1k"
-                          profilepic={profilepic}></ProfilePost>
-                      </Card>
-                    </div>
-                    <div className="profile-post">
-                      <Card>
-                        <ProfilePost 
-                          poster="Ruben Lubin"
-                          posterprofile={profilepic}
-                          designation="poster designation"
-                          content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum"
-                          hashtags="#Hashtags   #lorem_epsum"
-                          image={postImg}
-                          likes="3k"
-                          comments="1k"
-                          profilepic={profilepic}></ProfilePost>
-                      </Card>
-                    </div> */}
-                                    <Link to="/posts">
-                                        <div className="arrow">
-                                            <img src={arrow} alt="View Posts"></img>
-                                        </div>
-                                    </Link>
+                                    {this.state.posts.length != 0 && (
+                                        <>
+                                            {this.state.posts.map((post) => (
+                                                <div className="profile-post">
+                                                    <Card>
+                                                        <ProfilePost
+                                                            poster={post.poster}
+                                                            posterprofile={profilepic}
+                                                            designation={post.designation}
+                                                            content={post.text}
+                                                            hashtags={post.hashtags}
+                                                            image={postImg}
+                                                            likes={post.likes}
+                                                            comments={post.comments}
+                                                            profilepic={profilepic}
+                                                        ></ProfilePost>
+                                                    </Card>
+                                                </div>
+                                            ))}
+                                            <Link to="/posts">
+                                                <div className="arrow">
+                                                    <img src={arrow} alt="View Posts"></img>
+                                                </div>
+                                            </Link>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                             <div className="profile-experience">
@@ -266,30 +269,6 @@ class Profile extends Component {
                                         desc={exp.desc}
                                     />
                                 ))}
-                                {/* <Experience 
-                  logo={clogo}
-                  name="Apple Inc" 
-                  duration="Oct 2019- Current"
-                  type="Fulltime"
-                  position="Senior Software Engineer"
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
-                />
-                <Experience 
-                  logo={clogo}
-                  name="Apple Inc" 
-                  duration="Oct 2019- Current"
-                  type="Fulltime"
-                  position="Senior Software Engineer"
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
-                />
-                <Experience 
-                  logo={clogo}
-                  name="Apple Inc" 
-                  duration="Oct 2019- Current"
-                  type="Fulltime"
-                  position="Senior Software Engineer"
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
-                /> */}
                             </div>
                             <div className="profile-accom">
                                 <div className="section-headers">
@@ -302,9 +281,6 @@ class Profile extends Component {
                                     {this.state.acc.map((acc) => (
                                         <span className="acc-data">{acc}</span>
                                     ))}
-                                    {/* <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                  <span className="acc-data">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> */}
                                 </div>
                             </div>
                             <div className="profile-contact">
@@ -317,7 +293,7 @@ class Profile extends Component {
                                 <div className="contact-section">
                                     <div className="contact-content">
                                         <img src={mail} alt="mail"></img>
-                                        <p>johndoe@email.com</p>
+                                        <p>{this.state.email}</p>
                                     </div>
                                     <div className="contact-content">
                                         <img src={phone} alt="mail"></img>

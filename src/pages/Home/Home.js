@@ -87,7 +87,7 @@ class Home extends Component {
                                             designation={this.state.designation}
                                             content={e.text}
                                             hashtags={e.hashtags}
-                                            image={this.state.postImg}
+                                            image="https://picsum.photos/seed/picsum/200/"
                                             likes={e.likes}
                                             comments={e.comments}
                                             profilepic={this.state.profilepic}
