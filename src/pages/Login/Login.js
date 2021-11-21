@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "./Login.scss";
 //import React from "react";
 import { Formik } from "formik";
@@ -6,15 +6,22 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 //import Google from "../../assets/images/icons/Google.svg";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../auth/AuthContext";
 
 import { Link } from "react-router-dom";
 const Login = () => {
     const history = useHistory();
+    const { dispatch, state } = React.useContext(AuthContext);
+    const [stateData, setStateData] = useState({
+        isSubmitting: false,
+        isLoading: true,
+    });
 
     return (
         <Formik
             initialValues={{ username: "", password: "" }}
             onSubmit={(values, { setSubmitting }) => {
+                setStateData((prev) => ({ ...prev, isSubmitting: true }));
                 const asyncFunc = async () => {
                     try {
                         const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
@@ -33,18 +40,25 @@ const Login = () => {
                         }
 
                         const loginData = await loginResponse.json();
-                        // if( loginData.statusCode != 200){
-                        //     return alert(`Unable to login!${loginData.statusCode}`);
-                        //     //console.log(loginData.statusCode);
-                        // }
                         console.log(loginData);
-
-                        const token = loginData.access_token;
-                        window.localStorage.setItem("token", token);
-                        window.localStorage.setItem("isAuthenticated", "true");
+                        const payload = {
+                            user: {
+                                email: loginData.email,
+                                username: loginData.username,
+                            },
+                            token: loginData.access_token,
+                        };
+                        dispatch({
+                            type: "LOGIN",
+                            payload: payload,
+                        });
+                        // const token = loginData.access_token;
+                        // window.localStorage.setItem("token", token);
+                        setStateData((prev) => ({ ...prev, isSubmitting: false }));
                         history.push("/complete-profile");
                     } catch (e) {
                         // alert("Couldn't sign you in! Try again");
+                        setStateData((prev) => ({ ...prev, isSubmitting: false }));
                         console.log(e);
                     }
                 };
@@ -105,7 +119,9 @@ const Login = () => {
                                 </div>
 
                                 <div>
-                                    <button type="submit">Sign in</button>
+                                    <button type="submit" disabled={stateData.isSubmitting}>
+                                        {stateData.isSubmitting && "loading..."}Sign in
+                                    </button>
                                 </div>
                                 <div className="Login__container-white__create">
                                     <Link to="/signup">Create an Account</Link>

@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -7,48 +8,40 @@ import NoMatch from "./pages/NoMatch/NoMatch";
 import Profile from "./pages/Profile/Profile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Signup from "./pages/Signup/Signup";
-import CompleteProfile from "./pages/complete-profile/Complete-profile";
+import CompleteProfile from "./pages/complete-profile/CompleteProfile";
 import Jobs from "./pages/Jobs/Jobs";
 import JobApplicationForm from "./pages/JobApplicationForm/JobApplicationForm";
 import Posts from "./pages/Posts/Posts";
 import Settings from "./pages/Settings/Settings";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "../src/auth/privateRoute";
-import isAuthenticated from "../src/auth/isAuthenticated";
+import AuthProvider from "./auth/AuthProvider";
 
 function App() {
     return (
-        <div>
-            <Helmet>
-                <title>Macebook</title>
-            </Helmet>
-            <Router>
-                <Switch>
-                    <Route exact path="/login" component={Login} />
-                    <PrivateRoute exact authed={isAuthenticated()} path={["/", "/index", "/home"]} component={Home} />
-                    <PrivateRoute exact authed={isAuthenticated()} path="/profile" component={Profile} />
-                    <PrivateRoute exact authed={isAuthenticated()} path="/jobs" component={Jobs} />
-                    <PrivateRoute exact authed={isAuthenticated()} path="/settings" component={Settings} />
-                    <PrivateRoute exact authed={isAuthenticated()} path="/posts" component={Posts} />
-                    <PrivateRoute
-                        exact
-                        authed={isAuthenticated()}
-                        path="/job-application-form"
-                        component={JobApplicationForm}
-                    />
-                    <Route exact path="/forgot-password" component={ForgotPassword} />
-                    <Route exact path="/signup" component={Signup} />
-                    <PrivateRoute
-                        exact
-                        authed={isAuthenticated()}
-                        path="/complete-profile"
-                        component={CompleteProfile}
-                    />
-                    <PrivateRoute exact authed={isAuthenticated()} path="/dashboard" component={Dashboard} />
-                    <Route path="*" component={NoMatch} />
-                </Switch>
-            </Router>
-        </div>
+        <AuthProvider>
+            <div>
+                <Helmet>
+                    <title>Macebook</title>
+                </Helmet>
+                <Router>
+                    <Switch>
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path={["/", "/index", "/home"]} component={Home} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/jobs" component={Jobs} />
+                        <Route exact path="/settings" component={Settings} />
+                        <Route exact path="/posts" component={Posts} />
+                        <Route exact path="/job-application-form" component={JobApplicationForm} />
+                        <Route exact path="/forgot-password" component={ForgotPassword} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/complete-profile" component={CompleteProfile} />
+                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route path="*" component={NoMatch} />
+                    </Switch>
+                </Router>
+            </div>
+        </AuthProvider>
     );
 }
 

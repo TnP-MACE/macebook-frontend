@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Completeprofile.scss";
+import React, { Component, useEffect } from "react";
+import "./CompleteProfile.scss";
 //import React from "react";
 import { Formik, Field } from "formik";
 //import * as EmailValidator from "email-validator";
@@ -12,10 +12,14 @@ import profilepic from "../../assets/images/icons/profile.jpg";
 import Select from "react-select";
 import { useState } from "react";
 import DocImage from "../../assets/images/icons/Doc.svg";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const Completeprofile = () => {
     const history = useHistory();
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [changeCoverActive, setChangeCoverActive] = useState(false);
 
     const Profile = () => {
         const element = document.getElementById("profile-input");
@@ -39,9 +43,10 @@ const Completeprofile = () => {
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
-        document.getElementById("cover-input").style.display = "none";
-        document.getElementById("cover-change-label").style.display = "";
-        document.getElementById("cover-input-label").style.display = "none";
+        setChangeCoverActive(true);
+        // document.getElementById("cover-input").style.display = "none";
+        // document.getElementById("cover-change-label").style.display = "";
+        // document.getElementById("cover-input-label").style.display = "none";
     };
     const Coverchange = () => {
         const element = document.getElementById("cover-input-change");
@@ -53,7 +58,7 @@ const Completeprofile = () => {
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
-        document.getElementById("cover-input").style.display = "none";
+        // document.getElementById("cover-input").style.display = "none";
     };
 
     function CustomSelect({ label, options, onChange, defaultValue, isMulti }) {
@@ -81,6 +86,25 @@ const Completeprofile = () => {
         sessionStorage.setItem("skills", JSON.stringify(skills));
     }
 
+    // useEffect(() => {
+    //     const asyncFunc = async () => {
+    //         const token = window.localStorage.getItem("token");
+    //         const response = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
+    //             method: "GET",
+    //             headers: {
+    //                 Authorization: "Bearer " + token,
+    //             },
+    //         });
+    //         const data = await response.json();
+    //         setUsername(data.username);
+    //         setEmail(data.email);
+    //     };
+    //     asyncFunc();
+    // }, []);
+
+    const phoneRegExp =
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
     return (
         <Formik
             initialValues={{
@@ -103,13 +127,18 @@ const Completeprofile = () => {
             }}
             onSubmit={(values, { setSubmitting }) => {
                 const skillData = sessionStorage.getItem("skills");
-                let skills = ["css", "javascript"];
+                let skills = [
+                    [
+                        { label: "css", value: "css" },
+                        { label: "Javascript", value: "js" },
+                    ],
+                ];
                 if (skillData) {
                     skills = JSON.parse(skillData);
                 }
                 const sk = skills[skills.length - 1];
-                //console.log(skills);
                 const skData = sk.map((s) => s.value);
+                console.log(skData);
                 const data = { ...values, skills: skData };
                 console.log(data);
                 const accomplishment = [];
@@ -150,7 +179,10 @@ const Completeprofile = () => {
                         );
                         const completeprofiledata = await Completeprofileresponse.json();
                         if (completeprofiledata.success) {
-                            history.push("/");
+                            window.localStorage.setItem("profile-completed", true);
+                            if (completeprofiledata.success) {
+                                history.push("/");
+                            }
                         }
                     } catch (e) {
                         console.log(e);
@@ -159,11 +191,10 @@ const Completeprofile = () => {
                 asyncFunc();
             }}
             validationSchema={Yup.object().shape({
-                username: Yup.string().required("Required"),
+                // username: Yup.string().required("Required"),
                 fullname: Yup.string().required("Required"),
-                email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
-
-                phno: Yup.string().required("Required."),
+                // email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
+                phno: Yup.string().required("Required.").matches(phoneRegExp, "Phone number is not valid"),
                 branch: Yup.string().required("Required"),
                 batch: Yup.string().required("Required"),
                 addmiss: Yup.string().required("Required"),
@@ -181,26 +212,28 @@ const Completeprofile = () => {
                                         <div className="Completion__cover">
                                             <img id="cover-img" className="Completion__cover-file-ico" />
                                         </div>
-                                        <div className="Completion__cover-image-btn-container">
-                                            <label htmlFor="cover-input" id="cover-input-label">
-                                                <img src={DocImage} />
-                                                <span>Upload Cover Photo</span>
-                                            </label>
-                                            <input
-                                                className="Completion__cover-btn"
-                                                type="file"
-                                                name="cover"
-                                                accept="image/*"
-                                                value={values.cover}
-                                                onChange={(e) => {
-                                                    handleChange(e);
-                                                    Cover(e);
-                                                }}
-                                                onBlur={handleBlur}
-                                                style={{ display: "none" }}
-                                                id="cover-input"
-                                            />
-                                        </div>
+                                        {changeCoverActive || (
+                                            <div className="Completion__cover-image-btn-container">
+                                                <label htmlFor="cover-input" id="cover-input-label">
+                                                    <img src={DocImage} />
+                                                    <span>Upload Cover Photo</span>
+                                                </label>
+                                                <input
+                                                    className="Completion__cover-btn"
+                                                    type="file"
+                                                    name="cover"
+                                                    accept="image/*"
+                                                    value={values.cover}
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        Cover(e);
+                                                    }}
+                                                    onBlur={handleBlur}
+                                                    style={{ display: "none" }}
+                                                    id="cover-input"
+                                                />
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="Completion__profile-picture-container">
@@ -229,27 +262,27 @@ const Completeprofile = () => {
                                             style={{ visibility: "hidden" }}
                                         />
                                     </div>
-                                    <label
-                                        htmlFor="cover-input-change"
-                                        style={{ display: "none", float: "right" }}
-                                        id="cover-change-label"
-                                    >
-                                        <span>Change cover photo</span>
-                                    </label>
-                                    <div className="coverchange">
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            values={values.cover}
-                                            onChange={(e) => {
-                                                handleChange(e);
-                                                Coverchange(e);
-                                            }}
-                                            onBlur={handleBlur}
-                                            id="cover-input-change"
-                                            style={{ visibility: "hidden" }}
-                                        />
-                                    </div>
+                                    {changeCoverActive && (
+                                        <div className="cover-input-change-container">
+                                            <label htmlFor="cover-input-change" id="cover-change-label">
+                                                <span>Change cover photo</span>
+                                            </label>
+                                            <div className="coverchange">
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    values={values.cover}
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        Coverchange(e);
+                                                    }}
+                                                    onBlur={handleBlur}
+                                                    id="cover-input-change"
+                                                    style={{ visibility: "hidden", position: "absolute" }}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
                                     <div className="Completion__fields-container">
                                         <div className="Completion__fields-container">
                                             <h3 className="Completion__subtitle">Bio</h3>
@@ -258,7 +291,7 @@ const Completeprofile = () => {
                                                 className="Completion__bio"
                                                 type="textarea"
                                                 name="bio"
-                                                value={values.confirmpassword}
+                                                value={values.bio}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
@@ -271,12 +304,13 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="username"
-                                                        value={values.confirmpassword}
+                                                        value={username}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        disabled={true}
                                                     />
                                                     {errors.username && touched.username && (
-                                                        <div>{errors.username}</div>
+                                                        <div className="Completion__error-msg">{errors.username}</div>
                                                     )}
                                                 </div>
 
@@ -286,12 +320,12 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="fullname"
-                                                        value={values.confirmpassword}
+                                                        value={values.fullname}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
                                                     />
                                                     {errors.fullname && touched.fullname && (
-                                                        <div>{errors.fullname}</div>
+                                                        <div className="Completion__error-msg">{errors.fullname}</div>
                                                     )}
                                                 </div>
                                             </div>
@@ -302,11 +336,14 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="email"
-                                                        value={values.confirmpassword}
+                                                        value={email}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        disabled={true}
                                                     />
-                                                    {errors.email && touched.email && <div>{errors.email}</div>}
+                                                    {errors.email && touched.email && (
+                                                        <div className="Completion__error-msg">{errors.email}</div>
+                                                    )}
                                                 </div>
 
                                                 <div className="Completion__form-group">
@@ -315,11 +352,13 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="phno"
-                                                        value={values.confirmpassword}
+                                                        value={values.phno}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
                                                     />
-                                                    {errors.phno && touched.phno && <div>{errors.phno}</div>}
+                                                    {errors.phno && touched.phno && (
+                                                        <div className="Completion__error-msg">{errors.phno}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -328,15 +367,26 @@ const Completeprofile = () => {
                                             <div className="Completion__row">
                                                 <div className="Completion__form-group">
                                                     <label>Branch</label>
+                                                    {/* <select className="Completion__form-input" name="branch" onChange={handleChange} onBlur={handleBlur}>
+                                                        <option>CSE</option>
+                                                        <option>Mech</option>
+                                                        <option>Civil</option>
+                                                        <option>EC</option>
+                                                        <option>EEE</option>
+                                                        <option>DS</option>
+                                                    </select> */}
                                                     <input
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="branch"
-                                                        value={values.confirmpassword}
+                                                        value={values.branch}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        placeholder="ECE, CSE, Mech"
                                                     />
-                                                    {errors.branch && touched.branch && <div>{errors.branch}</div>}
+                                                    {errors.branch && touched.branch && (
+                                                        <div className="Completion__error-msg">{errors.branch}</div>
+                                                    )}
                                                 </div>
 
                                                 <div className="Completion__form-group">
@@ -345,11 +395,14 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="batch"
-                                                        value={values.confirmpassword}
+                                                        value={values.batch}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
+                                                        placeholder="2018, 2020, 2023"
                                                     />
-                                                    {errors.batch && touched.batch && <div>{errors.batch}</div>}
+                                                    {errors.batch && touched.batch && (
+                                                        <div className="Completion__error-msg">{errors.batch}</div>
+                                                    )}
                                                 </div>
 
                                                 <div className="Completion__form-group">
@@ -358,11 +411,13 @@ const Completeprofile = () => {
                                                         type="text"
                                                         className="Completion__form-input"
                                                         name="addmiss"
-                                                        value={values.confirmpassword}
+                                                        value={values.addmiss}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
                                                     />
-                                                    {errors.addmiss && touched.addmiss && <div>{errors.addmiss}</div>}
+                                                    {errors.addmiss && touched.addmiss && (
+                                                        <div className="Completion__error-msg">{errors.addmiss}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -389,9 +444,10 @@ const Completeprofile = () => {
                                                             type="text"
                                                             className="Completion__form-input"
                                                             name="link"
-                                                            value={values.confirmpassword}
+                                                            value={values.link}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
+                                                            placeholder="https://linkedin.com/in/johndoe"
                                                         />
                                                     </div>
 
@@ -401,9 +457,10 @@ const Completeprofile = () => {
                                                             type="text"
                                                             className="Completion__form-input"
                                                             name="insta"
-                                                            value={values.confirmpassword}
+                                                            value={values.insta}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
+                                                            placeholder="https://instagram.com/johndoe"
                                                         />
                                                     </div>
 
@@ -413,9 +470,10 @@ const Completeprofile = () => {
                                                             type="text"
                                                             className="Completion__form-input"
                                                             name="twitter"
-                                                            value={values.confirmpassword}
+                                                            value={values.twitter}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
+                                                            placeholder="https://twitter.com/johndoe"
                                                         />
                                                     </div>
                                                 </div>
@@ -427,23 +485,23 @@ const Completeprofile = () => {
                             <div className="Completion__form-group">
                                 <label>Full Name</label>
                                 <input type="text" className="Completion__form-input" />
-                            </div>
+                                </div>
 
                             <div className="Completion__form-group">
                                 <label>Email</label>
                                 <input type="text" className="Completion__form-input" />
                             </div>
-                        </div>
-                        <div className="Completion__row">
+                            </div>
+                            <div className="Completion__row">
                             <div className="Completion__form-group">
-                                <label>Phone Number</label>
-                                <input type="text" className="Completion__form-input" />
+                            <label>Phone Number</label>
+                            <input type="text" className="Completion__form-input" />
                             </div>
                             <div className="Completion__form-group Completion__hidden">
                                 <input type="text" />
-                            </div>
-                        </div>
-                        <button type="submit">Add</button> */}
+                                </div>
+                                </div>
+                            <button type="submit">Add</button> */}
                                         </div>
                                         <button type="submit" className="Completion__submit-btn">
                                             Go to Feed

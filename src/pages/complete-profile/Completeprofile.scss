@@ -120,6 +120,8 @@
     &__profile-picture {
         height: 8rem;
         border-radius: 50%;
+        width: 128px;
+        height: 128px;
     }
 
     &__profile-picture-btn {
@@ -154,7 +156,7 @@
     }
 
     &__fields-container {
-        margin-top: -3rem;
+        // margin-top: -3rem;
     }
 
     &__skills-container {
@@ -190,5 +192,24 @@
         margin: 3.5rem auto;
         display: block;
         cursor: pointer;
+    }
+
+    &__error-msg {
+        color: red;
+        font-size: 12px;
+    }
+
+    .cover-input-change-container {
+        margin-top: -3.5rem;
+        display: flex;
+        justify-content: flex-end;
+
+        #cover-change-label {
+            display: inline-block;
+            background-color: black;
+            padding: 10px 15px;
+            border-radius: 30px;
+            color: white;
+        }
     }
 }
