@@ -5,33 +5,32 @@ import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";
 import JobApplicationForm from "../../pages/JobApplicationForm/JobApplicationForm";
 import { Redirect } from "react-router";
-import {withRouter} from "react-router-dom";
- 
-class JobCard extends Component{
-    constructor(props){
+import { withRouter } from "react-router-dom";
+
+class JobCard extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-          ShowHidedesc: false,
-          btnContent: "View More",
+            ShowHidedesc: false,
+            btnContent: "View More",
         };
     }
-    
-   
-    handleClick = () =>{
+
+    handleClick = () => {
         this.setState({ ShowHidedesc: !this.state.ShowHidedesc });
         if (this.state.ShowHidedesc) {
             this.setState({ btnContent: "View More" });
         } else {
             this.setState({ btnContent: "View Less" });
         }
-    }
-    
-    handleApply=()=>{
-        const id =this.props.id;
-        this.props.history.push(`/job-application-form/?id=${id}`)
-    }
-    render(){
-        return(
+    };
+
+    handleApply = () => {
+        const id = this.props.id;
+        this.props.history.push(`/job-application-form/?id=${id}`);
+    };
+    render() {
+        return (
             <div className="jobCard-container">
                 <Card>
                     <div className="jobCard-content">
@@ -62,8 +61,10 @@ class JobCard extends Component{
                             <h4 className="lh-25">
                                 Skills:{" "}
                                 <span className="skills">
-                                    {this.props.skills.map((skill) => (
-                                        <span className="job-spec">{skill}</span>
+                                    {this.props.skills.map((skill, id) => (
+                                        <span className="job-spec" key={id}>
+                                            {skill}
+                                        </span>
                                     ))}
                                 </span>
                             </h4>
@@ -83,5 +84,5 @@ class JobCard extends Component{
         );
     }
 }
- 
+
 export default JobCard;

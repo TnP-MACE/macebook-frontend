@@ -70,7 +70,7 @@ class Post extends Component {
                         </Link>
                     </div>
                     <div className="name_desig">
-                        <Link href="./">
+                        <Link to="./">
                             <p className="Name">{this.props.poster}</p>
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
@@ -97,7 +97,7 @@ class Post extends Component {
                             >
                                 <path
                                     stroke="red"
-                                    stroke-width="1"
+                                    strokeWidth="1"
                                     d="M4.78229 0.818359C2.25745 0.818359 0.209961 2.85171 0.209961 5.36037C0.209961 7.38546 1.01012 12.1917 8.88642 17.0503C9.0275 17.1364 9.18948 17.182 9.35462 17.182C9.51977 17.182 9.68175 17.1364 9.82283 17.0503C17.6991 12.1917 18.4993 7.38546 18.4993 5.36037C18.4993 2.85171 16.4518 0.818359 13.927 0.818359C11.4021 0.818359 9.35462 3.57109 9.35462 3.57109C9.35462 3.57109 7.30713 0.818359 4.78229 0.818359Z"
                                     fill={this.state.liked ? "red" : "white"}
                                 />

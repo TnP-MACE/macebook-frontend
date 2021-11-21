@@ -70,8 +70,9 @@ class Dashboard extends Component {
                     <div className="jobs-posted">
                         <h3>Jobs Posted</h3>
                         <div className="jobs-content">
-                            {this.state.jobs.map((job) => (
+                            {this.state.jobs.map((job, id) => (
                                 <DashJobCard
+                                    key={id}
                                     clogo={job.clogo}
                                     position={job.position}
                                     company={job.company}
@@ -109,8 +110,8 @@ class Dashboard extends Component {
                             </div>
                             <br />
                             <div className="tb-dataContainer">
-                                {this.state.applications.map((app) => (
-                                    <div className="tb-datasContainer">
+                                {this.state.applications.map((id, app) => (
+                                    <div className="tb-datasContainer" key={id}>
                                         <div className="tb-datas">
                                             <div className="name">
                                                 <span className="tb-data">{app.name}</span>

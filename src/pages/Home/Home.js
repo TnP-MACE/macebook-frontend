@@ -8,57 +8,70 @@ import Suggestions from "../../components/Suggestions/Suggestions";
 import Header from "../../components/Header/Header";
 import postImg from "../../assets/images/icons/postImg.png";
 import profilepic from "../../assets/images/icons/UserProfile.png";
+import AuthContext from "../../auth/AuthContext";
+import isAuthenticated from "../../auth/isAuthenticated";
+import Spinner from "../../components/Spinner/Spinner";
 
 class Home extends Component {
+    static contextType = AuthContext;
+
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             postImg: postImg,
             designation: "SDE I at Amazon",
             profilepic: profilepic,
             posts: [],
             profile: [],
         };
-    }
-    // fetchUpcoming() {
-    //     fetch("https://mace-connect.herokuapp.com/api/v1/posts")
-    //         .then((response) => response.json())
-    //         .then((data) =>
-    //             this.setState({
-    //                 posts: data.results,
-    //             })
-    //         );
-    // };
 
-    fetchUpcoming = async () => {
+        this.getPosts = this.getPosts.bind(this);
+    }
+
+    async getPosts() {
+        const { state } = this.context;
         try {
-            const token = window.localStorage.getItem("token");
+            const token = state.token;
             let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            let response2 = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            let responseJson = await response.json();
-            let resJson = await response2.json();
+            if (response.status != 200) {
+                return alert("Couldn't fetch posts! Reload this page.");
+            }
+            let data = await response.json();
+
             return this.setState({
-                posts: responseJson,
-                profile: resJson,
+                posts: data,
+                profile: state.user,
             });
         } catch (error) {
             console.error(error);
         }
-    };
+    }
 
     //ABcd@12345678910
     componentDidMount() {
-        this.fetchUpcoming();
+        const { state, dispatch } = this.context;
+        if (!state.isAuthenticated) {
+            (async () => {
+                const [authenticated, payload] = await isAuthenticated();
+                if (authenticated === true) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: payload,
+                    });
+                    this.getPosts().then(this.setState({ loading: false }));
+                } else {
+                    this.props.history.push("/login");
+                }
+            })();
+        } else {
+            this.getPosts().then(this.setState({ loading: false }));
+        }
     }
 
     render() {
@@ -70,52 +83,42 @@ class Home extends Component {
 
                 <Header active={"home"} />
 
-                <div className="container">
-                    <div className="card-cols">
-                        <div className="card-col1">
-                            <div className="tweetbox-container">
-                                <Tweetbox></Tweetbox>
-                            </div>
+                {this.state.loading ? (
+                    <Spinner />
+                ) : (
+                    <div className="container">
+                        <div className="card-cols">
+                            <div className="card-col1">
+                                <div className="tweetbox-container">
+                                    <Tweetbox></Tweetbox>
+                                </div>
 
-                            {this.state.posts.map((e) => {
-                                return (
-                                    <Card>
-                                        <Post
-                                            poster={this.state.profile.username}
-                                            posterprofile={this.state.profilepic}
-                                            designation={this.state.designation}
-                                            content={e.text}
-                                            hashtags={e.hashtags}
-                                            image="https://picsum.photos/seed/picsum/200/"
-                                            likes={e.likes}
-                                            comments={e.comments}
-                                            profilepic={this.state.profilepic}
-                                        ></Post>
-                                    </Card>
-                                );
-                            })}
-                            {/* <Card>
-                <Post
-                  poster="Ruben Lubin"
-                  posterprofile={profilepic}
-                  designation="poster designation"
-                  content="Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip.
-                      Hashtags   lorem_epsum"
-                  hashtags="#Hashtags   #lorem_epsum"
-                  image={postImg}
-                  likes="3k"
-                  comments="1k"
-                  profilepic={profilepic}
-                ></Post>
-              </Card> */}
-                        </div>
-                        <div className="card-col2">
-                            <Card>
-                                <Suggestions></Suggestions>
-                            </Card>
+                                {this.state.posts.map((post) => {
+                                    return (
+                                        <Card key={post.post_id}>
+                                            <Post
+                                                poster={this.state.profile.username}
+                                                posterprofile={this.state.profilepic}
+                                                designation={this.state.designation}
+                                                content={post.text}
+                                                hashtags={post.hashtags}
+                                                image="https://picsum.photos/seed/picsum/200/"
+                                                likes={post.likes}
+                                                comments={post.comments}
+                                                profilepic={this.state.profilepic}
+                                            ></Post>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
+                            <div className="card-col2">
+                                <Card>
+                                    <Suggestions></Suggestions>
+                                </Card>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         );
     }

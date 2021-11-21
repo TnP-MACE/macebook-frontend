@@ -62,8 +62,10 @@ class DashJobCard extends Component {
                             <h4 className="lh-25">
                                 Skills:{" "}
                                 <span className="skills">
-                                    {this.props.skills.map((skill) => (
-                                        <span className="job-spec">{skill}</span>
+                                    {this.props.skills.map((id, skill) => (
+                                        <span className="job-spec" key={id}>
+                                            {skill}
+                                        </span>
                                     ))}
                                 </span>
                             </h4>

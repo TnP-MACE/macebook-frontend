@@ -21,11 +21,16 @@ import github from "../../assets/images/icons/github.svg";
 import edit from "../../assets/images/icons/edit.svg";
 import arrow from "../../assets/images/icons/arrow.png";
 import clogo from "../../assets/images/icons/company-logo.png";
+import isAuthenticated from "../../auth/isAuthenticated";
+import AuthContext from "../../auth/AuthContext";
 
 class Profile extends Component {
+    static contextType = AuthContext;
+
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             username: "John Doe",
             cover: { cover },
             profileimg: { profileimg },
@@ -70,54 +75,57 @@ class Profile extends Component {
                 "Ut enim ad minim veniam, quis nostrud exercitatioul lam co laboris nisi ut aliquip. Hashtags   lorem_epsum",
             ],
         };
+
+        this.getPosts = this.getPosts.bind(this);
+    }
+
+    async getPosts(token, user) {
+        try {
+            let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            console.log(data);
+            this.setState((prev) => {
+                return {
+                    ...prev,
+                    username: user.username,
+                    email: user.email,
+                    posts: data.slice(1, 3),
+                };
+            });
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     componentDidMount() {
-        const asyncFunc = async () => {
-            try {
-                const token =
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjM3MjQ2ODg2LCJleHAiOjE2MzczMzMyODZ9.LUrGjy8M8WyPaE_2jRiBpKI6fdWE3lNp37_poMxvvCI";
-                let userResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const userData = await userResponse.json();
-                console.log(userData);
-                this.setState((prev) => {
-                    return {
-                        ...prev,
-                        username: userData.username,
-                        email: userData.email,
-                    };
-                });
-
-                let postsResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                const postsData = await postsResponse.json();
-                console.log(postsData);
-                this.setState((prev) => {
-                    return {
-                        ...prev,
-                        posts: postsData.slice(1, 3),
-                    };
-                });
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        asyncFunc();
+        const { state, dispatch } = this.context;
+        console.log(state);
+        if (!state.isAuthenticated) {
+            (async () => {
+                const [authenticated, payload] = await isAuthenticated();
+                if (authenticated === true) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: payload,
+                    });
+                    this.getPosts(payload.token, payload.user).then(this.setState({ loading: false }));
+                } else {
+                    this.props.history.push("/login");
+                }
+            })();
+        } else {
+            this.getPosts(state.token, state.user).then(this.setState({ loading: false }));
+        }
     }
 
     componentDidUpdate() {
-        console.log(this.state);
+        // console.log(this.state);
     }
 
     render() {
@@ -189,8 +197,10 @@ class Profile extends Component {
                                         </div>
                                     </div>
                                     <div className="profile-skillsContainer">
-                                        {this.state.skills.map((skill) => (
-                                            <span className="profile-skills">{skill}</span>
+                                        {this.state.skills.map((skill, id) => (
+                                            <span className="profile-skills" key={id}>
+                                                {skill}
+                                            </span>
                                         ))}
                                     </div>
                                 </Card>
@@ -227,7 +237,7 @@ class Profile extends Component {
                                     {this.state.posts.length != 0 && (
                                         <>
                                             {this.state.posts.map((post) => (
-                                                <div className="profile-post">
+                                                <div className="profile-post" key={post.post_id}>
                                                     <Card>
                                                         <ProfilePost
                                                             poster={post.poster}
@@ -259,8 +269,9 @@ class Profile extends Component {
                                         <img src={edit} alt="Edit"></img>
                                     </span>
                                 </div>
-                                {this.state.exp.map((exp) => (
+                                {this.state.exp.map((exp, id) => (
                                     <Experience
+                                        key={id}
                                         logo={clogo}
                                         name={exp.name}
                                         duration={exp.duration}
@@ -278,8 +289,10 @@ class Profile extends Component {
                                     </span>
                                 </div>
                                 <div className="acc-row">
-                                    {this.state.acc.map((acc) => (
-                                        <span className="acc-data">{acc}</span>
+                                    {this.state.acc.map((acc, id) => (
+                                        <span className="acc-data" key={id}>
+                                            {acc}
+                                        </span>
                                     ))}
                                 </div>
                             </div>

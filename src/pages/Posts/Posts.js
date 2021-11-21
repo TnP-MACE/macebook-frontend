@@ -97,7 +97,7 @@ class Posts extends Component {
                         <div className="posts-display">
                             {this.state.posts.map((post) => {
                                 return (
-                                    <div className="post-content">
+                                    <div className="post-content" key={post.post_id}>
                                         <Card>
                                             <Post
                                                 poster={post.poster}
