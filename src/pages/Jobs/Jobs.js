@@ -95,7 +95,7 @@ class Jobs extends Component {
             <div className="Jobs">
                 <Header active="jobs" />
                 {this.state.loading ? (
-                    <div>
+                    <div className="Jobs__spinner-container">
                         <Spinner />
                     </div>
                 ) : (

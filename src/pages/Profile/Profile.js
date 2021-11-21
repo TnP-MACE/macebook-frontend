@@ -23,6 +23,7 @@ import arrow from "../../assets/images/icons/arrow.png";
 import clogo from "../../assets/images/icons/company-logo.png";
 import isAuthenticated from "../../auth/isAuthenticated";
 import AuthContext from "../../auth/AuthContext";
+import Spinner from "../../components/Spinner/Spinner";
 
 class Profile extends Component {
     static contextType = AuthContext;
@@ -95,6 +96,21 @@ class Profile extends Component {
         }
     }
 
+    async fetchProfile(token, userId) {
+        console.log(userId);
+        try {
+            const data = await fetch(`https://mace-connect.herokuapp.com/api​/v1​/auth`, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            console.log(data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     componentDidMount() {
         const { state, dispatch } = this.context;
         console.log(state);
@@ -106,6 +122,10 @@ class Profile extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
+                    // const posts = await this.fetchPosts(payload.token, payload.user);
+                    // const profile = await this.fetchProfile(payload.token, payload.user.username);
+                    // console.log(profile);
+                    // console.log(posts);
                     this.fetchPosts(payload.token, payload.user).then((posts) => {
                         this.setState(
                             (prev) => {
@@ -153,7 +173,9 @@ class Profile extends Component {
             <div className="Profile">
                 <Header active="profile" />
                 {this.state.loading ? (
-                    <div>Loading ...</div>
+                    <div className="Profile__spinner-container">
+                        <Spinner />
+                    </div>
                 ) : (
                     <div className="container">
                         <ProfileHeader

@@ -1,6 +1,13 @@
 @import "../../assets/sass/main.scss";
 
 .Home {
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: 40vh;
+        align-items: center;
+    }
+
     .container {
         @media (min-width: 1080px) {
             .card-cols {

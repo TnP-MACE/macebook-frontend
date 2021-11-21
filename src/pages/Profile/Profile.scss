@@ -392,3 +392,12 @@
         }
     }
 }
+
+.Profile {
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: calc(100vh - 100px);
+        align-items: center;
+    }
+}

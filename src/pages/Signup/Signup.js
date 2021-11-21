@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Signup.scss";
 //import React from "react";
 import { Formik } from "formik";
@@ -8,15 +8,46 @@ import Google from "../../assets/images/icons/Google.svg";
 import { Link } from "react-router-dom";
 import Sign from "../../assets/images/icons/Sign.svg";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../auth/AuthContext";
+import isAuthenticated from "../../auth/isAuthenticated";
+import Spinner from "../../components/Spinner/Spinner";
 
-const Signup = () => {
+const Signup = (props) => {
     const history = useHistory();
+    const { dispatch, state } = React.useContext(AuthContext);
+    const [stateData, setStateData] = useState({
+        isSubmitting: false,
+        isLoading: true,
+    });
+
+    useEffect(() => {
+        if (!state.isAuthenticated) {
+            (async () => {
+                const [authenticated, payload] = await isAuthenticated();
+                if (authenticated === true) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: payload,
+                    });
+                    props.history.push("/");
+                } else {
+                    setStateData({
+                        isLoading: false,
+                    });
+                }
+            })();
+        } else {
+            setStateData({
+                isLoading: false,
+            });
+        }
+    }, []);
 
     return (
         <Formik
             initialValues={{ username: "", password: "", confirmpassword: "", email: "", user: "" }}
             onSubmit={(values, { setSubmitting }) => {
-                const asyncFunc = async () => {
+                (async () => {
                     try {
                         const registerResponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/auth/register",
@@ -34,7 +65,7 @@ const Signup = () => {
                             }
                         );
                         const registerData = await registerResponse.json();
-                        console.log(registerData)
+                        console.log(registerData);
                         if (registerData.success === false) {
                             return alert("Couldn't create account!");
                         }
@@ -42,22 +73,26 @@ const Signup = () => {
                     } catch (e) {
                         console.log(e);
                     }
-                };
-                asyncFunc();
+                })();
             }}
             validationSchema={Yup.object().shape({
                 user: Yup.string().required("Required"),
                 username: Yup.string().required("Required"),
                 email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
 
-                password: Yup.string()
-                          .required("No password provided.")
-                          .min(8, 'Must be more than 8 digits'),
+                password: Yup.string().required("No password provided.").min(8, "Must be more than 8 digits"),
                 confirmpassword: Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match"),
             })}
         >
             {(props) => {
                 const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
+                if (stateData.isLoading) {
+                    return (
+                        <div className="Signup__spinner-container">
+                            <Spinner />
+                        </div>
+                    );
+                }
                 return (
                     <div className="container Signup">
                         <div className="Signup__heading">MACEBOOK</div>

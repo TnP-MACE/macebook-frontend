@@ -82,18 +82,19 @@ class Home extends Component {
                 </Helmet>
 
                 <Header active={"home"} />
+                <div className="container">
+                    <div className="card-cols">
+                        <div className="card-col1">
+                            <div className="tweetbox-container">
+                                <Tweetbox></Tweetbox>
+                            </div>
 
-                {this.state.loading ? (
-                    <Spinner />
-                ) : (
-                    <div className="container">
-                        <div className="card-cols">
-                            <div className="card-col1">
-                                <div className="tweetbox-container">
-                                    <Tweetbox></Tweetbox>
+                            {this.state.loading ? (
+                                <div className="Home__spinner-container">
+                                    <Spinner />
                                 </div>
-
-                                {this.state.posts.map((post) => {
+                            ) : (
+                                this.state.posts.map((post) => {
                                     return (
                                         <Card key={post.post_id}>
                                             <Post
@@ -109,16 +110,16 @@ class Home extends Component {
                                             ></Post>
                                         </Card>
                                     );
-                                })}
-                            </div>
-                            <div className="card-col2">
-                                <Card>
-                                    <Suggestions></Suggestions>
-                                </Card>
-                            </div>
+                                })
+                            )}
+                        </div>
+                        <div className="card-col2">
+                            <Card>
+                                <Suggestions></Suggestions>
+                            </Card>
                         </div>
                     </div>
-                )}
+                </div>
             </div>
         );
     }

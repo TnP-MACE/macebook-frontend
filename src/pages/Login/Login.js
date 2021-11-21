@@ -9,13 +9,39 @@ import { useHistory } from "react-router-dom";
 import AuthContext from "../../auth/AuthContext";
 
 import { Link } from "react-router-dom";
-const Login = () => {
+import Spinner from "../../components/Spinner/Spinner";
+import isAuthenticated from "../../auth/isAuthenticated";
+
+const Login = (props) => {
     const history = useHistory();
     const { dispatch, state } = React.useContext(AuthContext);
     const [stateData, setStateData] = useState({
         isSubmitting: false,
         isLoading: true,
     });
+
+    useEffect(() => {
+        if (!state.isAuthenticated) {
+            (async () => {
+                const [authenticated, payload] = await isAuthenticated();
+                if (authenticated === true) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: payload,
+                    });
+                    props.history.push("/");
+                } else {
+                    setStateData({
+                        isLoading: false,
+                    });
+                }
+            })();
+        } else {
+            setStateData({
+                isLoading: false,
+            });
+        }
+    }, []);
 
     return (
         <Formik
@@ -72,6 +98,13 @@ const Login = () => {
         >
             {(props) => {
                 const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
+                if (stateData.isLoading) {
+                    return (
+                        <div className="Login__spinner-container">
+                            <Spinner />
+                        </div>
+                    );
+                }
                 return (
                     <div className="container Login">
                         <div className="Login__heading">MACEBOOK</div>

@@ -7,6 +7,13 @@
     padding-top: 2rem;
     // flex-direction: column;
 
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: calc(100vh - 100px);
+        align-items: center;
+    }
+
     &__container-white {
         // position: absolute;
         max-width: 33.625rem;
