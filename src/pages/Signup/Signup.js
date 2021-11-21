@@ -47,6 +47,7 @@ const Signup = (props) => {
         <Formik
             initialValues={{ username: "", password: "", confirmpassword: "", email: "", user: "" }}
             onSubmit={(values, { setSubmitting }) => {
+                setStateData({ isSubmitting: true });
                 (async () => {
                     try {
                         const registerResponse = await fetch(
@@ -69,8 +70,10 @@ const Signup = (props) => {
                         if (registerData.success === false) {
                             return alert("Couldn't create account!");
                         }
+                        setStateData({ isSubmitting: false });
                         history.push("/login");
                     } catch (e) {
+                        setStateData({ isSubmitting: false });
                         console.log(e);
                     }
                 })();
@@ -183,7 +186,7 @@ const Signup = (props) => {
                                 )}
 
                                 <div>
-                                    <button type="submit">Complete Profile</button>
+                                    <button type="submit">{stateData.isSubmitting && "loading..."} Sign Up</button>
                                 </div>
                                 <div className="Signup__container-white__create">
                                     <Link to="/login">Sign in instead</Link>

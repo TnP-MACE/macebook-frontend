@@ -153,7 +153,7 @@ const Login = (props) => {
 
                                 <div>
                                     <button type="submit" disabled={stateData.isSubmitting}>
-                                        {stateData.isSubmitting && "loading..."}Sign in
+                                        {stateData.isSubmitting && "loading..."} Sign in
                                     </button>
                                 </div>
                                 <div className="Login__container-white__create">
