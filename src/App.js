@@ -8,7 +8,7 @@ import NoMatch from "./pages/NoMatch/NoMatch";
 import Profile from "./pages/Profile/Profile";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Signup from "./pages/Signup/Signup";
-import CompleteProfile from "./pages/complete-profile/CompleteProfile";
+import CompleteProfile from "./pages/CompleteProfile/CompleteProfile";
 import Jobs from "./pages/Jobs/Jobs";
 import JobApplicationForm from "./pages/JobApplicationForm/JobApplicationForm";
 import Posts from "./pages/Posts/Posts";
