@@ -70,43 +70,7 @@ class Tweetbox extends Component {
                         <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn"></input>
                         <input type="image" src={Video} onClick={() => this.openModal()} className="video-btn"></input>
                     </div>
-                    <Modal
-                        isOpen={this.state.isModalOpen}
-                        onClose={() => this.closeModal()}
-                        // initialValues={{ text: "", topic: "" }}
-                        // onSubmit={(values, { setSubmitting }) => {
-                        //     const asyncFunc = async () => {
-                        //         try {
-                        //             const postResponse = await fetch(
-                        //                 "https://mace-connect.herokuapp.com/api/v1/posts/add_post",
-                        //                 {
-                        //                     method: "POST",
-                        //                     headers: {
-                        //                         "Content-Type": "application/json",
-                        //                     },
-                        //                     body: JSON.stringify({
-                        //                         text: values.text,
-                        //                         topic: values.topic,
-                        //                     }),
-                        //                 }
-                        //             );
-
-                        //             const postData = await postResponse.json();
-                        //
-                        //             console.log(postData);
-
-                        //             const token = postData.access_token;
-                        //             window.localStorage.setItem("token", token);
-                        //             window.localStorage.setItem("isAuthenticated", "true");
-                        //         } catch (e) {
-                        //             // alert("Couldn't sign you in! Try again");
-                        //             console.log(e);
-                        //         }
-                        //     };
-
-                        //     asyncFunc();
-                        // }}
-                    >
+                    <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
                         <h3>Create a post</h3>
                         <hr></hr>
                         <div className="poster">
