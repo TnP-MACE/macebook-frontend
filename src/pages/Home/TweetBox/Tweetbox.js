@@ -13,8 +13,48 @@ import Card from "../../../components/Card/Card";
 class Tweetbox extends Component {
     constructor(props) {
         super(props);
-        this.state = { isModalOpen: false };
+        this.state = { isModalOpen: false, text: "", topic: "" };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
+    onChange(event) {
+        console.log("change");
+        this.setState((prev) => {
+            return {
+                ...prev,
+                text: event.target.values.text,
+                topic: event.target.values.text,
+            };
+        });
+    }
+    onSubmit(event) {
+        console.log("string");
+        // console.log(event.target.text.value);
+        // console.log(event.target.topic.value);
+        const fun = async () => {
+            try {
+                const token = window.localStorage.getItem("token");
+                const postResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts/add_post", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        text: this.state.text,
+                        topic: this.state.topic,
+                    }),
+                });
+
+                const postData = await postResponse.json();
+                console.log(postData);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fun();
+    }
+
     render() {
         return (
             <div className="Tweetbox">
@@ -23,7 +63,7 @@ class Tweetbox extends Component {
                 </div>
                 <div className="input-text-field">
                     <div onClick={() => this.openModal()}>
-                        <input className="text-field" placeholder="Add a post" />
+                        <input className="text-field" name="text" placeholder="Add a post" onChange={this.onChange} />
                     </div>
                     <div className="input-video">
                         <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn"></input>
@@ -55,7 +95,9 @@ class Tweetbox extends Component {
                                 <input type="image" src={Doc}></input>
                             </div>
                             <Card>
-                                <button type="button">Post</button>
+                                <button type="button" onClick={this.onSubmit}>
+                                    Post
+                                </button>
                             </Card>
                         </div>
                     </Modal>
