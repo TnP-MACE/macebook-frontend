@@ -31,7 +31,7 @@ class Profile extends Component {
         super(props);
         this.state = {
             loading: true,
-            username: "John Doe",
+            username: "",
             cover: { cover },
             profileimg: { profileimg },
             position: "Senior SWE at Apple Inc.",
@@ -41,7 +41,7 @@ class Profile extends Component {
             conn: 2000,
             self: true,
             skills: ["HTML", "CSS", "REACTJS", "NodeJS"],
-            email: "dohndoe@email.com",
+            email: "",
             posts: [],
             exp: [
                 {
@@ -76,10 +76,10 @@ class Profile extends Component {
             ],
         };
 
-        this.getPosts = this.getPosts.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
     }
 
-    async getPosts(token, user) {
+    async fetchPosts(token, user) {
         try {
             let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
                 method: "GET",
@@ -89,15 +89,7 @@ class Profile extends Component {
             });
 
             const data = await response.json();
-            console.log(data);
-            this.setState((prev) => {
-                return {
-                    ...prev,
-                    username: user.username,
-                    email: user.email,
-                    posts: data.slice(1, 3),
-                };
-            });
+            return data.slice(1, 3);
         } catch (e) {
             console.error(e);
         }
@@ -114,13 +106,41 @@ class Profile extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.getPosts(payload.token, payload.user).then(this.setState({ loading: false }));
+                    this.fetchPosts(payload.token, payload.user).then((posts) => {
+                        this.setState(
+                            (prev) => {
+                                return {
+                                    ...prev,
+                                    username: payload.user.username,
+                                    email: payload.user.email,
+                                    posts,
+                                };
+                            },
+                            () => {
+                                this.setState({ loading: false });
+                            }
+                        );
+                    });
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.getPosts(state.token, state.user).then(this.setState({ loading: false }));
+            this.fetchPosts(state.token, state.user).then((posts) => {
+                this.setState(
+                    (prev) => {
+                        return {
+                            ...prev,
+                            username: state.user.username,
+                            email: state.user.email,
+                            posts,
+                        };
+                    },
+                    () => {
+                        this.setState({ loading: false });
+                    }
+                );
+            });
         }
     }
 
@@ -132,19 +152,22 @@ class Profile extends Component {
         return (
             <div className="Profile">
                 <Header active="profile" />
-                <div className="container">
-                    <ProfileHeader
-                        user={this.state.username}
-                        cover={this.state.cover}
-                        profileimg={this.state.profileimg}
-                        position={this.state.position}
-                        location={this.state.location}
-                        batch={this.state.batch}
-                        dept={this.state.dept}
-                        conn={this.state.conn}
-                        self={this.state.self}
-                    />
-                    {/* <div className="profile-bgimgContainer">
+                {this.state.loading ? (
+                    <div>Loading ...</div>
+                ) : (
+                    <div className="container">
+                        <ProfileHeader
+                            user={this.state.username}
+                            cover={this.state.cover}
+                            profileimg={this.state.profileimg}
+                            position={this.state.position}
+                            location={this.state.location}
+                            batch={this.state.batch}
+                            dept={this.state.dept}
+                            conn={this.state.conn}
+                            self={this.state.self}
+                        />
+                        {/* <div className="profile-bgimgContainer">
             <img src={cover} alt="Background Image Not Loaded"></img>
           </div>
           <div className="profile-header">
@@ -172,167 +195,168 @@ class Profile extends Component {
               </div>
             </div>
           </div> */}
-                    <div className="profile-body">
-                        <div className="profile-leftpanel">
-                            <div className="card-container">
-                                <Card>
-                                    <div className="card-header">
-                                        <h3>About</h3>
-                                        <div style={{ display: this.state.self ? "block" : "none" }}>
-                                            <img src={edit} alt="Edit"></img>
+                        <div className="profile-body">
+                            <div className="profile-leftpanel">
+                                <div className="card-container">
+                                    <Card>
+                                        <div className="card-header">
+                                            <h3>About</h3>
+                                            <div style={{ display: this.state.self ? "block" : "none" }}>
+                                                <img src={edit} alt="Edit"></img>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy
-                                    </p>
-                                </Card>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            Lorem Ipsum has been the industry's standard dummy
+                                        </p>
+                                    </Card>
+                                </div>
+                                <div className="card-container">
+                                    <Card>
+                                        <div className="card-header">
+                                            <h3>Skills</h3>
+                                            <div style={{ display: this.state.self ? "block" : "none" }}>
+                                                <img src={edit} alt="Edit"></img>
+                                            </div>
+                                        </div>
+                                        <div className="profile-skillsContainer">
+                                            {this.state.skills.map((skill, id) => (
+                                                <span className="profile-skills" key={id}>
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </Card>
+                                </div>
+                                <div className="card-container" style={{ display: this.state.self ? "block" : "none" }}>
+                                    <Card>
+                                        <div className="profile-applicationContainer">
+                                            <div className="profile-appCount">
+                                                <div className="profile-appContent">
+                                                    <h2>3</h2>
+                                                    <p>New Applications</p>
+                                                </div>
+                                                <div className="profile-appContent">
+                                                    <h2>42</h2>
+                                                    <p>Total Applications</p>
+                                                </div>
+                                            </div>
+                                            <div className="profile-dashboardbtnContainer">
+                                                <button>Go to Dashboard</button>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+                                <div className="card-container">
+                                    <Card>
+                                        <Suggestions></Suggestions>
+                                    </Card>
+                                </div>
                             </div>
-                            <div className="card-container">
-                                <Card>
-                                    <div className="card-header">
-                                        <h3>Skills</h3>
-                                        <div style={{ display: this.state.self ? "block" : "none" }}>
-                                            <img src={edit} alt="Edit"></img>
-                                        </div>
+                            <div className="profile-rightpanel">
+                                <div className="profile-posts-section">
+                                    <h2>My Posts</h2>
+                                    <div className="profile-postContainer">
+                                        {this.state.posts.length != 0 && (
+                                            <>
+                                                {this.state.posts.map((post) => (
+                                                    <div className="profile-post" key={post.post_id}>
+                                                        <Card>
+                                                            <ProfilePost
+                                                                poster={post.poster}
+                                                                posterprofile={profilepic}
+                                                                designation={post.designation}
+                                                                content={post.text}
+                                                                hashtags={post.hashtags}
+                                                                image={postImg}
+                                                                likes={post.likes}
+                                                                comments={post.comments}
+                                                                profilepic={profilepic}
+                                                            ></ProfilePost>
+                                                        </Card>
+                                                    </div>
+                                                ))}
+                                                <Link to="/posts">
+                                                    <div className="arrow">
+                                                        <img src={arrow} alt="View Posts"></img>
+                                                    </div>
+                                                </Link>
+                                            </>
+                                        )}
                                     </div>
-                                    <div className="profile-skillsContainer">
-                                        {this.state.skills.map((skill, id) => (
-                                            <span className="profile-skills" key={id}>
-                                                {skill}
+                                </div>
+                                <div className="profile-experience">
+                                    <div className="section-headers">
+                                        <h2>Experience</h2>
+                                        <span style={{ display: this.state.self ? "block" : "none" }}>
+                                            <img src={edit} alt="Edit"></img>
+                                        </span>
+                                    </div>
+                                    {this.state.exp.map((exp, id) => (
+                                        <Experience
+                                            key={id}
+                                            logo={clogo}
+                                            name={exp.name}
+                                            duration={exp.duration}
+                                            type={exp.type}
+                                            position={exp.position}
+                                            desc={exp.desc}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="profile-accom">
+                                    <div className="section-headers">
+                                        <h2>Accomplishments</h2>
+                                        <span style={{ display: this.state.self ? "block" : "none" }}>
+                                            <img src={edit} alt="Edit"></img>
+                                        </span>
+                                    </div>
+                                    <div className="acc-row">
+                                        {this.state.acc.map((acc, id) => (
+                                            <span className="acc-data" key={id}>
+                                                {acc}
                                             </span>
                                         ))}
                                     </div>
-                                </Card>
-                            </div>
-                            <div className="card-container" style={{ display: this.state.self ? "block" : "none" }}>
-                                <Card>
-                                    <div className="profile-applicationContainer">
-                                        <div className="profile-appCount">
-                                            <div className="profile-appContent">
-                                                <h2>3</h2>
-                                                <p>New Applications</p>
-                                            </div>
-                                            <div className="profile-appContent">
-                                                <h2>42</h2>
-                                                <p>Total Applications</p>
-                                            </div>
-                                        </div>
-                                        <div className="profile-dashboardbtnContainer">
-                                            <button>Go to Dashboard</button>
-                                        </div>
-                                    </div>
-                                </Card>
-                            </div>
-                            <div className="card-container">
-                                <Card>
-                                    <Suggestions></Suggestions>
-                                </Card>
-                            </div>
-                        </div>
-                        <div className="profile-rightpanel">
-                            <div className="profile-posts-section">
-                                <h2>My Posts</h2>
-                                <div className="profile-postContainer">
-                                    {this.state.posts.length != 0 && (
-                                        <>
-                                            {this.state.posts.map((post) => (
-                                                <div className="profile-post" key={post.post_id}>
-                                                    <Card>
-                                                        <ProfilePost
-                                                            poster={post.poster}
-                                                            posterprofile={profilepic}
-                                                            designation={post.designation}
-                                                            content={post.text}
-                                                            hashtags={post.hashtags}
-                                                            image={postImg}
-                                                            likes={post.likes}
-                                                            comments={post.comments}
-                                                            profilepic={profilepic}
-                                                        ></ProfilePost>
-                                                    </Card>
-                                                </div>
-                                            ))}
-                                            <Link to="/posts">
-                                                <div className="arrow">
-                                                    <img src={arrow} alt="View Posts"></img>
-                                                </div>
-                                            </Link>
-                                        </>
-                                    )}
                                 </div>
-                            </div>
-                            <div className="profile-experience">
-                                <div className="section-headers">
-                                    <h2>Experience</h2>
-                                    <span style={{ display: this.state.self ? "block" : "none" }}>
-                                        <img src={edit} alt="Edit"></img>
-                                    </span>
-                                </div>
-                                {this.state.exp.map((exp, id) => (
-                                    <Experience
-                                        key={id}
-                                        logo={clogo}
-                                        name={exp.name}
-                                        duration={exp.duration}
-                                        type={exp.type}
-                                        position={exp.position}
-                                        desc={exp.desc}
-                                    />
-                                ))}
-                            </div>
-                            <div className="profile-accom">
-                                <div className="section-headers">
-                                    <h2>Accomplishments</h2>
-                                    <span style={{ display: this.state.self ? "block" : "none" }}>
-                                        <img src={edit} alt="Edit"></img>
-                                    </span>
-                                </div>
-                                <div className="acc-row">
-                                    {this.state.acc.map((acc, id) => (
-                                        <span className="acc-data" key={id}>
-                                            {acc}
+                                <div className="profile-contact">
+                                    <div className="section-headers">
+                                        <h2>Contact Info</h2>
+                                        <span style={{ display: this.state.self ? "block" : "none" }}>
+                                            <img src={edit} alt="Edit"></img>
                                         </span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="profile-contact">
-                                <div className="section-headers">
-                                    <h2>Contact Info</h2>
-                                    <span style={{ display: this.state.self ? "block" : "none" }}>
-                                        <img src={edit} alt="Edit"></img>
-                                    </span>
-                                </div>
-                                <div className="contact-section">
-                                    <div className="contact-content">
-                                        <img src={mail} alt="mail"></img>
-                                        <p>{this.state.email}</p>
                                     </div>
-                                    <div className="contact-content">
-                                        <img src={phone} alt="mail"></img>
-                                        <p>+91 123456789</p>
-                                    </div>
-                                    <div className="contact-content">
-                                        <img src={web} alt="mail"></img>
-                                        <p>johndoe.com</p>
-                                    </div>
-                                    <div className="contact-content">
-                                        <img src={linkedin} alt="mail"></img>
-                                        <p>linkedin.com/in/johndoe</p>
-                                    </div>
-                                    <div className="contact-content">
-                                        <img src={fb} alt="mail"></img>
-                                        <p>John Doe</p>
-                                    </div>
-                                    <div className="contact-content">
-                                        <img src={github} alt="mail"></img>
-                                        <p>github.com/johndoe</p>
+                                    <div className="contact-section">
+                                        <div className="contact-content">
+                                            <img src={mail} alt="mail"></img>
+                                            <p>{this.state.email}</p>
+                                        </div>
+                                        <div className="contact-content">
+                                            <img src={phone} alt="mail"></img>
+                                            <p>+91 123456789</p>
+                                        </div>
+                                        <div className="contact-content">
+                                            <img src={web} alt="mail"></img>
+                                            <p>johndoe.com</p>
+                                        </div>
+                                        <div className="contact-content">
+                                            <img src={linkedin} alt="mail"></img>
+                                            <p>linkedin.com/in/johndoe</p>
+                                        </div>
+                                        <div className="contact-content">
+                                            <img src={fb} alt="mail"></img>
+                                            <p>John Doe</p>
+                                        </div>
+                                        <div className="contact-content">
+                                            <img src={github} alt="mail"></img>
+                                            <p>github.com/johndoe</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         );
     }

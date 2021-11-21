@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useContext, useEffect } from "react";
 import "./CompleteProfile.scss";
 //import React from "react";
 import { Formik, Field } from "formik";
@@ -13,9 +13,12 @@ import Select from "react-select";
 import { useState } from "react";
 import DocImage from "../../assets/images/icons/Doc.svg";
 import { Redirect, useHistory } from "react-router";
+import AuthContext from "../../auth/AuthContext";
+import isAuthenticated from "../../auth/isAuthenticated";
 
 const Completeprofile = () => {
     const history = useHistory();
+    const { state, dispatch } = useContext(AuthContext);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -86,21 +89,21 @@ const Completeprofile = () => {
         sessionStorage.setItem("skills", JSON.stringify(skills));
     }
 
-    // useEffect(() => {
-    //     const asyncFunc = async () => {
-    //         const token = window.localStorage.getItem("token");
-    //         const response = await fetch("https://mace-connect.herokuapp.com/api/v1/auth", {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: "Bearer " + token,
-    //             },
-    //         });
-    //         const data = await response.json();
-    //         setUsername(data.username);
-    //         setEmail(data.email);
-    //     };
-    //     asyncFunc();
-    // }, []);
+    useEffect(() => {
+        (async () => {
+            const [authenticated, payload] = await isAuthenticated();
+            if (authenticated === true) {
+                dispatch({
+                    type: "LOGIN",
+                    payload: payload,
+                });
+                setUsername(payload.user.username);
+                setEmail(payload.user.email);
+            } else {
+                this.props.history.push("/login");
+            }
+        })();
+    }, []);
 
     const phoneRegExp =
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
