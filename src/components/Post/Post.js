@@ -80,7 +80,7 @@ class Post extends Component {
                 <div className="home-posts-content">
                     <p className="home-posts-text">{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
-                    <img src={this.props.image} alt={this.props.content}></img>
+                    <img src={this.props.image} alt=""></img>
                 </div>
                 <div className="home-posts-attributes">
                     <p>{this.state.likes_count} Likes</p>

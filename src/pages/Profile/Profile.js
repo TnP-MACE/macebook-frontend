@@ -122,10 +122,6 @@ class Profile extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    // const posts = await this.fetchPosts(payload.token, payload.user);
-                    // const profile = await this.fetchProfile(payload.token, payload.user.username);
-                    // console.log(profile);
-                    // console.log(posts);
                     this.fetchPosts(payload.token, payload.user).then((posts) => {
                         this.setState(
                             (prev) => {

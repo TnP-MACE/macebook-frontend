@@ -62,7 +62,7 @@ class Home extends Component {
         // }, 3000);
     }
 
-    async getPosts() {
+    async getPosts(cbk) {
         const { state } = this.context;
         try {
             const token = state.token;
@@ -77,10 +77,13 @@ class Home extends Component {
             }
             let data = await response.json();
 
-            return this.setState({
-                posts: data,
-                profile: state.user,
-            });
+            return this.setState(
+                {
+                    posts: data,
+                    profile: state.user,
+                },
+                () => cbk()
+            );
         } catch (error) {
             console.error(error);
         }
@@ -97,13 +100,13 @@ class Home extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.getPosts().then(this.setState({ loading: false }));
+                    this.getPosts(() => this.setState({ loading: false }));
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.getPosts().then(this.setState({ loading: false }));
+            this.getPosts(() => this.setState({ loading: false }));
         }
     }
 

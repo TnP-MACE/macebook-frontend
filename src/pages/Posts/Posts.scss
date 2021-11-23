@@ -14,4 +14,11 @@
         min-width: 0;
         max-width: 50%;
     }
+
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: calc(100vh - 100px);
+        align-items: center;
+    }
 }
