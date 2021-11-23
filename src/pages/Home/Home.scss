@@ -8,6 +8,38 @@
         align-items: center;
     }
 
+    .message-box {
+        max-width: 530px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            background-color: grey;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        &--danger {
+            background-color: rgba($color: rgb(235, 44, 11), $alpha: 0.4);
+            border: 3px solid rgb(235, 44, 11);
+        }
+        &--success {
+            background-color: rgba($color: rgb(1, 117, 10), $alpha: 0.4);
+            border: 3px solid rgb(1, 117, 10);
+        }
+    }
+
     .container {
         @media (min-width: 1080px) {
             .card-cols {

@@ -18,6 +18,10 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            message: {
+                text: "",
+                type: "success",
+            },
             loading: true,
             postImg: postImg,
             designation: "SDE I at Amazon",
@@ -27,6 +31,35 @@ class Home extends Component {
         };
 
         this.getPosts = this.getPosts.bind(this);
+        this.setMessage = this.setMessage.bind(this);
+        this.clearMessage = this.clearMessage.bind(this);
+    }
+
+    clearMessage() {
+        this.setState((prev) => {
+            return {
+                ...prev,
+                message: {
+                    text: "",
+                    type: "success",
+                },
+            };
+        });
+    }
+
+    setMessage(message, type) {
+        this.setState((prev) => {
+            return {
+                ...prev,
+                message: {
+                    text: message,
+                    type: type,
+                },
+            };
+        });
+        // setTimeout(() => {
+        //     this.clearMessage();
+        // }, 3000);
     }
 
     async getPosts() {
@@ -86,8 +119,14 @@ class Home extends Component {
                     <div className="card-cols">
                         <div className="card-col1">
                             <div className="tweetbox-container">
-                                <Tweetbox></Tweetbox>
+                                <Tweetbox setMessage={this.setMessage} getPosts={this.getPosts}></Tweetbox>
                             </div>
+                            {this.state.message.text && (
+                                <div className="message-box message-box--success">
+                                    <p>{this.state.message.text}</p>
+                                    <span onClick={this.clearMessage}>X</span>
+                                </div>
+                            )}
 
                             {this.state.loading ? (
                                 <div className="Home__spinner-container">

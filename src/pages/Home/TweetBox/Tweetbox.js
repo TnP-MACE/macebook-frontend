@@ -8,9 +8,12 @@ import Camera from "../../../assets/images/icons/Camera.svg";
 import Video from "../../../assets/images/icons/Video.svg";
 import Doc from "../../../assets/images/icons/Doc.svg";
 import Card from "../../../components/Card/Card";
+import AuthContext from "../../../auth/AuthContext";
 //import Anyone from "../../../assets/images/icons/Anyone.svg"
 
 class Tweetbox extends Component {
+    static contextType = AuthContext;
+
     constructor(props) {
         super(props);
         this.state = { isModalOpen: false, text: "", topic: "" };
@@ -18,12 +21,10 @@ class Tweetbox extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     onChange(event) {
-        console.log("change");
         this.setState((prev) => {
             return {
                 ...prev,
-                text: event.target.values.text,
-                topic: event.target.values.text,
+                text: event.target.value,
             };
         });
     }
@@ -33,7 +34,10 @@ class Tweetbox extends Component {
         // console.log(event.target.topic.value);
         const fun = async () => {
             try {
-                const token = window.localStorage.getItem("token");
+                // const token = window.localStorage.getItem("token");
+                const { state } = this.context;
+                const token = state.token;
+                console.log(this.state);
                 const postResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts/add_post", {
                     method: "POST",
                     headers: {
@@ -45,9 +49,11 @@ class Tweetbox extends Component {
                         topic: this.state.topic,
                     }),
                 });
-
-                const postData = await postResponse.json();
-                console.log(postData);
+                if (postResponse.status === 201) {
+                    this.setState({ isModalOpen: false });
+                    this.props.setMessage("Post has been added", "success");
+                    this.props.getPosts();
+                }
             } catch (e) {
                 console.log(e);
             }
@@ -63,7 +69,7 @@ class Tweetbox extends Component {
                 </div>
                 <div className="input-text-field">
                     <div onClick={() => this.openModal()}>
-                        <input className="text-field" name="text" placeholder="Add a post" onChange={this.onChange} />
+                        <input className="text-field" name="text" placeholder="Add a post" />
                     </div>
                     <div className="input-video">
                         <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn"></input>
@@ -86,7 +92,7 @@ class Tweetbox extends Component {
                             </div>
                         </div>
                         <Card>
-                            <textarea className="post-text"></textarea>
+                            <textarea className="post-text" name="post-text" onChange={this.onChange}></textarea>
                         </Card>
                         <div className="modal-bottom">
                             <div class="media-input">
