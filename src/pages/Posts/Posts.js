@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Posts.scss";
 import Header from "../../components/Header/Header";
-import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import ProfileHeader from "../../components/ProfileHeader/ProfileHeader2";
 import Card from "../../components/Card/Card";
 import Post from "../../components/Post/Post";
 import cover from "../../assets/images/icons/cover.jpg";
@@ -137,7 +137,7 @@ class Posts extends Component {
                     </div>
                 ) : (
                     <div className="container">
-                        <ProfileHeader
+                        {/* <ProfileHeader
                             user={this.state.username}
                             cover={this.state.cover}
                             profileimg={this.state.profilepic}
@@ -147,7 +147,8 @@ class Posts extends Component {
                             dept={this.state.dept}
                             conn={this.state.conn}
                             self={this.state.self}
-                        />
+                        /> */}
+                        <ProfileHeader />
                         <div class="posts-body">
                             <h2>All Posts</h2>
                             <div className="posts-display">

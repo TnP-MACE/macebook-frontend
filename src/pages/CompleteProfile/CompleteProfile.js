@@ -16,13 +16,15 @@ import { Redirect, useHistory } from "react-router";
 import AuthContext from "../../auth/AuthContext";
 import isAuthenticated from "../../auth/isAuthenticated";
 
-const Completeprofile = () => {
+const Completeprofile = (props) => {
     const history = useHistory();
     const { state, dispatch } = useContext(AuthContext);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [changeCoverActive, setChangeCoverActive] = useState(false);
+    const [coverImage, setCoverImage] = useState("");
+    const [profileImage, setProfileImage] = useState("");
 
     const Profile = () => {
         const element = document.getElementById("profile-input");
@@ -30,18 +32,21 @@ const Completeprofile = () => {
 
         const reader = new FileReader();
         reader.onload = () => {
+            setProfileImage(reader.result);
             const output = document.getElementById("profile-img");
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
         document.getElementById("profile-img-default").style.display = "none";
     };
+
     const Cover = () => {
         const element = document.getElementById("cover-input");
         const file = element.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
+            setCoverImage(reader.result);
             const output = document.getElementById("cover-img");
             output.src = reader.result;
         };
@@ -51,12 +56,14 @@ const Completeprofile = () => {
         // document.getElementById("cover-change-label").style.display = "";
         // document.getElementById("cover-input-label").style.display = "none";
     };
+
     const Coverchange = () => {
         const element = document.getElementById("cover-input-change");
         const file = element.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
+            setCoverImage(reader.result);
             const output = document.getElementById("cover-img");
             output.src = reader.result;
         };
@@ -100,7 +107,7 @@ const Completeprofile = () => {
                 setUsername(payload.user.username);
                 setEmail(payload.user.email);
             } else {
-                this.props.history.push("/login");
+                history.push("/login");
             }
         })();
     }, []);
@@ -129,6 +136,7 @@ const Completeprofile = () => {
                 rphno: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
+                setSubmitting(true);
                 const skillData = sessionStorage.getItem("skills");
                 let skills = [
                     [
@@ -136,14 +144,15 @@ const Completeprofile = () => {
                         { label: "Javascript", value: "js" },
                     ],
                 ];
+
                 if (skillData) {
                     skills = JSON.parse(skillData);
                 }
+
                 const sk = skills[skills.length - 1];
                 const skData = sk.map((s) => s.value);
-                console.log(skData);
                 const data = { ...values, skills: skData };
-                console.log(data);
+
                 const accomplishment = [];
                 const finaldata = {
                     fullname: data.fullname,
@@ -169,13 +178,15 @@ const Completeprofile = () => {
                 const asyncFunc = async () => {
                     try {
                         const token = window.localStorage.getItem("token");
+                        console.log("@@@@@@@@@@@@@");
+                        console.log(token);
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
                             {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    Authorization: `Bearer ${token}`,
+                                    Authorization: `Bearer ${JSON.stringify(token)}`,
                                 },
                                 body: JSON.stringify(finaldata),
                             }
@@ -184,10 +195,16 @@ const Completeprofile = () => {
                         if (completeprofiledata.success) {
                             window.localStorage.setItem("profile-completed", true);
                             if (completeprofiledata.success) {
-                                history.push("/");
+                                // history.push("/");
+                                console.log("success");
                             }
+                        } else {
+                            alert("Couldn't submit your profile! Try again");
+                            setSubmitting(false);
                         }
                     } catch (e) {
+                        alert("Couldn't submit your profile! Try again");
+                        setSubmitting(false);
                         console.log(e);
                     }
                 };
@@ -507,7 +524,15 @@ const Completeprofile = () => {
                             <button type="submit">Add</button> */}
                                         </div>
                                         <button type="submit" className="Completion__submit-btn">
-                                            Go to Feed
+                                            {isSubmitting
+                                                ? // <div class="lds-ring">
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  // </div>
+                                                  "Submitting..."
+                                                : "Submit"}
                                         </button>
                                     </div>
                                 </div>

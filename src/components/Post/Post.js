@@ -17,7 +17,7 @@ class Post extends Component {
             posts: [],
         };
         this.likePost = this.likePost.bind(this);
-        console.log(this.props.content);
+        // console.log(this.props.content);
     }
     updateCount() {
         data.likes = this.state.likes_count;

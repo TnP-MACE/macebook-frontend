@@ -71,6 +71,7 @@ const Login = (props) => {
                             user: {
                                 email: loginData.email,
                                 username: loginData.username,
+                                id: loginData.id,
                             },
                             token: loginData.access_token,
                         };

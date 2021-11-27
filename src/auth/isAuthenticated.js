@@ -21,6 +21,7 @@ export default async function isAuthenticated() {
                 user: {
                     email: data.email,
                     username: data.username,
+                    id: data.id,
                 },
                 token: JSON.parse(token),
             };
