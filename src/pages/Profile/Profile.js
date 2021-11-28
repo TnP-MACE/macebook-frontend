@@ -78,6 +78,7 @@ class Profile extends Component {
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
+        this.fetchProfile = this.fetchProfile.bind(this);
     }
 
     async fetchPosts(token, user) {
@@ -99,12 +100,13 @@ class Profile extends Component {
     async fetchProfile(token, userId) {
         console.log(userId);
         try {
-            const data = await fetch(`https://mace-connect.herokuapp.com/api​/v1​/auth`, {
+            const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
                 method: "GET",
                 headers: {
                     Authorization: "Bearer " + token,
                 },
             });
+            const data = await response.json();
             console.log(data);
         } catch (e) {
             console.error(e);
@@ -122,10 +124,7 @@ class Profile extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    // const posts = await this.fetchPosts(payload.token, payload.user);
-                    // const profile = await this.fetchProfile(payload.token, payload.user.username);
-                    // console.log(profile);
-                    // console.log(posts);
+                    // this.fetchProfile(payload.token, payload.user.id);
                     this.fetchPosts(payload.token, payload.user).then((posts) => {
                         this.setState(
                             (prev) => {
@@ -345,32 +344,32 @@ class Profile extends Component {
                                     <div className="section-headers">
                                         <h2>Contact Info</h2>
                                         <span style={{ display: this.state.self ? "block" : "none" }}>
-                                            <img src={edit} alt="Edit"></img>
+                                            <img src={edit} alt="Edit" />
                                         </span>
                                     </div>
                                     <div className="contact-section">
                                         <div className="contact-content">
-                                            <img src={mail} alt="mail"></img>
+                                            <img src={mail} alt="mail" />
                                             <p>{this.state.email}</p>
                                         </div>
                                         <div className="contact-content">
-                                            <img src={phone} alt="mail"></img>
+                                            <img src={phone} alt="mail" />
                                             <p>+91 123456789</p>
                                         </div>
                                         <div className="contact-content">
-                                            <img src={web} alt="mail"></img>
+                                            <img src={web} alt="mail" />
                                             <p>johndoe.com</p>
                                         </div>
                                         <div className="contact-content">
-                                            <img src={linkedin} alt="mail"></img>
+                                            <img src={linkedin} alt="mail" />
                                             <p>linkedin.com/in/johndoe</p>
                                         </div>
                                         <div className="contact-content">
-                                            <img src={fb} alt="mail"></img>
+                                            <img src={fb} alt="mail" />
                                             <p>John Doe</p>
                                         </div>
                                         <div className="contact-content">
-                                            <img src={github} alt="mail"></img>
+                                            <img src={github} alt="mail" />
                                             <p>github.com/johndoe</p>
                                         </div>
                                     </div>

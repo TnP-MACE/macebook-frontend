@@ -4,6 +4,7 @@ import "./ProfilePost.scss";
 import msg from "../../assets/images/icons/message.svg";
 import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
+import Card from "../Card/Card";
 
 class Post extends Component {
     constructor() {
@@ -11,14 +12,14 @@ class Post extends Component {
         // eslint-disable-next-line no-undef
         this.state = {
             liked: false,
-            likes_count: 0,
+            likesCount: 0,
         };
-        this.likePost = this.likePost.bind(this);
+        this.handlePostLike = this.handlePostLike.bind(this);
     }
     updateCount() {
-        data.likes = this.state.likes_count;
+        data.likes = this.state.likesCount;
     }
-    likePost(e) {
+    handlePostLike(e) {
         this.setState((prev) => {
             return {
                 ...prev,
@@ -26,43 +27,39 @@ class Post extends Component {
             };
         });
         this.setState((prevState) => {
-            //likes_count:  (prevState.likes_count==1) ? 0 : 1;
-            if (prevState.likes_count === 1) {
-                this.setState({ likes_count: 0 });
+            //likesCount:  (prevState.likesCount==1) ? 0 : 1;
+            if (prevState.likesCount === 1) {
+                this.setState({ likesCount: 0 });
             } else {
-                this.setState({ likes_count: 1 });
+                this.setState({ likesCount: 1 });
             }
         });
     }
+
+    handleCommentBoxFocus() {}
+
     render() {
         return (
-            <div className="home-post-container">
-                <div className="poster">
-                    <div className="posterimg">
-                        <Link to="./">
-                            {" "}
-                            <img src={this.props.posterprofile} alt="posterimage" className="profile-pic"></img>
-                        </Link>
+            <Card>
+                <div className="ProfilePost">
+                    <div className="ProfilePost__content-container">
+                        <p className="ProfilePost__content-text">{this.props.post.text}</p>
+                        <p className="ProfilePost__content-hashtag">{this.props.hashtags}</p>
+                        {this.props.postImageName && (
+                            <div className="ProfilePost__content-image">
+                                <img
+                                    src={`https://mace-connect.herokuapp.com/profile/${this.props.postImageName}`}
+                                    alt={this.props.text}
+                                />
+                            </div>
+                        )}
                     </div>
-                    <div className="name_desig">
-                        <Link to="./">
-                            <p className="Name">{this.props.poster}</p>
-                        </Link>
-                        <p className="Desig">{this.props.designation}</p>
+                    <div className="ProfilePost__attributes-container">
+                        <p className="ProfilePost__attributes-like">{this.state.likesCount} Likes</p>
+                        <p className="ProfilePost__attributes-comments">{this.props.comments} Comments</p>
                     </div>
-                </div>
-                <div className="home-post-content">
-                    <p>{this.props.content}</p>
-                    <p className="hashtags">{this.props.hashtags}</p>
-                    <img src={this.props.image} alt={this.props.content}></img>
-                </div>
-                <div className="post-attributes">
-                    <p>{this.state.likes_count} Likes</p>
-                    <p>{this.props.comments} Comments</p>
-                </div>
-                <div className="post-activity">
-                    <div>
-                        <button onClick={this.likePost}>
+                    <div className="ProfilePost__activity-container">
+                        <button onClick={this.handlePostLike}>
                             <svg
                                 width="19"
                                 height="18"
@@ -78,28 +75,34 @@ class Post extends Component {
                                 />
                             </svg>
                         </button>
-                    </div>
-                    <div>
                         <button>
                             <img src={msg} alt="Message"></img>
                         </button>
-                    </div>
-                    <div>
                         <button>
                             <img src={share} alt="Share"></img>
                         </button>
                     </div>
+                    <div className="ProfilePost__comments-container">
+                        <div className="ProfilePost__comments-image-container">
+                            <img
+                                src={`https://mace-connect.herokuapp.com/profile/${this.props.userImageName}`}
+                                alt="Profile Picture"
+                            />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Add a comment"
+                            className="comment-input-field"
+                            onFocus={this.handleCommentBoxFocus}
+                        />
+                    </div>
+                    <div className="ProfilePost__load-comments-container">
+                        <Link to="./" className="ProfilePost__load-comments-button">
+                            View all comments
+                        </Link>
+                    </div>
                 </div>
-                <div className="post-comment">
-                    <img src={this.props.profilepic} alt="Profilepic"></img>
-                    <input type="text" placeholder="Add a comment" className="comment-input-field"></input>
-                </div>
-                <div className="load-comments">
-                    <Link to="./" className="comments-loader">
-                        View all comments
-                    </Link>
-                </div>
-            </div>
+            </Card>
         );
     }
 }

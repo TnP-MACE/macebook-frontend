@@ -71,6 +71,7 @@ const Login = (props) => {
                             user: {
                                 email: loginData.email,
                                 username: loginData.username,
+                                id: loginData.uid,
                             },
                             token: loginData.access_token,
                         };
@@ -153,7 +154,7 @@ const Login = (props) => {
 
                                 <div>
                                     <button type="submit" disabled={stateData.isSubmitting}>
-                                        {stateData.isSubmitting && "loading..."}Sign in
+                                        {stateData.isSubmitting && "loading..."} Sign in
                                     </button>
                                 </div>
                                 <div className="Login__container-white__create">

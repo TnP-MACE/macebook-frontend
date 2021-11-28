@@ -16,52 +16,55 @@ import { Redirect, useHistory } from "react-router";
 import AuthContext from "../../auth/AuthContext";
 import isAuthenticated from "../../auth/isAuthenticated";
 
-const Completeprofile = () => {
+const Completeprofile = (props) => {
     const history = useHistory();
     const { state, dispatch } = useContext(AuthContext);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [changeCoverActive, setChangeCoverActive] = useState(false);
+    const [coverImage, setCoverImage] = useState("");
+    const [profileImage, setProfileImage] = useState("");
 
-    const Profile = () => {
+    const handleProfileImageAdd = (evt) => {
         const element = document.getElementById("profile-input");
         const file = element.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
+            setProfileImage(reader.result);
             const output = document.getElementById("profile-img");
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
         document.getElementById("profile-img-default").style.display = "none";
     };
-    const Cover = () => {
+
+    const handleCoverImageAdd = () => {
         const element = document.getElementById("cover-input");
         const file = element.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
+            setCoverImage(reader.result);
             const output = document.getElementById("cover-img");
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
         setChangeCoverActive(true);
-        // document.getElementById("cover-input").style.display = "none";
-        // document.getElementById("cover-change-label").style.display = "";
-        // document.getElementById("cover-input-label").style.display = "none";
     };
-    const Coverchange = () => {
+
+    const handleCoverImageChange = () => {
         const element = document.getElementById("cover-input-change");
         const file = element.files[0];
 
         const reader = new FileReader();
         reader.onload = () => {
+            setCoverImage(reader.result);
             const output = document.getElementById("cover-img");
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
-        // document.getElementById("cover-input").style.display = "none";
     };
 
     function CustomSelect({ label, options, onChange, defaultValue, isMulti }) {
@@ -72,6 +75,44 @@ const Completeprofile = () => {
         );
     }
 
+    async function submitCoverImage(token) {
+        const coverImageElement = document.getElementById("cover-input");
+        const coverImageData = coverImageElement.files[0];
+        let coverFormData = new FormData();
+        coverFormData.append("cover", coverImageData);
+        console.log("@@@@@@@@@@@@@");
+        console.log(coverFormData.get("cover"));
+
+        const coverImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/cover", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: coverFormData,
+        });
+
+        const coverResponseData = await coverImageResponse.json();
+        console.log(coverResponseData);
+    }
+
+    async function submitProfileImage(token) {
+        const profileImageElement = document.getElementById("profile-input");
+        const profileImageData = profileImageElement.files[0];
+        let profileFormData = new FormData();
+        profileFormData.append("profilepicture", profileImageData);
+
+        const profileImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/picture", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: profileFormData,
+        });
+
+        const profileResponseData = await profileImageResponse.json();
+        console.log(profileResponseData);
+    }
+
     const options = [
         { label: "React", value: "react" },
         { label: "ReactNative", value: "react-native" },
@@ -79,7 +120,7 @@ const Completeprofile = () => {
         { label: "CSS", value: "css" },
     ];
 
-    function onChangeInput(value) {
+    function onSkillChange(value) {
         const data = sessionStorage.getItem("skills");
         let skills = [];
         if (data) {
@@ -100,7 +141,7 @@ const Completeprofile = () => {
                 setUsername(payload.user.username);
                 setEmail(payload.user.email);
             } else {
-                this.props.history.push("/login");
+                history.push("/login");
             }
         })();
     }, []);
@@ -129,6 +170,7 @@ const Completeprofile = () => {
                 rphno: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
+                setSubmitting(true);
                 const skillData = sessionStorage.getItem("skills");
                 let skills = [
                     [
@@ -136,14 +178,15 @@ const Completeprofile = () => {
                         { label: "Javascript", value: "js" },
                     ],
                 ];
+
                 if (skillData) {
                     skills = JSON.parse(skillData);
                 }
+
                 const sk = skills[skills.length - 1];
                 const skData = sk.map((s) => s.value);
-                console.log(skData);
                 const data = { ...values, skills: skData };
-                console.log(data);
+
                 const accomplishment = [];
                 const finaldata = {
                     fullname: data.fullname,
@@ -166,9 +209,10 @@ const Completeprofile = () => {
                     skills: data.skills,
                     accomplishments: accomplishment,
                 };
-                const asyncFunc = async () => {
+                (async () => {
                     try {
-                        const token = window.localStorage.getItem("token");
+                        const token = state.token;
+                        console.log(token);
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
                             {
@@ -184,14 +228,27 @@ const Completeprofile = () => {
                         if (completeprofiledata.success) {
                             window.localStorage.setItem("profile-completed", true);
                             if (completeprofiledata.success) {
-                                history.push("/");
+                                // history.push("/");
+                                console.log("success");
                             }
+
+                            if (profileImage) {
+                                submitProfileImage(token);
+                            }
+
+                            if (coverImage) {
+                                submitCoverImage(token);
+                            }
+                        } else {
+                            alert("Couldn't submit your profile! Try again");
+                            setSubmitting(false);
                         }
                     } catch (e) {
+                        alert("Couldn't submit your profile! Try again");
+                        setSubmitting(false);
                         console.log(e);
                     }
-                };
-                asyncFunc();
+                })();
             }}
             validationSchema={Yup.object().shape({
                 // username: Yup.string().required("Required"),
@@ -209,11 +266,15 @@ const Completeprofile = () => {
                     <>
                         <Header active={"home"} />
                         <div className="Completion">
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} id="completion-form">
                                 <div className="container Completion__container">
                                     <div className="Completion__cover-container">
                                         <div className="Completion__cover">
-                                            <img id="cover-img" className="Completion__cover-file-ico" />
+                                            <img
+                                                id="cover-img"
+                                                className="Completion__cover-file-ico"
+                                                name="profilecover"
+                                            />
                                         </div>
                                         {changeCoverActive || (
                                             <div className="Completion__cover-image-btn-container">
@@ -229,7 +290,7 @@ const Completeprofile = () => {
                                                     value={values.cover}
                                                     onChange={(e) => {
                                                         handleChange(e);
-                                                        Cover(e);
+                                                        handleCoverImageAdd(e);
                                                     }}
                                                     onBlur={handleBlur}
                                                     style={{ display: "none" }}
@@ -258,7 +319,7 @@ const Completeprofile = () => {
                                             value={values.profile}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                Profile(e);
+                                                handleProfileImageAdd(e);
                                             }}
                                             onBlur={handleBlur}
                                             id="profile-input"
@@ -277,7 +338,7 @@ const Completeprofile = () => {
                                                     values={values.cover}
                                                     onChange={(e) => {
                                                         handleChange(e);
-                                                        Coverchange(e);
+                                                        handleCoverImageChange(e);
                                                     }}
                                                     onBlur={handleBlur}
                                                     id="cover-input-change"
@@ -431,7 +492,7 @@ const Completeprofile = () => {
                                                         <CustomSelect
                                                             isMulti={true}
                                                             defaultValue={[options[3], options[2]]}
-                                                            onChange={onChangeInput}
+                                                            onChange={onSkillChange}
                                                             options={options}
                                                             label="Choose a libary"
                                                         />
@@ -507,7 +568,15 @@ const Completeprofile = () => {
                             <button type="submit">Add</button> */}
                                         </div>
                                         <button type="submit" className="Completion__submit-btn">
-                                            Go to Feed
+                                            {isSubmitting
+                                                ? // <div class="lds-ring">
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  //     <div></div>
+                                                  // </div>
+                                                  "Submitting..."
+                                                : "Submit"}
                                         </button>
                                     </div>
                                 </div>

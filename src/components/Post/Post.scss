@@ -35,6 +35,11 @@
         }
     }
 }
+
+.home-posts-text {
+    white-space: pre-wrap;
+}
+
 .home-posts-container {
     .poster {
         display: flex;
@@ -78,6 +83,8 @@
     }
     .home-posts-content {
         width: 110%;
+        // margin-bottom: 10px;
+
         p {
             margin-left: 5rem;
             width: 80%;
@@ -97,6 +104,7 @@
         width: 60%;
         display: flex;
         justify-content: space-around;
+        margin: 10px 0;
         p {
             font-family: Poppins;
             font-size: 11px;

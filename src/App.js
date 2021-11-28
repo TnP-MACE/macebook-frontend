@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NoMatch from "./pages/NoMatch/NoMatch";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile2";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Signup from "./pages/Signup/Signup";
 import CompleteProfile from "./pages/CompleteProfile/CompleteProfile";

@@ -6,8 +6,8 @@ import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
 
 class Post extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         // eslint-disable-next-line no-undef
         this.state = {
             liked: false,
@@ -17,6 +17,7 @@ class Post extends Component {
             posts: [],
         };
         this.likePost = this.likePost.bind(this);
+        // console.log(this.props.content);
     }
     updateCount() {
         data.likes = this.state.likes_count;
@@ -66,7 +67,11 @@ class Post extends Component {
                     <div className="posterimg">
                         <Link to="./">
                             {" "}
-                            <img src={this.props.posterprofile} alt="posterimage" className="profile-pic"></img>
+                            <img
+                                src={`https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`}
+                                alt="posterimage"
+                                className="profile-pic"
+                            ></img>
                         </Link>
                     </div>
                     <div className="name_desig">
@@ -77,9 +82,11 @@ class Post extends Component {
                     </div>
                 </div>
                 <div className="home-posts-content">
-                    <p>{this.props.content}</p>
+                    <p className="home-posts-text">{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
-                    <img src={this.props.image} alt={this.props.content}></img>
+                    {this.props.imageName && (
+                        <img src={`https://mace-connect.herokuapp.com/post/${this.props.imageName}`} alt="" />
+                    )}
                 </div>
                 <div className="home-posts-attributes">
                     <p>{this.state.likes_count} Likes</p>
@@ -116,7 +123,10 @@ class Post extends Component {
                     </div>
                 </div>
                 <div className="home-posts-comment">
-                    <img src={this.props.profilepic} alt="Profilepic"></img>
+                    <img
+                        src={`https://mace-connect.herokuapp.com/profile/${this.props.profileImageName}`}
+                        alt="Profilepic"
+                    />
                     <input
                         type="text"
                         placeholder="Add a comment"

@@ -18,18 +18,70 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            message: {
+                text: "",
+                type: "success",
+            },
             loading: true,
             postImg: postImg,
             designation: "SDE I at Amazon",
             profilepic: profilepic,
             posts: [],
-            profile: [],
+            profile: {
+                about: "This is a sample bio",
+                accomplishments: [],
+                email: "asdf",
+                address: null,
+                admission: { admission_no: "sdfjh", branch: "sdfjkh", batch: "1254" },
+                cover_url: null,
+                experience: [],
+                fullname: "lksdjf",
+                phoneno: "9456898",
+                profile_id: "cf0069b6-dc0e-465c-8ce6-d6da3c226b31",
+                profile_image_url: null,
+                ref_email: "",
+                ref_fullname: "",
+                ref_phonenumber: "",
+                skills: [],
+                status: "complete",
+                urls: { linkedin: "", facebook: "", github: "" },
+            },
         };
 
-        this.getPosts = this.getPosts.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
+        this.fetchProfile = this.fetchProfile.bind(this);
+        this.setMessage = this.setMessage.bind(this);
+        this.clearMessage = this.clearMessage.bind(this);
     }
 
-    async getPosts() {
+    clearMessage() {
+        this.setState((prev) => {
+            return {
+                ...prev,
+                message: {
+                    text: "",
+                    type: "success",
+                },
+            };
+        });
+    }
+
+    setMessage(message, type) {
+        this.setState((prev) => {
+            return {
+                ...prev,
+                message: {
+                    text: message,
+                    type: type,
+                },
+            };
+        });
+        // setTimeout(() => {
+        //     this.clearMessage();
+        // }, 3000);
+    }
+
+    async fetchPosts(cbk) {
         const { state } = this.context;
         try {
             const token = state.token;
@@ -44,12 +96,40 @@ class Home extends Component {
             }
             let data = await response.json();
             console.log(data);
-            return this.setState({
-                posts: data,
-                profile: state.user,
-            });
+
+            return this.setState(
+                {
+                    posts: data,
+                },
+                () => cbk()
+            );
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    async fetchProfile(userId, cbk) {
+        const { state } = this.context;
+        console.log(userId);
+
+        try {
+            const token = state.token;
+            const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            const data = await response.json();
+            console.log(data.profile);
+            this.setState(
+                {
+                    profile: data.profile,
+                },
+                cbk
+            );
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -64,13 +144,13 @@ class Home extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.getPosts().then(this.setState({ loading: false }));
+                    this.fetchProfile(payload.user.id, () => this.fetchPosts(() => this.setState({ loading: false })));
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.getPosts().then(this.setState({ loading: false }));
+            this.fetchProfile(state.user.id, () => this.fetchPosts(() => this.setState({ loading: false })));
         }
     }
 
@@ -86,8 +166,18 @@ class Home extends Component {
                     <div className="card-cols">
                         <div className="card-col1">
                             <div className="tweetbox-container">
-                                <Tweetbox></Tweetbox>
+                                <Tweetbox
+                                    setMessage={this.setMessage}
+                                    getPosts={this.getPosts}
+                                    user={this.state.profile}
+                                ></Tweetbox>
                             </div>
+                            {this.state.message.text && (
+                                <div className="message-box message-box--success">
+                                    <p>{this.state.message.text}</p>
+                                    <span onClick={this.clearMessage}>X</span>
+                                </div>
+                            )}
 
                             {this.state.loading ? (
                                 <div className="Home__spinner-container">
@@ -99,14 +189,14 @@ class Home extends Component {
                                         <Card key={post.post_id}>
                                             <Post
                                                 poster={this.state.profile.username}
-                                                posterprofile={this.state.profilepic}
+                                                profileImageName={this.state.profile.profile_image_url}
                                                 designation={this.state.designation}
                                                 content={post.text}
                                                 hashtags={post.hashtags}
-                                                image="https://picsum.photos/seed/picsum/200/"
+                                                imageName={post.post_image_name}
                                                 likes={post.likes}
                                                 comments={post.comments}
-                                                profilepic={this.state.profilepic}
+                                                postCreatorImageName={post.post_profile_image_name}
                                             ></Post>
                                         </Card>
                                     );
