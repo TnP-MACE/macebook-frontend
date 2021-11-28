@@ -65,7 +65,10 @@ class Tweetbox extends Component {
         return (
             <div className="Tweetbox">
                 <div className="profile-pic">
-                    <img src={profilepic} alt="profilepicture"></img>
+                    <img
+                        src={`https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`}
+                        alt="profilepicture"
+                    ></img>
                 </div>
                 <div className="input-text-field">
                     <div onClick={() => this.openModal()}>

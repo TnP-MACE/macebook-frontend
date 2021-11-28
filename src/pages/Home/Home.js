@@ -27,7 +27,25 @@ class Home extends Component {
             designation: "SDE I at Amazon",
             profilepic: profilepic,
             posts: [],
-            profile: [],
+            profile: {
+                about: "This is a sample bio",
+                accomplishments: [],
+                email: "asdf",
+                address: null,
+                admission: { admission_no: "sdfjh", branch: "sdfjkh", batch: "1254" },
+                cover_url: null,
+                experience: [],
+                fullname: "lksdjf",
+                phoneno: "9456898",
+                profile_id: "cf0069b6-dc0e-465c-8ce6-d6da3c226b31",
+                profile_image_url: null,
+                ref_email: "",
+                ref_fullname: "",
+                ref_phonenumber: "",
+                skills: [],
+                status: "complete",
+                urls: { linkedin: "", facebook: "", github: "" },
+            },
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
@@ -77,11 +95,11 @@ class Home extends Component {
                 return alert("Couldn't fetch posts! Reload this page.");
             }
             let data = await response.json();
+            console.log(data);
 
             return this.setState(
                 {
                     posts: data,
-                    profile: state.user,
                 },
                 () => cbk()
             );
@@ -90,8 +108,12 @@ class Home extends Component {
         }
     }
 
-    async fetchProfile(token, userId) {
+    async fetchProfile(userId, cbk) {
+        const { state } = this.context;
+        console.log(userId);
+
         try {
+            const token = state.token;
             const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
                 method: "GET",
                 headers: {
@@ -99,7 +121,13 @@ class Home extends Component {
                 },
             });
             const data = await response.json();
-            console.log(data);
+            console.log(data.profile);
+            this.setState(
+                {
+                    profile: data.profile,
+                },
+                cbk
+            );
         } catch (e) {
             console.error(e);
         }
@@ -116,13 +144,13 @@ class Home extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.fetchPosts(() => this.setState({ loading: false }));
+                    this.fetchProfile(payload.user.id, () => this.fetchPosts(() => this.setState({ loading: false })));
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.fetchPosts(() => this.setState({ loading: false }));
+            this.fetchProfile(state.user.id, () => this.fetchPosts(() => this.setState({ loading: false })));
         }
     }
 
@@ -138,7 +166,11 @@ class Home extends Component {
                     <div className="card-cols">
                         <div className="card-col1">
                             <div className="tweetbox-container">
-                                <Tweetbox setMessage={this.setMessage} getPosts={this.getPosts}></Tweetbox>
+                                <Tweetbox
+                                    setMessage={this.setMessage}
+                                    getPosts={this.getPosts}
+                                    user={this.state.profile}
+                                ></Tweetbox>
                             </div>
                             {this.state.message.text && (
                                 <div className="message-box message-box--success">
@@ -157,14 +189,14 @@ class Home extends Component {
                                         <Card key={post.post_id}>
                                             <Post
                                                 poster={this.state.profile.username}
-                                                posterprofile={this.state.profilepic}
+                                                profileImageName={this.state.profile.profile_image_url}
                                                 designation={this.state.designation}
                                                 content={post.text}
                                                 hashtags={post.hashtags}
-                                                image="https://picsum.photos/seed/picsum/200/"
+                                                imageName={post.post_image_name}
                                                 likes={post.likes}
                                                 comments={post.comments}
-                                                profilepic={this.state.profilepic}
+                                                postCreatorImageName={post.post_profile_image_name}
                                             ></Post>
                                         </Card>
                                     );

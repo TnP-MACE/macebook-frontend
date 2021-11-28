@@ -45,12 +45,14 @@ class Post extends Component {
                     <div className="ProfilePost__content-container">
                         <p className="ProfilePost__content-text">{this.props.post.text}</p>
                         <p className="ProfilePost__content-hashtag">{this.props.hashtags}</p>
-                        <div className="ProfilePost__content-image">
-                            <img
-                                src={`https://mace-connect.herokuapp.com/profile/${this.props.userImageName}`}
-                                alt={this.props.text}
-                            />
-                        </div>
+                        {this.props.postImageName && (
+                            <div className="ProfilePost__content-image">
+                                <img
+                                    src={`https://mace-connect.herokuapp.com/profile/${this.props.postImageName}`}
+                                    alt={this.props.text}
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="ProfilePost__attributes-container">
                         <p className="ProfilePost__attributes-like">{this.state.likesCount} Likes</p>
@@ -82,7 +84,10 @@ class Post extends Component {
                     </div>
                     <div className="ProfilePost__comments-container">
                         <div className="ProfilePost__comments-image-container">
-                            <img src={this.props.userImage} alt="Profile Picture" />
+                            <img
+                                src={`https://mace-connect.herokuapp.com/profile/${this.props.userImageName}`}
+                                alt="Profile Picture"
+                            />
                         </div>
                         <input
                             type="text"
