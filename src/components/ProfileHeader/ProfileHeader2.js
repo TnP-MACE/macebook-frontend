@@ -14,7 +14,7 @@ class ProfileHeader extends React.Component {
     }
 
     render() {
-        const { fullname, about, address, admission, location, connections } = this.props.user;
+        const { fullname, about, address, admission, location, connections, profile_image_url } = this.props.user;
         const { branch, batch } = admission;
 
         return (
@@ -24,7 +24,7 @@ class ProfileHeader extends React.Component {
                 </div>
                 <div className="Profile__header-data-container">
                     <div className="Profile__header-data-image-container">
-                        <img src={profileimg} alt="User Img" />
+                        <img src={`https://mace-connect.herokuapp.com/profile/${profile_image_url}`} alt="User Img" />
                     </div>
                     <div className="Profile__header-data-text-container">
                         <h1 className="Profile__header-data-name">{fullname}</h1>

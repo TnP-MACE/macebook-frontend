@@ -26,7 +26,7 @@ const Completeprofile = (props) => {
     const [coverImage, setCoverImage] = useState("");
     const [profileImage, setProfileImage] = useState("");
 
-    const handleProfileImageAdd = () => {
+    const handleProfileImageAdd = (evt) => {
         const element = document.getElementById("profile-input");
         const file = element.files[0];
 
@@ -73,6 +73,44 @@ const Completeprofile = (props) => {
                 <Select isMulti={isMulti} options={options} onChange={onChange} defaultValue={defaultValue} />
             </div>
         );
+    }
+
+    async function submitCoverImage(token) {
+        const coverImageElement = document.getElementById("cover-input");
+        const coverImageData = coverImageElement.files[0];
+        let coverFormData = new FormData();
+        coverFormData.append("cover", coverImageData);
+        console.log("@@@@@@@@@@@@@");
+        console.log(coverFormData.get("cover"));
+
+        const coverImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/cover", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: coverFormData,
+        });
+
+        const coverResponseData = await coverImageResponse.json();
+        console.log(coverResponseData);
+    }
+
+    async function submitProfileImage(token) {
+        const profileImageElement = document.getElementById("profile-input");
+        const profileImageData = profileImageElement.files[0];
+        let profileFormData = new FormData();
+        profileFormData.append("profilepicture", profileImageData);
+
+        const profileImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/picture", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: profileFormData,
+        });
+
+        const profileResponseData = await profileImageResponse.json();
+        console.log(profileResponseData);
     }
 
     const options = [
@@ -194,19 +232,13 @@ const Completeprofile = (props) => {
                                 console.log("success");
                             }
 
-                            const profileImageResponse = await fetch(
-                                "https://mace-connect.herokuapp.com/api/v1/profile/picture",
-                                {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        Authorization: `Bearer ${token}`,
-                                    },
-                                    body: JSON.stringify({ profilepicture: profileImage }),
-                                }
-                            );
-                            const data = await profileImageResponse.json();
-                            console.log(data);
+                            if (profileImage) {
+                                submitProfileImage(token);
+                            }
+
+                            if (coverImage) {
+                                submitCoverImage(token);
+                            }
                         } else {
                             alert("Couldn't submit your profile! Try again");
                             setSubmitting(false);
@@ -234,11 +266,15 @@ const Completeprofile = (props) => {
                     <>
                         <Header active={"home"} />
                         <div className="Completion">
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} id="completion-form">
                                 <div className="container Completion__container">
                                     <div className="Completion__cover-container">
                                         <div className="Completion__cover">
-                                            <img id="cover-img" className="Completion__cover-file-ico" />
+                                            <img
+                                                id="cover-img"
+                                                className="Completion__cover-file-ico"
+                                                name="profilecover"
+                                            />
                                         </div>
                                         {changeCoverActive || (
                                             <div className="Completion__cover-image-btn-container">

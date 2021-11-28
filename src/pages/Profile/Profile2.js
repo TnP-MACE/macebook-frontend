@@ -190,7 +190,11 @@ class Profil2 extends Component {
                                 <div className="Profile__content-main-posts">
                                     {this.state.posts.map((post) => {
                                         return (
-                                            <Post key={post.post_id} post={post} userImage={this.state.user.image} />
+                                            <Post
+                                                key={post.post_id}
+                                                post={post}
+                                                userImageName={this.state.user.profile_image_url}
+                                            />
                                         );
                                     })}
                                     <a href="/posts">

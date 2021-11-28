@@ -46,7 +46,10 @@ class Post extends Component {
                         <p className="ProfilePost__content-text">{this.props.post.text}</p>
                         <p className="ProfilePost__content-hashtag">{this.props.hashtags}</p>
                         <div className="ProfilePost__content-image">
-                            <img src={this.props.userImage} alt={this.props.text} />
+                            <img
+                                src={`https://mace-connect.herokuapp.com/profile/${this.props.userImageName}`}
+                                alt={this.props.text}
+                            />
                         </div>
                     </div>
                     <div className="ProfilePost__attributes-container">
