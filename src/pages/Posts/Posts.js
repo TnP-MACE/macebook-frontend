@@ -20,16 +20,19 @@ class Posts extends Component {
         super(props);
         this.state = {
             loading: true,
-            username: "John Doe",
-            cover: { cover },
-            profilepic: profilepic,
-            position: "Senior SWE at Apple Inc.",
-            location: "San Fransisco, CA",
-            batch: 14,
-            dept: "CSE",
-            conn: 2000,
-            self: true,
-            skills: ["HTML", "CSS", "REACTJS", "NodeJS"],
+            user: {
+                username: "john",
+                fullname: "John Doe",
+                bio: "SENIOR SWE AT APPLE INC",
+                location: "San Fransisco, CA",
+                batch: "2014",
+                branch: "CSE",
+                connections: 25000,
+                image: profileimg,
+                cover: cover,
+                isAuthenticated: true,
+                id: 1,
+            },
             posts: [
                 {
                     poster: "Ruben Lubin",
@@ -73,10 +76,10 @@ class Posts extends Component {
                 },
             ],
         };
-        this.getPosts = this.getPosts.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
     }
 
-    async getPosts(cbk) {
+    async fetchPosts(cbk) {
         const { state } = this.context;
         try {
             const token = state.token;
@@ -90,14 +93,25 @@ class Posts extends Component {
                 return alert("Couldn't fetch posts! Reload this page.");
             }
             let data = await response.json();
+            console.log(data);
 
-            return this.setState(
-                {
-                    posts: data,
-                    username: state.user.username,
-                },
-                () => cbk()
-            );
+            data = data.map(async (post) => {
+                if (!post.post_image_name) return post;
+                let response = await fetch(
+                    "https://mace-connect.herokuapp.com/api/v1/uploads/posts/" + post.post_image_name,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                let data = await response.json();
+                console.log(data);
+                return post;
+            });
+
+            return this.setState({ posts: data }, cbk);
         } catch (error) {
             console.error(error);
         }
@@ -113,7 +127,7 @@ class Posts extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.getPosts(() => {
+                    this.fetchPosts(() => {
                         this.setState({ loading: false });
                     });
                 } else {
@@ -121,7 +135,7 @@ class Posts extends Component {
                 }
             })();
         } else {
-            this.getPosts(() => {
+            this.fetchPosts(() => {
                 this.setState({ loading: false });
             });
         }
@@ -137,18 +151,7 @@ class Posts extends Component {
                     </div>
                 ) : (
                     <div className="container">
-                        {/* <ProfileHeader
-                            user={this.state.username}
-                            cover={this.state.cover}
-                            profileimg={this.state.profilepic}
-                            position={this.state.position}
-                            location={this.state.location}
-                            batch={this.state.batch}
-                            dept={this.state.dept}
-                            conn={this.state.conn}
-                            self={this.state.self}
-                        /> */}
-                        <ProfileHeader />
+                        <ProfileHeader user={this.state.user} />
                         <div class="posts-body">
                             <h2>All Posts</h2>
                             <div className="posts-display">

@@ -30,7 +30,8 @@ class Home extends Component {
             profile: [],
         };
 
-        this.getPosts = this.getPosts.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
+        this.fetchProfile = this.fetchProfile.bind(this);
         this.setMessage = this.setMessage.bind(this);
         this.clearMessage = this.clearMessage.bind(this);
     }
@@ -62,7 +63,7 @@ class Home extends Component {
         // }, 3000);
     }
 
-    async getPosts(cbk) {
+    async fetchPosts(cbk) {
         const { state } = this.context;
         try {
             const token = state.token;
@@ -89,6 +90,21 @@ class Home extends Component {
         }
     }
 
+    async fetchProfile(token, userId) {
+        try {
+            const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     //ABcd@12345678910
     componentDidMount() {
         const { state, dispatch } = this.context;
@@ -100,13 +116,13 @@ class Home extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.getPosts(() => this.setState({ loading: false }));
+                    this.fetchPosts(() => this.setState({ loading: false }));
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.getPosts(() => this.setState({ loading: false }));
+            this.fetchPosts(() => this.setState({ loading: false }));
         }
     }
 

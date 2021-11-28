@@ -1,6 +1,7 @@
 .Profile {
     &__content {
         display: flex;
+        margin-top: -40px;
     }
 
     &__content-side {
@@ -63,8 +64,10 @@
 
         .Card {
             // width: 320px;
-            min-width: 0;
-            max-width: 320px;
+            // min-width: 0;
+            // width: 320px;
+            padding: 0;
+            width: fit-content;
             margin: 0 0 28px 0;
 
             &:not(:last-child) {
@@ -167,5 +170,12 @@
             font-size: 15px;
             font-weight: 600;
         }
+    }
+
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: calc(100vh - 100px);
+        align-items: center;
     }
 }
