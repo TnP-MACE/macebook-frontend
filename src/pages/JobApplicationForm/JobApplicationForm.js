@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
-import JobCard from '../../components/JobCard/JobCard'
-import clogo from '../../assets/images/icons/company-logo.png'
-import './JobApplicationForm.scss'
-import fileresume from '../../assets/images/icons/ant-design_file-add-outlined.svg'
-import { useLocation} from 'react-router-dom'
-import queryString from 'query-string';
+import React, { useState, Component } from "react";
+import Header from "../../components/Header/Header";
+import JobCard from "../../components/JobCard/JobCard";
+import clogo from "../../assets/images/icons/company-logo.png";
+import "./JobApplicationForm.scss";
+import fileresume from "../../assets/images/icons/ant-design_file-add-outlined.svg";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 class JobApplicationForm extends Component {
     constructor(props) {
@@ -26,12 +26,57 @@ class JobApplicationForm extends Component {
                     user: "John Doe",
                 },
             ],
+            resume: [],
         };
+        this.onSubmit = this.onSubmit.bind(this);
     }
-    
-    componentDidMount(){
-        const res=queryString.parse(this.props.location.search);
-        console.log(res)
+    // const [selectedFile, setSelectedFile] = useState();
+    // const [isFilePicked, setIsFilePicked] = useState(false);
+    // changeHandler(event){
+    //     setSelectedFile(event.target.files[0]);
+    // 	setIsSelected(true);
+    // }
+    ResumePdfInput() {
+        console.log("ResumePdfInput");
+        const element = document.getElementById("file-input");
+        const file = element.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            const output = document.getElementById("file-input");
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+    onSubmit(event) {
+        console.log("change");
+        const fun = async () => {
+            try {
+                const token = window.localStorage.getItem("token");
+                const jobPostResponse = await fetch(
+                    "https://mace-connect.herokuapp.com/api/v1/jobs/applications/{job_id}",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            resume: this.state.resume,
+                        }),
+                    }
+                );
+
+                const jobPostData = await jobPostResponse.json();
+                console.log(jobPostData);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fun();
+    }
+    componentDidMount() {
+        const res = queryString.parse(this.props.location.search);
+        console.log(res);
     }
 
     render() {
@@ -62,7 +107,13 @@ class JobApplicationForm extends Component {
                                 <img src={fileresume} />
                             </label>
 
-                            <input id="file-input" type="file" />
+                            <input
+                                id="file-input"
+                                onChange={(e) => {
+                                    this.ResumePdfInput(e);
+                                }}
+                                type="file"
+                            />
                         </div>
                         <p>Upload or Drag the file into here</p>
                     </div>
@@ -76,7 +127,9 @@ class JobApplicationForm extends Component {
                         className="msg-field"
                     ></textarea>
                 </div>
-                <button className="btn-apply">APPLY</button>
+                <button className="btn-apply" onSubmit={this.onSubmit}>
+                    APPLY
+                </button>
             </div>
         );
     }

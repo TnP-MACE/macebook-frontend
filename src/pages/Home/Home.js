@@ -43,7 +43,7 @@ class Home extends Component {
                 return alert("Couldn't fetch posts! Reload this page.");
             }
             let data = await response.json();
-
+            console.log(data);
             return this.setState({
                 posts: data,
                 profile: state.user,
