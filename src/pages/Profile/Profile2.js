@@ -37,21 +37,61 @@ class Profil2 extends Component {
             experience: [{}, {}],
             posts: [{}, {}],
             user: {
-                username: "john",
-                fullname: "John Doe",
-                bio: "SENIOR SWE AT APPLE INC",
-                location: "San Fransisco, CA",
-                batch: "2014",
-                branch: "CSE",
-                connections: 25000,
-                image: profileimg,
-                cover: cover,
-                isAuthenticated: true,
-                id: 1,
+                // username: "john",
+                // fullname: "John Doe",
+                // bio: "SENIOR SWE AT APPLE INC",
+                // location: "San Fransisco, CA",
+                // batch: "2014",
+                // branch: "CSE",
+                // connections: 25000,
+                // image: profileimg,
+                // cover: cover,
+                // isAuthenticated: true,
+                // id: 1,
+
+                about: "This is a sample bio",
+                accomplishments: [],
+                email: "asdf",
+                address: null,
+                admission: { admission_no: "sdfjh", branch: "sdfjkh", batch: "1254" },
+                cover_url: null,
+                experience: [],
+                fullname: "lksdjf",
+                phoneno: "9456898",
+                profile_id: "cf0069b6-dc0e-465c-8ce6-d6da3c226b31",
+                profile_image_url: null,
+                ref_email: "",
+                ref_fullname: "",
+                ref_phonenumber: "",
+                skills: [],
+                status: "complete",
+                urls: { linkedin: "", facebook: "", github: "" },
             },
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
+    }
+
+    async fetchProfile(token, userId, cbk) {
+        console.log(userId);
+        try {
+            const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+            this.setState(
+                {
+                    user: { ...data.profile, email: this.context.state.user.email },
+                },
+                cbk
+            );
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     async fetchPosts(token, cbk) {
@@ -87,16 +127,22 @@ class Profil2 extends Component {
                         payload: payload,
                     });
 
-                    this.fetchPosts(payload.token, () => {
-                        this.setState({ loading: false });
+                    console.log(payload);
+
+                    this.fetchProfile(payload.token, payload.user.id, () => {
+                        this.fetchPosts(payload.token, () => {
+                            this.setState({ loading: false });
+                        });
                     });
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.fetchPosts(state.token, () => {
-                this.setState({ loading: false });
+            this.fetchProfile(state.token, state.user.id, () => {
+                this.fetchPosts(state.token, () => {
+                    this.setState({ loading: false });
+                });
             });
         }
     }
@@ -117,15 +163,14 @@ class Profil2 extends Component {
                         <ProfileHeader user={this.state.user} />
                         <div className="Profile__content">
                             <aside className="Profile__content-side">
-                                <div className="Profile__about">
-                                    <Card>
-                                        <h2>ABOUT</h2>
-                                        <p>
-                                            The founder and late CEO of #Apple. I code and create iPhones. And my
-                                            disciples, ഇവന്മാര് ഈ company പൂട്ടിക്കും
-                                        </p>
-                                    </Card>
-                                </div>
+                                {this.state.user.about && (
+                                    <div className="Profile__about">
+                                        <Card>
+                                            <h2>ABOUT</h2>
+                                            <p>{this.state.user.about}</p>
+                                        </Card>
+                                    </div>
+                                )}
                                 <div className="Profile__skills">
                                     <Card>
                                         <h2>SKILLS</h2>
@@ -189,28 +234,36 @@ class Profil2 extends Component {
                                 <div className="Profile__content-main-contact">
                                     <div className="Profile__content-main-contact-img-txt-container">
                                         <img src={mail} alt="mail" />
-                                        <p>john@doe.com</p>
+                                        <p>{this.state.user.email}</p>
                                     </div>
-                                    <div className="Profile__content-main-contact-img-txt-container">
-                                        <img src={phone} alt="mail" />
-                                        <p>+91 123456789</p>
-                                    </div>
+                                    {this.state.user.phoneno && (
+                                        <div className="Profile__content-main-contact-img-txt-container">
+                                            <img src={phone} alt="mail" />
+                                            <p>{this.state.user.phoneno}</p>
+                                        </div>
+                                    )}
                                     <div className="Profile__content-main-contact-img-txt-container">
                                         <img src={web} alt="mail" />
                                         <p>johndoe.com</p>
                                     </div>
-                                    <div className="Profile__content-main-contact-img-txt-container">
-                                        <img src={linkedin} alt="mail" />
-                                        <p>linkedin.com/in/johndoe</p>
-                                    </div>
-                                    <div className="Profile__content-main-contact-img-txt-container">
-                                        <img src={fb} alt="mail" />
-                                        <p>John Doe</p>
-                                    </div>
-                                    <div className="Profile__content-main-contact-img-txt-container">
-                                        <img src={github} alt="mail" />
-                                        <p>github.com/johndoe</p>
-                                    </div>
+                                    {this.state.user.urls.linkedin && (
+                                        <div className="Profile__content-main-contact-img-txt-container">
+                                            <img src={linkedin} alt="mail" />
+                                            <p>{this.state.user.urls.linkedin}</p>
+                                        </div>
+                                    )}
+                                    {this.state.user.urls.facebook && (
+                                        <div className="Profile__content-main-contact-img-txt-container">
+                                            <img src={fb} alt="mail" />
+                                            <p>{this.state.user.urls.facebook}</p>
+                                        </div>
+                                    )}
+                                    {this.state.user.urls.github && (
+                                        <div className="Profile__content-main-contact-img-txt-container">
+                                            <img src={github} alt="mail" />
+                                            <p>{this.state.user.urls.github}</p>
+                                        </div>
+                                    )}
                                 </div>
                             </main>
                         </div>

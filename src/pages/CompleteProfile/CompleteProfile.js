@@ -26,7 +26,7 @@ const Completeprofile = (props) => {
     const [coverImage, setCoverImage] = useState("");
     const [profileImage, setProfileImage] = useState("");
 
-    const Profile = () => {
+    const handleProfileImageAdd = () => {
         const element = document.getElementById("profile-input");
         const file = element.files[0];
 
@@ -40,7 +40,7 @@ const Completeprofile = (props) => {
         document.getElementById("profile-img-default").style.display = "none";
     };
 
-    const Cover = () => {
+    const handleCoverImageAdd = () => {
         const element = document.getElementById("cover-input");
         const file = element.files[0];
 
@@ -52,12 +52,9 @@ const Completeprofile = (props) => {
         };
         reader.readAsDataURL(file);
         setChangeCoverActive(true);
-        // document.getElementById("cover-input").style.display = "none";
-        // document.getElementById("cover-change-label").style.display = "";
-        // document.getElementById("cover-input-label").style.display = "none";
     };
 
-    const Coverchange = () => {
+    const handleCoverImageChange = () => {
         const element = document.getElementById("cover-input-change");
         const file = element.files[0];
 
@@ -68,7 +65,6 @@ const Completeprofile = (props) => {
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
-        // document.getElementById("cover-input").style.display = "none";
     };
 
     function CustomSelect({ label, options, onChange, defaultValue, isMulti }) {
@@ -86,7 +82,7 @@ const Completeprofile = (props) => {
         { label: "CSS", value: "css" },
     ];
 
-    function onChangeInput(value) {
+    function onSkillChange(value) {
         const data = sessionStorage.getItem("skills");
         let skills = [];
         if (data) {
@@ -175,10 +171,9 @@ const Completeprofile = (props) => {
                     skills: data.skills,
                     accomplishments: accomplishment,
                 };
-                const asyncFunc = async () => {
+                (async () => {
                     try {
-                        const token = window.localStorage.getItem("token");
-                        console.log("@@@@@@@@@@@@@");
+                        const token = state.token;
                         console.log(token);
                         const Completeprofileresponse = await fetch(
                             "https://mace-connect.herokuapp.com/api/v1/profile/completion",
@@ -186,7 +181,7 @@ const Completeprofile = (props) => {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    Authorization: `Bearer ${JSON.stringify(token)}`,
+                                    Authorization: `Bearer ${token}`,
                                 },
                                 body: JSON.stringify(finaldata),
                             }
@@ -198,6 +193,20 @@ const Completeprofile = (props) => {
                                 // history.push("/");
                                 console.log("success");
                             }
+
+                            const profileImageResponse = await fetch(
+                                "https://mace-connect.herokuapp.com/api/v1/profile/picture",
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: `Bearer ${token}`,
+                                    },
+                                    body: JSON.stringify({ profilepicture: profileImage }),
+                                }
+                            );
+                            const data = await profileImageResponse.json();
+                            console.log(data);
                         } else {
                             alert("Couldn't submit your profile! Try again");
                             setSubmitting(false);
@@ -207,8 +216,7 @@ const Completeprofile = (props) => {
                         setSubmitting(false);
                         console.log(e);
                     }
-                };
-                asyncFunc();
+                })();
             }}
             validationSchema={Yup.object().shape({
                 // username: Yup.string().required("Required"),
@@ -246,7 +254,7 @@ const Completeprofile = (props) => {
                                                     value={values.cover}
                                                     onChange={(e) => {
                                                         handleChange(e);
-                                                        Cover(e);
+                                                        handleCoverImageAdd(e);
                                                     }}
                                                     onBlur={handleBlur}
                                                     style={{ display: "none" }}
@@ -275,7 +283,7 @@ const Completeprofile = (props) => {
                                             value={values.profile}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                Profile(e);
+                                                handleProfileImageAdd(e);
                                             }}
                                             onBlur={handleBlur}
                                             id="profile-input"
@@ -294,7 +302,7 @@ const Completeprofile = (props) => {
                                                     values={values.cover}
                                                     onChange={(e) => {
                                                         handleChange(e);
-                                                        Coverchange(e);
+                                                        handleCoverImageChange(e);
                                                     }}
                                                     onBlur={handleBlur}
                                                     id="cover-input-change"
@@ -448,7 +456,7 @@ const Completeprofile = (props) => {
                                                         <CustomSelect
                                                             isMulti={true}
                                                             defaultValue={[options[3], options[2]]}
-                                                            onChange={onChangeInput}
+                                                            onChange={onSkillChange}
                                                             options={options}
                                                             label="Choose a libary"
                                                         />

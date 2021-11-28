@@ -6,14 +6,16 @@ import profileimg from "../../assets/images/icons/profile.webp";
 class ProfileHeader extends React.Component {
     // helpers
     getFormattedCount(count) {
-        if (count < 1000) return count;
+        if (isNaN(count)) return 0;
+        else if (count < 1000) return count;
         else if (count < 1000000) return `${count / 1000}K`;
         else if (count < 1000000000) return `${count / 1000000}M`;
         else return `${count / 1000000000}`;
     }
 
     render() {
-        const { fullname, bio, branch, batch, location, connections } = this.props.user;
+        const { fullname, about, address, admission, location, connections } = this.props.user;
+        const { branch, batch } = admission;
 
         return (
             <>
@@ -22,13 +24,13 @@ class ProfileHeader extends React.Component {
                 </div>
                 <div className="Profile__header-data-container">
                     <div className="Profile__header-data-image-container">
-                        <img src={profileimg} alt="User Img"></img>
+                        <img src={profileimg} alt="User Img" />
                     </div>
                     <div className="Profile__header-data-text-container">
                         <h1 className="Profile__header-data-name">{fullname}</h1>
-                        <p className="Profile__header-data-bio">{bio}</p>
+                        <p className="Profile__header-data-bio">{about}</p>
                         <p className="Profile__header-data-location">
-                            {location} . Batch of {batch} . {branch}
+                            {address && address + " ."} {batch && "Batch of " + batch + " ."} {branch}
                         </p>
                         <p className="Profile__header-data-followers">
                             {this.getFormattedCount(connections)} Connections
