@@ -14,13 +14,17 @@ class ProfileHeader extends React.Component {
     }
 
     render() {
-        const { fullname, about, address, admission, location, connections, profile_image_url } = this.props.user;
+        const { fullname, about, address, admission, location, connections, profile_image_url, cover_url } =
+            this.props.user;
         const { branch, batch } = admission;
 
         return (
             <>
                 <div className="Profile__header-cover-container">
-                    <img src={cover} alt="Background Image Not Loaded" />
+                    <img
+                        src={`https://mace-connect.herokuapp.com/cover/${cover_url}`}
+                        alt="Background Image Not Loaded"
+                    />
                 </div>
                 <div className="Profile__header-data-container">
                     <div className="Profile__header-data-image-container">

@@ -16,9 +16,10 @@ class Tweetbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { isModalOpen: false, text: "", topic: "" };
+        this.state = { isModalOpen: false, text: "", topic: "", postImage: "" };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleAddImageToPost = this.handleAddImageToPost.bind(this);
     }
     onChange(event) {
         this.setState((prev) => {
@@ -61,6 +62,18 @@ class Tweetbox extends Component {
         fun();
     }
 
+    handleAddImageToPost(evt) {
+        const element = evt.target;
+        const file = element.files[0];
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            this.setState({ postImage: reader.result });
+        };
+        reader.readAsDataURL(file);
+        // document.getElementById("profile-img-default").style.display = "none";
+    }
+
     render() {
         return (
             <div className="Tweetbox">
@@ -68,24 +81,29 @@ class Tweetbox extends Component {
                     <img
                         src={`https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`}
                         alt="profilepicture"
-                    ></img>
+                    />
                 </div>
                 <div className="input-text-field">
                     <div onClick={() => this.openModal()}>
                         <input className="text-field" name="text" placeholder="Add a post" />
                     </div>
                     <div className="input-video">
-                        <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn"></input>
-                        <input type="image" src={Video} onClick={() => this.openModal()} className="video-btn"></input>
+                        <input type="image" src={Camera} onClick={() => this.openModal()} className="video-btn" />
+                        <input type="image" src={Video} onClick={() => this.openModal()} className="video-btn" />
                     </div>
                     <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
                         <h3>Create a post</h3>
                         <hr></hr>
                         <div className="poster">
-                            <img src={profilepic} alt="profilepicture"></img>
+                            <div className="poster-img-container">
+                                <img
+                                    src={`https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`}
+                                    alt="profilepicture"
+                                />
+                            </div>
                             <div className="post-view">
                                 <Link to="./" className="profile-link">
-                                    David J
+                                    {this.props.user.fullname}
                                 </Link>
                                 <select id="post-viewers" name="post-viewers">
                                     <option value="Anyone">Anyone </option>
@@ -97,11 +115,27 @@ class Tweetbox extends Component {
                         <Card>
                             <textarea className="post-text" name="post-text" onChange={this.onChange}></textarea>
                         </Card>
+                        {this.state.postImage && (
+                            <div className="tweetbox-image-container">
+                                <img src={this.state.postImage} />
+                            </div>
+                        )}
                         <div className="modal-bottom">
                             <div class="media-input">
-                                <input type="image" src={Camera}></input>
-                                <input type="image" src={Video}></input>
-                                <input type="image" src={Doc}></input>
+                                <div>
+                                    <label htmlFor="tweetbox-image-input">
+                                        <img src={Doc} />
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="tweetbox-image-input"
+                                        name="image"
+                                        style={{ display: "none" }}
+                                        onChange={this.handleAddImageToPost}
+                                    />
+                                </div>
+                                {/* <input type="image" src={Video} />
+                                <input type="image" src={Doc} /> */}
                             </div>
                             <Card>
                                 <button type="button" onClick={this.onSubmit}>

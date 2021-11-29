@@ -198,6 +198,13 @@
         font-size: 12px;
     }
 
+    &__spinner-container {
+        display: flex;
+        justify-content: center;
+        height: calc(100vh - 100px);
+        align-items: center;
+    }
+
     .cover-input-change-container {
         margin-top: -3.5rem;
         display: flex;

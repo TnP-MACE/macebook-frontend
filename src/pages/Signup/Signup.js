@@ -67,11 +67,11 @@ const Signup = (props) => {
                         );
                         const registerData = await registerResponse.json();
                         console.log(registerData);
-                        if (registerData.success === false) {
+                        if (!registerData.success) {
                             return alert("Couldn't create account!");
                         }
                         setStateData({ isSubmitting: false });
-                        history.push("/login");
+                        // history.push("/login");
                     } catch (e) {
                         setStateData({ isSubmitting: false });
                         console.log(e);
@@ -124,21 +124,6 @@ const Signup = (props) => {
                                     <div className="Signup__container-white__error-message">{errors.user}</div>
                                 )}
 
-                                <div className="Signup__container-white__email">
-                                    <input
-                                        name="email"
-                                        type="text"
-                                        placeholder="Enter your email"
-                                        value={values.email}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={errors.email && touched.email && "error"}
-                                    />
-                                </div>
-                                {errors.email && touched.email && (
-                                    <div className="Signup__container-white__error-message">{errors.email}</div>
-                                )}
-
                                 <div className="Signup__container-white__username">
                                     <input
                                         name="username"
@@ -152,6 +137,21 @@ const Signup = (props) => {
                                 </div>
                                 {errors.username && touched.username && (
                                     <div className="Signup__container-white__error-message">{errors.username}</div>
+                                )}
+
+                                <div className="Signup__container-white__email">
+                                    <input
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className={errors.email && touched.email && "error"}
+                                    />
+                                </div>
+                                {errors.email && touched.email && (
+                                    <div className="Signup__container-white__error-message">{errors.email}</div>
                                 )}
 
                                 <div className="Signup__container-white__password">

@@ -31,11 +31,15 @@
     align-items: center;
     margin: $margin-sm;
     .profile-pic {
+        height: 55px;
+        width: 55px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-top: $margin-sm;
         img {
-            margin-top: $margin-sm;
-            height: 55px;
-            width: 55px;
-            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
     .input-text-field {
@@ -71,6 +75,19 @@
             }
         }
     }
+    .tweetbox-image-container {
+        height: 80px;
+        width: 100px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
 }
 .modal {
     z-index: 9999;
@@ -87,9 +104,21 @@
         margin: $margin-sm;
     }
     .poster {
+        margin: 10px 1.5rem;
         display: flex;
+        .poster-img-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
         img {
-            padding: $padding-sm;
+            // padding: $padding-sm;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
         }
         .profile-link {
             margin-top: $margin-sm;
@@ -112,7 +141,7 @@
     textarea {
         padding: 0px;
         overflow: hidden;
-        min-height: 12rem;
+        min-height: 6rem;
         height: 100%;
         width: 100%;
         border: none;
@@ -140,6 +169,14 @@
                 padding: 1rem;
             }
         }
+    }
+
+    .post-image-container {
+        // width: 100%;
+        height: 25px;
+        background-color: blue;
+        margin: 0 1.5rem;
+        box-sizing: border-box;
     }
 }
 .bg {

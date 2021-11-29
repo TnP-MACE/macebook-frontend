@@ -45,28 +45,31 @@ const Login = (props) => {
 
     return (
         <Formik
-            initialValues={{ username: "", password: "" }}
+            initialValues={{ email: "", password: "" }}
             onSubmit={(values, { setSubmitting }) => {
                 setStateData((prev) => ({ ...prev, isSubmitting: true }));
                 const asyncFunc = async () => {
                     try {
+                        console.log(values.email);
+                        console.log(values.password);
                         const loginResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/auth/login", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
                             },
                             body: JSON.stringify({
-                                email: values.username,
+                                email: values.email,
                                 password: values.password,
                             }),
                         });
+                        const loginData = await loginResponse.json();
+                        console.log(loginData);
 
                         if (loginResponse.status != 201) {
+                            setStateData((prev) => ({ ...prev, isSubmitting: false }));
                             return alert("Couldn't login!");
                         }
 
-                        const loginData = await loginResponse.json();
-                        console.log(loginData);
                         const payload = {
                             user: {
                                 email: loginData.email,
@@ -81,10 +84,26 @@ const Login = (props) => {
                         });
                         // const token = loginData.access_token;
                         // window.localStorage.setItem("token", token);
+                        const statusResponse = await fetch(
+                            "https://mace-connect.herokuapp.com/api/v1/profile/mystatus",
+                            {
+                                headers: {
+                                    Authorization: "Bearer " + payload.token,
+                                },
+                            }
+                        );
+                        if (!statusResponse.ok) {
+                            alert("Couldn't sign you in! Try again");
+                        }
+                        const statusData = await statusResponse.json();
                         setStateData((prev) => ({ ...prev, isSubmitting: false }));
-                        history.push("/complete-profile");
+                        if (statusData[0].status === "complete") {
+                            history.push("/");
+                        } else {
+                            history.push("/complete-profile");
+                        }
                     } catch (e) {
-                        // alert("Couldn't sign you in! Try again");
+                        alert("Couldn't sign you in! Try again");
                         setStateData((prev) => ({ ...prev, isSubmitting: false }));
                         console.log(e);
                     }
@@ -93,7 +112,7 @@ const Login = (props) => {
                 asyncFunc();
             }}
             validationSchema={Yup.object().shape({
-                username: Yup.string().required("Required"),
+                email: Yup.string().required("Required"),
                 password: Yup.string().required("No password provided."),
             })}
         >
@@ -119,17 +138,17 @@ const Login = (props) => {
                             <form onSubmit={handleSubmit}>
                                 <div className="Login__container-white__username">
                                     <input
-                                        name="username"
+                                        name="email"
                                         type="text"
                                         placeholder="Enter your email"
                                         value={values.email}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        className={errors.username && touched.username && "error"}
+                                        className={errors.email && touched.email && "error"}
                                     />
                                 </div>
-                                {errors.username && touched.username && (
-                                    <div className="Login__container-white__error-message">{errors.username}</div>
+                                {errors.email && touched.email && (
+                                    <div className="Login__container-white__error-message">{errors.email}</div>
                                 )}
 
                                 <div className="Login__container-white__password">

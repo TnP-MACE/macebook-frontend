@@ -15,6 +15,8 @@ import DocImage from "../../assets/images/icons/Doc.svg";
 import { Redirect, useHistory } from "react-router";
 import AuthContext from "../../auth/AuthContext";
 import isAuthenticated from "../../auth/isAuthenticated";
+import Spinner from "../../components/Spinner/Spinner";
+import imageCompression from "browser-image-compression";
 
 const Completeprofile = (props) => {
     const history = useHistory();
@@ -24,7 +26,9 @@ const Completeprofile = (props) => {
     const [email, setEmail] = useState("");
     const [changeCoverActive, setChangeCoverActive] = useState(false);
     const [coverImage, setCoverImage] = useState("");
+    const [coverImageFileFormat, setCoverImageFileFormat] = useState(null);
     const [profileImage, setProfileImage] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const handleProfileImageAdd = (evt) => {
         const element = document.getElementById("profile-input");
@@ -37,12 +41,13 @@ const Completeprofile = (props) => {
             output.src = reader.result;
         };
         reader.readAsDataURL(file);
-        document.getElementById("profile-img-default").style.display = "none";
+        // document.getElementById("profile-img-default").style.display = "none";
     };
 
     const handleCoverImageAdd = () => {
         const element = document.getElementById("cover-input");
         const file = element.files[0];
+        setCoverImageFileFormat(file);
 
         const reader = new FileReader();
         reader.onload = () => {
@@ -57,6 +62,7 @@ const Completeprofile = (props) => {
     const handleCoverImageChange = () => {
         const element = document.getElementById("cover-input-change");
         const file = element.files[0];
+        setCoverImageFileFormat(file);
 
         const reader = new FileReader();
         reader.onload = () => {
@@ -75,13 +81,24 @@ const Completeprofile = (props) => {
         );
     }
 
+    async function compressImage(file) {
+        const options = {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+        };
+        const compressedFile = await imageCompression(file, options);
+        return compressedFile;
+    }
+
     async function submitCoverImage(token) {
-        const coverImageElement = document.getElementById("cover-input");
-        const coverImageData = coverImageElement.files[0];
+        console.log("submitting cover");
+        console.log(coverImageFileFormat);
+        const blob = await compressImage(coverImageFileFormat);
+        const compressedImageFile = new File([blob], "cover.jpeg");
+
         let coverFormData = new FormData();
-        coverFormData.append("cover", coverImageData);
-        console.log("@@@@@@@@@@@@@");
-        console.log(coverFormData.get("cover"));
+        coverFormData.append("cover", compressedImageFile);
 
         const coverImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/cover", {
             method: "POST",
@@ -96,10 +113,18 @@ const Completeprofile = (props) => {
     }
 
     async function submitProfileImage(token) {
+        console.log("submitting profile");
         const profileImageElement = document.getElementById("profile-input");
+        // console.log(profileImageElement);
         const profileImageData = profileImageElement.files[0];
+
+        const blob = await compressImage(profileImageData);
+        const compressedImageFile = new File([blob], "profile.jpeg");
+
+        console.log(compressedImageFile);
+
         let profileFormData = new FormData();
-        profileFormData.append("profilepicture", profileImageData);
+        profileFormData.append("profilepicture", compressedImageFile);
 
         const profileImageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/picture", {
             method: "POST",
@@ -138,9 +163,25 @@ const Completeprofile = (props) => {
                     type: "LOGIN",
                     payload: payload,
                 });
+                const statusResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/profile/mystatus", {
+                    headers: {
+                        Authorization: "Bearer " + payload.token,
+                    },
+                });
+                if (!statusResponse.ok) {
+                    history.push("/login");
+                }
+                const statusData = await statusResponse.json();
+                console.log(statusData[0].status === "complete");
+                if (statusData[0].status === "complete") {
+                    history.push("/");
+                }
+
                 setUsername(payload.user.username);
                 setEmail(payload.user.email);
+                setLoading(false);
             } else {
+                setLoading(false);
                 history.push("/login");
             }
         })();
@@ -227,18 +268,18 @@ const Completeprofile = (props) => {
                         const completeprofiledata = await Completeprofileresponse.json();
                         if (completeprofiledata.success) {
                             window.localStorage.setItem("profile-completed", true);
-                            if (completeprofiledata.success) {
-                                // history.push("/");
-                                console.log("success");
-                            }
 
+                            // console.log(profileImage);
+                            // console.log(coverImage);
                             if (profileImage) {
-                                submitProfileImage(token);
+                                await submitProfileImage(token);
+                            }
+                            if (coverImage) {
+                                await submitCoverImage(token);
                             }
 
-                            if (coverImage) {
-                                submitCoverImage(token);
-                            }
+                            setSubmitting(false);
+                            history.push("/");
                         } else {
                             alert("Couldn't submit your profile! Try again");
                             setSubmitting(false);
@@ -262,9 +303,16 @@ const Completeprofile = (props) => {
         >
             {(props) => {
                 const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props;
+                if (loading) {
+                    return (
+                        <div className="Completion__spinner-container">
+                            <Spinner />
+                        </div>
+                    );
+                }
                 return (
                     <>
-                        <Header active={"home"} />
+                        <Header />
                         <div className="Completion">
                             <form onSubmit={handleSubmit} id="completion-form">
                                 <div className="container Completion__container">
@@ -301,12 +349,16 @@ const Completeprofile = (props) => {
                                     </div>
 
                                     <div className="Completion__profile-picture-container">
-                                        <img className="Completion__profile-picture" id="profile-img" />
                                         <img
+                                            className="Completion__profile-picture"
+                                            id="profile-img"
+                                            src={profilepic}
+                                        />
+                                        {/* <img
                                             className="Completion__profile-picture"
                                             id="profile-img-default"
                                             src={profilepic}
-                                        />
+                                        /> */}
                                         <label htmlFor="profile-input">
                                             <span className="Completion__profile-picture-btn">
                                                 Upload Profile Picture
