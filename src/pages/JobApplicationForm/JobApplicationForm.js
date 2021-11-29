@@ -30,39 +30,41 @@ class JobApplicationForm extends Component {
         };
         this.onSubmit = this.onSubmit.bind(this);
     }
-    // const [selectedFile, setSelectedFile] = useState();
+    //const [selectedFile, setSelectedFile] = useState();
     // const [isFilePicked, setIsFilePicked] = useState(false);
     // changeHandler(event){
     //     setSelectedFile(event.target.files[0]);
     // 	setIsSelected(true);
     // }
-    ResumePdfInput() {
-        console.log("ResumePdfInput");
-        const element = document.getElementById("file-input");
-        const file = element.files[0];
+
+    ResumePdfInput(e) {
+        let fileData = e.target.files[0];
+        console.log(fileData);
+        if (fileData) {
+            let resumeData = new FormData();
+
+            resumeData.append("file", fileData);
+        }
+
         const reader = new FileReader();
-        reader.onload = () => {
-            const output = document.getElementById("file-input");
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(file);
+
+        reader.readAsDataURL(fileData);
     }
-    onSubmit(event) {
+    onSubmit = () => {
         console.log("change");
-        const fun = async () => {
+        const applyJobFun = async () => {
             try {
                 const token = window.localStorage.getItem("token");
+                //console.log(token);
                 const jobPostResponse = await fetch(
                     "https://mace-connect.herokuapp.com/api/v1/jobs/applications/{job_id}",
                     {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
+                            "Content-Type": "multipart/form-data",
                             Authorization: `Bearer ${token}`,
                         },
-                        body: JSON.stringify({
-                            resume: this.state.resume,
-                        }),
+                        body: this.fileData,
                     }
                 );
 
@@ -72,8 +74,8 @@ class JobApplicationForm extends Component {
                 console.log(e);
             }
         };
-        fun();
-    }
+        applyJobFun();
+    };
     componentDidMount() {
         const res = queryString.parse(this.props.location.search);
         console.log(res);
@@ -127,7 +129,7 @@ class JobApplicationForm extends Component {
                         className="msg-field"
                     ></textarea>
                 </div>
-                <button className="btn-apply" onSubmit={this.onSubmit}>
+                <button className="btn-apply" onClick={this.onSubmit}>
                     APPLY
                 </button>
             </div>
