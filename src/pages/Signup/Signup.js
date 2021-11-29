@@ -71,7 +71,7 @@ const Signup = (props) => {
                             return alert("Couldn't create account!");
                         }
                         setStateData({ isSubmitting: false });
-                        // history.push("/login");
+                        history.push("/login");
                     } catch (e) {
                         setStateData({ isSubmitting: false });
                         console.log(e);

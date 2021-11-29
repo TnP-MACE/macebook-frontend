@@ -172,8 +172,7 @@ const Completeprofile = (props) => {
                     history.push("/login");
                 }
                 const statusData = await statusResponse.json();
-                console.log(statusData[0].status === "complete");
-                if (statusData[0].status === "complete") {
+                if (statusData.length > 0 && statusData[0].status === "complete") {
                     history.push("/");
                 }
 

@@ -10,6 +10,7 @@ import Doc from "../../../assets/images/icons/Doc.svg";
 import Card from "../../../components/Card/Card";
 import AuthContext from "../../../auth/AuthContext";
 //import Anyone from "../../../assets/images/icons/Anyone.svg"
+import imageCompression from "browser-image-compression";
 
 class Tweetbox extends Component {
     static contextType = AuthContext;
@@ -20,6 +21,7 @@ class Tweetbox extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.handleAddImageToPost = this.handleAddImageToPost.bind(this);
+        this.submitImage = this.submitImage.bind(this);
     }
     onChange(event) {
         this.setState((prev) => {
@@ -29,6 +31,47 @@ class Tweetbox extends Component {
             };
         });
     }
+
+    async compressImage(file) {
+        const options = {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+        };
+        const compressedFile = await imageCompression(file, options);
+        return compressedFile;
+    }
+
+    async submitImage(token, post_id) {
+        console.log("submitting image");
+        const imageElement = document.getElementById("tweetbox-image-input");
+        // console.log(imageElement);
+        const imageData = imageElement.files[0];
+
+        const blob = await this.compressImage(imageData);
+        const compressedImageFile = new File([blob], "postImage.jpeg");
+
+        console.log(compressedImageFile);
+
+        let formData = new FormData();
+        formData.append("postimage", compressedImageFile);
+
+        const imageResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts/picture/" + post_id, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (!imageResponse.ok) {
+            throw new Error("Couldn't upload image");
+        }
+
+        const responseData = await imageResponse.json();
+        console.log(responseData);
+    }
+
     onSubmit(event) {
         console.log("string");
         // console.log(event.target.text.value);
@@ -51,9 +94,11 @@ class Tweetbox extends Component {
                     }),
                 });
                 if (postResponse.status === 201) {
+                    const data = await postResponse.json();
+                    await this.submitImage(token, data.post.post_id);
                     this.setState({ isModalOpen: false });
                     this.props.setMessage("Post has been added", "success");
-                    this.props.getPosts();
+                    this.props.getPosts(() => {});
                 }
             } catch (e) {
                 console.log(e);

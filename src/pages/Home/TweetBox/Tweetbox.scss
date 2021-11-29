@@ -76,11 +76,14 @@
         }
     }
     .tweetbox-image-container {
-        height: 80px;
-        width: 100px;
+        height: 180px;
+        // width: 100%;
+        margin: 0 1.5rem;
         overflow: hidden;
         display: flex;
         justify-content: center;
+        border-radius: 10px;
+        overflow: hidden;
 
         img {
             width: 100%;

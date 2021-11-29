@@ -121,13 +121,14 @@ class Home extends Component {
                 },
             });
             const data = await response.json();
-            console.log(data.profile);
-            this.setState(
-                {
-                    profile: data.profile,
-                },
-                cbk
-            );
+            if (data.profile) {
+                this.setState(
+                    {
+                        profile: data.profile,
+                    },
+                    cbk
+                );
+            }
         } catch (e) {
             console.error(e);
         }
@@ -168,7 +169,7 @@ class Home extends Component {
                             <div className="tweetbox-container">
                                 <Tweetbox
                                     setMessage={this.setMessage}
-                                    getPosts={this.getPosts}
+                                    getPosts={this.fetchPosts}
                                     user={this.state.profile}
                                 ></Tweetbox>
                             </div>
