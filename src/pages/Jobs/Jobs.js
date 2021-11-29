@@ -17,53 +17,76 @@ class Jobs extends Component {
         super(props);
         this.state = {
             loading: true,
-            jobs: [
-                {
-                    id: "24343",
-                    clogo: { clogo },
-                    position: "Junior Software Engineer",
-                    company: "Apple Inc.",
-                    location: "San Fransisco, California",
-                    type: "Full Time",
-                    experience: "1-2",
-                    salary: 90000,
-                    skills: ["C++", "Perl", "Java", "PHP"],
-                    date: "14/11/2021",
-                    user: "John Doe",
-                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-                },
-                {
-                    id: "2342",
-                    clogo: { clogo },
-                    position: "Junior Software Engineer",
-                    company: "Apple Inc.",
-                    location: "San Fransisco, California",
-                    type: "Full Time",
-                    experience: "1-2",
-                    salary: 90000,
-                    skills: ["C++", "Perl", "Java", "PHP"],
-                    date: "14/11/2021",
-                    user: "John Doe",
-                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-                },
-                {
-                    id: "34423",
-                    clogo: { clogo },
-                    position: "Junior Software Engineer",
-                    company: "Apple Inc.",
-                    location: "San Fransisco, California",
-                    type: "Full Time",
-                    experience: "1-2",
-                    salary: 90000,
-                    skills: ["C++", "Perl", "Java", "PHP"],
-                    date: "14/11/2021",
-                    user: "John Doe",
-                    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-                },
-            ],
+            jobData: [],
+            // jobs: [
+            //     {
+            //         id: "24343",
+            //         clogo: { clogo },
+            //         position: "Junior Software Engineer",
+            //         company: "Apple Inc.",
+            //         location: "San Fransisco, California",
+            //         type: "Full Time",
+            //         experience: "1-2",
+            //         salary: 90000,
+            //         skills: ["C++", "Perl", "Java", "PHP"],
+            //         date: "14/11/2021",
+            //         user: "John Doe",
+            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
+            //     },
+            //     {
+            //         id: "2342",
+            //         clogo: { clogo },
+            //         position: "Junior Software Engineer",
+            //         company: "Apple Inc.",
+            //         location: "San Fransisco, California",
+            //         type: "Full Time",
+            //         experience: "1-2",
+            //         salary: 90000,
+            //         skills: ["C++", "Perl", "Java", "PHP"],
+            //         date: "14/11/2021",
+            //         user: "John Doe",
+            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
+            //     },
+            //     {
+            //         id: "34423",
+            //         clogo: { clogo },
+            //         position: "Junior Software Engineer",
+            //         company: "Apple Inc.",
+            //         location: "San Fransisco, California",
+            //         type: "Full Time",
+            //         experience: "1-2",
+            //         salary: 90000,
+            //         skills: ["C++", "Perl", "Java", "PHP"],
+            //         date: "14/11/2021",
+            //         user: "John Doe",
+            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
+            //     },
+            // ],
         };
+        this.getJobs = this.getJobs.bind(this);
     }
-
+    async getJobs() {
+        const { state } = this.context;
+        try {
+            const token = state.token;
+            let response = await fetch("https://mace-connect.herokuapp.com/api/v1/jobs/", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (response.status != 200) {
+                return alert("Couldn't fetch jobs! Reload this page.");
+            }
+            let data = await response.json();
+            console.log(data);
+            return this.setState({
+                jobData: data,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
     componentDidMount() {
         const { state, dispatch } = this.context;
         if (!state.isAuthenticated) {
@@ -83,7 +106,7 @@ class Jobs extends Component {
             };
             asyncFunc();
         } else {
-            this.setState({ loading: false });
+            this.getJobs().then(this.setState({ loading: false }));
         }
     }
 
@@ -101,7 +124,7 @@ class Jobs extends Component {
                 ) : (
                     <div class="jobs-container">
                         <div class="left-section">
-                            {this.state.jobs.map((job) => (
+                            {this.state.jobData.map((job) => (
                                 <JobCard
                                     key={job.id}
                                     clogo={job.clogo}
