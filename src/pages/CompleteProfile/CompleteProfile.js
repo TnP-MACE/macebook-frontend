@@ -171,6 +171,7 @@ const Completeprofile = (props) => {
                 if (!statusResponse.ok) {
                     history.push("/login");
                 }
+
                 const statusData = await statusResponse.json();
                 if (statusData.length > 0 && statusData[0].status === "complete") {
                     history.push("/");
@@ -241,7 +242,7 @@ const Completeprofile = (props) => {
                         facebook: data.insta,
                         github: data.twitter,
                     },
-                    about: "This is a sample bio",
+                    about: data.bio,
 
                     ref_fullname: data.rfullname,
                     ref_email: data.remail,

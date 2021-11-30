@@ -97,7 +97,7 @@ const Login = (props) => {
                         }
                         const statusData = await statusResponse.json();
                         setStateData((prev) => ({ ...prev, isSubmitting: false }));
-                        if (statusData[0].status === "complete") {
+                        if (statusData.length != 0 && statusData[0].status === "complete") {
                             history.push("/");
                         } else {
                             history.push("/complete-profile");
