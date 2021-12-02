@@ -189,6 +189,8 @@ class Home extends Component {
                                     return (
                                         <Card key={post.post_id}>
                                             <Post
+                                                fullname={post.post_username}
+                                                post_id={post.post_id}
                                                 poster={this.state.profile.username}
                                                 profileImageName={this.state.profile.profile_image_url}
                                                 designation={this.state.designation}

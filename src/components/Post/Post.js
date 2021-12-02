@@ -4,8 +4,12 @@ import "./Post.scss";
 import msg from "../../assets/images/icons/message.svg";
 import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
+import defaultUserImage from "../../assets/images/icons/default-user.png";
+import AuthContext from "../../auth/AuthContext";
 
 class Post extends Component {
+    static contextType = AuthContext;
+
     constructor(props) {
         super(props);
         // eslint-disable-next-line no-undef
@@ -22,13 +26,26 @@ class Post extends Component {
     updateCount() {
         data.likes = this.state.likes_count;
     }
-    likePost(e) {
+    async likePost(post_id) {
+        const { state } = this.context;
         this.setState((prev) => {
             return {
                 ...prev,
                 liked: !prev.liked,
             };
         });
+
+        const res = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/like/${post_id}`, {
+            method: "POST",
+            headers: {
+                Authorization: "Bearer " + state.token,
+            },
+        });
+        if (res.ok) {
+            const data = await res.json();
+            console.log(data);
+        }
+
         this.setState((prevState) => {
             //likes_count:  (prevState.likes_count==1) ? 0 : 1;
             // if (prevState.liked) {
@@ -37,6 +54,7 @@ class Post extends Component {
             // } else {
             //     this.setState({ likes_count: prevState.likes_count - 1 });
             // }
+
             if (prevState.likes_count === 1) {
                 this.setState({ likes_count: 0 });
             } else {
@@ -68,7 +86,11 @@ class Post extends Component {
                         <Link to="./">
                             {" "}
                             <img
-                                src={`https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`}
+                                src={
+                                    this.props.postCreatorImageName
+                                        ? `https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`
+                                        : defaultUserImage
+                                }
                                 alt="posterimage"
                                 className="profile-pic"
                             ></img>
@@ -76,7 +98,7 @@ class Post extends Component {
                     </div>
                     <div className="name_desig">
                         <Link to="./">
-                            <p className="Name">{this.props.poster}</p>
+                            <p className="Name">{this.props.fullname}</p>
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
@@ -94,7 +116,7 @@ class Post extends Component {
                 </div>
                 <div className="home-posts-activity">
                     <div>
-                        <button onClick={this.likePost}>
+                        <button onClick={() => this.likePost(this.props.post_id)}>
                             <svg
                                 width="19"
                                 height="18"

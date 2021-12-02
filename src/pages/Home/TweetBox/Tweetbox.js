@@ -11,6 +11,7 @@ import Card from "../../../components/Card/Card";
 import AuthContext from "../../../auth/AuthContext";
 //import Anyone from "../../../assets/images/icons/Anyone.svg"
 import imageCompression from "browser-image-compression";
+import defaultUserImage from "../../../assets/images/icons/default-user.png";
 
 class Tweetbox extends Component {
     static contextType = AuthContext;
@@ -47,6 +48,7 @@ class Tweetbox extends Component {
         const imageElement = document.getElementById("tweetbox-image-input");
         // console.log(imageElement);
         const imageData = imageElement.files[0];
+        console.log(imageData);
 
         const blob = await this.compressImage(imageData);
         const compressedImageFile = new File([blob], "postImage.jpeg");
@@ -95,7 +97,9 @@ class Tweetbox extends Component {
                 });
                 if (postResponse.status === 201) {
                     const data = await postResponse.json();
-                    await this.submitImage(token, data.post.post_id);
+                    if (this.state.postImage) {
+                        await this.submitImage(token, data.post.post_id);
+                    }
                     this.setState({ isModalOpen: false });
                     this.props.setMessage("Post has been added", "success");
                     this.props.getPosts(() => {});
@@ -142,7 +146,11 @@ class Tweetbox extends Component {
                         <div className="poster">
                             <div className="poster-img-container">
                                 <img
-                                    src={`https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`}
+                                    src={
+                                        this.props.user.profile_image_url
+                                            ? `https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`
+                                            : defaultUserImage
+                                    }
                                     alt="profilepicture"
                                 />
                             </div>
@@ -157,14 +165,18 @@ class Tweetbox extends Component {
                                 </select>
                             </div>
                         </div>
-                        <Card>
-                            <textarea className="post-text" name="post-text" onChange={this.onChange}></textarea>
-                        </Card>
-                        {this.state.postImage && (
-                            <div className="tweetbox-image-container">
-                                <img src={this.state.postImage} />
+                        <div className="tweetbox-content-wrapper">
+                            {/* <Card> */}
+                            <div className="tweetbox-textarea-container">
+                                <textarea className="post-text" name="post-text" onChange={this.onChange}></textarea>
                             </div>
-                        )}
+                            {/* </Card> */}
+                            {this.state.postImage && (
+                                <div className="tweetbox-image-container">
+                                    <img src={this.state.postImage} />
+                                </div>
+                            )}
+                        </div>
                         <div className="modal-bottom">
                             <div class="media-input">
                                 <div>
@@ -182,11 +194,9 @@ class Tweetbox extends Component {
                                 {/* <input type="image" src={Video} />
                                 <input type="image" src={Doc} /> */}
                             </div>
-                            <Card>
-                                <button type="button" onClick={this.onSubmit}>
-                                    Post
-                                </button>
-                            </Card>
+                            <button type="button" onClick={this.onSubmit}>
+                                Post
+                            </button>
                         </div>
                     </Modal>
                 </div>

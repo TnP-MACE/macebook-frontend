@@ -75,22 +75,6 @@
             }
         }
     }
-    .tweetbox-image-container {
-        height: 180px;
-        // width: 100%;
-        margin: 0 1.5rem;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        border-radius: 10px;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
 }
 .modal {
     z-index: 9999;
@@ -141,29 +125,85 @@
             flex-direction: column;
         }
     }
-    textarea {
-        padding: 0px;
-        overflow: hidden;
-        min-height: 6rem;
-        height: 100%;
-        width: 100%;
-        border: none;
-        margin: $margin-sm;
-        outline: none;
+
+    .tweetbox-content-wrapper {
+        overflow-y: scroll;
+        max-height: 50vh;
+        max-width: 600px;
+        margin: 1.5rem 0;
+        // display: flex;
+        // flex-direction: column;
     }
+
+    .tweetbox-textarea-container {
+        display: flex;
+        margin: 0 1.5rem;
+
+        textarea {
+            padding: 10px;
+            overflow: hidden;
+            min-height: 6rem;
+            // height: 100%;
+            // width: 100%;
+            border: none;
+            // margin: $margin-sm;
+            outline: none;
+            border: 1px solid #c4c4c4;
+            border-radius: 10px;
+            // width: 300px;
+            // width: 100%;
+            // max-width: 100%;
+            // min-width: 100%;
+            box-sizing: border-box;
+            resize: none;
+            flex: 1;
+        }
+    }
+
+    .tweetbox-image-container {
+        // height: 180px;
+        // width: 100%;
+        margin: 0 1.5rem;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 1.5rem;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
     .modal-bottom {
         display: flex;
         justify-content: space-between;
+        margin: 0 1.5rem;
+
         button {
             cursor: pointer;
             background-color: $color-white;
             border: none;
-            height: 0.1rem;
-            width: 3rem;
-            padding: 0px;
+            // height: 0.1rem;
+            // width: 3rem;
+            padding: 10px 15px;
+            border: 1px solid #c4c4c4;
+            // box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+            //     -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+            //     inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+            border-radius: 10px;
         }
         .media-input {
-            margin: $margin-sm;
+            // margin: $margin-sm;
+            // height: 50px;
+            img {
+                height: 25px;
+                cursor: pointer;
+            }
+
             input {
                 background-color: none;
                 border: none;
