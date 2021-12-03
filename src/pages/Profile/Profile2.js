@@ -171,6 +171,12 @@ class Profil2 extends Component {
                                         </Card>
                                     </div>
                                 )}
+                                <div>
+                                    <Card>
+                                        <h2>Dashboard</h2>
+                                        <Link to="/dashboard">Go to job dashboard</Link>
+                                    </Card>
+                                </div>
                                 <div className="Profile__skills">
                                     <Card>
                                         <h2>SKILLS</h2>

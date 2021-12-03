@@ -16,6 +16,7 @@ import Settings from "./pages/Settings/Settings";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import PrivateRoute from "../src/auth/privateRoute";
 import AuthProvider from "./auth/AuthProvider";
+import NewJob from "./pages/NewJob/NewJob";
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/complete-profile" component={CompleteProfile} />
                         <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/add-job" component={NewJob} />
                         <Route path="*" component={NoMatch} />
                     </Switch>
                 </Router>

@@ -18,53 +18,10 @@ class Jobs extends Component {
         this.state = {
             loading: true,
             jobData: [],
-            // jobs: [
-            //     {
-            //         id: "24343",
-            //         clogo: { clogo },
-            //         position: "Junior Software Engineer",
-            //         company: "Apple Inc.",
-            //         location: "San Fransisco, California",
-            //         type: "Full Time",
-            //         experience: "1-2",
-            //         salary: 90000,
-            //         skills: ["C++", "Perl", "Java", "PHP"],
-            //         date: "14/11/2021",
-            //         user: "John Doe",
-            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-            //     },
-            //     {
-            //         id: "2342",
-            //         clogo: { clogo },
-            //         position: "Junior Software Engineer",
-            //         company: "Apple Inc.",
-            //         location: "San Fransisco, California",
-            //         type: "Full Time",
-            //         experience: "1-2",
-            //         salary: 90000,
-            //         skills: ["C++", "Perl", "Java", "PHP"],
-            //         date: "14/11/2021",
-            //         user: "John Doe",
-            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-            //     },
-            //     {
-            //         id: "34423",
-            //         clogo: { clogo },
-            //         position: "Junior Software Engineer",
-            //         company: "Apple Inc.",
-            //         location: "San Fransisco, California",
-            //         type: "Full Time",
-            //         experience: "1-2",
-            //         salary: 90000,
-            //         skills: ["C++", "Perl", "Java", "PHP"],
-            //         date: "14/11/2021",
-            //         user: "John Doe",
-            //         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. ",
-            //     },
-            // ],
         };
         this.getJobs = this.getJobs.bind(this);
     }
+
     async getJobs() {
         const { state } = this.context;
         try {
@@ -97,9 +54,7 @@ class Jobs extends Component {
                         type: "LOGIN",
                         payload: payload,
                     });
-                    this.setState({
-                        loading: false,
-                    });
+                    this.getJobs().then(this.setState({ loading: false }));
                 } else {
                     this.props.history.push("/login");
                 }
@@ -142,9 +97,9 @@ class Jobs extends Component {
                                     history={this.props.history}
                                 />
                             ))}
-                            <div className="left-section-bottom">
+                            {/* <div className="left-section-bottom">
                                 <p>Show More</p>
-                            </div>
+                            </div> */}
                         </div>
                         <div class="right-section">
                             <Card>
