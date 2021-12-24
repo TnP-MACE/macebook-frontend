@@ -91,7 +91,7 @@ class Home extends Component {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 return alert("Couldn't fetch posts! Reload this page.");
             }
             let data = await response.json();
@@ -132,6 +132,7 @@ class Home extends Component {
         } catch (e) {
             console.error(e);
         }
+        
     }
 
     //ABcd@12345678910

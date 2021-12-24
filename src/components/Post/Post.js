@@ -6,14 +6,19 @@ import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import AuthContext from "../../auth/AuthContext";
+import Modal from "./Modal";
+import {useState} from "react";
 
 class Post extends Component {
     static contextType = AuthContext;
-
+    
     constructor(props) {
+        
         super(props);
         // eslint-disable-next-line no-undef
         this.state = {
+            openModal: false,
+            setOpenModal: false,
             liked: false,
             likes_count: 0,
             commentValue: "",
@@ -23,6 +28,7 @@ class Post extends Component {
         this.likePost = this.likePost.bind(this);
         // console.log(this.props.content);
     }
+    
     updateCount() {
         data.likes = this.state.likes_count;
     }
@@ -102,6 +108,18 @@ class Post extends Component {
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
+                    <button onClick={()=>{
+                        this.setState({setOpenModal: true , openModal: true})
+                    }}
+                >edit post</button>
+                    
+                    <button onClick={()=>{
+                        this.setState(
+                            {
+                            openModal: false}
+                        )
+                    }}>X</button>
+                    {this.state.openModal && <Modal post_id={this.props.post_id} name={this.props.fullname} designation={this.props.designation} content={this.props.content}/>}
                 </div>
                 <div className="home-posts-content">
                     <p className="home-posts-text">{this.props.content}</p>
