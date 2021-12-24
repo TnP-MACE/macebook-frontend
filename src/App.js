@@ -39,6 +39,7 @@ function App() {
                         <Route exact path="/complete-profile" component={CompleteProfile} />
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path="/add-job" component={NewJob} />
+                        <Route exact path="/users/:id" component={Profile} />
                         <Route path="*" component={NoMatch} />
                     </Switch>
                 </Router>

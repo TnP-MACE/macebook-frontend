@@ -5,20 +5,12 @@ import "./Profile2.scss";
 import Header from "../../components/Header/Header";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader2";
 import Card from "../../components/Card/Card";
-import Experience from "../../components/Experience/Experience";
-import Suggestions from "../../components/Suggestions/Suggestions";
-import ProfilePost from "../../components/ProfilePost/ProfilePost";
-import cover from "../../assets/images/icons/cover.jpg";
-import profileimg from "../../assets/images/icons/profile.webp";
-import postImg from "../../assets/images/icons/postImg.png";
-import profilepic from "../../assets/images/icons/UserProfile.png";
 import mail from "../../assets/images/icons/mail.svg";
 import phone from "../../assets/images/icons/phone.svg";
 import web from "../../assets/images/icons/web.svg";
 import linkedin from "../../assets/images/icons/linkedin.svg";
 import fb from "../../assets/images/icons/fb.svg";
 import github from "../../assets/images/icons/github.svg";
-import edit from "../../assets/images/icons/edit.svg";
 import arrow from "../../assets/images/icons/arrow.png";
 import clogo from "../../assets/images/icons/company-logo.png";
 import isAuthenticated from "../../auth/isAuthenticated";
@@ -37,18 +29,6 @@ class Profil2 extends Component {
             experience: [{}, {}],
             posts: [{}, {}],
             user: {
-                // username: "john",
-                // fullname: "John Doe",
-                // bio: "SENIOR SWE AT APPLE INC",
-                // location: "San Fransisco, CA",
-                // batch: "2014",
-                // branch: "CSE",
-                // connections: 25000,
-                // image: profileimg,
-                // cover: cover,
-                // isAuthenticated: true,
-                // id: 1,
-
                 about: "This is a sample bio",
                 accomplishments: [],
                 email: "asdf",
@@ -67,34 +47,30 @@ class Profil2 extends Component {
                 status: "complete",
                 urls: { linkedin: "", facebook: "", github: "" },
             },
+            userNotFound: false,
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
     }
 
-    async fetchProfile(token, userId, cbk) {
+    async fetchProfile(token, userId) {
         console.log(userId);
-        try {
-            const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
-                method: "GET",
-                headers: {
-                    Authorization: "Bearer " + token,
-                },
-            });
-            const data = await response.json();
-            console.log(data);
-            this.setState(
-                {
-                    user: { ...data.profile, email: this.context.state.user.email },
-                },
-                cbk
-            );
-        } catch (e) {
-            console.error(e);
+        const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        });
+        const data = await response.json();
+        if (!data.profile) {
+            throw new Error("Profile Not Found");
         }
+        this.setState({
+            user: { ...data.profile, email: this.context.state.user.email },
+        });
     }
 
-    async fetchPosts(token, cbk) {
+    async fetchPosts(token) {
         try {
             let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
                 method: "GET",
@@ -105,12 +81,9 @@ class Profil2 extends Component {
 
             const data = await response.json();
             console.log(data);
-            this.setState(
-                {
-                    posts: data.slice(1, 3),
-                },
-                cbk
-            );
+            this.setState({
+                posts: data.slice(1, 3),
+            });
         } catch (e) {
             console.error(e);
         }
@@ -129,21 +102,23 @@ class Profil2 extends Component {
 
                     console.log(payload);
 
-                    this.fetchProfile(payload.token, payload.user.id, () => {
-                        this.fetchPosts(payload.token, () => {
-                            this.setState({ loading: false });
-                        });
-                    });
+                    try {
+                        await this.fetchProfile(payload.token, this.props.match.params.id || payload.user.id);
+                        await this.fetchPosts(payload.token);
+                        this.setState({ loading: false });
+                    } catch (e) {
+                        this.setState({ userNotFound: true, loading: false });
+                    }
                 } else {
                     this.props.history.push("/login");
                 }
             })();
         } else {
-            this.fetchProfile(state.token, state.user.id, () => {
-                this.fetchPosts(state.token, () => {
-                    this.setState({ loading: false });
-                });
-            });
+            (async () => {
+                await this.fetchProfile(state.token, state.user.id);
+                await this.fetchPosts(state.token);
+                this.setState({ loading: false });
+            })();
         }
     }
 
@@ -158,6 +133,8 @@ class Profil2 extends Component {
                     <div className="Profile__spinner-container">
                         <Spinner />
                     </div>
+                ) : this.state.userNotFound ? (
+                    <div>User Not Found</div>
                 ) : (
                     <div className="Profile container">
                         <ProfileHeader user={this.state.user} />

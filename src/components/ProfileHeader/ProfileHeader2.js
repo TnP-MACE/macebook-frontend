@@ -2,6 +2,8 @@ import React from "react";
 import "./ProfileHeader2.scss";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
+import defaultUserImage from '../../assets/images/icons/default-user.png'
+import defaultCoverImage from '../../assets/images/icons/cover.jpg'
 
 class ProfileHeader extends React.Component {
     // helpers
