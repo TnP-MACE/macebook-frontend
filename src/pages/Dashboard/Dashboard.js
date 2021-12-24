@@ -6,6 +6,7 @@ import DashJobCard from "../../components/DashJobcard/DashJobcard";
 import clogo from "../../assets/images/icons/company-logo.png";
 import edit from "../../assets/images/icons/edit.svg";
 import del from "../../assets/images/icons/delete-red.svg";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
     state = {
@@ -59,6 +60,8 @@ class Dashboard extends Component {
         ],
     };
 
+    async handleAddNewJob() {}
+
     render() {
         return (
             <div className="dashboard-container">
@@ -87,7 +90,9 @@ class Dashboard extends Component {
                                 />
                             ))}
                             <div className="add-btnContainer">
-                                <buttun className="add-btn">Add New Job Posting</buttun>
+                                <button clssName="add-btn">
+                                    <Link to="/add-job">Add New Job Posting</Link>
+                                </button>
                             </div>
                         </div>
                     </div>
