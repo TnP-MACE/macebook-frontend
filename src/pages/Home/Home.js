@@ -132,7 +132,6 @@ class Home extends Component {
         } catch (e) {
             console.error(e);
         }
-        
     }
 
     //ABcd@12345678910
@@ -207,11 +206,11 @@ class Home extends Component {
                                 })
                             )}
                         </div>
-                        <div className="card-col2">
+                        {/* <div className="card-col2">
                             <Card>
                                 <Suggestions></Suggestions>
                             </Card>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -2,13 +2,13 @@ import React from "react";
 import "./ProfileHeader2.scss";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
-import defaultUserImage from '../../assets/images/icons/default-user.png'
-import defaultCoverImage from '../../assets/images/icons/cover.jpg'
-import {Link} from "react-router-dom";
+import defaultUserImage from "../../assets/images/icons/default-user.png";
+import defaultCoverImage from "../../assets/images/icons/cover.jpg";
+import { Link } from "react-router-dom";
 
 class ProfileHeader extends React.Component {
     // helpers
-    getFormattedCount(count) { 
+    getFormattedCount(count) {
         if (isNaN(count)) return 0;
         else if (count < 1000) return count;
         else if (count < 1000000) return `${count / 1000}K`;

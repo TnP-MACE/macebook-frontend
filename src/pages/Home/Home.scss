@@ -7,7 +7,9 @@
         height: 40vh;
         align-items: center;
     }
-
+    .bgChange {
+        filter: blur(2px) opacity(40%);
+    }
     .message-box {
         max-width: 530px;
         box-sizing: border-box;

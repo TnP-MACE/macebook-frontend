@@ -1,5 +1,25 @@
 @import "../../assets/sass/main.scss";
 
+.home-posts-container {
+    .poster {
+        .edit-post-btn {
+            margin-left: 54%;
+        }
+
+        button {
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            padding: 0px;
+        }
+        .open-edit {
+            display: flex;
+            .close-modal-btn {
+                margin-top: -15rem;
+                margin-left: 7rem;
+            }
+        }
+    }
+}
 @media (min-width: 768px) {
     .home-posts-container {
         .home-posts-content {
