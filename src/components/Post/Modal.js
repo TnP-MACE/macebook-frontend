@@ -4,6 +4,7 @@ import Doc from "../../assets/images/icons/Doc.svg";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import imageCompression from "browser-image-compression";
 import AuthContext from "../../auth/AuthContext";
+import { FaTimes } from "react-icons/fa";
 
 class Modal extends React.Component {
     static contextType = AuthContext;
@@ -116,6 +117,11 @@ class Modal extends React.Component {
     render() {
         return (
             <div className="modal-bg">
+                <div className="close-btn">
+                    <button onClick={this.props.closeEditModal}>
+                        <FaTimes />
+                    </button>
+                </div>
                 <h3>Edit post</h3>
                 <hr></hr>
 

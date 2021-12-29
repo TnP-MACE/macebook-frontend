@@ -9,6 +9,13 @@
     position: absolute;
     margin-top: -8px;
     min-height: 500px;
+    .close-btn {
+        display: flex;
+        align-items: flex-end;
+        button {
+            margin-left: 94%;
+        }
+    }
     .poster {
         margin: 1rem;
         display: flex;
