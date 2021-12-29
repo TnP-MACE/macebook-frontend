@@ -30,6 +30,7 @@ class Post extends Component {
             posts: [],
         };
         this.likePost = this.likePost.bind(this);
+        this.componentUpdated = this.componentUpdated.bind(this);
         // console.log(this.props.content);
     }
 
@@ -48,32 +49,29 @@ class Post extends Component {
             editdeloptions: false,
         });
     }
-    // componentUpdated() {
-    //     // Typical usage (don't forget to compare props):
+    async componentUpdated() {
+        const { state } = this.context;
+        try {
+            const token = state.token;
+            let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (response.status !== 200) {
+                return alert("Couldn't fetch posts! Reload this page.");
+            }
+            let data = await response.json();
+            console.log(data);
 
-    //     const fetchData = async (post_id) => {
-    //         try {
-    //             const { state } = this.context;
-    //             const token = state.token;
-
-    //             const postRes = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/${post_id}`, {
-    //                 method: "GET",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             });
-    //             if (postRes.status === 200) {
-    //                 const data = await postRes.json();
-    //                 console.log(data);
-    //                 console.log(this.props.post_id + " edited successfully");
-    //             }
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     };
-    //     fetchData(this.props.post_id);
-    // }
+            return this.setState({
+                posts: data,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
     async likePost(post_id) {
         const { state } = this.context;
         this.setState((prev) => {
@@ -148,8 +146,34 @@ class Post extends Component {
         });
     };
     submitCommentValue = (e) => {
-        e.preventDefault();
         this.setCommentLine();
+        const fun = async (post_id) => {
+            try {
+                // const token = window.localStorage.getItem("token");
+                const state = this.context;
+                const token = state.token;
+
+                const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/${post_id}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        commentValue: this.state.commentValue,
+                    }),
+                });
+                if (commentResponse.status === 201) {
+                    const commentdata = await commentResponse.json();
+
+                    this.setState({ isModalOpen: false });
+                    console.log(commentdata);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fun(this.props.post_id);
     };
     enterCommentLine = (e) => {
         this.setCommentLine();
@@ -232,7 +256,7 @@ class Post extends Component {
                     {this.state.openModal && (
                         <div className="open-edit">
                             <Modal
-                                //componentUpdated={this.componentUpdated.bind(this)}
+                                componentUpdated={this.componentUpdated}
                                 closeEditModal={this.closeEditModal.bind(this)}
                                 post_id={this.props.post_id}
                                 name={this.props.fullname}

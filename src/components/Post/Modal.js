@@ -56,6 +56,7 @@ class Modal extends React.Component {
                         await this.submitImage(token, this.props.post_id);
                     }
                     console.log(this.props.post_id);
+                    this.props.componentUpdated();
                 }
             } catch (e) {
                 console.log(e);

@@ -81,7 +81,7 @@ class Tweetbox extends Component {
         const fun = async () => {
             try {
                 // const token = window.localStorage.getItem("token");
-                const { state } = this.context;
+                const state = this.context;
                 const token = state.token;
                 console.log(this.state);
                 const postResponse = await fetch("https://mace-connect.herokuapp.com/api/v1/posts/add_post", {
