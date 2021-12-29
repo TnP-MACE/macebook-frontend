@@ -11,14 +11,19 @@
             border: none;
             padding: 0px;
         }
-        .open-edit {
-            display: flex;
-            .close-modal-btn {
-                margin-top: -15rem;
-                margin-left: 7rem;
+        .list-options {
+            div {
+                display: flex;
+                flex-direction: row;
             }
         }
+        .open-edit {
+            display: flex;
+        }
     }
+}
+button {
+    cursor: pointer;
 }
 @media (min-width: 768px) {
     .home-posts-container {
@@ -38,6 +43,8 @@
     .home-posts-attributes {
         p {
             margin-left: -12%;
+        }
+        .poster {
         }
     }
 }

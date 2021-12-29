@@ -28,7 +28,6 @@ class Modal extends React.Component {
         });
     }
     onSubmit(event) {
-        console.log("string");
         const editPost = async (post_id) => {
             try {
                 const { state } = this.context;

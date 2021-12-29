@@ -7,9 +7,9 @@ import data from "../../assets/data.json";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import AuthContext from "../../auth/AuthContext";
 import Modal from "./Modal";
-import { useState } from "react";
+import DelModal from "./DelModal";
 import Card from "../Card/Card";
-import { FaEllipsisV } from "react-icons/fa";
+import { FaEllipsisV, FaTimes, FaPen, FaTrash } from "react-icons/fa";
 
 class Post extends Component {
     static contextType = AuthContext;
@@ -18,6 +18,8 @@ class Post extends Component {
         super(props);
         // eslint-disable-next-line no-undef
         this.state = {
+            delPostModal: false,
+            ed: false,
             openModal: false,
             setOpenModal: false,
             liked: false,
@@ -85,6 +87,7 @@ class Post extends Component {
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
+
     render() {
         return (
             <div className="home-posts-container">
@@ -112,34 +115,91 @@ class Post extends Component {
                     <button
                         className="edit-post-btn"
                         onClick={() => {
-                            this.setState({ setOpenModal: true, openModal: true });
+                            if (!this.state.ed) {
+                                this.setState({ ed: true });
+                            } else {
+                                this.setState({ ed: false });
+                            }
                         }}
                     >
                         <FaEllipsisV />
                     </button>
 
+                    {this.state.ed && (
+                        <Card>
+                            <div className="list-options">
+                                <div style={{ display: "flex" }}>
+                                    <FaPen />
+                                    <button
+                                        style={{ marginLeft: 10 }}
+                                        onClick={() => {
+                                            this.setState({ setOpenModal: true, openModal: true });
+                                        }}
+                                    >
+                                        edit
+                                    </button>
+                                </div>
+
+                                <div style={{ display: "flex", marginTop: 12 }}>
+                                    <FaTrash />
+                                    <button
+                                        style={{ marginLeft: 10 }}
+                                        onClick={() => {
+                                            this.setState({
+                                                delPostModal: true,
+                                                ed: false,
+                                            });
+                                        }}
+                                    >
+                                        delete
+                                    </button>
+                                </div>
+                            </div>
+                        </Card>
+                    )}
+
                     {this.state.openModal && (
                         <div className="open-edit">
+                            <button
+                                style={{ marginTop: -140 }}
+                                className="close-modal-btn"
+                                onClick={() => {
+                                    this.setState({
+                                        openModal: false,
+                                        ed: false,
+                                    });
+                                }}
+                            >
+                                <FaTimes />
+                            </button>
+                            <br />
                             <Modal
-                                blurModalBg={this.state.openModal}
                                 post_id={this.props.post_id}
                                 name={this.props.fullname}
                                 designation={this.props.designation}
                                 content={this.props.content}
                             />
+                        </div>
+                    )}
+                    {this.state.delPostModal && (
+                        <div>
                             <button
-                                className="close-modal-btn"
                                 onClick={() => {
                                     this.setState({
-                                        openModal: false,
+                                        delPostModal: false,
+                                        ed: false,
                                     });
                                 }}
                             >
-                                X
+                                <FaTimes />
                             </button>
+                            <Card>
+                                <DelModal post_id={this.props.post_id} />
+                            </Card>
                         </div>
                     )}
                 </div>
+
                 <div className="home-posts-content">
                     <p className="home-posts-text">{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
