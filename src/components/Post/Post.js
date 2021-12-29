@@ -6,6 +6,10 @@ import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import AuthContext from "../../auth/AuthContext";
+import Modal from "./Modal";
+import DelModal from "./DelModal";
+import Card from "../Card/Card";
+import { FaEllipsisV, FaPen, FaTrash } from "react-icons/fa";
 
 class Post extends Component {
     static contextType = AuthContext;
@@ -14,6 +18,11 @@ class Post extends Component {
         super(props);
         // eslint-disable-next-line no-undef
         this.state = {
+            deletedPost: false,
+            delPostModal: false,
+            editdeloptions: false,
+            openModal: false,
+            setOpenModal: false,
             liked: false,
             likes_count: 0,
             commentValue: "",
@@ -23,9 +32,48 @@ class Post extends Component {
         this.likePost = this.likePost.bind(this);
         // console.log(this.props.content);
     }
+
     updateCount() {
         data.likes = this.state.likes_count;
     }
+    closeEditModal() {
+        this.setState({
+            openModal: false,
+            editdeloptions: false,
+        });
+    }
+    closeDelModal() {
+        this.setState({
+            delPostModal: false,
+            editdeloptions: false,
+        });
+    }
+    // componentUpdated() {
+    //     // Typical usage (don't forget to compare props):
+
+    //     const fetchData = async (post_id) => {
+    //         try {
+    //             const { state } = this.context;
+    //             const token = state.token;
+
+    //             const postRes = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/${post_id}`, {
+    //                 method: "GET",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             });
+    //             if (postRes.status === 200) {
+    //                 const data = await postRes.json();
+    //                 console.log(data);
+    //                 console.log(this.props.post_id + " edited successfully");
+    //             }
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     };
+    //     fetchData(this.props.post_id);
+    // }
     async likePost(post_id) {
         const { state } = this.context;
         this.setState((prev) => {
@@ -62,6 +110,34 @@ class Post extends Component {
             }
         });
     }
+
+    handleClick(event) {
+        const delPost = async (post_id) => {
+            try {
+                const { state } = this.context;
+                const token = state.token;
+                console.log(state);
+
+                const postDelResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/${post_id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (postDelResponse.status === 200) {
+                    const data = await postDelResponse.json();
+                    this.setState({
+                        deletedPost: true,
+                    });
+                    console.log(this.props.post_id + " deleted successfully");
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        delPost(this.props.post_id);
+    }
     handleCommentValue(e) {
         this.setState({ commentValue: e.target.value });
     }
@@ -78,8 +154,13 @@ class Post extends Component {
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
+
     render() {
-        return (
+        return this.state.deletedPost ? (
+            <div>
+                <p>Post Removed</p>
+            </div>
+        ) : (
             <div className="home-posts-container">
                 <div className="poster">
                     <div className="posterimg">
@@ -102,7 +183,75 @@ class Post extends Component {
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
+                    <button
+                        className="edit-post-btn"
+                        onClick={() => {
+                            if (!this.state.editdeloptions) {
+                                this.setState({ editdeloptions: true });
+                            } else {
+                                this.setState({ editdeloptions: false });
+                            }
+                        }}
+                    >
+                        <FaEllipsisV />
+                    </button>
+
+                    {this.state.editdeloptions && (
+                        <Card>
+                            <div className="list-options">
+                                <div style={{ display: "flex" }}>
+                                    <FaPen />
+                                    <button
+                                        style={{ marginLeft: 10 }}
+                                        onClick={() => {
+                                            this.setState({ setOpenModal: true, openModal: true });
+                                        }}
+                                    >
+                                        edit
+                                    </button>
+                                </div>
+
+                                <div style={{ display: "flex", marginTop: 12 }}>
+                                    <FaTrash />
+                                    <button
+                                        style={{ marginLeft: 10 }}
+                                        onClick={() => {
+                                            this.setState({
+                                                delPostModal: true,
+                                                editdeloptions: false,
+                                            });
+                                        }}
+                                    >
+                                        delete
+                                    </button>
+                                </div>
+                            </div>
+                        </Card>
+                    )}
+
+                    {this.state.openModal && (
+                        <div className="open-edit">
+                            <Modal
+                                //componentUpdated={this.componentUpdated.bind(this)}
+                                closeEditModal={this.closeEditModal.bind(this)}
+                                post_id={this.props.post_id}
+                                name={this.props.fullname}
+                                designation={this.props.designation}
+                                content={this.props.content}
+                            />
+                        </div>
+                    )}
+                    {this.state.delPostModal && (
+                        <div>
+                            <DelModal
+                                closeDelModal={this.closeDelModal.bind(this)}
+                                handleClick={this.handleClick.bind(this)}
+                                post_id={this.props.post_id}
+                            />
+                        </div>
+                    )}
                 </div>
+
                 <div className="home-posts-content">
                     <p className="home-posts-text">{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>

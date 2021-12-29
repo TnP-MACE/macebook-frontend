@@ -152,6 +152,7 @@ class Posts extends Component {
                 ) : (
                     <div className="container">
                         <ProfileHeader user={this.state.user} />
+
                         <div class="posts-body">
                             <h2>All Posts</h2>
                             <div className="posts-display">
