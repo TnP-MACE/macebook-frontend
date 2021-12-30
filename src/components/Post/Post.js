@@ -34,20 +34,19 @@ class Post extends Component {
             commentText: "",
             commentLine: [{ commentId: "", commentText: "" }],
             commentData: [],
+            profile: {},
             posts: [],
         };
         this.fetchComments = this.fetchComments.bind(this);
+        this.profile = this.profile.bind(this);
         this.likePost = this.likePost.bind(this);
         this.componentUpdated = this.componentUpdated.bind(this);
         // console.log(this.props.content);
     }
 
     // eslint-disable-next-line react/no-typos
-    ComponentDidMount() {
-        console.log("mounted");
-        this.fetchComments().then(() => {
-            console.log("fetched comments");
-        });
+    componentDidMount() {
+        this.profile();
     }
     updateCount() {
         data.likes = this.state.likes_count;
@@ -64,6 +63,34 @@ class Post extends Component {
             editdeloptions: false,
         });
     }
+
+    profile() {
+        const fetchProfile = async (userId) => {
+            const { state } = this.context;
+            console.log(userId);
+
+            try {
+                const token = state.token;
+                const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                const data = await response.json();
+                if (data.profile) {
+                    this.setState({
+                        profile: data.profile,
+                    });
+                    console.log(data.profile);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchProfile(this.props.profile_id);
+    }
+
     async componentUpdated() {
         const { state } = this.context;
         try {
@@ -193,6 +220,7 @@ class Post extends Component {
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
+
     fetchComments() {
         this.state.viewMoreComments
             ? this.setState({ viewMoreComments: false })
@@ -223,9 +251,7 @@ class Post extends Component {
         const cd = this.state.commentData;
         const dt = cd.comment;
         const rows = [];
-        if (dt === undefined) {
-            return;
-        } else {
+        if (dt !== undefined) {
             for (var i = 0; i < 1; i++) {
                 this.setState({ initComments: dt[i].body });
             }
@@ -393,6 +419,11 @@ class Post extends Component {
                 </div>
                 <div className="load-comments">
                     {this.state.initComments}
+                    <Comment
+                        profile_name={this.state.profile.fullname}
+                        profile_pic_url={this.state.profile.profile_image_url}
+                        text={this.state.initComments}
+                    />
                     <br />
                     <button onClick={this.fetchComments} className="comments-loader">
                         {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
