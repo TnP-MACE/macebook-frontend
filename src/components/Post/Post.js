@@ -65,6 +65,7 @@ class Post extends Component {
     }
 
     profile() {
+        this.fetchComments();
         const fetchProfile = async (userId) => {
             const { state } = this.context;
             console.log(userId);
@@ -222,9 +223,6 @@ class Post extends Component {
     };
 
     fetchComments() {
-        this.state.viewMoreComments
-            ? this.setState({ viewMoreComments: false })
-            : this.setState({ viewMoreComments: true });
         const CommentsFun = async (post_id) => {
             try {
                 const { state } = this.context;
@@ -417,25 +415,36 @@ class Post extends Component {
                         Post
                     </button>
                 </div>
-                <div className="load-comments">
-                    <Comment
-                        profile_name={this.state.profile.fullname}
-                        profile_pic_url={this.state.profile.profile_image_url}
-                        text={this.state.initComments}
-                    />
-                    <br />
-                    <button onClick={this.fetchComments} className="comments-loader">
-                        {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
-                    </button>
-                    <br />
-                    {this.state.viewMoreComments && (
+                {this.state.commentData && (
+                    <div className="load-comments">
                         <Comment
                             profile_name={this.state.profile.fullname}
                             profile_pic_url={this.state.profile.profile_image_url}
-                            text={this.state.moreComments}
+                            text={this.state.initComments}
                         />
-                    )}
-                </div>
+
+                        <br />
+                        <button
+                            onClick={() => {
+                                this.state.viewMoreComments
+                                    ? this.setState({ viewMoreComments: false })
+                                    : this.setState({ viewMoreComments: true });
+                                this.fetchComments();
+                            }}
+                            className="comments-loader"
+                        >
+                            {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
+                        </button>
+                        <br />
+                        {this.state.viewMoreComments && (
+                            <Comment
+                                profile_name={this.state.profile.fullname}
+                                profile_pic_url={this.state.profile.profile_image_url}
+                                text={this.state.moreComments}
+                            />
+                        )}
+                    </div>
+                )}
             </div>
         );
     }
