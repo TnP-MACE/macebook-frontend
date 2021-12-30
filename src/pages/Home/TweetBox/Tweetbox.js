@@ -97,6 +97,7 @@ class Tweetbox extends Component {
                 });
                 if (postResponse.status === 201) {
                     const data = await postResponse.json();
+                    console.log(data);
                     if (this.state.postImage) {
                         await this.submitImage(token, data.post.post_id);
                     }
