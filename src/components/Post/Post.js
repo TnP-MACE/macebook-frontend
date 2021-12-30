@@ -418,7 +418,6 @@ class Post extends Component {
                     </button>
                 </div>
                 <div className="load-comments">
-                    {this.state.initComments}
                     <Comment
                         profile_name={this.state.profile.fullname}
                         profile_pic_url={this.state.profile.profile_image_url}
@@ -429,7 +428,13 @@ class Post extends Component {
                         {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
                     </button>
                     <br />
-                    {this.state.commentData && this.state.viewMoreComments && this.state.moreComments}
+                    {this.state.viewMoreComments && (
+                        <Comment
+                            profile_name={this.state.profile.fullname}
+                            profile_pic_url={this.state.profile.profile_image_url}
+                            text={this.state.moreComments}
+                        />
+                    )}
                 </div>
             </div>
         );
