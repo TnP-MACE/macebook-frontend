@@ -4,7 +4,7 @@ import Tweetbox from "./TweetBox/Tweetbox";
 import "./Home.scss";
 import Card from "../../components/Card/Card";
 import Post from "../../components/Post/Post";
-import Suggestions from "../../components/Suggestions/Suggestions";
+//import Suggestions from "../../components/Suggestions/Suggestions";
 import Header from "../../components/Header/Header";
 import postImg from "../../assets/images/icons/postImg.png";
 import profilepic from "../../assets/images/icons/UserProfile.png";

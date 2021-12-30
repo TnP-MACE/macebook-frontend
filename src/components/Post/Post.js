@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Post.scss";
@@ -7,6 +8,7 @@ import data from "../../assets/data.json";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import AuthContext from "../../auth/AuthContext";
 import Modal from "./Modal";
+import Comment from "./Comment";
 import DelModal from "./DelModal";
 import Card from "../Card/Card";
 import { FaEllipsisV, FaPen, FaTrash } from "react-icons/fa";
@@ -18,6 +20,9 @@ class Post extends Component {
         super(props);
         // eslint-disable-next-line no-undef
         this.state = {
+            initComments: [],
+            moreComments: [],
+            viewMoreComments: false,
             deletedPost: false,
             delPostModal: false,
             editdeloptions: false,
@@ -26,14 +31,24 @@ class Post extends Component {
             liked: false,
             likes_count: 0,
             commentValue: "",
+            commentText: "",
             commentLine: [{ commentId: "", commentText: "" }],
+            commentData: [],
             posts: [],
         };
+        this.fetchComments = this.fetchComments.bind(this);
         this.likePost = this.likePost.bind(this);
         this.componentUpdated = this.componentUpdated.bind(this);
         // console.log(this.props.content);
     }
 
+    // eslint-disable-next-line react/no-typos
+    ComponentDidMount() {
+        console.log("mounted");
+        this.fetchComments().then(() => {
+            console.log("fetched comments");
+        });
+    }
     updateCount() {
         data.likes = this.state.likes_count;
     }
@@ -150,9 +165,9 @@ class Post extends Component {
         const fun = async (post_id) => {
             try {
                 // const token = window.localStorage.getItem("token");
-                const state = this.context;
+                const { state } = this.context;
                 const token = state.token;
-
+                console.log(token);
                 const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/${post_id}`, {
                     method: "POST",
                     headers: {
@@ -160,12 +175,12 @@ class Post extends Component {
                         Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify({
-                        commentValue: this.state.commentValue,
+                        body: this.state.commentValue,
                     }),
                 });
                 if (commentResponse.status === 201) {
                     const commentdata = await commentResponse.json();
-
+                    console.log(token);
                     this.setState({ isModalOpen: false });
                     console.log(commentdata);
                 }
@@ -178,7 +193,50 @@ class Post extends Component {
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
+    fetchComments() {
+        this.state.viewMoreComments
+            ? this.setState({ viewMoreComments: false })
+            : this.setState({ viewMoreComments: true });
+        const CommentsFun = async (post_id) => {
+            try {
+                const { state } = this.context;
+                const token = state.token;
+                console.log(token);
+                const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/p/${post_id}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (commentResponse.status === 200) {
+                    const commentdata = await commentResponse.json();
+                    console.log(token);
+                    this.setState({ commentData: commentdata });
+                    console.log(commentdata);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
 
+        CommentsFun(this.props.post_id);
+        const cd = this.state.commentData;
+        const dt = cd.comment;
+        const rows = [];
+        if (dt === undefined) {
+            return;
+        } else {
+            for (var i = 0; i < 1; i++) {
+                this.setState({ initComments: dt[i].body });
+            }
+            console.log(this.state.initComments);
+            for (var j = 1; j < dt.length; j++) {
+                rows.push(dt[j].body + "\n");
+            }
+            rows.toString().replace(",", "\n");
+            this.setState({ moreComments: rows });
+        }
+    }
     render() {
         return this.state.deletedPost ? (
             <div>
@@ -334,9 +392,13 @@ class Post extends Component {
                     </button>
                 </div>
                 <div className="load-comments">
-                    <Link to="./" className="comments-loader">
-                        View all comments
-                    </Link>
+                    {this.state.initComments}
+                    <br />
+                    <button onClick={this.fetchComments} className="comments-loader">
+                        {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
+                    </button>
+                    <br />
+                    {this.state.commentData && this.state.viewMoreComments && this.state.moreComments}
                 </div>
             </div>
         );
