@@ -329,36 +329,32 @@ class Post extends Component {
                     )}
 
                     {this.state.editdeloptions && (
-                        <Card>
-                            <div className="list-options">
-                                <div style={{ display: "flex" }}>
-                                    <FaPen />
-                                    <button
-                                        style={{ marginLeft: 10 }}
-                                        onClick={() => {
-                                            this.setState({ setOpenModal: true, openModal: true });
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                </div>
-
-                                <div style={{ display: "flex", marginTop: 12 }}>
-                                    <FaTrash />
-                                    <button
-                                        style={{ marginLeft: 10 }}
-                                        onClick={() => {
-                                            this.setState({
-                                                delPostModal: true,
-                                                editdeloptions: false,
-                                            });
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
+                        <div className="list-options">
+                            <div style={{ display: "flex" }}>
+                                <FaPen />
+                                <button
+                                    onClick={() => {
+                                        this.setState({ setOpenModal: true, openModal: true });
+                                    }}
+                                >
+                                    Edit
+                                </button>
                             </div>
-                        </Card>
+
+                            <div style={{ display: "flex", marginTop: 12 }}>
+                                <FaTrash />
+                                <button
+                                    onClick={() => {
+                                        this.setState({
+                                            delPostModal: true,
+                                            editdeloptions: false,
+                                        });
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
                     )}
 
                     {this.state.openModal && (
@@ -417,11 +413,6 @@ class Post extends Component {
                     <div>
                         <button>
                             <img src={msg} alt="Message"></img>
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                            <img src={share} alt="Share"></img>
                         </button>
                     </div>
                 </div>
