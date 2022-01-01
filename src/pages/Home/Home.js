@@ -193,6 +193,7 @@ class Home extends Component {
                                                 post_id={post.post_id}
                                                 poster={this.state.profile.username}
                                                 profile_id={this.state.profile.profile_id}
+                                                post_profile_id={post.post_profile_id}
                                                 profileImageName={this.state.profile.profile_image_url}
                                                 designation={this.state.designation}
                                                 content={post.text}

@@ -2,8 +2,10 @@
 
 .home-posts-container {
     .poster {
+        padding-bottom: 1.2rem;
+        margin-top: 5%;
         .edit-post-btn {
-            margin-left: 54%;
+            position: absolute;
         }
 
         button {
@@ -12,6 +14,15 @@
             padding: 0px;
         }
         .list-options {
+            background: #ffffff;
+            box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+                -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            position: absolute;
+            right: 25%;
+
             div {
                 display: flex;
                 flex-direction: row;
@@ -25,8 +36,13 @@
 button {
     cursor: pointer;
 }
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
     .home-posts-container {
+        .poster {
+            .edit-post-btn {
+                margin-left: 30%;
+            }
+        }
         .home-posts-content {
             margin-left: -3rem;
             img {
@@ -44,12 +60,15 @@ button {
         p {
             margin-left: -12%;
         }
-        .poster {
-        }
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     .home-posts-container {
+        .poster {
+            .edit-post-btn {
+                margin-left: 45%;
+            }
+        }
         .home-posts-content {
             margin-left: -3rem;
             p {
@@ -62,7 +81,30 @@ button {
         }
     }
 }
-
+@media (max-width: 769px) {
+    .home-posts-container {
+        .poster {
+            .list-options {
+                right: 25%;
+            }
+            .edit-post-btn {
+                margin-left: 60%;
+            }
+        }
+    }
+}
+@media (max-width: 412px) {
+    .home-posts-container {
+        .poster {
+            .edit-post-btn {
+                margin-left: 75%;
+            }
+            .list-options {
+                right: 15%;
+            }
+        }
+    }
+}
 .home-posts-text {
     white-space: pre-wrap;
 }
@@ -184,6 +226,10 @@ button {
     }
     .load-comments {
         margin-left: $margin-sm;
+        button {
+            background-color: white;
+            border: none;
+        }
         .comments-loader {
             color: $color-orange;
             font-family: Poppins;

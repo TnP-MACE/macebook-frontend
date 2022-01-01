@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -21,7 +22,6 @@ class Post extends Component {
         // eslint-disable-next-line no-undef
         this.state = {
             initComments: [],
-            moreComments: [],
             viewMoreComments: false,
             deletedPost: false,
             delPostModal: false,
@@ -29,12 +29,15 @@ class Post extends Component {
             openModal: false,
             setOpenModal: false,
             liked: false,
-            likes_count: 0,
+            likes_count: this.props.likes.length,
             commentValue: "",
             commentText: "",
+            moreComments: [],
             commentLine: [{ commentId: "", commentText: "" }],
+            comment_id: "",
             commentData: [],
             profile: {},
+            userId: "",
             posts: [],
         };
         this.fetchComments = this.fetchComments.bind(this);
@@ -47,8 +50,18 @@ class Post extends Component {
     // eslint-disable-next-line react/no-typos
     componentDidMount() {
         this.profile();
+        console.log(this.props.likes);
+        for (var i = 0; i < this.props.likes.length; i++) {
+            if (this.props.likes[i] === this.props.profile_id) {
+                console.log("liked by me");
+                this.setState({ liked: true });
+            }
+        }
     }
     updateCount() {
+        this.setState({
+            likes_count: this.props.likes.length,
+        });
         data.likes = this.state.likes_count;
     }
     closeEditModal() {
@@ -65,13 +78,16 @@ class Post extends Component {
     }
 
     profile() {
-        const fetchProfile = async (userId) => {
+        this.fetchComments();
+        const fetchProfile = async (userid) => {
             const { state } = this.context;
-            console.log(userId);
-
+            this.setState({
+                userId: userid,
+            });
             try {
                 const token = state.token;
-                const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userId}`, {
+
+                const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userid}`, {
                     method: "GET",
                     headers: {
                         Authorization: "Bearer " + token,
@@ -82,7 +98,6 @@ class Post extends Component {
                     this.setState({
                         profile: data.profile,
                     });
-                    console.log(data.profile);
                 }
             } catch (e) {
                 console.error(e);
@@ -95,6 +110,7 @@ class Post extends Component {
         const { state } = this.context;
         try {
             const token = state.token;
+
             let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
                 method: "GET",
                 headers: {
@@ -116,6 +132,8 @@ class Post extends Component {
     }
     async likePost(post_id) {
         const { state } = this.context;
+        const token = state.token;
+        console.log(post_id);
         this.setState((prev) => {
             return {
                 ...prev,
@@ -126,7 +144,7 @@ class Post extends Component {
         const res = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/like/${post_id}`, {
             method: "POST",
             headers: {
-                Authorization: "Bearer " + state.token,
+                Authorization: `Bearer ${token}`,
             },
         });
         if (res.ok) {
@@ -143,10 +161,10 @@ class Post extends Component {
             //     this.setState({ likes_count: prevState.likes_count - 1 });
             // }
 
-            if (prevState.likes_count === 1) {
-                this.setState({ likes_count: 0 });
+            if (prevState.liked) {
+                this.setState({ likes_count: prevState.likes_count + 1 });
             } else {
-                this.setState({ likes_count: 1 });
+                this.setState({ likes_count: prevState.likes_count - 1 });
             }
         });
     }
@@ -156,7 +174,6 @@ class Post extends Component {
             try {
                 const { state } = this.context;
                 const token = state.token;
-                console.log(state);
 
                 const postDelResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/${post_id}`, {
                     method: "DELETE",
@@ -194,7 +211,7 @@ class Post extends Component {
                 // const token = window.localStorage.getItem("token");
                 const { state } = this.context;
                 const token = state.token;
-                console.log(token);
+
                 const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/${post_id}`, {
                     method: "POST",
                     headers: {
@@ -207,7 +224,7 @@ class Post extends Component {
                 });
                 if (commentResponse.status === 201) {
                     const commentdata = await commentResponse.json();
-                    console.log(token);
+
                     this.setState({ isModalOpen: false });
                     console.log(commentdata);
                 }
@@ -222,14 +239,11 @@ class Post extends Component {
     };
 
     fetchComments() {
-        this.state.viewMoreComments
-            ? this.setState({ viewMoreComments: false })
-            : this.setState({ viewMoreComments: true });
         const CommentsFun = async (post_id) => {
             try {
                 const { state } = this.context;
                 const token = state.token;
-                console.log(token);
+
                 const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/p/${post_id}`, {
                     method: "GET",
                     headers: {
@@ -238,7 +252,7 @@ class Post extends Component {
                 });
                 if (commentResponse.status === 200) {
                     const commentdata = await commentResponse.json();
-                    console.log(token);
+
                     this.setState({ commentData: commentdata });
                     console.log(commentdata);
                 }
@@ -246,23 +260,31 @@ class Post extends Component {
                 console.log(e);
             }
         };
-
         CommentsFun(this.props.post_id);
+
         const cd = this.state.commentData;
         const dt = cd.comment;
-        const rows = [];
-        if (dt !== undefined) {
-            for (var i = 0; i < 1; i++) {
-                this.setState({ initComments: dt[i].body });
+        let rows = [];
+        let comments = [];
+        console.log(dt);
+        if (dt === undefined) {
+            return;
+        } else {
+            for (var j = 0; j < dt.length; j++) {
+                rows.push(dt[j]);
             }
-            console.log(this.state.initComments);
-            for (var j = 1; j < dt.length; j++) {
-                rows.push(dt[j].body + "\n");
-            }
-            rows.toString().replace(",", "\n");
-            this.setState({ moreComments: rows });
+            this.setState({ moreComments: dt });
+            // this.setState({ moreComments: [this.state.moreComments, ...rows] });
+            // console.log(this.state.moreComments);
+            // for (var i = 1; i < rows.length; i++) {
+            //     comments.push(this.state.moreComments[i]);
+            // }
+
+            // this.setState({ initComments: comments });
+            // console.log(this.state.initComments);
         }
     }
+
     render() {
         return this.state.deletedPost ? (
             <div>
@@ -280,7 +302,7 @@ class Post extends Component {
                                         ? `https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`
                                         : defaultUserImage
                                 }
-                                alt="posterimage"
+                                alt="poster"
                                 className="profile-pic"
                             ></img>
                         </Link>
@@ -291,50 +313,48 @@ class Post extends Component {
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
-                    <button
-                        className="edit-post-btn"
-                        onClick={() => {
-                            if (!this.state.editdeloptions) {
-                                this.setState({ editdeloptions: true });
-                            } else {
-                                this.setState({ editdeloptions: false });
-                            }
-                        }}
-                    >
-                        <FaEllipsisV />
-                    </button>
+                    {this.state.userId === this.props.post_profile_id && (
+                        <button
+                            className="edit-post-btn"
+                            onClick={() => {
+                                if (!this.state.editdeloptions) {
+                                    this.setState({ editdeloptions: true });
+                                } else {
+                                    this.setState({ editdeloptions: false });
+                                }
+                            }}
+                        >
+                            <FaEllipsisV />
+                        </button>
+                    )}
 
                     {this.state.editdeloptions && (
-                        <Card>
-                            <div className="list-options">
-                                <div style={{ display: "flex" }}>
-                                    <FaPen />
-                                    <button
-                                        style={{ marginLeft: 10 }}
-                                        onClick={() => {
-                                            this.setState({ setOpenModal: true, openModal: true });
-                                        }}
-                                    >
-                                        edit
-                                    </button>
-                                </div>
-
-                                <div style={{ display: "flex", marginTop: 12 }}>
-                                    <FaTrash />
-                                    <button
-                                        style={{ marginLeft: 10 }}
-                                        onClick={() => {
-                                            this.setState({
-                                                delPostModal: true,
-                                                editdeloptions: false,
-                                            });
-                                        }}
-                                    >
-                                        delete
-                                    </button>
-                                </div>
+                        <div className="list-options">
+                            <div style={{ display: "flex" }}>
+                                <FaPen />
+                                <button
+                                    onClick={() => {
+                                        this.setState({ setOpenModal: true, openModal: true });
+                                    }}
+                                >
+                                    Edit
+                                </button>
                             </div>
-                        </Card>
+
+                            <div style={{ display: "flex", marginTop: 12 }}>
+                                <FaTrash />
+                                <button
+                                    onClick={() => {
+                                        this.setState({
+                                            delPostModal: true,
+                                            editdeloptions: false,
+                                        });
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
                     )}
 
                     {this.state.openModal && (
@@ -395,11 +415,6 @@ class Post extends Component {
                             <img src={msg} alt="Message"></img>
                         </button>
                     </div>
-                    <div>
-                        <button>
-                            <img src={share} alt="Share"></img>
-                        </button>
-                    </div>
                 </div>
                 <div className="home-posts-comment">
                     <img
@@ -417,25 +432,42 @@ class Post extends Component {
                         Post
                     </button>
                 </div>
-                <div className="load-comments">
-                    <Comment
-                        profile_name={this.state.profile.fullname}
-                        profile_pic_url={this.state.profile.profile_image_url}
-                        text={this.state.initComments}
-                    />
-                    <br />
-                    <button onClick={this.fetchComments} className="comments-loader">
-                        {this.state.viewMoreComments ? <div>View Less</div> : <div>View More Comments</div>}
-                    </button>
-                    <br />
-                    {this.state.viewMoreComments && (
-                        <Comment
-                            profile_name={this.state.profile.fullname}
-                            profile_pic_url={this.state.profile.profile_image_url}
-                            text={this.state.moreComments}
-                        />
-                    )}
-                </div>
+                {this.state.commentData && (
+                    <div className="load-comments">
+                        <button
+                            onClick={() => {
+                                this.state.viewMoreComments
+                                    ? this.setState({ viewMoreComments: false })
+                                    : this.setState({ viewMoreComments: true });
+                                this.fetchComments();
+                            }}
+                            className="comments-loader"
+                        >
+                            {this.state.viewMoreComments ? <div>Hide</div> : <div>View Comments</div>}
+                        </button>
+                        <br />
+                        {/* {this.state.viewMoreComments && (
+                            <Comment
+                                profile_name={this.state.profile.fullname}
+                                profile_pic_url={this.state.profile.profile_image_url}
+                                text={this.state.moreComments}
+                            />
+                        )} */}
+
+                        {this.state.viewMoreComments &&
+                            this.state.moreComments.map((comment) => {
+                                console.log(this.state.moreComments);
+                                return (
+                                    <Comment
+                                        comment_id={comment.comment_id}
+                                        profile_name={comment.comment_profile_name}
+                                        profile_pic_url={comment.comment_profile_image_name}
+                                        text={comment.body}
+                                    />
+                                );
+                            })}
+                    </div>
+                )}
             </div>
         );
     }

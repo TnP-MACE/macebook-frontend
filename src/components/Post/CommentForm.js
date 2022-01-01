@@ -1,22 +1,16 @@
 import React from "react";
 import AuthContext from "../../auth/AuthContext";
-import defaultUserImage from "../../assets/images/icons/default-user.png";
-import "./Comment.scss";
-import CommentForm from "./CommentForm";
+import "./CommentForm.scss";
 
-class Comment extends React.Component {
+class CommentForm extends React.Component {
     static contextType = AuthContext;
     constructor(props) {
         super(props);
         this.state = {
-            openCommentForm: false,
+            formVal: this.props.text,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    closeCommentForm() {
-        if (this.state.openCommentForm) {
-            this.setState({ openCommentForm: false });
-        }
+        this.onChange = this.onChange.bind(this);
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -29,7 +23,7 @@ class Comment extends React.Component {
                 const commentEditResponse = await fetch(
                     `https://mace-connect.herokuapp.com/api/v1/comments/${comment_id}`,
                     {
-                        method: "DELETE",
+                        method: "PATCH",
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: `Bearer ${token}`,
@@ -50,33 +44,29 @@ class Comment extends React.Component {
         };
         editcomment(this.props.comment_id);
     }
+    onChange(event) {
+        this.setState((prev) => {
+            return {
+                ...prev,
+                formVal: event.target.value,
+            };
+        });
+    }
     render() {
         return (
-            <div className="comment">
-                <div className="comment-user">
-                    <img src={this.props.profile_pic_url} />
-                    <p className="fullname">{this.props.profile_name}</p>
-                </div>
-                <p>{this.props.text}</p>
-                <div>
-                    <button
-                        onClick={() => {
-                            this.setState({ openCommentForm: true });
-                        }}
-                    >
-                        Edit
+            <div>
+                <form className="commentform">
+                    <textarea className="comment-form-textarea" onChange={this.onChange}>
+                        {this.props.text}
+                    </textarea>
+                    <br />
+                    <button onClick={this.handleSubmit} className="comment-form-button">
+                        Save
                     </button>
-                    |<button onClick={this.handleSubmit}>Delete</button>
-                </div>
-                {this.state.openCommentForm && (
-                    <CommentForm
-                        comment_id={this.props.comment_id}
-                        closeCommentForm={this.closeCommentForm.bind(this)}
-                        text={this.props.text}
-                    />
-                )}
+                    <button onClick={this.props.closeCommentForm}>Close</button>
+                </form>
             </div>
         );
     }
 }
-export default Comment;
+export default CommentForm;
