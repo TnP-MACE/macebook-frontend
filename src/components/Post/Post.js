@@ -36,6 +36,7 @@ class Post extends Component {
             commentLine: [{ commentId: "", commentText: "" }],
             comment_id: "",
             commentData: [],
+            commentNo: "",
             profile: {},
             userId: "",
             posts: [],
@@ -234,6 +235,7 @@ class Post extends Component {
         };
         fun(this.props.post_id);
     };
+
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
@@ -253,8 +255,7 @@ class Post extends Component {
                 if (commentResponse.status === 200) {
                     const commentdata = await commentResponse.json();
 
-                    this.setState({ commentData: commentdata });
-                    console.log(commentdata);
+                    this.setState({ commentData: commentdata, commentNo: commentdata.comment.length });
                 }
             } catch (e) {
                 console.log(e);
@@ -265,7 +266,7 @@ class Post extends Component {
         const cd = this.state.commentData;
         const dt = cd.comment;
         let rows = [];
-        let comments = [];
+
         console.log(dt);
         if (dt === undefined) {
             return;
@@ -389,7 +390,7 @@ class Post extends Component {
                 </div>
                 <div className="home-posts-attributes">
                     <p>{this.state.likes_count} Likes</p>
-                    <p>{this.props.comments} Comments</p>
+                    <p>{this.state.commentNo} Comments</p>
                 </div>
                 <div className="home-posts-activity">
                     <div>
