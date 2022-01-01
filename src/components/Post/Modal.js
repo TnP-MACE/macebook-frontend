@@ -63,6 +63,7 @@ class Modal extends React.Component {
             }
         };
         editPost(this.props.post_id);
+        this.props.closeEditModal();
     }
     async compressImage(file) {
         const options = {
