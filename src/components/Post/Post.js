@@ -33,6 +33,7 @@ class Post extends Component {
             commentValue: "",
             commentText: "",
             moreComments: [],
+            commentLine: [{ commentId: "", commentText: "" }],
             comment_id: "",
             commentData: [],
             profile: {},
@@ -264,6 +265,7 @@ class Post extends Component {
         const cd = this.state.commentData;
         const dt = cd.comment;
         let rows = [];
+        let comments = [];
         console.log(dt);
         if (dt === undefined) {
             return;
@@ -271,8 +273,15 @@ class Post extends Component {
             for (var j = 0; j < dt.length; j++) {
                 rows.push(dt[j]);
             }
+            this.setState({ moreComments: dt });
+            // this.setState({ moreComments: [this.state.moreComments, ...rows] });
+            // console.log(this.state.moreComments);
+            // for (var i = 1; i < rows.length; i++) {
+            //     comments.push(this.state.moreComments[i]);
+            // }
 
-            this.setState({ moreComments: [this.state.moreComments, ...rows] });
+            // this.setState({ initComments: comments });
+            // console.log(this.state.initComments);
         }
     }
 
@@ -443,7 +452,7 @@ class Post extends Component {
                             }}
                             className="comments-loader"
                         >
-                            {this.state.viewMoreComments ? <div>hide</div> : <div>View Comments</div>}
+                            {this.state.viewMoreComments ? <div>Hide</div> : <div>View Comments</div>}
                         </button>
                         <br />
                         {/* {this.state.viewMoreComments && (
@@ -460,8 +469,8 @@ class Post extends Component {
                                 return (
                                     <Comment
                                         comment_id={comment.comment_id}
-                                        profile_name={this.state.profile.fullname}
-                                        profile_pic_url={this.state.profile.profile_image_url}
+                                        profile_name={comment.comment_profile_name}
+                                        profile_pic_url={comment.comment_profile_image_name}
                                         text={comment.body}
                                     />
                                 );
