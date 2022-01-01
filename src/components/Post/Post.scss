@@ -2,6 +2,7 @@
 
 .home-posts-container {
     .poster {
+        padding: 0.6rem;
         .edit-post-btn {
             margin-left: 54%;
         }
@@ -184,6 +185,10 @@ button {
     }
     .load-comments {
         margin-left: $margin-sm;
+        button {
+            background-color: white;
+            border: none;
+        }
         .comments-loader {
             color: $color-orange;
             font-family: Poppins;

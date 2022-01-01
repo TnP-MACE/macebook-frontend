@@ -22,7 +22,6 @@ class Post extends Component {
         // eslint-disable-next-line no-undef
         this.state = {
             initComments: [],
-            moreComments: [],
             viewMoreComments: false,
             deletedPost: false,
             delPostModal: false,
@@ -30,10 +29,11 @@ class Post extends Component {
             openModal: false,
             setOpenModal: false,
             liked: false,
-            likes_count: 0,
+            likes_count: this.props.likes.length,
             commentValue: "",
             commentText: "",
-            commentLine: [{ commentId: "", commentText: "" }],
+            moreComments: [],
+            comment_id: "",
             commentData: [],
             profile: {},
             userId: "",
@@ -49,7 +49,13 @@ class Post extends Component {
     // eslint-disable-next-line react/no-typos
     componentDidMount() {
         this.profile();
-        this.fetchComments();
+        console.log(this.props.likes);
+        for (var i = 0; i < this.props.likes.length; i++) {
+            if (this.props.likes[i] === this.props.profile_id) {
+                console.log("liked by me");
+                this.setState({ liked: true });
+            }
+        }
     }
     updateCount() {
         this.setState({
@@ -154,10 +160,10 @@ class Post extends Component {
             //     this.setState({ likes_count: prevState.likes_count - 1 });
             // }
 
-            if (prevState.likes_count === 1) {
-                this.setState({ likes_count: prevState.likes_count - 1 });
-            } else {
+            if (prevState.liked) {
                 this.setState({ likes_count: prevState.likes_count + 1 });
+            } else {
+                this.setState({ likes_count: prevState.likes_count - 1 });
             }
         });
     }
@@ -258,15 +264,15 @@ class Post extends Component {
         const cd = this.state.commentData;
         const dt = cd.comment;
         let rows = [];
-
+        console.log(dt);
         if (dt === undefined) {
             return;
         } else {
             for (var j = 0; j < dt.length; j++) {
-                rows.push(dt[j].body);
+                rows.push(dt[j]);
             }
 
-            this.setState({ moreComments: rows });
+            this.setState({ moreComments: [this.state.moreComments, ...rows] });
         }
     }
 
@@ -287,7 +293,7 @@ class Post extends Component {
                                         ? `https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`
                                         : defaultUserImage
                                 }
-                                alt="posterimage"
+                                alt="poster"
                                 className="profile-pic"
                             ></img>
                         </Link>
@@ -324,7 +330,7 @@ class Post extends Component {
                                             this.setState({ setOpenModal: true, openModal: true });
                                         }}
                                     >
-                                        edit
+                                        Edit
                                     </button>
                                 </div>
 
@@ -339,7 +345,7 @@ class Post extends Component {
                                             });
                                         }}
                                     >
-                                        delete
+                                        Delete
                                     </button>
                                 </div>
                             </div>
@@ -450,11 +456,13 @@ class Post extends Component {
 
                         {this.state.viewMoreComments &&
                             this.state.moreComments.map((comment) => {
+                                console.log(this.state.moreComments);
                                 return (
                                     <Comment
+                                        comment_id={comment.comment_id}
                                         profile_name={this.state.profile.fullname}
                                         profile_pic_url={this.state.profile.profile_image_url}
-                                        text={comment}
+                                        text={comment.body}
                                     />
                                 );
                             })}
