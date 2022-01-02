@@ -1,0 +1,14 @@
+.EditProfile {
+    &__container {
+        margin: 30px auto;
+    }
+    &__title {
+    }
+    &__content-container {
+        margin: 30px;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}

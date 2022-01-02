@@ -30,7 +30,7 @@ class NewJob extends React.Component {
     }
 
     handleInputChange(e) {
-        console.log(e.name);
+        console.log(e.target.file);
         // this.setState({[e.name]})
     }
 
@@ -84,7 +84,7 @@ class NewJob extends React.Component {
                             <div className="NewJob__form-file-image-wrapper">
                                 <label htmlFor="newjob-company-logo" className="NewJob__form-file-image">
                                     <img src={FileResumeImage} />
-                                    <p>Upload or Drag the file into here</p>
+                                    <p>Upload the file here</p>
                                 </label>
                             </div>
                             <input
@@ -95,6 +95,7 @@ class NewJob extends React.Component {
                                 className="NewJob__form-upload"
                                 style={{ display: "none" }}
                                 onChange={this.handleInputChange}
+                                accept="image/*"
                             />
                         </div>
 

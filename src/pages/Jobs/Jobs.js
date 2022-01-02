@@ -9,6 +9,7 @@ import SearchIcon from "../../assets/images/icons/Search.svg";
 import isAuthenticated from "../../auth/isAuthenticated";
 import AuthContext from "../../auth/AuthContext";
 import Spinner from "../../components/Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 class Jobs extends Component {
     static contextType = AuthContext;
@@ -109,6 +110,11 @@ class Jobs extends Component {
                                         <input type="text" className="Search__input" placeholder="Search" />
                                     </div>
                                 </div>
+                            </Card>
+
+                            <Card>
+                                <h2>Dashboard</h2>
+                                <Link to="/dashboard">Go to job dashboard</Link>
                             </Card>
                         </div>
                     </div>

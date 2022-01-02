@@ -2,8 +2,9 @@ import React from "react";
 import "./ProfileHeader2.scss";
 import cover from "../../assets/images/icons/cover.jpg";
 import profileimg from "../../assets/images/icons/profile.webp";
-import defaultUserImage from '../../assets/images/icons/default-user.png'
-import defaultCoverImage from '../../assets/images/icons/cover.jpg'
+import defaultUserImage from "../../assets/images/icons/default-user.png";
+import defaultCoverImage from "../../assets/images/icons/cover.jpg";
+import { Link } from "react-router-dom";
 
 class ProfileHeader extends React.Component {
     // helpers
@@ -16,9 +17,11 @@ class ProfileHeader extends React.Component {
     }
 
     render() {
-        const { fullname, about, address, admission, location, connections, profile_image_url, cover_url } =
+        const { fullname, about, address, admission, location, connections, profile_image_key, cover_url } =
             this.props.user;
         const { branch, batch } = admission;
+
+        console.log(this.props.user)
 
         return (
             <>
@@ -30,7 +33,7 @@ class ProfileHeader extends React.Component {
                 </div>
                 <div className="Profile__header-data-container">
                     <div className="Profile__header-data-image-container">
-                        <img src={`https://mace-connect.herokuapp.com/profile/${profile_image_url}`} alt="User Img" />
+                        <img src={`https://mace-connect.herokuapp.com/api/v1/profile/images/${profile_image_key}`} alt="User Img" />
                     </div>
                     <div className="Profile__header-data-text-container">
                         <h1 className="Profile__header-data-name">{fullname}</h1>
@@ -43,12 +46,18 @@ class ProfileHeader extends React.Component {
                         </p>
                     </div>
                     <div className="Profile__header-control-container">
-                        <button className="Profile__header-control-button Profile__header-control-button--settings">
+                        <Link
+                            to="/settings"
+                            className="Profile__header-control-button Profile__header-control-button--settings"
+                        >
                             Settings
-                        </button>
-                        <button className="Profile__header-control-button Profile__header-control-button--edit">
+                        </Link>
+                        <Link
+                            to="/edit-profile"
+                            className="Profile__header-control-button Profile__header-control-button--edit"
+                        >
                             Edit Profile
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </>
