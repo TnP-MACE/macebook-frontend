@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "./DashJobcard.scss";
 import Card from "../../components/Card/Card";
 import clogo from "../../assets/images/icons/company-logo.png";

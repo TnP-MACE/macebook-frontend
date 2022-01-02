@@ -1,0 +1,98 @@
+.modal-bg {
+    background: #ffffff;
+    box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+        -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+    border-radius: 10px;
+    padding: 2rem;
+    z-index: 9999;
+    position: absolute;
+    margin-top: -8px;
+    min-height: 500px;
+    .close-btn {
+        display: flex;
+        align-items: flex-end;
+        button {
+            margin-left: 94%;
+        }
+    }
+    .poster {
+        margin: 1rem;
+        display: flex;
+        p {
+            margin-left: 0.8rem;
+        }
+    }
+    .post-view {
+        select {
+            border-radius: 6px;
+            margin-left: 6%;
+        }
+    }
+    .tweetbox-content-wrapper {
+        .tweetbox-textarea-container {
+            textarea {
+                margin: auto;
+                padding: 10px;
+                min-height: 280px;
+                outline: none;
+            }
+        }
+        .tweetbox-image-container {
+            // height: 180px;
+            // width: 100%;
+            margin: 0 3rem;
+            overflow: hidden;
+            display: flex;
+            overflow: hidden;
+            margin-top: 1.5rem;
+
+            img {
+                max-width: 400px;
+                width: 100%;
+                height: 70%;
+                object-fit: cover;
+            }
+        }
+    }
+    .modal-bottom {
+        button {
+            cursor: pointer;
+            margin-left: 80%;
+            margin-top: 0.4rem;
+            padding: 12px;
+            background: #ffffff;
+            box-shadow: -1px 1px 2px rgba(191, 191, 191, 0.2), 1px -1px 2px rgba(191, 191, 191, 0.2),
+                -1px -1px 2px rgba(255, 255, 255, 0.9), 1px 1px 3px rgba(191, 191, 191, 0.9),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(191, 191, 191, 0.5);
+            border-radius: 7px;
+        }
+    }
+}
+@media (min-width: 568px) {
+    .modal-bg {
+        min-width: 500px;
+        left: 34%;
+        .tweetbox-content-wrapper {
+            .tweetbox-textarea-container {
+                textarea {
+                    margin: auto;
+                    min-width: 430px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 568px) {
+    .modal-bg {
+        left: 10%;
+        min-width: 320px;
+        .tweetbox-content-wrapper {
+            .tweetbox-textarea-container {
+                textarea {
+                    margin: auto;
+                }
+            }
+        }
+    }
+}

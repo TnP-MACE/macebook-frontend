@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-expressions */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Post.scss";
@@ -6,6 +8,11 @@ import share from "../../assets/images/icons/share.svg";
 import data from "../../assets/data.json";
 import defaultUserImage from "../../assets/images/icons/default-user.png";
 import AuthContext from "../../auth/AuthContext";
+import Modal from "./Modal";
+import Comment from "./Comment";
+import DelModal from "./DelModal";
+import Card from "../Card/Card";
+import { FaEllipsisV, FaPen, FaTrash } from "react-icons/fa";
 
 class Post extends Component {
     static contextType = AuthContext;
@@ -14,20 +21,120 @@ class Post extends Component {
         super(props);
         // eslint-disable-next-line no-undef
         this.state = {
+            initComments: [],
+            viewMoreComments: false,
+            deletedPost: false,
+            delPostModal: false,
+            editdeloptions: false,
+            openModal: false,
+            setOpenModal: false,
             liked: false,
-            likes_count: 0,
+            likes_count: this.props.likes.length,
             commentValue: "",
+            commentText: "",
+            moreComments: [],
             commentLine: [{ commentId: "", commentText: "" }],
+            comment_id: "",
+            commentData: [],
+            commentNo: "",
+            profile: {},
+            userId: "",
             posts: [],
         };
+        this.fetchComments = this.fetchComments.bind(this);
+        this.profile = this.profile.bind(this);
         this.likePost = this.likePost.bind(this);
+        this.componentUpdated = this.componentUpdated.bind(this);
         // console.log(this.props.content);
     }
+
+    // eslint-disable-next-line react/no-typos
+    componentDidMount() {
+        this.profile();
+        console.log(this.props.likes);
+        for (var i = 0; i < this.props.likes.length; i++) {
+            if (this.props.likes[i] === this.props.profile_id) {
+                console.log("liked by me");
+                this.setState({ liked: true });
+            }
+        }
+    }
     updateCount() {
+        this.setState({
+            likes_count: this.props.likes.length,
+        });
         data.likes = this.state.likes_count;
+    }
+    closeEditModal() {
+        this.setState({
+            openModal: false,
+            editdeloptions: false,
+        });
+    }
+    closeDelModal() {
+        this.setState({
+            delPostModal: false,
+            editdeloptions: false,
+        });
+    }
+
+    profile() {
+        this.fetchComments();
+        const fetchProfile = async (userid) => {
+            const { state } = this.context;
+            this.setState({
+                userId: userid,
+            });
+            try {
+                const token = state.token;
+
+                const response = await fetch(`https://mace-connect.herokuapp.com/api/v1/profile/p1/${userid}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                const data = await response.json();
+                if (data.profile) {
+                    this.setState({
+                        profile: data.profile,
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchProfile(this.props.profile_id);
+    }
+
+    async componentUpdated() {
+        const { state } = this.context;
+        try {
+            const token = state.token;
+
+            let response = await fetch("https://mace-connect.herokuapp.com/api/v1/posts", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (response.status !== 200) {
+                return alert("Couldn't fetch posts! Reload this page.");
+            }
+            let data = await response.json();
+            console.log(data);
+
+            return this.setState({
+                posts: data,
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
     async likePost(post_id) {
         const { state } = this.context;
+        const token = state.token;
+        console.log(post_id);
         this.setState((prev) => {
             return {
                 ...prev,
@@ -38,7 +145,7 @@ class Post extends Component {
         const res = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/like/${post_id}`, {
             method: "POST",
             headers: {
-                Authorization: "Bearer " + state.token,
+                Authorization: `Bearer ${token}`,
             },
         });
         if (res.ok) {
@@ -55,12 +162,39 @@ class Post extends Component {
             //     this.setState({ likes_count: prevState.likes_count - 1 });
             // }
 
-            if (prevState.likes_count === 1) {
-                this.setState({ likes_count: 0 });
+            if (prevState.liked) {
+                this.setState({ likes_count: prevState.likes_count + 1 });
             } else {
-                this.setState({ likes_count: 1 });
+                this.setState({ likes_count: prevState.likes_count - 1 });
             }
         });
+    }
+
+    handleClick(event) {
+        const delPost = async (post_id) => {
+            try {
+                const { state } = this.context;
+                const token = state.token;
+
+                const postDelResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/posts/${post_id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (postDelResponse.status === 200) {
+                    const data = await postDelResponse.json();
+                    this.setState({
+                        deletedPost: true,
+                    });
+                    console.log(this.props.post_id + " deleted successfully");
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        delPost(this.props.post_id);
     }
     handleCommentValue(e) {
         this.setState({ commentValue: e.target.value });
@@ -72,14 +206,92 @@ class Post extends Component {
         });
     };
     submitCommentValue = (e) => {
-        e.preventDefault();
         this.setCommentLine();
+        const fun = async (post_id) => {
+            try {
+                // const token = window.localStorage.getItem("token");
+                const { state } = this.context;
+                const token = state.token;
+
+                const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/${post_id}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        body: this.state.commentValue,
+                    }),
+                });
+                if (commentResponse.status === 201) {
+                    const commentdata = await commentResponse.json();
+
+                    this.setState({ isModalOpen: false });
+                    console.log(commentdata);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fun(this.props.post_id);
     };
+
     enterCommentLine = (e) => {
         this.setCommentLine();
     };
+
+    fetchComments() {
+        const CommentsFun = async (post_id) => {
+            try {
+                const { state } = this.context;
+                const token = state.token;
+
+                const commentResponse = await fetch(`https://mace-connect.herokuapp.com/api/v1/comments/p/${post_id}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (commentResponse.status === 200) {
+                    const commentdata = await commentResponse.json();
+
+                    this.setState({ commentData: commentdata, commentNo: commentdata.comment.length });
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        CommentsFun(this.props.post_id);
+
+        const cd = this.state.commentData;
+        const dt = cd.comment;
+        let rows = [];
+
+        console.log(dt);
+        if (dt === undefined) {
+            return;
+        } else {
+            for (var j = 0; j < dt.length; j++) {
+                rows.push(dt[j]);
+            }
+            this.setState({ moreComments: dt });
+            // this.setState({ moreComments: [this.state.moreComments, ...rows] });
+            // console.log(this.state.moreComments);
+            // for (var i = 1; i < rows.length; i++) {
+            //     comments.push(this.state.moreComments[i]);
+            // }
+
+            // this.setState({ initComments: comments });
+            // console.log(this.state.initComments);
+        }
+    }
+
     render() {
-        return (
+        return this.state.deletedPost ? (
+            <div>
+                <p>Post Removed</p>
+            </div>
+        ) : (
             <div className="home-posts-container">
                 <div className="poster">
                     <div className="posterimg">
@@ -91,7 +303,7 @@ class Post extends Component {
                                         ? `https://mace-connect.herokuapp.com/api/v1/profile/images/${this.props.postCreatorImageName}`
                                         : defaultUserImage
                                 }
-                                alt="posterimage"
+                                alt="poster"
                                 className="profile-pic"
                             ></img>
                         </Link>
@@ -102,7 +314,73 @@ class Post extends Component {
                         </Link>
                         <p className="Desig">{this.props.designation}</p>
                     </div>
+                    {this.state.userId === this.props.post_profile_id && (
+                        <button
+                            className="edit-post-btn"
+                            onClick={() => {
+                                if (!this.state.editdeloptions) {
+                                    this.setState({ editdeloptions: true });
+                                } else {
+                                    this.setState({ editdeloptions: false });
+                                }
+                            }}
+                        >
+                            <FaEllipsisV />
+                        </button>
+                    )}
+
+                    {this.state.editdeloptions && (
+                        <div className="list-options">
+                            <div style={{ display: "flex" }}>
+                                <FaPen />
+                                <button
+                                    onClick={() => {
+                                        this.setState({ setOpenModal: true, openModal: true });
+                                    }}
+                                >
+                                    Edit
+                                </button>
+                            </div>
+
+                            <div style={{ display: "flex", marginTop: 12 }}>
+                                <FaTrash />
+                                <button
+                                    onClick={() => {
+                                        this.setState({
+                                            delPostModal: true,
+                                            editdeloptions: false,
+                                        });
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {this.state.openModal && (
+                        <div className="open-edit">
+                            <Modal
+                                componentUpdated={this.componentUpdated}
+                                closeEditModal={this.closeEditModal.bind(this)}
+                                post_id={this.props.post_id}
+                                name={this.props.fullname}
+                                designation={this.props.designation}
+                                content={this.props.content}
+                            />
+                        </div>
+                    )}
+                    {this.state.delPostModal && (
+                        <div>
+                            <DelModal
+                                closeDelModal={this.closeDelModal.bind(this)}
+                                handleClick={this.handleClick.bind(this)}
+                                post_id={this.props.post_id}
+                            />
+                        </div>
+                    )}
                 </div>
+
                 <div className="home-posts-content">
                     <p className="home-posts-text">{this.props.content}</p>
                     <p className="hashtags">{this.props.hashtags}</p>
@@ -112,7 +390,7 @@ class Post extends Component {
                 </div>
                 <div className="home-posts-attributes">
                     <p>{this.state.likes_count} Likes</p>
-                    <p>{this.props.comments} Comments</p>
+                    <p>{this.state.commentNo} Comments</p>
                 </div>
                 <div className="home-posts-activity">
                     <div>
@@ -138,11 +416,6 @@ class Post extends Component {
                             <img src={msg} alt="Message"></img>
                         </button>
                     </div>
-                    <div>
-                        <button>
-                            <img src={share} alt="Share"></img>
-                        </button>
-                    </div>
                 </div>
                 <div className="home-posts-comment">
                     <img
@@ -160,11 +433,42 @@ class Post extends Component {
                         Post
                     </button>
                 </div>
-                <div className="load-comments">
-                    <Link to="./" className="comments-loader">
-                        View all comments
-                    </Link>
-                </div>
+                {this.state.commentData && (
+                    <div className="load-comments">
+                        <button
+                            onClick={() => {
+                                this.state.viewMoreComments
+                                    ? this.setState({ viewMoreComments: false })
+                                    : this.setState({ viewMoreComments: true });
+                                this.fetchComments();
+                            }}
+                            className="comments-loader"
+                        >
+                            {this.state.viewMoreComments ? <div>Hide</div> : <div>View Comments</div>}
+                        </button>
+                        <br />
+                        {/* {this.state.viewMoreComments && (
+                            <Comment
+                                profile_name={this.state.profile.fullname}
+                                profile_pic_url={this.state.profile.profile_image_url}
+                                text={this.state.moreComments}
+                            />
+                        )} */}
+
+                        {this.state.viewMoreComments &&
+                            this.state.moreComments.map((comment) => {
+                                console.log(this.state.moreComments);
+                                return (
+                                    <Comment
+                                        comment_id={comment.comment_id}
+                                        profile_name={comment.comment_profile_name}
+                                        profile_pic_url={comment.comment_profile_image_name}
+                                        text={comment.body}
+                                    />
+                                );
+                            })}
+                    </div>
+                )}
             </div>
         );
     }

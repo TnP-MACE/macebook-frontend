@@ -4,7 +4,7 @@ import Tweetbox from "./TweetBox/Tweetbox";
 import "./Home.scss";
 import Card from "../../components/Card/Card";
 import Post from "../../components/Post/Post";
-import Suggestions from "../../components/Suggestions/Suggestions";
+//import Suggestions from "../../components/Suggestions/Suggestions";
 import Header from "../../components/Header/Header";
 import postImg from "../../assets/images/icons/postImg.png";
 import profilepic from "../../assets/images/icons/UserProfile.png";
@@ -91,7 +91,7 @@ class Home extends Component {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 return alert("Couldn't fetch posts! Reload this page.");
             }
             let data = await response.json();
@@ -192,6 +192,8 @@ class Home extends Component {
                                                 fullname={post.post_username}
                                                 post_id={post.post_id}
                                                 poster={this.state.profile.username}
+                                                profile_id={this.state.profile.profile_id}
+                                                post_profile_id={post.post_profile_id}
                                                 profileImageName={this.state.profile.profile_image_key}
                                                 designation={this.state.designation}
                                                 content={post.text}
@@ -206,11 +208,11 @@ class Home extends Component {
                                 })
                             )}
                         </div>
-                        <div className="card-col2">
+                        {/* <div className="card-col2">
                             <Card>
                                 <Suggestions></Suggestions>
                             </Card>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
