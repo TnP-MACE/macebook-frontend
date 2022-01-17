@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom";
 class JobCard extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             ShowHidedesc: false,
             btnContent: "View More",
@@ -27,7 +28,7 @@ class JobCard extends Component {
 
     handleApply = () => {
         const id = this.props.id;
-        this.props.history.push(`/job-application-form/?id=${id}`);
+        this.props.history.push({ pathname: `/job-application-form/?id=${id}`, state: { jobid: id } });
     };
     render() {
         return (

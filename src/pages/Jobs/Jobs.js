@@ -81,7 +81,7 @@ class Jobs extends Component {
                         <div class="left-section">
                             {this.state.jobData.map((job) => (
                                 <JobCard
-                                    key={job.id}
+                                    key={job.job_id}
                                     clogo={job.clogo}
                                     position={job.position}
                                     company={job.company}
@@ -93,7 +93,7 @@ class Jobs extends Component {
                                     desc={job.desc}
                                     date={job.date}
                                     user={job.user}
-                                    id={job.id}
+                                    id={job.job_id}
                                     history={this.props.history}
                                 />
                             ))}
