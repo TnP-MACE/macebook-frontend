@@ -99,6 +99,7 @@ class Post extends Component {
                     this.setState({
                         profile: data.profile,
                     });
+                    console.log(data.profile);
                 }
             } catch (e) {
                 console.error(e);
@@ -460,6 +461,7 @@ class Post extends Component {
                                 console.log(this.state.moreComments);
                                 return (
                                     <Comment
+                                        user_name={this.state.profile.fullname}
                                         comment_id={comment.comment_id}
                                         profile_name={comment.comment_profile_name}
                                         profile_pic_url={comment.comment_profile_image_name}
