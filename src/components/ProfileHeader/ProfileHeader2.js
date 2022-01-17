@@ -17,9 +17,11 @@ class ProfileHeader extends React.Component {
     }
 
     render() {
-        const { fullname, about, address, admission, location, connections, profile_image_url, cover_url } =
+        const { fullname, about, address, admission, location, connections, profile_image_key, cover_url } =
             this.props.user;
         const { branch, batch } = admission;
+
+        console.log(this.props.user)
 
         return (
             <>
@@ -31,7 +33,7 @@ class ProfileHeader extends React.Component {
                 </div>
                 <div className="Profile__header-data-container">
                     <div className="Profile__header-data-image-container">
-                        <img src={`https://mace-connect.herokuapp.com/profile/${profile_image_url}`} alt="User Img" />
+                        <img src={`https://mace-connect.herokuapp.com/api/v1/profile/images/${profile_image_key}`} alt="User Img" />
                     </div>
                     <div className="Profile__header-data-text-container">
                         <h1 className="Profile__header-data-name">{fullname}</h1>
@@ -44,14 +46,18 @@ class ProfileHeader extends React.Component {
                         </p>
                     </div>
                     <div className="Profile__header-control-container">
-                        <Link to="/settings">
-                            <button className="Profile__header-control-button Profile__header-control-button--settings">
-                                Settings
-                            </button>
+                        <Link
+                            to="/settings"
+                            className="Profile__header-control-button Profile__header-control-button--settings"
+                        >
+                            Settings
                         </Link>
-                        <button className="Profile__header-control-button Profile__header-control-button--edit">
+                        <Link
+                            to="/edit-profile"
+                            className="Profile__header-control-button Profile__header-control-button--edit"
+                        >
                             Edit Profile
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </>

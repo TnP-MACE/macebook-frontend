@@ -62,6 +62,7 @@ class Profil2 extends Component {
             },
         });
         const data = await response.json();
+        console.log(data);
         if (!data.profile) {
             throw new Error("Profile Not Found");
         }
@@ -148,6 +149,7 @@ class Profil2 extends Component {
                                         </Card>
                                     </div>
                                 )}
+                                {}
                                 <div>
                                     <Card>
                                         <h2>Dashboard</h2>

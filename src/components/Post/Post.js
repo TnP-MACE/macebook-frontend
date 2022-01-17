@@ -300,7 +300,7 @@ class Post extends Component {
                             <img
                                 src={
                                     this.props.postCreatorImageName
-                                        ? `https://mace-connect.herokuapp.com/profile/${this.props.postCreatorImageName}`
+                                        ? `https://mace-connect.herokuapp.com/api/v1/profile/images/${this.props.postCreatorImageName}`
                                         : defaultUserImage
                                 }
                                 alt="poster"
@@ -419,7 +419,7 @@ class Post extends Component {
                 </div>
                 <div className="home-posts-comment">
                     <img
-                        src={`https://mace-connect.herokuapp.com/profile/${this.props.profileImageName}`}
+                        src={`https://mace-connect.herokuapp.com/api/v1/profile/images/${this.props.profileImageName}`}
                         alt="Profilepic"
                     />
                     <input

@@ -48,7 +48,7 @@ class Post extends Component {
                         {this.props.postImageName && (
                             <div className="ProfilePost__content-image">
                                 <img
-                                    src={`https://mace-connect.herokuapp.com/profile/${this.props.postImageName}`}
+                                    src={`https://mace-connect.herokuapp.com/api/v1/profile/${this.props.postImageName}`}
                                     alt={this.props.text}
                                 />
                             </div>
@@ -85,7 +85,7 @@ class Post extends Component {
                     <div className="ProfilePost__comments-container">
                         <div className="ProfilePost__comments-image-container">
                             <img
-                                src={`https://mace-connect.herokuapp.com/profile/${this.props.userImageName}`}
+                                src={`https://mace-connect.herokuapp.com/api/v1/profile/${this.props.userImageName}`}
                                 alt="Profile Picture"
                             />
                         </div>

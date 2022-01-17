@@ -38,7 +38,7 @@ class Home extends Component {
                 fullname: "lksdjf",
                 phoneno: "9456898",
                 profile_id: "cf0069b6-dc0e-465c-8ce6-d6da3c226b31",
-                profile_image_url: null,
+                profile_image_key: null,
                 ref_email: "",
                 ref_fullname: "",
                 ref_phonenumber: "",
@@ -194,7 +194,7 @@ class Home extends Component {
                                                 poster={this.state.profile.username}
                                                 profile_id={this.state.profile.profile_id}
                                                 post_profile_id={post.post_profile_id}
-                                                profileImageName={this.state.profile.profile_image_url}
+                                                profileImageName={this.state.profile.profile_image_key}
                                                 designation={this.state.designation}
                                                 content={post.text}
                                                 hashtags={post.hashtags}

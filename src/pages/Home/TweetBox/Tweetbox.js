@@ -129,7 +129,7 @@ class Tweetbox extends Component {
             <div className="Tweetbox">
                 <div className="profile-pic">
                     <img
-                        src={`https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`}
+                        src={`https://mace-connect.herokuapp.com/api/v1/profile/images/${this.props.user.profile_image_key}`}
                         alt="profilepicture"
                     />
                 </div>
@@ -148,8 +148,8 @@ class Tweetbox extends Component {
                             <div className="poster-img-container">
                                 <img
                                     src={
-                                        this.props.user.profile_image_url
-                                            ? `https://mace-connect.herokuapp.com/profile/${this.props.user.profile_image_url}`
+                                        this.props.user.profile_image_key
+                                            ? `https://mace-connect.herokuapp.com/api/v1/profile/images/${this.props.user.profile_image_key}`
                                             : defaultUserImage
                                     }
                                     alt="profilepicture"
