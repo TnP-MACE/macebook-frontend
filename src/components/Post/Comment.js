@@ -58,16 +58,18 @@ class Comment extends React.Component {
                     <p className="fullname">{this.props.profile_name}</p>
                 </div>
                 <p>{this.props.text}</p>
-                <div>
-                    <button
-                        onClick={() => {
-                            this.setState({ openCommentForm: true });
-                        }}
-                    >
-                        Edit
-                    </button>
-                    |<button onClick={this.handleSubmit}>Delete</button>
-                </div>
+                {this.props.profile_name === this.props.user_name && (
+                    <div>
+                        <button
+                            onClick={() => {
+                                this.setState({ openCommentForm: true });
+                            }}
+                        >
+                            Edit
+                        </button>
+                        |<button onClick={this.handleSubmit}>Delete</button>
+                    </div>
+                )}
                 {this.state.openCommentForm && (
                     <CommentForm
                         comment_id={this.props.comment_id}
